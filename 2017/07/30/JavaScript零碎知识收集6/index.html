@@ -80,16 +80,19 @@
 
 
 
-<meta name="description" content="1.window对象：{    ~window对象是BOM的核心对象    ~全局作用域:{        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行        ~window对象有location和navigator属性，他们分别指向自己所代表的对象        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.f">
+<meta name="description" content="关于location对象属性的一些说明、例如：http:\/\/wwww.baidu.com:8080\/abc\/index.html\/\?\a=1\&amp;amp;b=2#user
+location : {    protocol : http:    hostname : wwww.baidu.com    port : 8080    pathname : abc/index.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计 第三版》第7~8章">
-<meta property="og:url" content="http://apskt.com/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/index.html">
+<meta property="og:title" content="JavaScript零碎知识收集6">
+<meta property="og:url" content="http://apskt.com/2017/07/30/JavaScript零碎知识收集6/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="1.window对象：{    ~window对象是BOM的核心对象    ~全局作用域:{        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行        ~window对象有location和navigator属性，他们分别指向自己所代表的对象        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.f">
-<meta property="og:updated_time" content="2017-07-28T03:01:37.453Z">
+<meta property="og:description" content="关于location对象属性的一些说明、例如：http:\/\/wwww.baidu.com:8080\/abc\/index.html\/\?\a=1\&amp;amp;b=2#user
+location : {    protocol : http:    hostname : wwww.baidu.com    port : 8080    pathname : abc/index.html">
+<meta property="og:updated_time" content="2017-08-01T06:54:23.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计 第三版》第7~8章">
-<meta name="twitter:description" content="1.window对象：{    ~window对象是BOM的核心对象    ~全局作用域:{        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行        ~window对象有location和navigator属性，他们分别指向自己所代表的对象        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.f">
+<meta name="twitter:title" content="JavaScript零碎知识收集6">
+<meta name="twitter:description" content="关于location对象属性的一些说明、例如：http:\/\/wwww.baidu.com:8080\/abc\/index.html\/\?\a=1\&amp;amp;b=2#user
+location : {    protocol : http:    hostname : wwww.baidu.com    port : 8080    pathname : abc/index.html">
 
 
 
@@ -117,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/"/>
+  <link rel="canonical" href="http://apskt.com/2017/07/30/JavaScript零碎知识收集6/"/>
 
 
 
 
 
-  <title> 读《JavaScript高级程序设计 第三版》第7~8章 | Finch's blog </title>
+  <title> JavaScript零碎知识收集6 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -270,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/30/JavaScript零碎知识收集6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -291,7 +294,7 @@
             
             
               
-                读《JavaScript高级程序设计 第三版》第7~8章
+                JavaScript零碎知识收集6
               
             
           </h1>
@@ -306,8 +309,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T11:01:18+08:00">
-                2017-07-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T21:37:51+08:00">
+                2017-07-30
               </time>
             
 
@@ -364,12 +367,8 @@
       
 
       
-        <p>1.window对象：{<br>    ~window对象是BOM的核心对象<br>    ~全局作用域:{<br>        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行<br>        ~window对象有location和navigator属性，他们分别指向自己所代表的对象<br>        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.frame[i]获取<br>        ~window对象位置属性：{<br>            ~IE,Safari,Chrome和Chrome都提供了screenLeft，screenTop，分别表示窗口相对屏幕左边和上边的位置<br>            ~Firefox则提供了screenX和screenY<br>        }<br>        ~window对象的方法：alert(), confirm(),prompt();<br>    }<br>}</p>
-<p>2.location对象：{<br>    ~location对象是Bom最有用的对象之一<br>    ~window.location === document.location 他们引用同一个对象<br>    ~location.search.substring(1).split(‘&amp;’)处理参数<br>    ~location.hash用来处理页内锚点跳转<br>}</p>
-<p>3.navigator： {<br>    navigator.appName:浏览器名称<br>    navigator.APPVersion:浏览器版本<br>}</p>
-<p>4.history: {<br>    ~history保存的是用户上网的浏览记录，从窗口打开的那一刻算起。<br>    ~方法{<br>        history.go(-1) = history.back();<br>        history.go(1) = history.forward();;<br>        history.go(‘baidu.com’);</p>
-<pre><code>}
-</code></pre><p>}</p>
+        <h2 id="关于location对象属性的一些说明、"><a href="#关于location对象属性的一些说明、" class="headerlink" title="关于location对象属性的一些说明、"></a>关于location对象属性的一些说明、</h2><p>例如：http:\/\/wwww.baidu.com:8080\/abc\/index.html\/\?\a=1\&amp;b=2#user</p>
+<p>location : {<br>    protocol : http:<br>    hostname : wwww.baidu.com<br>    port : 8080<br>    pathname : abc/index.html<br>    search : ?a=1&amp;b=2<br>    hash : #user<br>}</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -413,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/28/JavaScript零碎知识收集5/" rel="next" title="JavaScript零碎知识收集5">
-                <i class="fa fa-chevron-left"></i> JavaScript零碎知识收集5
+              <a href="/2017/07/29/吐槽/" rel="next" title="吐槽">
+                <i class="fa fa-chevron-left"></i> 吐槽
               </a>
             
           </div>
@@ -422,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/29/读《JavaScript高级程序设计 第三版》第8~13章/" rel="prev" title="读《JavaScript高级程序设计 第三版》第8~13章">
-                读《JavaScript高级程序设计 第三版》第8~13章 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,7 +448,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="读《JavaScript高级程序设计 第三版》第7~8章" ></div> 
+<div id="SOHUCS" sid="JavaScript零碎知识收集6" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -481,8 +476,17 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/tx.jpg"
@@ -544,6 +548,22 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于location对象属性的一些说明、"><span class="nav-number">1.</span> <span class="nav-text">关于location对象属性的一些说明、</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

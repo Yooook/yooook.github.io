@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -225,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -235,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -268,7 +268,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/01/dijfosidjfoidsjofijdsiojfoisdjfoiwdufi/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/30/JavaScript零碎知识收集6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -290,8 +290,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/08/01/dijfosidjfoidsjofijdsiojfoisdjfoiwdufi/" itemprop="url">
-                  法进343行初
+                <a class="post-title-link" href="/2017/07/30/JavaScript零碎知识收集6/" itemprop="url">
+                  JavaScript零碎知识收集6
                 </a>
               
             
@@ -305,10 +305,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T10:29:05+08:00">
-                2017-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T21:37:51+08:00">
+                2017-07-30
               </time>
             
 
@@ -326,12 +326,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ajax/" itemprop="url" rel="index">
-                    <span itemprop="name">Ajax</span>
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
                   </a>
                 </span>
 
@@ -367,9 +367,8 @@
       
         
           
-            <p>###ajax的原生实现之前已经有很详细的说明，这里主要说说区别<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 请求地址</div><div class="line">var url = <span class="string">'./data.json'</span>;</div><div class="line">// 通过open方法进行初始化配置</div><div class="line">xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">// 执行发送请求的动作</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
-<p>回调函数的数据返回类型是responseText，var data = JSON.parse(xhr.responseText);先将文本数据转化为对象，这样才能进行后续的操作，比如遍历，否则输;不论是解析xml或者json都需要做的步骤并且一定要正确，否则会出现未定义的状况无法输出内容。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"total"</span>:<span class="string">"4"</span>,</div><div class="line">  <span class="string">"data"</span>:[</div><div class="line">    &#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"三国演义"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"一个军阀混战的年代"</span></div><div class="line">    &#125;,&#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"水浒传"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"草寇or英雄好汉"</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="string">"obj"</span>:&#123;<span class="string">"adf"</span>:<span class="string">"adf"</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>给按钮或者其他标签添加事件，在事件里实现异步请求。</p>
+            <h2 id="关于location对象属性的一些说明、"><a href="#关于location对象属性的一些说明、" class="headerlink" title="关于location对象属性的一些说明、"></a>关于location对象属性的一些说明、</h2><p>例如：http:\/\/wwww.baidu.com:8080\/abc\/index.html\/\?\a=1\&amp;b=2#user</p>
+<p>location : {<br>    protocol : http:<br>    hostname : wwww.baidu.com<br>    port : 8080<br>    pathname : abc/index.html<br>    search : ?a=1&amp;b=2<br>    hash : #user<br>}</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
           
@@ -451,7 +450,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:12:03+08:00">
                 2017-07-29
@@ -472,7 +471,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -595,7 +594,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:00:02+08:00">
                 2017-07-29
@@ -616,7 +615,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -739,7 +738,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T11:43:20+08:00">
                 2017-07-29
@@ -760,7 +759,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -883,7 +882,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T11:01:18+08:00">
                 2017-07-28
@@ -904,7 +903,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1032,7 +1031,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T09:24:25+08:00">
                 2017-07-28
@@ -1053,7 +1052,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1176,7 +1175,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:51:52+08:00">
                 2017-07-21
@@ -1197,7 +1196,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1320,7 +1319,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:50:31+08:00">
                 2017-07-21
@@ -1341,7 +1340,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1464,7 +1463,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:49:57+08:00">
                 2017-07-21
@@ -1485,7 +1484,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1609,7 +1608,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T09:43:49+08:00">
                 2017-07-20
@@ -1630,7 +1629,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1757,7 +1756,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">48</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1767,8 +1766,8 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1778,8 +1777,8 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1829,7 +1828,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
