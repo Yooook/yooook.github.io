@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -225,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -235,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -258,6 +258,153 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/27/原生Ajax对JSON数据解析注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/27/原生Ajax对JSON数据解析注意事项/" itemprop="url">
+                  原生Ajax对JSON数据解析注意事项
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T18:45:21+08:00">
+                2017-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax/" itemprop="url" rel="index">
+                    <span itemprop="name">Ajax</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###ajax的原生实现之前已经有很详细的说明，这里主要说说区别<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 请求地址</div><div class="line">var url = <span class="string">'./data.json'</span>;</div><div class="line">// 通过open方法进行初始化配置</div><div class="line">xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">// 执行发送请求的动作</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<p>true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 数据请求之后的回调函数</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  // 判断服务器数据请求是否成功</div><div class="line">  <span class="keyword">if</span> (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</div><div class="line">    // 请求的数据类型为responseText</div><div class="line">    var data = JSON.parse(xhr.responseText);</div><div class="line">    var total = data.total;</div><div class="line">    var datas = data.data;</div><div class="line">    var tag = <span class="string">''</span>;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; datas.length; i++) &#123;</div><div class="line">      var data1 = datas[i];</div><div class="line">      tag += <span class="string">'&lt;tr&gt;&lt;td&gt;'</span> + data1.name + <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + data1.category+ <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + data1.desc + <span class="string">'&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">    &#125;</div><div class="line">    var tbody = document.createElement(<span class="string">'tbody'</span>);</div><div class="line">    tbody.innerHTML = tag;</div><div class="line">    document.getElementById(<span class="string">'info'</span>).appendChild(tbody);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>回调函数的数据返回类型是responseText，var data = JSON.parse(xhr.responseText);先将文本数据转化为对象，这样才能进行后续的操作，比如遍历，否则输出的是字符串。for循环里var data1 = datas[i];不论是解析xml或者json都需要做的步骤并且一定要正确，否则会出现未定义的状况无法输出内容。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"total"</span>:<span class="string">"4"</span>,</div><div class="line">  <span class="string">"data"</span>:[</div><div class="line">    &#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"三国演义"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"一个军阀混战的年代"</span></div><div class="line">    &#125;,&#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"水浒传"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"草寇or英雄好汉"</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="string">"obj"</span>:&#123;<span class="string">"adf"</span>:<span class="string">"adf"</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>给按钮或者其他标签添加事件，在事件里实现异步请求。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -305,7 +452,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T17:58:49+08:00">
                 2017-04-27
@@ -326,7 +473,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -453,7 +600,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T18:03:39+08:00">
                 2017-04-26
@@ -474,7 +621,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -599,7 +746,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T22:16:10+08:00">
                 2017-04-25
@@ -620,7 +767,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -745,7 +892,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T10:15:44+08:00">
                 2017-04-25
@@ -766,7 +913,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -891,7 +1038,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T09:30:23+08:00">
                 2017-04-15
@@ -912,7 +1059,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1037,7 +1184,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-13T11:30:33+08:00">
                 2017-04-13
@@ -1058,7 +1205,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1183,7 +1330,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-08T08:38:48+08:00">
                 2017-04-08
@@ -1204,7 +1351,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1346,7 +1493,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T17:43:38+08:00">
                 2017-03-25
@@ -1478,8 +1625,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1489,8 +1636,8 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1500,8 +1647,8 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1551,7 +1698,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
