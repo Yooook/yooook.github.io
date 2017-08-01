@@ -1,0 +1,711 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ajax,JS,原生封装" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,document)&amp;#123;  // 原生封装Ajax  function Ajax(data) &amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax原生封装">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/Ajax原生封装/index.html">
+<meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,document)&amp;#123;  // 原生封装Ajax  function Ajax(data) &amp;#12">
+<meta property="og:updated_time" content="2017-06-11T01:41:50.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax原生封装">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,document)&amp;#123;  // 原生封装Ajax  function Ajax(data) &amp;#12">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/27/Ajax原生封装/"/>
+
+
+
+
+
+  <title> Ajax原生封装 | Finch's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Finch's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="width:100%;text-align:center; ">
+   <span id="busuanzi_container_site_uv" > 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+  <div style="margin: 0 auto; position:absolute;left:50%;margin-left:-30px;top:420px">
+  <img src="/images/1b.png" style="opacity: 1"alt="">
+</div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/Ajax原生封装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ajax原生封装
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T21:33:11+08:00">
+                2017-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax-JS/" itemprop="url" rel="index">
+                    <span itemprop="name">Ajax,JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span>(window,document)&#123;</div><div class="line">  // 原生封装Ajax</div><div class="line">  <span class="keyword">function</span> Ajax(data) &#123;</div><div class="line">    // var data = &#123;data:<span class="string">""</span>,dataType:<span class="string">"xml/json"</span>,<span class="built_in">type</span>:<span class="string">"get/post"</span>,url:<span class="string">""</span>,asyn:<span class="string">"true/false"</span>,success:<span class="function"><span class="title">function</span></span>() &#123;&#125;,error:<span class="function"><span class="title">function</span></span>() &#123;&#125;&#125;</div><div class="line">    // data:&#123;username:123,password:123&#125;</div><div class="line">    // data=<span class="string">"username=123&amp;password=123"</span></div><div class="line">    var xhr = null;</div><div class="line">    <span class="keyword">if</span> (window.XMLHttpRequest) &#123;</div><div class="line">      var xhr = new XMLHttpRequest();</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">      var xhr = new ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</div><div class="line">    &#125;</div><div class="line">    // ---------参数处理------------------</div><div class="line">    var <span class="built_in">type</span> = data.type == <span class="string">'get'</span>?<span class="string">'get'</span>:<span class="string">'post'</span>;</div><div class="line">    var url = <span class="string">''</span>;</div><div class="line">    <span class="keyword">if</span> (data.url) &#123;</div><div class="line">      url = data.url;</div><div class="line">      <span class="keyword">if</span> (<span class="built_in">type</span> == <span class="string">'get'</span>) &#123;</div><div class="line">        url += <span class="string">'?'</span> + data.data + <span class="string">'&amp;_t='</span> + new Date().getTime();//清除get缓存，加时间戳</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    var flag = data.asyn = <span class="string">'true'</span>?<span class="string">'true'</span>:<span class="string">'false'</span>;</div><div class="line">    // -----------------------------------</div><div class="line">    xhr.open(<span class="built_in">type</span>,url,flag);</div><div class="line">    xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (this.readyState == 4) &#123;</div><div class="line">          // ---------参数处理------------------</div><div class="line">        <span class="keyword">if</span> ( this.status == 200) &#123;</div><div class="line">           <span class="keyword">if</span> (typeof data.success == <span class="string">'function'</span>) &#123;</div><div class="line">            var d = data.dataType == <span class="string">'xml'</span> ? xhr.responseXML : xhr.responseText;</div><div class="line">            data.success(d);</div><div class="line">          &#125;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">           <span class="keyword">if</span> (typeof data.error == <span class="string">'function'</span>) &#123;</div><div class="line">             data.error();</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">       // -----------------------------------</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    // ---------参数处理------------------</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">type</span> == <span class="string">'get'</span>) &#123;</div><div class="line">      xhr.send(null);</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">type</span> == <span class="string">'post'</span>) &#123;</div><div class="line">      xhr.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">      xhr.send(data.data);</div><div class="line">    &#125;</div><div class="line">    // -----------------------------------</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  window.onload = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var btn = document.getElementById(<span class="string">'btn'</span>);</div><div class="line">    btn.onclick = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      var param = &#123;</div><div class="line">        data:<span class="string">'username=admin&amp;password=123'</span>,</div><div class="line">        url:<span class="string">'data.php'</span>,</div><div class="line">        <span class="built_in">type</span>:<span class="string">'post'</span>,</div><div class="line">        dataType:<span class="string">'json'</span>,</div><div class="line">        success:<span class="keyword">function</span>(data) &#123;</div><div class="line">         console.log(data);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      Ajax(param);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">    </div><div class="line">&#125;)(window,document);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>我只说一句，readyState 中的S是大写！</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ajax-JS/" rel="tag"># Ajax,JS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/27/原生Ajax对JSON数据解析注意事项/" rel="next" title="原生Ajax对JSON数据解析注意事项">
+                <i class="fa fa-chevron-left"></i> 原生Ajax对JSON数据解析注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/28/jquery实现Ajax技术/" rel="prev" title="jquery实现Ajax技术">
+                jquery实现Ajax技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Ajax原生封装" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/tx.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+ 
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

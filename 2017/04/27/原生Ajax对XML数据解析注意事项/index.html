@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ajax,JS,原生,XML解析" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.xml&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
+true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生Ajax对XML数据解析注意事项">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/原生Ajax对XML数据解析注意事项/index.html">
+<meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.xml&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
+true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nul">
+<meta property="og:updated_time" content="2017-04-27T10:54:25.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原生Ajax对XML数据解析注意事项">
+<meta name="twitter:description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.xml&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
+true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nul">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/27/原生Ajax对XML数据解析注意事项/"/>
+
+
+
+
+
+  <title> 原生Ajax对XML数据解析注意事项 | Finch's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Finch's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="width:100%;text-align:center; ">
+   <span id="busuanzi_container_site_uv" > 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+  <div style="margin: 0 auto; position:absolute;left:50%;margin-left:-30px;top:420px">
+  <img src="/images/1b.png" style="opacity: 1"alt="">
+</div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/原生Ajax对XML数据解析注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                原生Ajax对XML数据解析注意事项
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T17:58:49+08:00">
+                2017-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax/" itemprop="url" rel="index">
+                    <span itemprop="name">Ajax</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###ajax的原生实现之前已经有很详细的说明，这里主要说说区别<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 请求地址</div><div class="line">var url = <span class="string">'./data.xml'</span>;</div><div class="line">// 通过open方法进行初始化配置</div><div class="line">xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">// 执行发送请求的动作</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<p>true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 数据请求之后的回调函数</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  // 判断服务器数据请求是否成功</div><div class="line">  <span class="keyword">if</span> (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</div><div class="line">    // 请求的数据类型为responseText</div><div class="line">    var data = xhr.responseXML;</div><div class="line">    var xml = data.getElementsByTagName(<span class="string">'bookstore'</span>)[0];</div><div class="line">    var arr = xml.getElementsByTagName(<span class="string">'book'</span>);</div><div class="line">    var tag = <span class="string">''</span>;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">      var book = arr[i];</div><div class="line">      var name = book.getElementsByTagName(<span class="string">'name'</span>)[0];</div><div class="line">      var category = book.getElementsByTagName(<span class="string">'category'</span>)[0];</div><div class="line">      var desc = book.getElementsByTagName(<span class="string">'desc'</span>)[0];</div><div class="line">      tag += <span class="string">'&lt;tr&gt;&lt;td&gt;'</span> + getNodeText(name) + <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + getNodeText(category) + <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + getNodeText(desc) + <span class="string">'&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">    &#125;</div><div class="line">    var tbody = document.createElement(<span class="string">'tbody'</span>);</div><div class="line">    tbody.innerHTML = tag;</div><div class="line">    document.getElementById(<span class="string">'info'</span>).appendChild(tbody);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先返回的数据类型是responseXML，其次 var xml = data.getElementsByTagName(‘bookstore’)[0];注意是data下的查找，arr是所要遍历的节点组，在每个组里边实现for循环里面的一些设置，【这些都是对节点对象的一些操作】，注意字符串要在循环外提前定义，最后添加在新建的节点中，将节点提交给页面。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> getNodeText(node) &#123;</div><div class="line">    <span class="keyword">if</span> (window.ActiveXObject) &#123;//IE</div><div class="line">      <span class="built_in">return</span> node.text;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;//标准浏览器</div><div class="line">      <span class="keyword">if</span>(node.nodeType == 1)&#123;</div><div class="line">        <span class="built_in">return</span> node.textContent;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>针对不同浏览器获取节点内容的方式不同自定义函数，这个函数定义在window.onload外，在拼接字符串的时候传入节点对象获取xml的值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line">&lt;bookstore&gt;</div><div class="line">	&lt;book&gt;</div><div class="line">		&lt;name&gt;Ajax&lt;/name&gt;</div><div class="line">		&lt;category&gt;computer&lt;/category&gt;</div><div class="line">		&lt;desc&gt;this is a book&lt;/desc&gt;</div><div class="line">	&lt;/book&gt;	</div><div class="line">	&lt;book&gt;</div><div class="line">		&lt;name&gt;JavaScript&lt;/name&gt;</div><div class="line">		&lt;category&gt;computer&lt;/category&gt;</div><div class="line">		&lt;desc&gt;this is a book&lt;/desc&gt;</div><div class="line">	&lt;/book&gt;</div><div class="line">&lt;/bookstore&gt;</div></pre></td></tr></table></figure></p>
+<p>给按钮或者其他标签添加事件，在事件里实现异步请求。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ajax-JS-XML/" rel="tag"># Ajax,JS,XML</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/26/【详细】JS原生实现Ajax的post提交方式/" rel="next" title="【详细】JS原生实现Ajax的post提交方式">
+                <i class="fa fa-chevron-left"></i> 【详细】JS原生实现Ajax的post提交方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/27/原生Ajax对JSON数据解析注意事项/" rel="prev" title="原生Ajax对JSON数据解析注意事项">
+                原生Ajax对JSON数据解析注意事项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="原生Ajax对XML数据解析注意事项" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/tx.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+ 
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

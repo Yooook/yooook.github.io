@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。5.标签语句:语句是可以添加标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript权威指南（第六版）》第五，六，七，八章">
+<meta property="og:url" content="http://yoursite.com/2017/06/05/读《JavaScript权威指南（第六版）》第5,6,7，8章/index.html">
+<meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。5.标签语句:语句是可以添加标">
+<meta property="og:updated_time" content="2017-06-05T09:22:11.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript权威指南（第六版）》第五，六，七，八章">
+<meta name="twitter:description" content="1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。5.标签语句:语句是可以添加标">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/05/读《JavaScript权威指南（第六版）》第5,6,7，8章/"/>
+
+
+
+
+
+  <title> 读《JavaScript权威指南（第六版）》第五，六，七，八章 | Finch's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Finch's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="width:100%;text-align:center; ">
+   <span id="busuanzi_container_site_uv" > 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+  <div style="margin: 0 auto; position:absolute;left:50%;margin-left:-30px;top:420px">
+  <img src="/images/1b.png" style="opacity: 1"alt="">
+</div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/读《JavaScript权威指南（第六版）》第5,6,7，8章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                读《JavaScript权威指南（第六版）》第五，六，七，八章
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T17:20:24+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升<br>2.多次声明一个变量是无所谓的<br>3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，<br>4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。<br>5.标签语句:语句是可以添加标签的，标签由语句前的标识符和冒号组成<br>6.通过给循环定义一个标签名，可以在循环体内部使用break和continue后缀标签名，跳出循环或者跳转到下一个循环。break和continue是唯一能够使用语句标签的语句<br>7.‘use strict’严格模式<br>8.JavaScript对象和属性和划分：内置对象，宿主对象 自定义对象，自由属性和继承属性<br>9：创建对象：【1】对象直接量，共享一个原型，属性有空格，有连字符必须用字符串标识，有保留字必须用引号【2】通过new创建对象，通过自定义构造函数实现初始化【3】原型创建，每一个JavaScript对象都和另一个对象关联，另一个对象就是原型，每一个对象都从原型继承属性，&amp;object.prototype没有原型对象【4】ES5通过Object.create()创建对象，第一个参数是这个对象的原型（可以传入null创建没有原型的对象，或者传入Object.prototype创建普通空对象），第二个参数可选，用来对属性进一步描述<br>10，JavaScript对象都是关联数组，可以通过object[‘’]访问<br>11.继承的属性被覆盖，并不会修改原型属性值，只是修改当前对象<br>12,delete运算符只能删除自有属性不能删除继承属性，除非在原型对象上删除该属性<br>13，可以用in运算符检查对象属性是否存在，或者用“！===”例如，o.x !== undefined;<br>14,isPrototypeOf()检查一个对象是否是另一个对象的原型或处于原型链。<br>15.JASON.stringify()序列化对象<br>16，数组是值得有序集合<br>17，通过设置数组length来删除元素<br>18，通过push()方法往数组最后添加元素，等同于给arr【arr。length】赋值，unshift()首部插入<br>19，用delete删除元素但是不会修改length,pop(),shift()。splice()会改变length<br>20.Array.join()将元素转化为字符串拼接在一起，参数是分割符，与Array.split()对应<br>21、Array.reserve()颠倒数组元素顺序，返回逆序顺序<br>22.Array.sort()给数字元素排序，返回排序后得数组<br>23、Array.concat()创建并返回一个新数组，如果元素是数组，则只拼接元素，若元素是二维数组，保留数组元素<br>24，Array.slice()返回数组片段，两个参数，起始和终止索引，不包括第二个索引值<br>25，Array.splice()的前两个参数确定了要删除元素的范围，后面的参数是要添加的元素，插入位置为第一个参数的位置<br>26.数组的toString()方法和无参数的join()返回相同，不管器子元素是否是数组<br>27，forEach()方法，如果只关心数组的值，可以用此方法，参数为匿名函数，函数参数为value，接受数组的值<br>28，map()方法，将调用它的数组每个元素穿个指定的函数，返回一个操作后得数组<br>28，filter()返回调用它的数组的一个子集，参数是方法，方法的参数是x，例如a.filter(function(x){x&gt;2});<br>29，every()和some()用于逻辑判断，返回布尔值a.every(function(x){x&gt;2})检测是否有大于2的元素;some()类似，检测是否存在a.some(function(x){x%2===0});<br>30，indexOf()和lastindexOf()都是返回给定元素的索引，没找到返回-1<br>31.判断位置对象是否为数组Array.isArray();返回布尔值<br>32.return语句没有与之相关的表达式，会返回undefined，如果一个函数不包含return语句，它会执行函数体的语句并返回undefined<br>33.printprops()函数没有return。他的作用是输出对象属性的键和值，没有必要要返回值，默认返回undefined<br>34，没有返回值的函数有时称为过程<br>35.嵌套函数的有趣之处在于他的变量作用域规则<br>36.函数主体在定义的时候并不会执行，只有在调用该函数时，才会执行<br>37.函数调用的四种方法：做为函数（调用表达式），作为方法，作为构造函数，通过call()和apply()方法间接调用<br>38，任何函数作为方法调用实际上都会传入一个隐式的实参，这个实参是一个对象，方法调用的母体就是这个对象，this<br>39.链式调用的核心是返回对象<br>40，this是一个关键字，不是变量，也不是属性，JavaScript不允许为this赋值<br>41.如果嵌套函数作为函数调用，this值不是全局对象（非严格模式）就是undefined（严格模式），想要访问外部函数的this值，就必须定义变量self保存this<br>42.当调用函数的时候传入的实参比函数声明的时候指定的形参个数要少的时候，其他形参默认为undefined<br>43.通过arguments[]获取实参，它具有length属性<br>44.实参对象具有callee和caller属性，callee指代当前执行的函数，在递归函数中会用到，caller指代调用当前正在执行的函数的函数，通过该属性可以访问调用栈<br>45.函数参数超过三个的时候，他们传入的顺序会很难控制，所以传入对象，虽然效率稍稍有些低，但是可以忽略顺序问题<br>46，函数可以作为值传递，无论是对象数组或者其他</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/读《JavaScript权威指南（第六版）》第2,3,4章/" rel="next" title="读《JavaScript权威指南（第六版）》第二，三，四章">
+                <i class="fa fa-chevron-left"></i> 读《JavaScript权威指南（第六版）》第二，三，四章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/05/读《JavaScript权威指南（第六版）》【闭包详解】/" rel="prev" title="读《JavaScript权威指南（第六版）》【闭包详解】">
+                读《JavaScript权威指南（第六版）》【闭包详解】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="读《JavaScript权威指南（第六版）》第五，六，七，八章" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/tx.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+ 
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

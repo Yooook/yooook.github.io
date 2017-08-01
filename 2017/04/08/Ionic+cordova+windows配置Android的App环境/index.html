@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ionic,angular,cordova,android" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
+1$ java -version
+命令窗口检查是否安装成功
+2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【详细】Ionic+cordova+windows配置Android的App环境">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/index.html">
+<meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
+1$ java -version
+命令窗口检查是否安装成功
+2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
+<meta property="og:updated_time" content="2017-04-09T06:30:01.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【详细】Ionic+cordova+windows配置Android的App环境">
+<meta name="twitter:description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
+1$ java -version
+命令窗口检查是否安装成功
+2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/"/>
+
+
+
+
+
+  <title> 【详细】Ionic+cordova+windows配置Android的App环境 | Finch's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Finch's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="width:100%;text-align:center; ">
+   <span id="busuanzi_container_site_uv" > 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+  <div style="margin: 0 auto; position:absolute;left:50%;margin-left:-30px;top:420px">
+  <img src="/images/1b.png" style="opacity: 1"alt="">
+</div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【详细】Ionic+cordova+windows配置Android的App环境
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-08T08:38:48+08:00">
+                2017-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ionic/" itemprop="url" rel="index">
+                    <span itemprop="name">Ionic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h3 id="1、Java-JDK-配置（Android-ADT需要）"><a href="#1、Java-JDK-配置（Android-ADT需要）" class="headerlink" title="1、Java JDK 配置（Android ADT需要）"></a>1、Java JDK 配置（Android ADT需要）</h3><p>最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，<br>在这里将它们记录下来，提供给需要的小伙伴们参考…….<br>详细配置: <a href="http://jingyan.baidu.com/article/f96699bb8b38e0894e3c1bef.html" target="_blank" rel="external">java环境配置链接</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ java -version</div></pre></td></tr></table></figure>
+<p>命令窗口检查是否安装成功</p>
+<h3 id="2、C-配置（node需要）"><a href="#2、C-配置（node需要）" class="headerlink" title="2、C++ 配置（node需要）"></a>2、C++ 配置（node需要）</h3><p>我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET Framework 4.5]安装发现严重错误，查了相关文档，是系统的问题，而我懒得升级系统或者重装系统（w7 sp1 支持Microsoft .NET Framework 4.5），所以安装了visual studio 2012，没有报错，很顺利！ 提示：并不影响app的生产<br>各种版本下载地址: <a href="http://blog.csdn.net/cometnet/article/details/19551125" target="_blank" rel="external">visual studio</a></p>
+<h3 id="3、Android-配置（打包Android应用需要）"><a href="#3、Android-配置（打包Android应用需要）" class="headerlink" title="3、Android 配置（打包Android应用需要）"></a>3、Android 配置（打包Android应用需要）</h3><p>【重点】</p>
+<h4 id="1、下载Android-SDK-Tools-Android工具链接"><a href="#1、下载Android-SDK-Tools-Android工具链接" class="headerlink" title="1、下载Android SDK Tools: Android工具链接"></a>1、下载Android SDK Tools: <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android工具链接</a></h4><h4 id="2、配置环境变量-Android配置环境变量"><a href="#2、配置环境变量-Android配置环境变量" class="headerlink" title="2、配置环境变量: Android配置环境变量"></a>2、配置环境变量: <a href="http://jingyan.baidu.com/article/" target="_blank" rel="external">Android配置环境变量</a></h4><h4 id="3、检查是否配置成功"><a href="#3、检查是否配置成功" class="headerlink" title="3、检查是否配置成功"></a>3、检查是否配置成功</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb</div></pre></td></tr></table></figure>
+<h4 id="4、相关组件下载"><a href="#4、相关组件下载" class="headerlink" title="4、相关组件下载"></a>4、相关组件下载</h4><p>现在有些人推荐离线安装，具体要下载的目录看下边写的，不过好几个包需要下载，这里我先说一下最方便的方法，可能会慢一些，不过步骤比较少，如果我所说的几个包，你没有显示，那就手动下载，地址就是 <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android</a><br>如果配置好了环境变量，输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ android</div></pre></td></tr></table></figure>
+<p>弹出Android SDK Manger窗口，勾选（所需要的几个包）Tools&gt; Android SDK Tools / Android SDK Platform-tools / Android SDK Build-tools 与Tools平级的勾选 API22（Android5.1.1）、API23（Android6.0），Extras里面勾选Android Support Respository 和 Google USB Driver 等待下载安装好即可，比较慢，可以喝杯茶了。</p>
+<p>手动下载的具体放置位置<a href="http://oo2fh73dq.bkt.clouddn.com/%E6%8D%95%E8%8E%B7.PNG" target="_blank" rel="external">目录图片链接</a>，解压放到相应位置即可</p>
+<h3 id="4、Node-配置（插件环境需要）"><a href="#4、Node-配置（插件环境需要）" class="headerlink" title="4、Node 配置（插件环境需要）"></a>4、Node 配置（插件环境需要）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node -v</div></pre></td></tr></table></figure>
+<h3 id="5、GIt-配置（需要从github上下载模板，团队开发）"><a href="#5、GIt-配置（需要从github上下载模板，团队开发）" class="headerlink" title="5、GIt 配置（需要从github上下载模板，团队开发）"></a>5、GIt 配置（需要从github上下载模板，团队开发）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git version</div></pre></td></tr></table></figure></p>
+<h2 id="项目依赖环境搭建"><a href="#项目依赖环境搭建" class="headerlink" title="项目依赖环境搭建"></a>项目依赖环境搭建</h2><p>1、cordova（打包工具）<br>2、Ionic（框架）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cordova ionic</div></pre></td></tr></table></figure></p>
+<p>想说的是安装可能有点慢，如果安装不正常，估计是被墙了，那么就要利用淘宝镜像安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g cordova ionic</div></pre></td></tr></table></figure>
+<p>安装完成肯定都要迫不及待要创建app啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ionic start myapp</div></pre></td></tr></table></figure></p>
+<p>好啦，那么问题来啦！！！【坑】<br>如果报的错里面有：npminstall的字样<br>那就是npm需要全局安装（默认不是全局的）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g npm</div></pre></td></tr></table></figure></p>
+<p>然后再试试，好了那就没什么了，如果没好？<br>弹出了缺少一个gulp-sass这个模块？？【十分 超级 坑】<br>解决方法：<br>由于gulp-sass需要依赖于node-sass，所以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm rebuild node-sass</div></pre></td></tr></table></figure></p>
+<p>然后再次创建项目ok；</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ionic-angular-cordova-android/" rel="tag"># Ionic,angular,cordova,android</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/25/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/" rel="prev" title="禁止手机浏览器、微信浏览器的上下滑动问题">
+                禁止手机浏览器、微信浏览器的上下滑动问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="【详细】Ionic+cordova+windows配置Android的App环境" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/tx.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统环境搭建"><span class="nav-number">1.</span> <span class="nav-text">系统环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Java-JDK-配置（Android-ADT需要）"><span class="nav-number">1.1.</span> <span class="nav-text">1、Java JDK 配置（Android ADT需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、C-配置（node需要）"><span class="nav-number">1.2.</span> <span class="nav-text">2、C++ 配置（node需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Android-配置（打包Android应用需要）"><span class="nav-number">1.3.</span> <span class="nav-text">3、Android 配置（打包Android应用需要）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、下载Android-SDK-Tools-Android工具链接"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、下载Android SDK Tools: Android工具链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、配置环境变量-Android配置环境变量"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、配置环境变量: Android配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、检查是否配置成功"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、检查是否配置成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、相关组件下载"><span class="nav-number">1.3.4.</span> <span class="nav-text">4、相关组件下载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Node-配置（插件环境需要）"><span class="nav-number">1.4.</span> <span class="nav-text">4、Node 配置（插件环境需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、GIt-配置（需要从github上下载模板，团队开发）"><span class="nav-number">1.5.</span> <span class="nav-text">5、GIt 配置（需要从github上下载模板，团队开发）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目依赖环境搭建"><span class="nav-number">2.</span> <span class="nav-text">项目依赖环境搭建</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+ 
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
