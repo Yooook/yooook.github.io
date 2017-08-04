@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ajax,JS,原生,JSON解析" />
+  <meta name="keywords" content="Angular见闻" />
 
 
 
@@ -80,19 +80,31 @@
 
 
 
-<meta name="description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.json&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
-true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nu">
+<meta name="description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
+&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
+    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
+    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;script src=&quot;node_modules/a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原生Ajax对JSON数据解析注意事项">
-<meta property="og:url" content="http://apskt.com/2017/04/27/原生Ajax对JSON数据解析注意事项/index.html">
+<meta property="og:title" content="Angular自定义filter匹配规则">
+<meta property="og:url" content="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.json&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
-true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nu">
-<meta property="og:updated_time" content="2017-04-27T10:54:10.292Z">
+<meta property="og:description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
+&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
+    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
+    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;script src=&quot;node_modules/a">
+<meta property="og:updated_time" content="2017-08-04T10:00:45.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原生Ajax对JSON数据解析注意事项">
-<meta name="twitter:description" content="###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = &apos;./data.json&apos;;// 通过open方法进行初始化配置xhr.open(&apos;post&apos;,url,true);// 执行发送请求的动作xhr.send(null);
-true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为nu">
+<meta name="twitter:title" content="Angular自定义filter匹配规则">
+<meta name="twitter:description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
+&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
+    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
+    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;script src=&quot;node_modules/a">
 
 
 
@@ -120,13 +132,13 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/04/27/原生Ajax对JSON数据解析注意事项/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/"/>
 
 
 
 
 
-  <title> 原生Ajax对JSON数据解析注意事项 | Finch's blog </title>
+  <title> Angular自定义filter匹配规则 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -273,7 +285,7 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/27/原生Ajax对JSON数据解析注意事项/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -294,7 +306,7 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
             
             
               
-                原生Ajax对JSON数据解析注意事项
+                Angular自定义filter匹配规则
               
             
           </h1>
@@ -309,8 +321,8 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T18:45:21+08:00">
-                2017-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-04T18:00:38+08:00">
+                2017-08-04
               </time>
             
 
@@ -332,8 +344,8 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ajax/" itemprop="url" rel="index">
-                    <span itemprop="name">Ajax</span>
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
                   </a>
                 </span>
 
@@ -367,10 +379,25 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
       
 
       
-        <p>###ajax的原生实现之前已经有很详细的说明，这里主要说说区别<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 请求地址</div><div class="line">var url = <span class="string">'./data.json'</span>;</div><div class="line">// 通过open方法进行初始化配置</div><div class="line">xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">// 执行发送请求的动作</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
-<p>true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 数据请求之后的回调函数</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  // 判断服务器数据请求是否成功</div><div class="line">  <span class="keyword">if</span> (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</div><div class="line">    // 请求的数据类型为responseText</div><div class="line">    var data = JSON.parse(xhr.responseText);</div><div class="line">    var total = data.total;</div><div class="line">    var datas = data.data;</div><div class="line">    var tag = <span class="string">''</span>;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; datas.length; i++) &#123;</div><div class="line">      var data1 = datas[i];</div><div class="line">      tag += <span class="string">'&lt;tr&gt;&lt;td&gt;'</span> + data1.name + <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + data1.category+ <span class="string">'&lt;/td&gt;&lt;td&gt;'</span> + data1.desc + <span class="string">'&lt;/td&gt;&lt;/tr&gt;'</span>;</div><div class="line">    &#125;</div><div class="line">    var tbody = document.createElement(<span class="string">'tbody'</span>);</div><div class="line">    tbody.innerHTML = tag;</div><div class="line">    document.getElementById(<span class="string">'info'</span>).appendChild(tbody);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>回调函数的数据返回类型是responseText，var data = JSON.parse(xhr.responseText);先将文本数据转化为对象，这样才能进行后续的操作，比如遍历，否则输出的是字符串。for循环里var data1 = datas[i];不论是解析xml或者json都需要做的步骤并且一定要正确，否则会出现未定义的状况无法输出内容。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"total"</span>:<span class="string">"4"</span>,</div><div class="line">  <span class="string">"data"</span>:[</div><div class="line">    &#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"三国演义"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"一个军阀混战的年代"</span></div><div class="line">    &#125;,&#123;</div><div class="line">      <span class="string">"name"</span>:<span class="string">"水浒传"</span>,</div><div class="line">      <span class="string">"category"</span>:<span class="string">"文学"</span>,</div><div class="line">      <span class="string">"desc"</span>:<span class="string">"草寇or英雄好汉"</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="string">"obj"</span>:&#123;<span class="string">"adf"</span>:<span class="string">"adf"</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>给按钮或者其他标签添加事件，在事件里实现异步请求。</p>
+        <p>在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定</p>
+<pre><code class="bash">&lt;div ng-app=<span class="string">"app"</span>&gt;
+    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">'height'</span>&gt;
+    &lt;p&gt;{{height | height}}&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=<span class="string">"node_modules/angular/angular.min.js"</span>&gt;&lt;/script&gt;
+&lt;script&gt;
+    angular.module(<span class="string">'app'</span>, [])
+    .filter(<span class="string">'height'</span>,<span class="function"><span class="title">function</span></span>() {
+        <span class="built_in">return</span> <span class="keyword">function</span>(input) {
+            <span class="keyword">if</span> (input &gt; 200) {
+                <span class="built_in">return</span> <span class="string">'太高啦'</span>;
+            }<span class="keyword">else</span> <span class="keyword">if</span> (input &lt; 100) {
+                <span class="built_in">return</span> <span class="string">'太矮了'</span>;
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -401,7 +428,7 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
       
         <div class="post-tags">
           
-            <a href="/tags/Ajax-JS-JSON/" rel="tag"># Ajax,JS,JSON</a>
+            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
           
         </div>
       
@@ -414,8 +441,8 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/27/原生Ajax对XML数据解析注意事项/" rel="next" title="原生Ajax对XML数据解析注意事项">
-                <i class="fa fa-chevron-left"></i> 原生Ajax对XML数据解析注意事项
+              <a href="/2017/08/02/Angular自定义指令实践/" rel="next" title="Angular自定义指令实践">
+                <i class="fa fa-chevron-left"></i> Angular自定义指令实践
               </a>
             
           </div>
@@ -423,10 +450,6 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/27/Ajax原生封装/" rel="prev" title="Ajax原生封装">
-                Ajax原生封装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -454,7 +477,7 @@ true可以省略，不论是post方法或者get方法请求【整个xml文件节
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="原生Ajax对JSON数据解析注意事项" ></div> 
+<div id="SOHUCS" sid="Angular自定义filter匹配规则" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
