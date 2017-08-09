@@ -268,6 +268,298 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/15/微信浏览器实现canvas画笔+手势放大缩小（任然可以画）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/15/微信浏览器实现canvas画笔+手势放大缩小（任然可以画）/" itemprop="url">
+                  微信浏览器利用手势实现canvas画笔+放大缩小（任然可以画）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T09:30:23+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微信/" itemprop="url" rel="index">
+                    <span itemprop="name">微信</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- ## 微信浏览器利用手势实现canvas画笔+放大缩小（任然可以画） -->
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">  &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</div><div class="line">    (<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">      var canvas = document.querySelector(<span class="string">'#cavsElem'</span>);</div><div class="line">      var togger = 0;</div><div class="line">  // 判断是否取消微信默认的下拉事件</div><div class="line">  document.querySelector(<span class="string">'.swiper-container'</span>).addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    <span class="keyword">if</span> (togger == 1) &#123;event.preventDefault();&#125;</div><div class="line">    <span class="keyword">else</span> &#123;<span class="built_in">return</span>;&#125;</div><div class="line">  &#125;);</div><div class="line">  var ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">  // canvas全屏自适应</div><div class="line">  var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;</div><div class="line">  var h =  window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; </div><div class="line">  canvas.width = w;</div><div class="line">  canvas.height = h+2;</div><div class="line">  canvas.style.border = <span class="string">"1px solid #000"</span>;</div><div class="line">  ctx.strokeStyle = <span class="string">"red"</span>;</div><div class="line">  ctx.lineWidth = 3;</div><div class="line">  // 画笔功能</div><div class="line">  canvas.addEventListener(<span class="string">'touchstart'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    var x =  parseInt(ev.changedTouches[0].clientX);</div><div class="line">    var y =  parseInt(ev.changedTouches[0].clientY);</div><div class="line">    ctx.beginPath();</div><div class="line">    canvas.addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">      // 判断触点个数 </div><div class="line">      togger = ev.touches.length;</div><div class="line">      <span class="keyword">if</span> (ev.touches.length == 1) &#123;</div><div class="line">        var x =  parseInt(ev.changedTouches[0].clientX);</div><div class="line">        var y =  parseInt(ev.changedTouches[0].clientY);</div><div class="line">        ctx.lineTo(x, y);</div><div class="line">        ctx.stroke();</div><div class="line">        console.log(<span class="string">'('</span>+x +<span class="string">','</span>+ y+<span class="string">')'</span>);</div><div class="line">      &#125;</div><div class="line">      ev.touches.length = 2</div><div class="line">    &#125;);</div><div class="line">    canvas.addEventListener(<span class="string">'touchend'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">      canvas.removeEventListener(<span class="string">'touchstart'</span>,null);</div><div class="line">      canvas.removeEventListener(<span class="string">'touchmove'</span>,null);</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">&#125;());</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>【1】微信浏览器对原生的js事件监听的语法不能较好的识别，无法监听到touch的整个过程，必须使用规范的HTML5的书写方式去实现事件监听，也就是所谓的DOM2级事件处理程序。尤其是对touch事件的处理。【2】这里通过判断touchmove过程中的touchs的个数决定了是否取消微信浏览器默认的下拉刷新的浮动事件，从而将批注和手势缩放区分开来。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/" itemprop="url">
+                  禁止手机浏览器、微信浏览器的上下滑动问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-13T11:30:33+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微信/" itemprop="url" rel="index">
+                    <span itemprop="name">微信</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- ## 禁止移动端（包括微信浏览器）的上下滑动产生浮动的问题 -->
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">'text/javascript'</span>&gt;</div><div class="line">document.querySelector(<span class="string">'body'</span>).addEventListener(<span class="string">'touchstart'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    event.preventDefault();</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>这个是官方给出的解决方案，我就以自己的案例为主，提出一点思考，就代码而言有用，但是禁用掉了所有包含在body下的一些touch，scroll事件，可以考虑将需要touch，和scroll的事件元素放在所要禁用的元素外层，这样就可以规避此类问题，转为从html的嵌套层次上下手去解决问题。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -600,7 +892,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>

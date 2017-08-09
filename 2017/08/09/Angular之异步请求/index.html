@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ionic,angular,cordova,android" />
+  <meta name="keywords" content="Angular见闻" />
 
 
 
@@ -80,25 +80,16 @@
 
 
 
-<meta name="description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
-1$ java -version
-命令窗口检查是否安装成功
-2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
+<meta name="description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【详细】Ionic+cordova+windows配置Android的App环境">
-<meta property="og:url" content="http://apskt.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/index.html">
+<meta property="og:title" content="Angular之异步请求">
+<meta property="og:url" content="http://apskt.com/2017/08/09/Angular之异步请求/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
-1$ java -version
-命令窗口检查是否安装成功
-2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
-<meta property="og:updated_time" content="2017-04-09T06:30:01.959Z">
+<meta property="og:description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
+<meta property="og:updated_time" content="2017-08-09T06:19:42.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【详细】Ionic+cordova+windows配置Android的App环境">
-<meta name="twitter:description" content="系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
-1$ java -version
-命令窗口检查是否安装成功
-2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual">
+<meta name="twitter:title" content="Angular之异步请求">
+<meta name="twitter:description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
 
 
 
@@ -126,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/09/Angular之异步请求/"/>
 
 
 
 
 
-  <title> 【详细】Ionic+cordova+windows配置Android的App环境 | Finch's blog </title>
+  <title> Angular之异步请求 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -279,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular之异步请求/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -300,7 +291,7 @@
             
             
               
-                【详细】Ionic+cordova+windows配置Android的App环境
+                Angular之异步请求
               
             
           </h1>
@@ -315,8 +306,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-08T08:38:48+08:00">
-                2017-04-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T14:19:42+08:00">
+                2017-08-09
               </time>
             
 
@@ -338,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ionic/" itemprop="url" rel="index">
-                    <span itemprop="name">Ionic</span>
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
                   </a>
                 </span>
 
@@ -373,26 +364,12 @@
       
 
       
-        <h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h3 id="1、Java-JDK-配置（Android-ADT需要）"><a href="#1、Java-JDK-配置（Android-ADT需要）" class="headerlink" title="1、Java JDK 配置（Android ADT需要）"></a>1、Java JDK 配置（Android ADT需要）</h3><p>最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，<br>在这里将它们记录下来，提供给需要的小伙伴们参考…….<br>详细配置: <a href="http://jingyan.baidu.com/article/f96699bb8b38e0894e3c1bef.html" target="_blank" rel="external">java环境配置链接</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ java -version</div></pre></td></tr></table></figure>
-<p>命令窗口检查是否安装成功</p>
-<h3 id="2、C-配置（node需要）"><a href="#2、C-配置（node需要）" class="headerlink" title="2、C++ 配置（node需要）"></a>2、C++ 配置（node需要）</h3><p>我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET Framework 4.5]安装发现严重错误，查了相关文档，是系统的问题，而我懒得升级系统或者重装系统（w7 sp1 支持Microsoft .NET Framework 4.5），所以安装了visual studio 2012，没有报错，很顺利！ 提示：并不影响app的生产<br>各种版本下载地址: <a href="http://blog.csdn.net/cometnet/article/details/19551125" target="_blank" rel="external">visual studio</a></p>
-<h3 id="3、Android-配置（打包Android应用需要）"><a href="#3、Android-配置（打包Android应用需要）" class="headerlink" title="3、Android 配置（打包Android应用需要）"></a>3、Android 配置（打包Android应用需要）</h3><p>【重点】</p>
-<h4 id="1、下载Android-SDK-Tools-Android工具链接"><a href="#1、下载Android-SDK-Tools-Android工具链接" class="headerlink" title="1、下载Android SDK Tools: Android工具链接"></a>1、下载Android SDK Tools: <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android工具链接</a></h4><h4 id="2、配置环境变量-Android配置环境变量"><a href="#2、配置环境变量-Android配置环境变量" class="headerlink" title="2、配置环境变量: Android配置环境变量"></a>2、配置环境变量: <a href="http://jingyan.baidu.com/article/" target="_blank" rel="external">Android配置环境变量</a></h4><h4 id="3、检查是否配置成功"><a href="#3、检查是否配置成功" class="headerlink" title="3、检查是否配置成功"></a>3、检查是否配置成功</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb</div></pre></td></tr></table></figure>
-<h4 id="4、相关组件下载"><a href="#4、相关组件下载" class="headerlink" title="4、相关组件下载"></a>4、相关组件下载</h4><p>现在有些人推荐离线安装，具体要下载的目录看下边写的，不过好几个包需要下载，这里我先说一下最方便的方法，可能会慢一些，不过步骤比较少，如果我所说的几个包，你没有显示，那就手动下载，地址就是 <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android</a><br>如果配置好了环境变量，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ android</div></pre></td></tr></table></figure>
-<p>弹出Android SDK Manger窗口，勾选（所需要的几个包）Tools&gt; Android SDK Tools / Android SDK Platform-tools / Android SDK Build-tools 与Tools平级的勾选 API22（Android5.1.1）、API23（Android6.0），Extras里面勾选Android Support Respository 和 Google USB Driver 等待下载安装好即可，比较慢，可以喝杯茶了。</p>
-<p>手动下载的具体放置位置<a href="http://oo2fh73dq.bkt.clouddn.com/%E6%8D%95%E8%8E%B7.PNG" target="_blank" rel="external">目录图片链接</a>，解压放到相应位置即可</p>
-<h3 id="4、Node-配置（插件环境需要）"><a href="#4、Node-配置（插件环境需要）" class="headerlink" title="4、Node 配置（插件环境需要）"></a>4、Node 配置（插件环境需要）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node -v</div></pre></td></tr></table></figure>
-<h3 id="5、GIt-配置（需要从github上下载模板，团队开发）"><a href="#5、GIt-配置（需要从github上下载模板，团队开发）" class="headerlink" title="5、GIt 配置（需要从github上下载模板，团队开发）"></a>5、GIt 配置（需要从github上下载模板，团队开发）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git version</div></pre></td></tr></table></figure></p>
-<h2 id="项目依赖环境搭建"><a href="#项目依赖环境搭建" class="headerlink" title="项目依赖环境搭建"></a>项目依赖环境搭建</h2><p>1、cordova（打包工具）<br>2、Ionic（框架）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cordova ionic</div></pre></td></tr></table></figure></p>
-<p>想说的是安装可能有点慢，如果安装不正常，估计是被墙了，那么就要利用淘宝镜像安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g cordova ionic</div></pre></td></tr></table></figure>
-<p>安装完成肯定都要迫不及待要创建app啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ionic start myapp</div></pre></td></tr></table></figure></p>
-<p>好啦，那么问题来啦！！！【坑】<br>如果报的错里面有：npminstall的字样<br>那就是npm需要全局安装（默认不是全局的）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g npm</div></pre></td></tr></table></figure></p>
-<p>然后再试试，好了那就没什么了，如果没好？<br>弹出了缺少一个gulp-sass这个模块？？【十分 超级 坑】<br>解决方法：<br>由于gulp-sass需要依赖于node-sass，所以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm rebuild node-sass</div></pre></td></tr></table></figure></p>
-<p>然后再次创建项目ok；</p>
+        <h2 id="使用angular本身提供的-http服务进行异步请求"><a href="#使用angular本身提供的-http服务进行异步请求" class="headerlink" title="使用angular本身提供的$http服务进行异步请求"></a>使用angular本身提供的$http服务进行异步请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>(&#123;</div><div class="line">		method:<span class="string">'GET'</span>,</div><div class="line">		url:<span class="string">'/app/data.json'</span></div><div class="line">	&#125;).then(<span class="keyword">function</span>(response) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(response)</div><div class="line">	&#125;, <span class="keyword">function</span>(response) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;);</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>.get(<span class="string">'./data.json'</span>).then(<span class="keyword">function</span>(data) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(data.data)</div><div class="line">	&#125;,<span class="keyword">function</span>(err) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;)</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>针对Chrome和Firefox进行测试，结果如下：</p>
+<p>Firefox（file协议下）：可以正常请求数据，但是提示报错（XML 解析错误：格式不佳 位置：file:///C:/Users/Administrator/Desktop angular_test2/angular-seed(Modified)/app/data.json 行 1，列 1：）<br>Firefox（http协议下）：一切正常</p>
+<p>Chrome（file协议下）：可以正常请求数据，但是提示报错（XMLHttpRequest cannot load file:///C:/Users/Administrator/Desktop/angular_test2/angular-seed(Modified)/app/view1/view1.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.）<br>Chrome（http协议下）：一切正常</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -423,7 +400,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ionic-angular-cordova-android/" rel="tag"># Ionic,angular,cordova,android</a>
+            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
           
         </div>
       
@@ -436,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/08/09/Angular见闻之三/" rel="next" title="Angular见闻之三">
+                <i class="fa fa-chevron-left"></i> Angular见闻之三
               </a>
             
           </div>
@@ -445,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/" rel="prev" title="禁止手机浏览器、微信浏览器的上下滑动问题">
-                禁止手机浏览器、微信浏览器的上下滑动问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +449,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="【详细】Ionic+cordova+windows配置Android的App环境" ></div> 
+<div id="SOHUCS" sid="Angular之异步请求" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -586,7 +559,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统环境搭建"><span class="nav-number">1.</span> <span class="nav-text">系统环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Java-JDK-配置（Android-ADT需要）"><span class="nav-number">1.1.</span> <span class="nav-text">1、Java JDK 配置（Android ADT需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、C-配置（node需要）"><span class="nav-number">1.2.</span> <span class="nav-text">2、C++ 配置（node需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Android-配置（打包Android应用需要）"><span class="nav-number">1.3.</span> <span class="nav-text">3、Android 配置（打包Android应用需要）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、下载Android-SDK-Tools-Android工具链接"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、下载Android SDK Tools: Android工具链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、配置环境变量-Android配置环境变量"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、配置环境变量: Android配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、检查是否配置成功"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、检查是否配置成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、相关组件下载"><span class="nav-number">1.3.4.</span> <span class="nav-text">4、相关组件下载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Node-配置（插件环境需要）"><span class="nav-number">1.4.</span> <span class="nav-text">4、Node 配置（插件环境需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、GIt-配置（需要从github上下载模板，团队开发）"><span class="nav-number">1.5.</span> <span class="nav-text">5、GIt 配置（需要从github上下载模板，团队开发）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目依赖环境搭建"><span class="nav-number">2.</span> <span class="nav-text">项目依赖环境搭建</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用angular本身提供的-http服务进行异步请求"><span class="nav-number">1.</span> <span class="nav-text">使用angular本身提供的$http服务进行异步请求</span></a></li></ol></div>
             
 
           </div>

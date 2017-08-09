@@ -268,6 +268,298 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/08/读《JavaScript高级程序设计 第三版》第五章补/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/08/读《JavaScript高级程序设计 第三版》第五章补/" itemprop="url">
+                  读《JavaScript高级程序设计 第三版》第五章补
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T15:00:29+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>~对象字面量的属性定义可以用字符串”name” = alg;<br>~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&lt;7和早版本的opera中会报错<br>~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参<br>~使用方括号访问属性的唯一优点是可以以变量的方式访问。<br>~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数<br>~检测数组：if(Array.isArray(value)){//对数组操作};<br>~如果数组中有一项的值是null或者undefined，那么该值在join().toString()，和valueOf()<br>方法的返回结果中以空字符串表示。<br>~栈方法：Array.push()接受任意数量的参数，把他们添加到数组末尾，返回修改后数组的长度。Array.pop()从数组末尾移除最后一项，返回移除项。<br>~队列方法：Array.push()和Array.shift()，shift方法移除数组中第一个项并返回该项，同时数组长度减1；<br>~unshift()在数组前端添加任意个 项并返回数组的长度。<br>~reverse()和sort()返回排序后得数组<br>~sort()对数组排序会将数值转化为字符比较所以5会比10大，针对这个进行改造,传入函数compare如下Array.sort(ccompare);</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> compare(value1,value2) &#123;</div><div class="line">	<span class="keyword">if</span>(value1 &lt; varue2) &#123;</div><div class="line">	<span class="built_in">return</span> -1;//换为1同时将下面换成-1则为降序排列，当然了如果只是反转顺序，reserve()更快</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(value1 &lt; varue2)&#123;</div><div class="line">	<span class="built_in">return</span> 1;</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">	<span class="built_in">return</span> 0;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>操作方法：<br>~concat()方法：创建当前数组的副本，然后将参数添加到副本的末尾，返回新数组。反悔的数组和之前的数组是两个数组。<br>~slice()方法：返回新数组，一个参数时，从该参数位置到结尾的所有元素返回数组，两个参数时返回起始到结束位置的新数组，不包括结束位置的索引，且该方法不影响原始数组。如果参数有负数，则加数组长度，长度为5（-2，-1）== （3,4），若结束位置小于初始位置则返回空数组。<br>~splice()方法：算是最强大的数组方法，传入两个参数，则删除对应起始位置的元素。三个或者三个以上的参数，第一个是起始位置，第二个是删除项的个数，第三个以后是要插入的元素，三个参数时，第一个参数从1开始。</p>
+<p>~位置方法：indexOf()方法和lastIndexOf()返回查找项的位置索引，没有则返回-1；<br>~Data.now()获取当前的毫秒数可以用来计算函数执行时间。<br>~JavaScript没有重载<br>~可以同时使用函数声明和函数表达式，但是在Safari中会导致错误<br>~在函数内部有两个特殊的对象，this和arguments，arguments是一个类数组对象，有一个callee的属性，指向拥有这个arguments对象的函数。<br>~函数名只是一个包含指针的变量而已，无临时全局的say()还是o.say()指向的都是同一个函数。<br>~严格模式不能为caller属性赋值，不然会导致错误；<br>~每个函数都包含两个非继承而来的方法：apply()和call()用途都是在特定的作用域中调用函数。sum.apply(this,arguments)/sum.call(this,arg1,arg2,arg3)…他们真正强大的是可以扩充函数赖以运行的作用于。</p>
+<p>~num.toFixed(2)返回两位小数的数字。会自动舍入<br>~字符方法：charAt()：接受一个参数，返回该参数的字符。charCodeAt()接受一个参数，返回该参数的字符编码。或者以string[i]的方式返回。<br>~字符串操作方法：string.concat()，返回新的字符串。slice()，substr(),substring()返回子字符串。一个参数或者两个参数，subtr()传入两个参数的时候，后者标识要返回字符串的个数。传入负值时，slice()会加字符串长度。substr()会将第一个参数加字符串的长度，第二个负的参数转化为0；substring()会把所有负值转化为0，从小数部分开始算；<br>~如果字符出现一次则indeOf()和lastIndexOf()返回的相同。他们的第二个可选参数指定查询开始位置。<br>~string.trim()方法，删除前后的空格，中间的不会删除。并返回结果。<br>~大小写转化：string.toLocalUpperCase() == string.toUpperCase();string.toLocalLowerCase() == string.toLowerCase();<br>~模式匹配：match()，serach()；<br>~将字符串转化为数组：split(),第一个参数为分隔符。第二个可选参数是元素个数。<br>~单体内置对象：不需要显示的实例化内置对象，Global，Math<br>~Global不属于任何其他对象的属性和方法，最终都是它的属性和方法<br>~encodeURIComponent(url);decodeURIComponent(url)<br>~严格模式下访问不到任何eval()中穿件的变量或者函数，并且为eval赋值也会错误。<br>~Object是一个基础类型，其他所有类型都要从Object继承基本的行为</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/06/读《JavaScript高级程序设计 第三版》前五章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/06/读《JavaScript高级程序设计 第三版》前五章/" itemprop="url">
+                  读《JavaScript高级程序设计 第三版》前五章
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-06T12:22:50+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>~Dom不仅仅只是针对JavaScript，很多语言也实现了Dom.<br>~如果用var在函数内定义一个变量，那么这个变量就会在函数退出后就会被销毁。<br>~在严格模式下，不能定义名为eval或arguments的变量，否则会导致语法错误。<br>~ECMAScript函数不能重载<br>~在很多语言中，字符串以对象的形式来标识，因此被认为是引用类型的。ECMAScript放弃了这一传统<br>~垃圾收集策略：标记清除，引用计数<br>~解除引用：一般数据不再有用，最好通过将其值设置为null来释放其引用，这个方法叫做解除引用。这一方法适合大多数全局变量和全局对象的属性。局部变量会在他们离开执行环境的时候自动被解除引用。解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便于垃圾收集器下次运行的时候将其回收。<br>~JavaScript变量可以用来保存两种类型的值：基本类型值（栈内存）和引用类型值（堆内存）。<br>~从一个变量向另一个变量复制基本类型的值，会创建这个值的一个副本。<br>~从一个变量向另一个变量复制引用类型的值，仅仅复制了指针，他们指向同一个对象。<br>~确定一个值是那种基本类型可以用typeof操作符，确定一个值是哪种引用类型可以用instanceof操作符<br>~每次进入一个新的执行环境，都会创建一个用于搜索变量和函数的作用域链<br>~“标记清除”离开作用域的值会被自动标记为可回收，在垃圾收集期间被删除。这是目前主流的垃圾收集算法。<br>~“引用计数”追踪记录所有值被引用的次数。JavaScript引擎目前不再使用这种算法。主要原因是当代码中存在循环引用现象时，就会出现问题。<br>~“解除变量”有助于消除循环引用的现象，对垃圾回收也有用好处。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/05/《JavaScript权威指南》《JavaScript Dom编程艺术》读书感想/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1412,295 +1704,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/27/读《JavaScript权威指南（第六版）》第十四章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/27/读《JavaScript权威指南（第六版）》第十四章/" itemprop="url">
-                  读《JavaScript权威指南（第六版）》第十四章
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-27T11:40:13+08:00">
-                2017-06-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用<br>~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location对象，即wi<br>~ndow.location === document.location//true<br>~window.location和location输出相同，location.href和location.toString()输出相同 解析URL：var<br>~query = location.search.substring(1)//找到查询串并去掉‘？’；var pairs =<br>~query.split(‘&amp;’)//用&amp;符号分割字符串，并且返回数组； assign()可以使窗口载入并显示你说指定的URL中的文档，replace()类<br>~似，推荐用后者，因为后者在载入的时候会在历史记录中删除当前文档，否则后退按钮会把浏览器带回到原始文档，再次载入新文档；<br>~可以通过location.replace()方法载入静态的html，例如if(!XMLHttpRequest)<br>~location.replace(“staticpage.html”);//重定向<br>~location对象除了上面的两个方法之外，还有reload()方法，可以让浏览器重新载入当前文档<br>~跳转还可以，直接将新的URL或者相对URL赋值给location，例如 location = ‘www.baidu.com’;location =<br>‘index.html’; 其他方式：location = ‘#top’;location.search = ‘?page=’ +<br>~(pagenum+1);//进入下一页 浏览历史：window对象的history属性引用的是History对象。这个对象将窗口浏览历史用文档和文档状态列<br>~表的形式标识。具有length属性，表示历史记录的数量，出于安全考虑吗，脚本不能访问已经保存了的URL；<br>~History对象有back(),forward(),go()方法等实现前进后退，go()方法接受正负整形参数<br>~window对象的navigator和screen属性分别引用的是navigator对象和screen对象<br>~Navigator对象的命名是为了纪念Netscape之后的navigator浏览器<br>~一般用navigator的userAgent属性进行网络嗅探，它包含了APPVersion所有的信息，以及一些其他信息<br>~通过navigator对象的onLine属性可以判断当前网络是否链接<br>~Screen对象提供有关窗口大小和颜色数量的信息。属性width，height指定以像素为单位的窗口大小，属性availWidth和availHeight指定实际可用的显示大小<br>~关于对话框：window对象提供了3个方法1。alert(),comfirm(),prompt()后两种会产生阻塞，在用户关掉他们所显示的对话框之前，不会返回，意味着代码运行会停止，alert()也会,但不是总是。<br>~一个浏览器有可以有多个标签页，他们都是独立的“浏览器上下文”，都具有独立的window对象，但并不是总是没有关系，可以用过一个窗口的脚本打开另一个标签页面。<br>~window对象的open(‘url’,’窗口名字’,’设置属性’，’bool替换或创建历史记录当前条目’)和close()方法打开和关闭一个窗口。<br>~窗口关闭了，对象依然存在，已经关闭的窗口会有个值为true的closed属性，它的document是null，方法通常也不会再工作。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/23/读《JavaScript权威指南（第六版）》第13章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/23/读《JavaScript权威指南（第六版）》第13章/" itemprop="url">
-                  读《JavaScript权威指南（第六版）》第十三章
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-23T16:23:00+08:00">
-                2017-06-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~web浏览器中的JavaScript称为客户端JavaScript<br>~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它<br>~alert，settimeout，location等都是window的方法或者属性<br>~在客户端JavaScript中，window对象也是全局对象，处于作用域的顶部，它的属性和方法都是全局变量和全局函数<br>~Window对象有一个引用自身的属性，叫做window，如果需要引用窗口对象本身，可以使用这个属性，如果只是引用全局窗口对象的属性，通常不需要用到window<br>~Window对象中最重要的一个属性是document，它引用Document对象，后者表示在窗口中的文档。<br>~Document对象有一些重要的方法，比如getElemenById(),返回element对象，element对象还有其他重要的属性和方法；每个element对象都有style和className属性<br>~用户体验不应该依赖于JavaScript，但JavaScript可以增强体验<br>~注意区分web文档（document,element,css,事件处理程序）和web应用里面的JavaScript（XMLHttpRequest）<br>~嵌入客户端JavaScript代码有四种方式，内联，外联，事件处理程序内onclick，放在一个URL里，这个URL使用特殊的”javascript：”协议，后两种已经很少使用，内联也用的少了，主要是‘unobtrusive JavaScript’编程哲学。（html和JavaScript分离）</p>
-<p>~在XHTML中有些字符会被解释成XML标记，所以应该这样写&lt;\script&gt;&lt;!&gt;[CDATA[//这里写JavaScript代码]]&lt;\/script&gt;<br>~JavaScript脚本类型type=”text/javascript”,language=”text/javascript”<br>~当脚本所在的html文件被载入时，脚本里的JavaScript只会执行一次，为了可以交互，必须先定义事件处理程序——web浏览器先注册JavaScript函数，并在之后调用他作为事件响应、<br>~JavaScript载入阶段是相对短暂的（1-2秒）在文档载入完成后，只有在web浏览器显示文档，事件驱动阶段就会一直持续下去，因为这个阶段是异步和事件驱动的，长时间处于不活动状态。<br>~脚本和事件处理程序在同一个时间只能执行一个，没有并发性，这保持了JavaScript编程的简单性<br>~脚本的执行在默认情况下是同步和阻塞的，但是可以配合src属性设置异步或者延迟执行，不影响文档的解析和渲染，注意的是延迟的脚本会按照它们在文档里出现的顺序执行，异步的则不会<br>~事件具有目标，它是一个对象（DOM对象），事件就在它上面发生。<br>~注册（脚本执行的第1阶段）事件处理程序，最简单的方法就是将JavaScript函数赋值给目标对象的属性<br>~传递给settimeout()的函数和事件处理程序的注册不用，他们通常叫做“回调逻辑”，而不是“处理程序”，但是它们和事件处理程序一样，都是异步的。<br>~事件处理程序注册技术addEventListaner();允许注册多个监听器；<br>~H5定义了一种并发控制方式，叫做“web worker”；用来执行计算密集任务而不冻结用户界面的后台线程<br>~浏览器在document对象上触发DOMContentLoaded事件（ 在load事件之前触发）。这标志着程序执行从同步脚本执行阶段，转换到了异步事件驱动阶段。但要注意的是，可能还有异步脚本没有执行完。<br>~框架必不可少的一个重要功能是：他们定义了新的客户端API并且兼容所有浏览器；<br>~解决不兼容问题的方法：使用类库，功能检测，浏览器检测，条件注释（比如IE）<br>~怪异模式和标准模式（CSS兼容模式）：根据是否有DOCTYPE声明决定是否遵循css标准。两种方法的检测方法：document.compatMode属性，如果值为“CSS1Compat”则为标准模式“BackCompat”则为怪异模式<br>~浏览器检测，主要是用Navigator对象，检测浏览器类型和版本。<br>~浏览器嗅探（客户端嗅探）：确定当前浏览器厂商和版本的代码叫做浏览器嗅探。<br>~为什么要说安全性，因为web浏览器包含JavaScript解释器，一旦加载web页面，可以让任意的JavaScript代码在计算机里执行。<br>~校本化插件和ActiveX控件，是为了使用安全性的前提下屏蔽的恶意代码调用文件系统功能和网络功能的一种途径，但是也有很糟糕的历史遗留问题，操作系统还存在很多可以被控件利用的安全漏洞；</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1750,7 +1753,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
