@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Accueil
+            Home
           </a>
         </li>
       
@@ -235,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            A propos
+            About
           </a>
         </li>
       
@@ -258,6 +258,503 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/02/Angular自定义指令实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/02/Angular自定义指令实践/" itemprop="url">
+                  Angular自定义指令实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:10:29+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code class="bash">&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="string">"en"</span>&gt;
+&lt;head&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"./bower_components/bootstrap/dist/css/bootstrap.min.css"</span>&gt;
+&lt;/head&gt;
+&lt;body  ng-app=<span class="string">"barModule"</span> ng-controller=<span class="string">"barController"</span>&gt;
+    &lt;breadcrumb data=<span class="string">"{{data}}"</span>&gt;111111111&lt;/breadcrumb&gt;
+    &lt;script src=<span class="string">"./bower_components/angular/angular.min.js"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var barModule = angular.module(<span class="string">'barModule'</span>,[]);
+
+        barModule.controller(<span class="string">'barController'</span>,[<span class="string">'$scope'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>){
+            <span class="variable">$scope</span>.data = {
+                shouyw:1,
+                dierye:2,
+                disanye:3
+            };
+        }]);
+
+        barModule.directive(<span class="string">'breadcrumb'</span>,[<span class="function"><span class="title">function</span></span>(){
+            <span class="built_in">return</span> {
+                scope:{},
+                // restrict: <span class="string">'AE'</span>,
+                // template: <span class="string">''</span>,
+                transclude: <span class="literal">true</span>,
+                replace: <span class="literal">true</span>,
+                templateUrl:<span class="string">'./tpls/breadcrumb.html'</span>,
+                link:<span class="keyword">function</span>(scope,element,attribute) {
+                    scope.data = JSON.parse(attribute.data);
+                    console.log(scope.data)
+                }
+            };
+        }]);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>./tpls/breadcrumb.html文件如下</p>
+<pre><code class="bash">&lt;ol class=<span class="string">"breadcrumb"</span>&gt;
+  &lt;li ng-repeat=<span class="string">"(key, value) in data"</span> ng-class=<span class="string">"{active:<span class="variable">$last</span>}"</span>&gt;
+       &lt;a href=<span class="string">"{{value}}"</span> ng-if=<span class="string">"!<span class="variable">$last</span>"</span>&gt;{{key}}&lt;/a&gt;
+    &lt;span ng-if=<span class="string">"<span class="variable">$last</span>"</span>&gt;{{key}}&lt;/span&gt;
+  &lt;/li&gt;
+  &lt;!-- &lt;ng-transclude&gt;&lt;/ng-transclude&gt; --&gt;
+&lt;/ol&gt;
+</code></pre>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/02/Angular见闻之二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/02/Angular见闻之二/" itemprop="url">
+                  Angular见闻之二
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:05:14+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> ~ng-xxx的属性本身并不是标准中定义的属性，语法校验无法通过，所以也有data-ng-xxx的写法，让网页对h5有效，二者相同<br>~按照功能人为划分指令可以分为，普通指令和事件指令<br>ng-app：{<br>    ~创建多个ng-app的时候，默认执行第一个，其他的需要手动去执行<br>    ~ng-app一个页面上有多个，但是不推荐，另外标记的范围要尽可能小， 性能更高<br>    ~每个ng-app都是一个模块，他们可以组成新的模块从而避免多个ng-app<br>}<br>ng-bind： {<br>    在绑定的值包含HTML时会转义，为了预防跨站脚本攻击<br>    绑定函数<br>    ng-bind-html可以包含html，需要依赖于angular-sanitize,并注入ngSanitize模块在ng-app中<br>}<br>ng-repeat: {<br>    往数组添加元素的方法除了push()还有data[data.length]=xxx；<br>    添加给需要的重复的标签forin语法<br>    {&amp;{$first?’开始’:’’}&amp;}<br>    {&amp;{$last?’结束’:’’}&amp;}<br>    class = “{&amp;{$even?’red’:’green’}&amp;}”隔行换色<br>    ng-class = “{red:$even,green:$odd}”<br>    ng-class = “{red:name.startWidth(‘李’【这里可以是一个变量】))}”<br>}<br>nf-show : {<br>    settimeout()在angular中是$timeout()<br>    相对应的有ng-hide<br>}<br>ng-src：{<br>    避免网页报错，导致img标签请求表达式地址，产生的加载失败瞬间<br>    相似的有ng-href<br>}</p>
+<p>ng-switch ：{<br>    与ng-switch-when，ng-switch-default配合使用<br>}</p>
+<p>ng-checked 和 ng-selected ：{<br>    都只会做数据到视图的同步，相反则不会<br>}</p>
+<p>自定义指令：{<br>    定义：demoApp.directive(‘myButton’,[function(){<br>        return {<br>            transclude: true,//该属性在html页面只能用ng-transclude做标签，而不是属性，否则报错<br>            replace: true,<br>            templateUrl:’./tpls/breadcrumb.html’<br>            template:’模板代码’<br>        };<br>    }]);<br>    调用：&lt;\my-button&gt;&lt;\/my-button&gt;<br>}</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/31/Angular见闻/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/31/Angular见闻/" itemprop="url">
+                  Angular见闻之一
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-31T11:18:00+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>是什么：Angular就是一个高级的JavaScript框架</p>
+<p>做什么：Angular能够构建SPA[单一页面应用程序]，只有一个页面，内容由AJAX请求得到，Angular整个是利用锚点进行异步请求的，实现局部刷新</p>
+<p>为什么用：更少的代码实现更强劲的功能，现在的需求不仅仅是做出一些相应的功能，如果不能在代码里体现出一些思想的话，那么维护和推进都很难，而angular的出现带领着人更加注重前端思维，走向模式化和架构化.</p>
+<p>Angular的特性:1.MVC 2.模块化 3.自动化双向数据绑定 4.指令系统</p>
+<p>所有需要ng管理的代码都需要包裹着ng-app中,ng-app是ng的入口,表示所有的指令都会被angular管理</p>
+<p>当代码被执行到ng-app的时候会开辟内存空间,用于创建并存放ng-model对应的’值’的数据模型,并将value属性和内存空间中的某个对象的某个属性建立关系,value和属性的联系,不是ng-model和对象的联系，也不是value和对象的联系,这个时候不需要有值,这只是一种绑定，就想把变量对应到内存空间一样.当代码继续执行遇到表达式的时候[两对花括号],如果表达式中的内容与数据模型对应,那么表达式所在标签的innerHTML属性和内存空间中相应属性建立联系,这样就进行了双向的数据绑定。</p>
+<p>使用angular的好处： {<br>    最大程度上减少了页面上的DOM操作，这个很重要。基本不用操作<br>    让JavaScript专注业务逻辑代码<br>    通过自定义指令实现组件化编程<br>    维护成本低<br>}</p>
+<p>Google浏览器默认情况下file协议无法进行ajax操作</p>
+<p>CDN的优势 ：{<br>    快<br>    节省自己服务器的带宽压力和流量<br>}</p>
+<p>angular模块：{<br>    应用程序的最小单元，对页面进行功能业务划分<br>    angular.module(‘myapp’,[‘$scope’,function($scope){}]);必须有第二个参数，否则不是创建模块，而是返回新建的模块<br>}</p>
+<p>$scope:就想事件对象一样，代表着数据模型，存放在数据,如：$scope.uer.name = ‘dsfsd’。</p>
+<p>数据模型仅仅是存数据，真正对数据处理和操作在controller里面</p>
+<p>控制器必须在模块下，想创建控制器必须先创建模块</p>
+<p>ng-module是绑定数据，和ngular.module创建模块</p>
+<p>控制器的三种职责： {<br>    为应用中的模型设置初始状态<br>    通过$scope暴露数据和行为给视图<br>    监视数据变化，做出判断：$scope.$watch(‘user.name’,function(now,old){}) //注意没有$scope<br>}</p>
+<p>ng-cloak隐藏未渲染的瞬间：{<br>    方式1：ng-cloak + [ng-cloak] {display:none;}<br>    方式2：class=”ng-cloak” + [ng-cloak],.ng-cloak {display:none;}<br>}</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -305,7 +802,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T21:37:51+08:00">
                 2017-07-30
@@ -450,7 +947,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:12:03+08:00">
                 2017-07-29
@@ -594,7 +1091,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:00:02+08:00">
                 2017-07-29
@@ -738,7 +1235,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T11:43:20+08:00">
                 2017-07-29
@@ -882,7 +1379,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T11:01:18+08:00">
                 2017-07-28
@@ -1031,7 +1528,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T09:24:25+08:00">
                 2017-07-28
@@ -1175,7 +1672,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:51:52+08:00">
                 2017-07-21
@@ -1273,444 +1770,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/21/JavaScript零碎知识收集4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/21/JavaScript零碎知识收集4/" itemprop="url">
-                  JavaScript零碎知识收集4
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posté le</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:50:31+08:00">
-                2017-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~实现继承的方式：构造函数和原型分别继承，如下<br>构造：在构造函数内添加Person.call(this,arguments);然后写子类属性<br>原型：Student.prototype = new Person();<br>~如果使用了原型继承那么就要用离散的原型方法，不可以综合去写，否则出错万物都继承自Object（准确的说是Object.prototype）,不管是内置对象还是自定义对象。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/21/JavaScript零碎知识收集3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/21/JavaScript零碎知识收集3/" itemprop="url">
-                  JavaScript零碎知识收集3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posté le</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:49:57+08:00">
-                2017-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~供爷法则：call/被借用的对象.function.call(要借用的对象，参数1，参数2)，不会拷贝，只是借用<br>~函数也可以借用，因为函数也是对象，形式如下：被借用函数.call(借用函数，参数1，参数2)<br>~call()可以改变被借用函数this指针指向。this指向借用函数<br>~伪数组：就是一个包含有length属性的json对象，他不是一个真数组<br>~apply和call几乎一样，唯一不同的是传参方式不同，apply将参数以数组的方式传入<br>~apply实现高效的求数组最大值，最小值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> getMax(arr) &#123;</div><div class="line">	<span class="built_in">return</span> Math.max.apply(null,arr)</div><div class="line">	//<span class="built_in">return</span> Math.min.apply(null,arr)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>~apply可以实现好多不定参数的函数<br>~调用函数的五种方式：<br>1.普通模式：声明并调用<br>2.函数表达式<br>3.方法调用模式<br>4.构造函数形式<br>5.apply，call形式<br>6.Function对象形式<br>~Object对象时Function对象的一个实例，所以Object的<strong>proto</strong>属性指向Function对象的原型<br>~<strong>proto</strong>是每个对象都有的一个属性，而prototype是函数才会有的属性!!!<br>~内置对象和自定义对象的原型链不同，内置对象的原型链中多了一个Function.prototype<br>~Object.prototype.<strong>proto</strong>指向null，也是原型链结束的地方<br>~Ajax在传输数据的时候应该进行数据分流，减少服务器的链接个数。<br>~分析原型链要分内置对象和自定义对象，以及从构造函数和实例两个对象分析，缺一不可。<br>~只有Function构造函数的<strong>proto</strong>指向自己的Function.prototype<br>~实现继承的的方式<br>1.原型继承：缺点：子类传参无法实例话父类构造函数属性，只能单独去写<br>2.构造函数继承<br>3.组合继承<br>4。寄生组合继承:封装继承的方法供对象调用<br>5.拷贝继承：base2或者simplejavascriptinheritance<br>~js语言不支持重载，但是有两种方式可以实习重载1.arguments 2.typeof<br>~js中同名函数只会调用后者</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/20/JavaScript零碎知识收集2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/20/JavaScript零碎知识收集2/" itemprop="url">
-                  JavaScript零碎知识收集
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posté le</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T09:43:49+08:00">
-                2017-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>创建对象的几种方式<br>1.Object()方式：对于属性的添加重复太多<br>2.工厂模式：封装性强，不需要知道细节<br>3.构造函数方法 缺点：实例化导致方法重复，无法共享<br>4.原型方法：缺点：只有引用类型可以被共享<br>5.混合模式（原型+构造）<br>6:字面量形式：将json字符串通过JSON.parse()转化为对象<br>7.拷贝模式 (for in/argumnets)</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1755,8 +1819,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
-                <span class="site-state-item-name">articles</span>
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1832,7 +1896,7 @@
 </div>
 
 <div class="theme-info">
-  Thème -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

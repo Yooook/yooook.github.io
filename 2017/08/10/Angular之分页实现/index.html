@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular见闻" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular之分页实现">
+<meta property="og:url" content="http://apskt.com/2017/08/10/Angular之分页实现/index.html">
+<meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：p">
+<meta property="og:updated_time" content="2017-08-10T04:29:18.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular之分页实现">
+<meta name="twitter:description" content="首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：p">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://apskt.com/2017/08/10/Angular之分页实现/"/>
+
+
+
+
+
+  <title> Angular之分页实现 | Finch's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Finch's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div style="width:100%;text-align:center; ">
+   <span id="busuanzi_container_site_uv" > 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+  <div style="margin: 0 auto; position:absolute;left:50%;margin-left:-30px;top:420px">
+  <img src="/images/1b.png" style="opacity: 1"alt="">
+</div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/10/Angular之分页实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular之分页实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-10T11:21:54+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先要明确一下路由的配置：<br>{<br>    1.npm install angular-route –save<br>    2.在模块中注入ngRoute模块<br>    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});<br>    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)<br>}</p>
+<p>根据传入的start和count控制分页，关系如下<br>start = (页码page-1)* count<br>pagecount = Math.ceil(total/count)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span> (angular) &#123;</div><div class="line">	<span class="string">'use strict'</span>;</div><div class="line">	var module = angular.module(<span class="string">'moviecat.in_theaters'</span>, [<span class="string">'ngRoute'</span>,<span class="string">'moviecat.services.http'</span>]);</div><div class="line">	</div><div class="line">	//该模块对路由的地址添加了page参数，传入用于控制翻页的页码</div><div class="line">	module.config([<span class="string">'$routeProvider'</span>, <span class="keyword">function</span>(<span class="variable">$routeProvider</span>) &#123;</div><div class="line">		<span class="variable">$routeProvider</span>.when(<span class="string">'/in_theaters/:page'</span>, &#123;</div><div class="line">			templateUrl: <span class="string">'in_theaters/view.html'</span>,</div><div class="line">			controller: <span class="string">'InTheatersController'</span></div><div class="line">		&#125;);</div><div class="line">	&#125;])</div><div class="line">	</div><div class="line">	module.controller(<span class="string">'InTheatersController'</span>, [</div><div class="line">		<span class="string">'$scope'</span>,</div><div class="line">		<span class="string">'$route'</span>,</div><div class="line">		<span class="string">'$routeParams'</span>,</div><div class="line">		<span class="string">'HttpService'</span>,</div><div class="line">		<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$route</span>,<span class="variable">$routeParams</span>,HttpService) &#123;</div><div class="line">			var count = 10;</div><div class="line"></div><div class="line">			//获取传入的参数</div><div class="line">			var page = parseInt(<span class="variable">$routeParams</span>.page);</div><div class="line"></div><div class="line">			var start = (page - 1)*count;</div><div class="line">			<span class="variable">$scope</span>.loading = <span class="literal">true</span>;</div><div class="line">			<span class="variable">$scope</span>.subjects = [];</div><div class="line">			<span class="variable">$scope</span>.message = <span class="string">''</span>;</div><div class="line">			<span class="variable">$scope</span>.totalCount = 0;</div><div class="line"></div><div class="line">			//赋值给currentPage变量，默认值为1，这个1是在总路由中提前配置的</div><div class="line">			<span class="variable">$scope</span>.currentPage = page;</div><div class="line"></div><div class="line">			<span class="variable">$scope</span>.totalPages = 0;</div><div class="line">			HttpService.jsonp(<span class="string">'http://api.douban.com/v2/movie/in_theaters'</span>,&#123;start:start,count:count&#125;,<span class="keyword">function</span>(data) &#123;</div><div class="line">				<span class="variable">$scope</span>.subjects = data.subjects;</div><div class="line">				<span class="variable">$scope</span>.totalCount = data.total;</div><div class="line">				<span class="variable">$scope</span>.title = data.title;</div><div class="line"></div><div class="line">				//计算总页数</div><div class="line">				<span class="variable">$scope</span>.totalPages = Math.ceil(<span class="variable">$scope</span>.totalCount/count);</div><div class="line"></div><div class="line">				<span class="variable">$scope</span>.loading = <span class="literal">false</span>;</div><div class="line">				<span class="variable">$scope</span>.<span class="variable">$apply</span>();</div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			//这个是控制翻页的函数，我们采用的是上一页下一页两个按钮进行翻页的</div><div class="line">			<span class="variable">$scope</span>.go = <span class="keyword">function</span>(page) &#123;</div><div class="line">				<span class="keyword">if</span> (page&gt;=1&amp;&amp;page&lt;=<span class="variable">$scope</span>.totalPages)</div><div class="line">				<span class="variable">$route</span>.updateParams(&#123; page:page &#125;);</div><div class="line">			&#125;</div><div class="line">		   &#125;</div><div class="line">		]);</div><div class="line">&#125;)(angular);</div></pre></td></tr></table></figure>
+<p>html部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;\div ng-show=<span class="string">"!loading"</span>&gt;</div><div class="line">	&lt;\p&gt;总共：&#123;&#123;totalCount&#125;&#125; 条记录,&#123;&#123;totalPages&#125;&#125;页&lt;\/p&gt;	</div><div class="line">	&lt;\nav aria-label=<span class="string">"..."</span>&gt;</div><div class="line">	  &lt;\ul class=<span class="string">"pager"</span>&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&lt;=1&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage - 1)"</span>&gt;&lt;&lt; Previous&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&gt;=totalPages&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage + 1)"</span>&gt;Next &gt;&gt;&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	  &lt;\/ul&gt;</div><div class="line">	&lt;\/nav&gt;</div><div class="line">&lt;\/div&gt;</div></pre></td></tr></table></figure>
+<p>总路由部分，初始1的由来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$routeProvider</span>.otherwise(&#123;redirectTo: <span class="string">'/in_theaters/1'</span>&#125;);</div></pre></td></tr></table></figure>
+<p>分页制作完成，disabled类控制按钮是否可以点</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/10/Angular之loading动画实现/" rel="next" title="Angular之loading动画实现">
+                <i class="fa fa-chevron-left"></i> Angular之loading动画实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/10/Angular之焦点切换/" rel="prev" title="Angular之焦点切换">
+                Angular之焦点切换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Angular之分页实现" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/tx.jpg"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+ 
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
