@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -225,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -235,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -258,6 +258,152 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/05/01/Ionic中使用scrollTop值为0的问题解决/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/01/Ionic中使用scrollTop值为0的问题解决/" itemprop="url">
+                  Ionic中使用scrollTop输出值为0的问题解决
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T12:04:48+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ionic-JS/" itemprop="url" rel="index">
+                    <span itemprop="name">Ionic,JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>html部分截取简要代码说明一下，在id为home-content的标签的内填充内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ion-view id=<span class="string">"home"</span> view-title=<span class="string">"主页"</span> cache-view=<span class="string">"false"</span> &gt;</div><div class="line">&lt;!-- 实现scroll的标签 --&gt;</div><div class="line">  &lt;ion-content id=<span class="string">"home-content"</span> scroll=<span class="string">"false"</span>&gt;  </div><div class="line">  &lt;!--返回顶部的按钮 --&gt;</div><div class="line">  &lt;div class=<span class="string">"back_top"</span>&gt;&lt;/div&gt;</div><div class="line">  &lt;/ion-content&gt;</div><div class="line">&lt;/ion-view&gt;</div></pre></td></tr></table></figure></p>
+<p>下面是controller的代码，记得调用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> //回到顶部</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">goTop</span></span>()&#123;</div><div class="line">  var <span class="built_in">bg</span>=window.document.getElementById(<span class="string">'home-content'</span>);</div><div class="line">  var goTop = document.querySelector(<span class="string">".back_top"</span>);</div><div class="line"></div><div class="line">  bg.addEventListener(<span class="string">'scroll'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    var top = bg.scrollTop;</div><div class="line">    <span class="keyword">if</span>(top&gt;200)&#123;</div><div class="line">      goTop.style.opacity = 1;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      goTop.style.opacity = 0;</div><div class="line">    &#125;</div><div class="line">  &#125;,<span class="literal">false</span>);</div><div class="line"></div><div class="line">  goTop.onclick = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    bg.scrollTop = 0;</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>一般做完上述两步后，在控制台输出发现一直在触发scroll事件，但是获取的值恒为0；可以通过在scroll事件中添加事件处理对象event，通过event.detail.scrollTop发现值在随着滚动改变，但是虽然可以监听这个值做一些事件处理，但是无法完成返回顶部的功能，应为click的事件处理对象和scroll是两个对象，且不可以通过变量的形式去传递。这个现象的主要问题是出在css的设置上，因为ion-content的overflow的默认设置导致的。如下写即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#home ion-content&#123;</span></div><div class="line">  overflow:scroll;</div><div class="line"></div><div class="line">&#125;</div><div class="line">/*回到头部滚动条*/</div><div class="line"><span class="comment">#home .back_top&#123;</span></div><div class="line">  width: 35px;</div><div class="line">  height: 35px;</div><div class="line">  position: fixed;</div><div class="line">  bottom: 55px;</div><div class="line">  right: 10px;</div><div class="line">  background: url(<span class="string">"../../img/home/scroll-to-top-icon.png"</span>) no-repeat;</div><div class="line">  background-size: 35px 35px;</div><div class="line">  opacity: 0;</div><div class="line">  transition: all .3s ease 0s;</div><div class="line">  -webkit-transition: all .3s ease 0s;</div><div class="line">  z-index: 100;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -305,7 +451,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-28T17:12:17+08:00">
                 2017-04-28
@@ -326,7 +472,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -451,7 +597,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T21:33:11+08:00">
                 2017-04-27
@@ -472,7 +618,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -596,7 +742,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T18:45:21+08:00">
                 2017-04-27
@@ -617,7 +763,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -743,7 +889,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T17:58:49+08:00">
                 2017-04-27
@@ -764,7 +910,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -891,7 +1037,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T18:03:39+08:00">
                 2017-04-26
@@ -912,7 +1058,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1037,7 +1183,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T22:16:10+08:00">
                 2017-04-25
@@ -1058,7 +1204,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1183,7 +1329,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T10:15:44+08:00">
                 2017-04-25
@@ -1204,7 +1350,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1329,7 +1475,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T09:30:23+08:00">
                 2017-04-15
@@ -1350,7 +1496,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1475,7 +1621,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-13T11:30:33+08:00">
                 2017-04-13
@@ -1496,7 +1642,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1540,169 +1686,6 @@
             <!-- ## 禁止移动端（包括微信浏览器）的上下滑动产生浮动的问题 -->
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">'text/javascript'</span>&gt;</div><div class="line">document.querySelector(<span class="string">'body'</span>).addEventListener(<span class="string">'touchstart'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    event.preventDefault();</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
 <p>这个是官方给出的解决方案，我就以自己的案例为主，提出一点思考，就代码而言有用，但是禁用掉了所有包含在body下的一些touch，scroll事件，可以考虑将需要touch，和scroll的事件元素放在所要禁用的元素外层，这样就可以规避此类问题，转为从html的嵌套层次上下手去解决问题。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/08/Ionic+cordova+windows配置Android的App环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/08/Ionic+cordova+windows配置Android的App环境/" itemprop="url">
-                  【详细】Ionic+cordova+windows配置Android的App环境
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-08T08:38:48+08:00">
-                2017-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ionic/" itemprop="url" rel="index">
-                    <span itemprop="name">Ionic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h3 id="1、Java-JDK-配置（Android-ADT需要）"><a href="#1、Java-JDK-配置（Android-ADT需要）" class="headerlink" title="1、Java JDK 配置（Android ADT需要）"></a>1、Java JDK 配置（Android ADT需要）</h3><p>最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，<br>在这里将它们记录下来，提供给需要的小伙伴们参考…….<br>详细配置: <a href="http://jingyan.baidu.com/article/f96699bb8b38e0894e3c1bef.html" target="_blank" rel="external">java环境配置链接</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ java -version</div></pre></td></tr></table></figure>
-<p>命令窗口检查是否安装成功</p>
-<h3 id="2、C-配置（node需要）"><a href="#2、C-配置（node需要）" class="headerlink" title="2、C++ 配置（node需要）"></a>2、C++ 配置（node需要）</h3><p>我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET Framework 4.5]安装发现严重错误，查了相关文档，是系统的问题，而我懒得升级系统或者重装系统（w7 sp1 支持Microsoft .NET Framework 4.5），所以安装了visual studio 2012，没有报错，很顺利！ 提示：并不影响app的生产<br>各种版本下载地址: <a href="http://blog.csdn.net/cometnet/article/details/19551125" target="_blank" rel="external">visual studio</a></p>
-<h3 id="3、Android-配置（打包Android应用需要）"><a href="#3、Android-配置（打包Android应用需要）" class="headerlink" title="3、Android 配置（打包Android应用需要）"></a>3、Android 配置（打包Android应用需要）</h3><p>【重点】</p>
-<h4 id="1、下载Android-SDK-Tools-Android工具链接"><a href="#1、下载Android-SDK-Tools-Android工具链接" class="headerlink" title="1、下载Android SDK Tools: Android工具链接"></a>1、下载Android SDK Tools: <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android工具链接</a></h4><h4 id="2、配置环境变量-Android配置环境变量"><a href="#2、配置环境变量-Android配置环境变量" class="headerlink" title="2、配置环境变量: Android配置环境变量"></a>2、配置环境变量: <a href="http://jingyan.baidu.com/article/" target="_blank" rel="external">Android配置环境变量</a></h4><h4 id="3、检查是否配置成功"><a href="#3、检查是否配置成功" class="headerlink" title="3、检查是否配置成功"></a>3、检查是否配置成功</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb</div></pre></td></tr></table></figure>
-<h4 id="4、相关组件下载"><a href="#4、相关组件下载" class="headerlink" title="4、相关组件下载"></a>4、相关组件下载</h4><p>现在有些人推荐离线安装，具体要下载的目录看下边写的，不过好几个包需要下载，这里我先说一下最方便的方法，可能会慢一些，不过步骤比较少，如果我所说的几个包，你没有显示，那就手动下载，地址就是 <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android</a><br>如果配置好了环境变量，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ android</div></pre></td></tr></table></figure>
-<p>弹出Android SDK Manger窗口，勾选（所需要的几个包）Tools&gt; Android SDK Tools / Android SDK Platform-tools / Android SDK Build-tools 与Tools平级的勾选 API22（Android5.1.1）、API23（Android6.0），Extras里面勾选Android Support Respository 和 Google USB Driver 等待下载安装好即可，比较慢，可以喝杯茶了。</p>
-<p>手动下载的具体放置位置<a href="http://oo2fh73dq.bkt.clouddn.com/%E6%8D%95%E8%8E%B7.PNG" target="_blank" rel="external">目录图片链接</a>，解压放到相应位置即可</p>
-<h3 id="4、Node-配置（插件环境需要）"><a href="#4、Node-配置（插件环境需要）" class="headerlink" title="4、Node 配置（插件环境需要）"></a>4、Node 配置（插件环境需要）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node -v</div></pre></td></tr></table></figure>
-<h3 id="5、GIt-配置（需要从github上下载模板，团队开发）"><a href="#5、GIt-配置（需要从github上下载模板，团队开发）" class="headerlink" title="5、GIt 配置（需要从github上下载模板，团队开发）"></a>5、GIt 配置（需要从github上下载模板，团队开发）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git version</div></pre></td></tr></table></figure></p>
-<h2 id="项目依赖环境搭建"><a href="#项目依赖环境搭建" class="headerlink" title="项目依赖环境搭建"></a>项目依赖环境搭建</h2><p>1、cordova（打包工具）<br>2、Ionic（框架）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cordova ionic</div></pre></td></tr></table></figure></p>
-<p>想说的是安装可能有点慢，如果安装不正常，估计是被墙了，那么就要利用淘宝镜像安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g cordova ionic</div></pre></td></tr></table></figure>
-<p>安装完成肯定都要迫不及待要创建app啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ionic start myapp</div></pre></td></tr></table></figure></p>
-<p>好啦，那么问题来啦！！！【坑】<br>如果报的错里面有：npminstall的字样<br>那就是npm需要全局安装（默认不是全局的）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g npm</div></pre></td></tr></table></figure></p>
-<p>然后再试试，好了那就没什么了，如果没好？<br>弹出了缺少一个gulp-sass这个模块？？【十分 超级 坑】<br>解决方法：<br>由于gulp-sass需要依赖于node-sass，所以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm rebuild node-sass</div></pre></td></tr></table></figure></p>
-<p>然后再次创建项目ok；</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
           
@@ -1787,8 +1770,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1799,7 +1782,7 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1810,7 +1793,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">15</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1860,7 +1843,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

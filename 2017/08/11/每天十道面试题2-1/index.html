@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Angular见闻" />
+  <meta name="keywords" content="前端面试" />
 
 
 
@@ -80,31 +80,19 @@
 
 
 
-<meta name="description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
-&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
-    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
-    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;script src=&quot;node_modules/a">
+<meta name="description" content="实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。
+12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &amp;#123;    var o;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular自定义filter匹配规则">
-<meta property="og:url" content="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/index.html">
+<meta property="og:title" content="每天十道面试题__2017/8/11">
+<meta property="og:url" content="http://apskt.com/2017/08/11/每天十道面试题2-1/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
-&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
-    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
-    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;script src=&quot;node_modules/a">
-<meta property="og:updated_time" content="2017-08-04T10:00:45.267Z">
+<meta property="og:description" content="实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。
+12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &amp;#123;    var o;">
+<meta property="og:updated_time" content="2017-08-11T13:43:14.026Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular自定义filter匹配规则">
-<meta name="twitter:description" content="在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
-&amp;lt;div ng-app=&quot;app&quot;&amp;gt;
-    &amp;lt;input type=&quot;text&quot; ng-model=&apos;height&apos;&amp;gt;
-    &amp;lt;p&amp;gt;{{height | height}}&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;script src=&quot;node_modules/a">
+<meta name="twitter:title" content="每天十道面试题__2017/8/11">
+<meta name="twitter:description" content="实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。
+12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &amp;#123;    var o;">
 
 
 
@@ -132,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/11/每天十道面试题2-1/"/>
 
 
 
 
 
-  <title> Angular自定义filter匹配规则 | Finch's blog </title>
+  <title> 每天十道面试题__2017/8/11 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -285,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/11/每天十道面试题2-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -306,7 +294,7 @@
             
             
               
-                Angular自定义filter匹配规则
+                每天十道面试题__2017/8/11
               
             
           </h1>
@@ -321,8 +309,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-04T18:00:38+08:00">
-                2017-08-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-11T21:35:56+08:00">
+                2017-08-11
               </time>
             
 
@@ -344,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
+                  <a href="/categories/前端面试/" itemprop="url" rel="index">
+                    <span itemprop="name">前端面试</span>
                   </a>
                 </span>
 
@@ -379,25 +367,11 @@
       
 
       
-        <p>在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定</p>
-<pre><code class="bash">&lt;div ng-app=<span class="string">"app"</span>&gt;
-    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">'height'</span>&gt;
-    &lt;p&gt;{{height | height}}&lt;/p&gt;
-&lt;/div&gt;
-&lt;script src=<span class="string">"node_modules/angular/angular.min.js"</span>&gt;&lt;/script&gt;
-&lt;script&gt;
-    angular.module(<span class="string">'app'</span>, [])
-    .filter(<span class="string">'height'</span>,<span class="function"><span class="title">function</span></span>() {
-        <span class="built_in">return</span> <span class="keyword">function</span>(input) {
-            <span class="keyword">if</span> (input &gt; 200) {
-                <span class="built_in">return</span> <span class="string">'太高啦'</span>;
-            }<span class="keyword">else</span> <span class="keyword">if</span> (input &lt; 100) {
-                <span class="built_in">return</span> <span class="string">'太矮了'</span>;
-            }
-        }
-    });
-&lt;/script&gt;
-</code></pre>
+        <p>实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="built_in">clone</span>(obj) &#123;</div><div class="line">    var o;</div><div class="line">    switch (typeof obj) &#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">"undefined"</span>:</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"Function"</span>:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"string"</span>:</div><div class="line">            o = obj + <span class="string">""</span>;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"number"</span>:</div><div class="line">            o = obj - 0;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"boolean"</span>:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"object"</span>: // object 分为两种情况 对象（Object）或数组（Array）</div><div class="line">            <span class="keyword">if</span> (obj === null) &#123;</div><div class="line">                o = null;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">if</span> (Object.prototype.toString.call(obj).slice(8, -1) === <span class="string">"Array"</span>) &#123;</div><div class="line">                    o = [];</div><div class="line">                    <span class="keyword">for</span> (var i = 0; i &lt; obj.length; i++) &#123;</div><div class="line">                        o.push(<span class="built_in">clone</span>(obj[i]));</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    o = &#123;&#125;;</div><div class="line">                    <span class="keyword">for</span> (var k <span class="keyword">in</span> obj) &#123;</div><div class="line">                        o[k] = <span class="built_in">clone</span>(obj[k]);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        default:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> o;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要说一下这个Object.prototype.toString.call(obj).slice(8, -1)。对于基本类型的判断我们可以typeof或者insctanceof，但是对于复杂的我们就可以用Object.prototype.toString.call(obj).slice(8, -1)精确判断。</p>
+<p>Object.prototype.toString.call(obj)返回值如下类型：<br>[object String]<br>[object Array]<br>[object Function]</p>
+<p>所以通过Object.prototype.toString.call(obj).slice(8, -1) === “Array”，我们可以很好的判断复杂类型</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -428,7 +402,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
+            <a href="/tags/前端面试/" rel="tag"># 前端面试</a>
           
         </div>
       
@@ -441,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/02/Angular自定义指令实践/" rel="next" title="Angular自定义指令实践">
-                <i class="fa fa-chevron-left"></i> Angular自定义指令实践
+              <a href="/2017/08/10/Angular之焦点切换/" rel="next" title="Angular之焦点切换">
+                <i class="fa fa-chevron-left"></i> Angular之焦点切换
               </a>
             
           </div>
@@ -450,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/09/Angular见闻之三/" rel="prev" title="Angular见闻之三">
-                Angular见闻之三 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,7 +451,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="Angular自定义filter匹配规则" ></div> 
+<div id="SOHUCS" sid="每天十道面试题__2017/8/11" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 

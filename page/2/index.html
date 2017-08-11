@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -225,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -235,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -258,6 +258,168 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/04/Angular自定义filter匹配规则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/04/Angular自定义filter匹配规则/" itemprop="url">
+                  Angular自定义filter匹配规则
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-04T18:00:38+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定</p>
+<pre><code class="bash">&lt;div ng-app=<span class="string">"app"</span>&gt;
+    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">'height'</span>&gt;
+    &lt;p&gt;{{height | height}}&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src=<span class="string">"node_modules/angular/angular.min.js"</span>&gt;&lt;/script&gt;
+&lt;script&gt;
+    angular.module(<span class="string">'app'</span>, [])
+    .filter(<span class="string">'height'</span>,<span class="function"><span class="title">function</span></span>() {
+        <span class="built_in">return</span> <span class="keyword">function</span>(input) {
+            <span class="keyword">if</span> (input &gt; 200) {
+                <span class="built_in">return</span> <span class="string">'太高啦'</span>;
+            }<span class="keyword">else</span> <span class="keyword">if</span> (input &lt; 100) {
+                <span class="built_in">return</span> <span class="string">'太矮了'</span>;
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -305,7 +467,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:10:29+08:00">
                 2017-08-02
@@ -326,7 +488,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -496,7 +658,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:05:14+08:00">
                 2017-08-02
@@ -517,7 +679,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -643,7 +805,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-31T11:18:00+08:00">
                 2017-07-31
@@ -664,7 +826,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -802,7 +964,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T21:37:51+08:00">
                 2017-07-30
@@ -823,7 +985,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -947,7 +1109,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:12:03+08:00">
                 2017-07-29
@@ -968,7 +1130,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1091,7 +1253,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T15:00:02+08:00">
                 2017-07-29
@@ -1112,7 +1274,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1235,7 +1397,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-29T11:43:20+08:00">
                 2017-07-29
@@ -1256,7 +1418,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1379,7 +1541,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T11:01:18+08:00">
                 2017-07-28
@@ -1400,7 +1562,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1528,7 +1690,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T09:24:25+08:00">
                 2017-07-28
@@ -1549,7 +1711,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1591,150 +1753,6 @@
         
           
             <p>~早起的事件写法称之为：DOM0时代，也就是click写法。分离事件的写法称之为：DOM2时代，也就是addEventListener<br>~Dom2的核心就是事件流，事件流包括冒泡和捕获。<br>~Dom2—addEventListener:优点：1，给一个对象绑定多个事件2，动态的移除和添加 ~事件委托：通过绑定父元素来绑定子元素(原理：事件冒泡)<br>~Event对象：当你定义一个事件的时候，系统自动生成一个event对象保存当前对象的一些信息，比如type，target。<br>短路表达式（经常在框架中使用）：<br>~ || :如果左边返回true就返回左边，否则返回右边<br>~ &amp;&amp; ：如果左边返回true就返回右边，否则返回左边<br>~缓存是提高性 能的最核心武器<br>~缓存的三种形式<br>1.直接放在内存中<br>2.通过cookie<br>3.通过html5的缓存机制<br>动画框架的封装<br>~大部分的动画都必须要有position：absolute<br>~一般用offsetLeft获取left值，不带px，方便计算</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/21/读《JavaScript高级程序设计 第三版》第六章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/21/读《JavaScript高级程序设计 第三版》第六章/" itemprop="url">
-                  读《JavaScript高级程序设计 第三版》第六章
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T16:51:52+08:00">
-                2017-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>关于函数<br>~定义函数有两种方式：函数声明和函数表达式<br>~函数声明最重要的特征是函数声明提升，意思是在代码执行之前会先读取函数申明，这就意味着函数声明课以放在调用他的后面。<br>~函数表达式是创建匿名函数，赋值给一个变量，它的name属性时空字符串。而且必须先赋值后使用<br>~关于递归，最好使用arguments.callee指向原函数<br>~由于闭包会携带包含它的函数作用域，因此会比其他函数占用更多的内存，过度使用则会到时内存占用过多，谨慎使用。</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
           
@@ -1819,8 +1837,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">61</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1831,7 +1849,7 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1842,7 +1860,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">15</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1892,7 +1910,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
