@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Angular见闻" />
+  <meta name="keywords" content="seajs" />
 
 
 
@@ -80,16 +80,25 @@
 
 
 
-<meta name="description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
+<meta name="description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
+SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
+1.安装seajs，引入，并编写入口模块，一般加载都在head部分
+1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular之异步请求">
-<meta property="og:url" content="http://apskt.com/2017/08/09/Angular之异步请求/index.html">
+<meta property="og:title" content="模块化seajs使用实现CMD规范">
+<meta property="og:url" content="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
-<meta property="og:updated_time" content="2017-08-09T06:27:21.102Z">
+<meta property="og:description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
+SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
+1.安装seajs，引入，并编写入口模块，一般加载都在head部分
+1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
+<meta property="og:updated_time" content="2017-08-12T14:23:03.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular之异步请求">
-<meta name="twitter:description" content="使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地">
+<meta name="twitter:title" content="模块化seajs使用实现CMD规范">
+<meta name="twitter:description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
+SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
+1.安装seajs，引入，并编写入口模块，一般加载都在head部分
+1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
 
 
 
@@ -117,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/08/09/Angular之异步请求/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/"/>
 
 
 
 
 
-  <title> Angular之异步请求 | Finch's blog </title>
+  <title> 模块化seajs使用实现CMD规范 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -270,7 +279,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular之异步请求/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -291,7 +300,7 @@
             
             
               
-                Angular之异步请求
+                模块化seajs使用实现CMD规范
               
             
           </h1>
@@ -306,8 +315,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T14:19:42+08:00">
-                2017-08-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-12T21:32:10+08:00">
+                2017-08-12
               </time>
             
 
@@ -329,8 +338,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
+                  <a href="/categories/seajs/" itemprop="url" rel="index">
+                    <span itemprop="name">seajs</span>
                   </a>
                 </span>
 
@@ -364,12 +373,25 @@
       
 
       
-        <h2 id="使用angular本身提供的-http服务进行异步请求"><a href="#使用angular本身提供的-http服务进行异步请求" class="headerlink" title="使用angular本身提供的$http服务进行异步请求"></a>使用angular本身提供的$http服务进行异步请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>(&#123;</div><div class="line">		method:<span class="string">'GET'</span>,</div><div class="line">		url:<span class="string">'/app/data.json'</span></div><div class="line">	&#125;).then(<span class="keyword">function</span>(response) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(response)</div><div class="line">	&#125;, <span class="keyword">function</span>(response) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;);</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>.get(<span class="string">'./data.json'</span>).then(<span class="keyword">function</span>(data) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(data.data)</div><div class="line">	&#125;,<span class="keyword">function</span>(err) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;)</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
-<p>针对Chrome和Firefox进行测试，结果如下：</p>
-<p>Firefox（file协议下）：可以正常请求到数据，但是提示报错（XML 解析错误：格式不佳 位置：file:///C:/Users/Administrator/Desktop angular_test2/angular-seed(Modified)/app/data.json 行 1，列 1：）<br>Firefox（http协议下）：一切正常</p>
-<p>Chrome（file协议下）：不能请求到数据，但是提示报错（XMLHttpRequest cannot load file:///C:/Users/Administrator/Desktop/angular_test2/angular-seed(Modified)/app/view1/view1.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.）<br>Chrome（http协议下）：一切正常</p>
+        <p>关于为什么要使用seajs，我已经在上次的文章里体现的很具体了</p>
+<p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：</p>
+<p>1.安装seajs，引入，并编写入口模块，一般加载都在head部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;\script src=<span class="string">"node_modules/seajs/dist/sea.js"</span>&gt;&lt;\/script&gt;</div><div class="line"> &lt;\script&gt;</div><div class="line">   seajs.use(<span class="string">'./calculate.js'</span>, <span class="keyword">function</span>(calculator) &#123;</div><div class="line">     console.log(<span class="string">'模块加载完成'</span>);</div><div class="line">     // console.log(e);</div><div class="line">   &#125;);</div><div class="line">&lt;\/script&gt;</div></pre></td></tr></table></figure>
+<p>需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径<br>入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){})</p>
+<p>2.定义单独的js模块文件，并且定义模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> // 定义一个计算模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var add = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var result = 0;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arguments.length; i++) &#123;</div><div class="line">      result += parseFloat(arguments[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> result;</div><div class="line">  &#125;</div><div class="line">	</div><div class="line">  //exports.add = add;</div><div class="line">  module.exports = &#123;</div><div class="line">    add: add</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>首先，函数的参数不推荐自己定义，以防止和nodejs的文件命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
+<p>3.模块间的调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 定义一个模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  // require(<span class="string">'./modules/02-calculator.js'</span>);用一个变量接受返回值，从而调用引入模块的方法，同步</div><div class="line">  require.async(<span class="string">'./modules/02-calculator.js'</span>,<span class="keyword">function</span> (c) &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;);//异步方法加载模块，没有返回值，有回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4.使用第三方依赖，用jQuery做例子：</p>
+<p>对jQuery做相应的修改，非压缩文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">   define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">     <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">   &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象</p>
+<p>5.seajs配置</p>
+<p>//别名配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    <span class="built_in">alias</span>: &#123; <span class="string">'jquery'</span>: <span class="string">'./jquery/jquery/1.10.1/jquery.js'</span> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">    //引用jQuery模块</div><div class="line">    var $ = require(<span class="string">'jquery'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p> // 变量配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    vars: &#123;</div><div class="line">        <span class="string">'locale'</span>: <span class="string">'zh-cn'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var lang = require(<span class="string">'./i18n/&#123;locale&#125;.js'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -400,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
+            <a href="/tags/seajs/" rel="tag"># seajs</a>
           
         </div>
       
@@ -413,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/09/Angular见闻之三/" rel="next" title="Angular见闻之三">
-                <i class="fa fa-chevron-left"></i> Angular见闻之三
+              <a href="/2017/08/12/模块化编程的发展过程/" rel="next" title="模块化编程的发展过程">
+                <i class="fa fa-chevron-left"></i> 模块化编程的发展过程
               </a>
             
           </div>
@@ -422,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/09/Angular之跨域请求/" rel="prev" title="Angular之跨域请求">
-                Angular之跨域请求 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,7 +471,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="Angular之异步请求" ></div> 
+<div id="SOHUCS" sid="模块化seajs使用实现CMD规范" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -481,17 +499,8 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/tx.jpg"
@@ -553,22 +562,6 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用angular本身提供的-http服务进行异步请求"><span class="nav-number">1.</span> <span class="nav-text">使用angular本身提供的$http服务进行异步请求</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
