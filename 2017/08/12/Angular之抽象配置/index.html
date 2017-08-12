@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, 博客 ,前端 ,大神" />
+  <meta name="keywords" content="Angular见闻" />
 
 
 
@@ -80,12 +80,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Finch's blog">
-<meta property="og:url" content="http://apskt.com/tags/JS/index.html">
+<meta name="description" content="angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{    pageSize:10,    listApi:’www.baidu.com/api’})
+2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular之抽象配置">
+<meta property="og:url" content="http://apskt.com/2017/08/12/Angular之抽象配置/index.html">
 <meta property="og:site_name" content="Finch's blog">
+<meta property="og:description" content="angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{    pageSize:10,    listApi:’www.baidu.com/api’})
+2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以">
+<meta property="og:updated_time" content="2017-08-12T09:32:48.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Finch's blog">
+<meta name="twitter:title" content="Angular之抽象配置">
+<meta name="twitter:description" content="angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{    pageSize:10,    listApi:’www.baidu.com/api’})
+2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以">
 
 
 
@@ -113,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/tags/JS/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/12/Angular之抽象配置/"/>
 
 
 
 
 
-  <title> Tag: JS | Finch's blog </title>
+  <title> Angular之抽象配置 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -144,7 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,302 +263,185 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        JS
-        <small>Tag</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/12/模块化编程的发展过程/" itemprop="url">
-              
-                <span itemprop="name">模块化编程的发展过程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-12T18:00:31+08:00"
-              content="2017-08-12" >
-          08-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/30/JavaScript零碎知识收集6/" itemprop="url">
-              
-                <span itemprop="name">JavaScript零碎知识收集6</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-30T21:37:51+08:00"
-              content="2017-07-30" >
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/29/吐槽/" itemprop="url">
-              
-                <span itemprop="name">吐槽</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-29T15:12:03+08:00"
-              content="2017-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/29/读《编写高质量代码 改善JavaScript程序的188个建议》之一/" itemprop="url">
-              
-                <span itemprop="name">读《编写高质量代码 改善JavaScript程序的188个建议》之一</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-29T15:00:02+08:00"
-              content="2017-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/29/读《JavaScript高级程序设计 第三版》第8~13章/" itemprop="url">
-              
-                <span itemprop="name">读《JavaScript高级程序设计 第三版》第8~13章</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-29T11:43:20+08:00"
-              content="2017-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/" itemprop="url">
-              
-                <span itemprop="name">读《JavaScript高级程序设计 第三版》第7~8章</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-28T11:01:18+08:00"
-              content="2017-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/28/JavaScript零碎知识收集5/" itemprop="url">
-              
-                <span itemprop="name">JavaScript零碎知识收集5</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-28T09:24:25+08:00"
-              content="2017-07-28" >
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/21/读《JavaScript高级程序设计 第三版》第六章/" itemprop="url">
-              
-                <span itemprop="name">读《JavaScript高级程序设计 第三版》第六章</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-21T16:51:52+08:00"
-              content="2017-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/21/JavaScript零碎知识收集4/" itemprop="url">
-              
-                <span itemprop="name">JavaScript零碎知识收集4</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-21T16:50:31+08:00"
-              content="2017-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/21/JavaScript零碎知识收集3/" itemprop="url">
-              
-                <span itemprop="name">JavaScript零碎知识收集3</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-21T16:49:57+08:00"
-              content="2017-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/JS/page/2/">2</a><a class="page-number" href="/tags/JS/page/3/">3</a><a class="extend next" rel="next" href="/tags/JS/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/Angular之抽象配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular之抽象配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-12T17:32:46+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="angular抽象配置"><a href="#angular抽象配置" class="headerlink" title="angular抽象配置"></a>angular抽象配置</h2><p>1.创建父模块模块，编写配置<br>var myApp = angular.module(‘myApp’,[]);<br>myApp.constant(‘appConfig’,{<br>    pageSize:10,<br>    listApi:’www.baidu.com/api’<br>})</p>
+<p>2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以被子模块获取，</p>
+<p>3.利用对象的方式调用并替换相应的字符串。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular见闻/" rel="tag"># Angular见闻</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/12/Angular之异步加载包/" rel="next" title="Angular之异步加载包">
+                <i class="fa fa-chevron-left"></i> Angular之异步加载包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/12/模块化编程的发展过程/" rel="prev" title="模块化编程的发展过程">
+                模块化编程的发展过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -559,6 +449,19 @@
 
 
           
+<span id="busuanzi_container_page_pv">
+   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Angular之抽象配置" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysUJYvpg'; 
+var conf = 'prod_b9097d0b304d2c80a6f89cd48095632a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
 
         </div>
         
@@ -578,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/tx.jpg"
@@ -641,6 +553,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#angular抽象配置"><span class="nav-number">1.</span> <span class="nav-text">angular抽象配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -749,6 +677,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
