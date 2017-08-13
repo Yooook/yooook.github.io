@@ -271,6 +271,304 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/20/JavaScript零碎知识收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/20/JavaScript零碎知识收集/" itemprop="url">
+                  JavaScript零碎知识收集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T09:41:28+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>~构造函数中如果有return语句，具体执行那个作用域，取决于是否返回的是对象，如果是对象，则执行return对象里的语句，否则还是构造函数内部的内容。<br>~实例拷贝理论：每当我们实例化构造函数的时候都会将构造函数的属性拷贝一份，同事赋给新值，一旦赋予新值，那么内存空间将会被替换，所以说实例化的过程是拷贝构造函数的过程。constructor属性时构造函数的隐藏属性，所以会被拷贝给实例，指向构造函数。<br>~constructor属性时function对象的一个属性，而对象都是由函数实现的，所以对象就是function的一个实例而已<br>~原型对象不管实例化多少次，都只会生成一次。重要的是实例拷贝理论只是针对构造函数，而不会拷贝原型对象的属性。<br>~属性搜索机制：prototype保存的是原型对象的地址，而实例属性是拷贝而来的，因此可以向上访问属性。<br>~双对象法则：js所谓的对象包含两个独立的对象，构造函数对象和原型对象，通过——proto——联系起来<br>~属性屏蔽理论：原型链上有限选择近的，屏蔽其他同名属性，若要访问可以delete或者o.prototype.属性进行访问<br>~引用类型和值类型：将一个值类型的赋值给另一个变量，实际上创建了新的内存空间，并且将值保存进去，两者互不影响。引用类型赋值则只是将保存内容的地址赋值过去，使得他们指向同一个内存空间，相互影响。值类型有：undefined，string，number，boolean。引用类型有:函数，数组，对象，null，内置对象<br>~整个js而言，完全面向对象，包括内置对象，BOM对象，自定义对象</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/19/javascript面向对象编程的一些想法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/19/javascript面向对象编程的一些想法/" itemprop="url">
+                  javascript面向对象编程的一些想法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T13:58:58+08:00">
+                2017-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>下面的例子是单独绑定数据实例。</p>
+<pre><code class="bash">create : <span class="function"><span class="title">function</span></span>(){
+    var html = <span class="string">'&lt;\div class="image"&gt;&lt;\/div&gt;&lt;\div class="description"&gt;&lt;\p class="name"&gt;@(name)&lt;\/p&gt;&lt;\p class="time"&gt;@(time)&lt;\/p&gt;&lt;\div class="mark"&gt;&lt;\/div&gt;&lt;\/div&gt;'</span>;
+    this.dom.html($.formateString(html, this.data), <span class="literal">true</span>).appendTo(<span class="string">'.xingzuo'</span>);
+}
+</code></pre>
+<pre><code class="bash"><span class="keyword">for</span>(var i = 0, len = data.length; i &lt; len; i++){
+    new Xingzuo(data[i], i);
+}
+</code></pre>
+<p>JavaScript面向对象编程的时候，传入json数据，在最后实例化的时候是否遍历循环实例化所有的对象取决于数据绑定的时候是否将数据全部绑定，如果全部绑定则只需要实例化一次。当然了，从更专业的角度来说，应该是取决于我们所针对的对象，比如说购物车和星座显示，那么购物车除了商品列表之外还有其他要显示的内容比如 总金额，这些都是购物车这个对象的一部分，而商品列表中的每个商品又是同一对象的不同实例，如何选择呢，我们这里既然以购物车为对象自然使用最后new一次的方法。因为购物车只是一个。星座显示则相反，它是12个相似独立的个体，不包含之外的信息，所以我们可以更好的选择先个体后整体的思想，new多个对象，这样思路则清晰一些。说的这些并没有什么严格的规范，只是选用合适的方法，合理的解决问题，而不仅仅是解决问题，更多的是对面向对象的理解。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/19/Arttemplate模板技术实现数据绑定/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1423,294 +1721,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/01/读《JavaScript Dom编程艺术》笔记之一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/01/读《JavaScript Dom编程艺术》笔记之一/" itemprop="url">
-                  读《JavaScript Dom编程艺术》笔记之一
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-01T21:11:40+08:00">
-                2017-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、<br>~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;<br>~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&lt;\/body&gt;之前，这样能够使浏览器更快的加载页面<br>~虽然关联数组的可读性更高，但是不推荐使用，因为它改变了array对象的属性；<br>~DOM的前提是有文档，一份文档就是一棵节点树。<br>~节点分为不同的类型，元素节点，属性节点，文本节点<br>~若是一个站点用到多个JavaScript文件，为了减少对站点的请求次数，提高性能，应该合并到一个js文件里<br>~&lt;\a href=”###”  onclick=”showPic(this) return false;”&gt; 这里的this代表a对象，false是为了阻止默认行为<br>~每一个节点都有nodeType属性，元素节点1，属性节点2，文本节点3<br>~nodeValue是文本节点的属性<br>~’Javascript:’伪协议，让我们通过一个连接来调用JavaScript函数</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/29/读《JavaScript权威指南（第六版）》第十九章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/29/读《JavaScript权威指南（第六版）》第十九章/" itemprop="url">
-                  读《JavaScript权威指南（第六版）》第十九章
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T18:15:34+08:00">
-                2017-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。<br>~jQuery对象是类数组，具有length属性<br>~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组比之更有用<br>~jQuery.borwser用于客户端嗅探。如果是IE会有msie属性值为true，如果是Firefox,会有值为true的mozilla属性，如果是Safari和Chrome，huiou值为true的webkit属性，在Opera中会有值为true的opera属性。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1760,7 +1770,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1771,7 +1781,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1782,7 +1792,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
