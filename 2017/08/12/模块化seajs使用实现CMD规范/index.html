@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -92,7 +92,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
 SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
 1.安装seajs，引入，并编写入口模块，一般加载都在head部分
 1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
-<meta property="og:updated_time" content="2017-08-12T14:23:03.902Z">
+<meta property="og:updated_time" content="2017-08-13T01:51:32.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模块化seajs使用实现CMD规范">
 <meta name="twitter:description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
@@ -112,7 +112,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -135,7 +135,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
   <title> 模块化seajs使用实现CMD规范 | Finch's blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -173,7 +173,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">It never rains but it pours ---- 司马迁</p>
       
   </div>
   <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -206,7 +206,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -216,7 +216,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -226,7 +226,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -236,7 +236,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -246,7 +246,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -313,9 +313,9 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-12T21:32:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T21:32:10+08:00">
                 2017-08-12
               </time>
             
@@ -334,7 +334,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -380,12 +380,12 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
 <p>需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径<br>入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){})</p>
 <p>2.定义单独的js模块文件，并且定义模块</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> // 定义一个计算模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var add = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var result = 0;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arguments.length; i++) &#123;</div><div class="line">      result += parseFloat(arguments[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> result;</div><div class="line">  &#125;</div><div class="line">	</div><div class="line">  //exports.add = add;</div><div class="line">  module.exports = &#123;</div><div class="line">    add: add</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>首先，函数的参数不推荐自己定义，以防止和nodejs的文件命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
+<p>首先，函数的参数不推荐自己定义，以防止和nodejs的命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
 <p>3.模块间的调用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 定义一个模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  // require(<span class="string">'./modules/02-calculator.js'</span>);用一个变量接受返回值，从而调用引入模块的方法，同步</div><div class="line">  require.async(<span class="string">'./modules/02-calculator.js'</span>,<span class="keyword">function</span> (c) &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;);//异步方法加载模块，没有返回值，有回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>4.使用第三方依赖，用jQuery做例子：</p>
 <p>对jQuery做相应的修改，非压缩文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">   define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">     <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">   &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//适配CMD</div><div class="line"> <span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">    define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象</p>
 <p>5.seajs配置</p>
 <p>//别名配置</p>
@@ -507,7 +507,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
                alt="John Doe" />
           <p class="site-author-name" itemprop="name">John Doe</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">怀揣梦想的年轻人</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -516,7 +516,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">66</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -527,7 +527,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -538,7 +538,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">标签</span>
               
             </div>
           
@@ -588,11 +588,11 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
