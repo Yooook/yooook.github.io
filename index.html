@@ -271,6 +271,325 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/15/ECMAScript6学习1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/15/ECMAScript6学习1/" itemprop="url">
+                  ECMAScript6学习(下)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T16:59:10+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ECMAScript6/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMAScript6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="笔迹："><a href="#笔迹：" class="headerlink" title="笔迹："></a>笔迹：</h2><p>1.把一个对象的属性赋值给另一个对象Object.assign()<br>{<br>    let foo = {};<br>    Object.assign(<br>        foo,//第一个参数是需要复制的对象<br>        {one:1}//被复制的对象<br>    );<br>}</p>
+<p>2.设置对象的prototype<br>{<br>    let foo = {<br>        get() {}<br>    }<br>    let fmm = {}<br>    fun = Object.create(foo)//创建对象<br>    Object.getPrototypeOf(fun) === foo//true<br>    Object.setPrototypeOf(fun,fmm)//第一个参数是当前对象，第二个是prototype属性将要指向的对象，这样就可以调用fmm里面的方法<br>}</p>
+<p>3.<strong>proto</strong>: {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>}</p>
+<p>4.super属性重写父类方法 {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>    get() {//重写父类的get方法<br>        return super.get() + ‘xxxxxx’;//super.get()父类get方法的返回值<br>    }<br>}</p>
+<p>5.Class:{<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        say() {<br>            console.log(this.name)<br>        }<br>    }</p>
+<pre><code>let tom = new Person(&apos;tom&apos;);
+tom.say();
+</code></pre><p>}</p>
+<p>6.get和set关键字 {<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        get say() {<br>            return this.name;<br>        }<br>        set say(bb) {<br>            this.name = bb;<br>        }<br>    }</p>
+<pre><code>let tom = new Person(&apos;tom&apos;);
+tom.say = &apos;哈哈哈哈&apos;;//设置
+tom.say;//获取
+</code></pre><p>}</p>
+<p>7.static {<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        static foot (a) {console.log(a)}<br>    }<br>    Person.foot(a) ;//static定义的静态方法不需要实例化就可以调用<br>}</p>
+<p>8.extends继承 {<br>    class Person extends Animinal {<br>        //主要是构造函数的写法<br>        constructor(name) {<br>            super(name);<br>        }<br>    }<br>}</p>
+<p>9.set：一堆东西的集合，不能有重复 {<br>    var something = new Set(‘123’)//输出为：Set {“1”,”2”,”3”}<br>    添加：something.add(‘4’)<br>    添加：something.add(‘4’)//第二次无效<br>    长度：something.size<br>    判断存在：something.has(‘4’)<br>    删除：something.delete(‘4’)<br>    遍历：something.forEach (item =&gt; {<br>        console.log(item)<br>    })<br>    清空:something.clear();<br>}</p>
+<p>迭代器，生成器，Module需要借助工具，导入导出 暂时了解</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/15/ECMAScript6学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/15/ECMAScript6学习/" itemprop="url">
+                  ECMAScript6学习(上)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T15:50:02+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ECMAScript6/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMAScript6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="笔迹："><a href="#笔迹：" class="headerlink" title="笔迹："></a>笔迹：</h2><p>1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效</p>
+<p>2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据</p>
+<p>3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3</p>
+<p>4.解构对象 let {one1:one,two1:two,three1:three} = {one:1,two:2,three:3}</p>
+<p>5.模板字符串： let apple = ‘apples’ ;var string = <code>今天吃 ${apple}</code>//注意反引号，另外支持换行</p>
+<p>6.带标签的模板字符串 var string = kitchen<code>今天吃 ${apple}</code>;function kitchen(strings,…values) {//strings是指字符串的每个部分的数组集合，values只是变量的数组集合}</p>
+<p>7.判断字符串里是否有其他字符串：包含baohastring.includes(‘apple’)&amp;开始string.startsWith(‘apple’)&amp;结尾string.endsWith(‘apple’)</p>
+<p>8.给函数设置[默认值]function breakfast(one=1,two=2) {}；不代表不可以传参</p>
+<p>9.’…’展开操作符，举个例子，将一个数组添加到另一个数组，var arr1 = [1,2,3];var arr2 = [4,5];arr1 = [1,2,3,…arr2]//arr1 = [1,2,3,4,5]</p>
+<p>10.剩余操作符function open(one,two,…three) {console.log(one,two，three);console.log(one,two，..three)};open(1,2,3,4)//1,2,[3,4] //1,2,3,4</p>
+<p>11.解构参数function(three,{one,two}={}) { console.log(three,one,two)}</p>
+<p>12.函数名的name属性: var one = function two() {};console.log(one.name);//two，如果没有two则输出变量的名称，这是权重的问题</p>
+<p>13.箭头函数，<br> {<br>     一个参数并返回：let open = one =&gt; one;<br>     多个参数：let open = (one,two) =&gt; {…;return one + two};<br>     没有参数：let open = ( ) =&gt; {…;return one + two};//小括号里面是一个空格<br> }</p>
+<p> 14.对象表达式：<br> {<br>     let one=1,two=2;<br>     var food = {<br>         one,//直接写变量名，不需要赋值<br>         two,<br>         breakfast() {}//不需要function关键字<br>     }<br> }</p>
+<p> 15.添加带空格的属性：let foo = {} ; foo[‘hot drink’] = ‘xxx’//也可以str = ‘hot drink’ ；foo[str] = ‘xxx’</p>
+<p> 16.就判断两个值相等：Object.is(NaN,NaN)//true,Object.is(+0,-0)//false</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/13/实现分页组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1466,302 +1785,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/10/Angular之分页实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/10/Angular之分页实现/" itemprop="url">
-                  Angular之分页实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T11:21:54+08:00">
-                2017-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先要明确一下路由的配置：<br>{<br>    1.npm install angular-route –save<br>    2.在模块中注入ngRoute模块<br>    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});<br>    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)<br>}</p>
-<p>根据传入的start和count控制分页，关系如下<br>start = (页码page-1)* count<br>pagecount = Math.ceil(total/count)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span> (angular) &#123;</div><div class="line">	<span class="string">'use strict'</span>;</div><div class="line">	var module = angular.module(<span class="string">'moviecat.in_theaters'</span>, [<span class="string">'ngRoute'</span>,<span class="string">'moviecat.services.http'</span>]);</div><div class="line">	</div><div class="line">	//该模块对路由的地址添加了page参数，传入用于控制翻页的页码</div><div class="line">	module.config([<span class="string">'$routeProvider'</span>, <span class="keyword">function</span>(<span class="variable">$routeProvider</span>) &#123;</div><div class="line">		<span class="variable">$routeProvider</span>.when(<span class="string">'/in_theaters/:page'</span>, &#123;</div><div class="line">			templateUrl: <span class="string">'in_theaters/view.html'</span>,</div><div class="line">			controller: <span class="string">'InTheatersController'</span></div><div class="line">		&#125;);</div><div class="line">	&#125;])</div><div class="line">	</div><div class="line">	module.controller(<span class="string">'InTheatersController'</span>, [</div><div class="line">		<span class="string">'$scope'</span>,</div><div class="line">		<span class="string">'$route'</span>,</div><div class="line">		<span class="string">'$routeParams'</span>,</div><div class="line">		<span class="string">'HttpService'</span>,</div><div class="line">		<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$route</span>,<span class="variable">$routeParams</span>,HttpService) &#123;</div><div class="line">			var count = 10;</div><div class="line"></div><div class="line">			//获取传入的参数</div><div class="line">			var page = parseInt(<span class="variable">$routeParams</span>.page);</div><div class="line"></div><div class="line">			var start = (page - 1)*count;</div><div class="line">			<span class="variable">$scope</span>.loading = <span class="literal">true</span>;</div><div class="line">			<span class="variable">$scope</span>.subjects = [];</div><div class="line">			<span class="variable">$scope</span>.message = <span class="string">''</span>;</div><div class="line">			<span class="variable">$scope</span>.totalCount = 0;</div><div class="line"></div><div class="line">			//赋值给currentPage变量，默认值为1，这个1是在总路由中提前配置的</div><div class="line">			<span class="variable">$scope</span>.currentPage = page;</div><div class="line"></div><div class="line">			<span class="variable">$scope</span>.totalPages = 0;</div><div class="line">			HttpService.jsonp(<span class="string">'http://api.douban.com/v2/movie/in_theaters'</span>,&#123;start:start,count:count&#125;,<span class="keyword">function</span>(data) &#123;</div><div class="line">				<span class="variable">$scope</span>.subjects = data.subjects;</div><div class="line">				<span class="variable">$scope</span>.totalCount = data.total;</div><div class="line">				<span class="variable">$scope</span>.title = data.title;</div><div class="line"></div><div class="line">				//计算总页数</div><div class="line">				<span class="variable">$scope</span>.totalPages = Math.ceil(<span class="variable">$scope</span>.totalCount/count);</div><div class="line"></div><div class="line">				<span class="variable">$scope</span>.loading = <span class="literal">false</span>;</div><div class="line">				<span class="variable">$scope</span>.<span class="variable">$apply</span>();</div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			//这个是控制翻页的函数，我们采用的是上一页下一页两个按钮进行翻页的</div><div class="line">			<span class="variable">$scope</span>.go = <span class="keyword">function</span>(page) &#123;</div><div class="line">				<span class="keyword">if</span> (page&gt;=1&amp;&amp;page&lt;=<span class="variable">$scope</span>.totalPages)</div><div class="line">				<span class="variable">$route</span>.updateParams(&#123; page:page &#125;);</div><div class="line">			&#125;</div><div class="line">		   &#125;</div><div class="line">		]);</div><div class="line">&#125;)(angular);</div></pre></td></tr></table></figure>
-<p>html部分：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;\div ng-show=<span class="string">"!loading"</span>&gt;</div><div class="line">	&lt;\p&gt;总共：&#123;&#123;totalCount&#125;&#125; 条记录,&#123;&#123;totalPages&#125;&#125;页&lt;\/p&gt;	</div><div class="line">	&lt;\nav aria-label=<span class="string">"..."</span>&gt;</div><div class="line">	  &lt;\ul class=<span class="string">"pager"</span>&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&lt;=1&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage - 1)"</span>&gt;&lt;&lt; Previous&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&gt;=totalPages&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage + 1)"</span>&gt;Next &gt;&gt;&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	  &lt;\/ul&gt;</div><div class="line">	&lt;\/nav&gt;</div><div class="line">&lt;\/div&gt;</div></pre></td></tr></table></figure>
-<p>总路由部分，初始1的由来</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$routeProvider</span>.otherwise(&#123;redirectTo: <span class="string">'/in_theaters/1'</span>&#125;);</div></pre></td></tr></table></figure>
-<p>分页制作完成，disabled类控制按钮是否可以点</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/10/Angular之loading动画实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/10/Angular之loading动画实现/" itemprop="url">
-                  Angular之loading动画实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T11:02:09+08:00">
-                2017-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’<a href="https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：" target="_blank" rel="external">https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：</a></p>
-<p>1.复制相应动画的html和css到项目对应页面<br>2.$scope暴露变量，值为bool，例如$scope.flag = true;<br>3.加载完成后改变变量的值,$scope.flag = false;<br>4.html部分，ng-show=”flag”;<br>5.在回调函数中$scope.apply()重新同步数据;</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1811,7 +1834,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1822,7 +1845,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1833,7 +1856,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
