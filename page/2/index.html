@@ -271,6 +271,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化编程的发展过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/12/模块化编程的发展过程/" itemprop="url">
+                  模块化编程的发展过程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T18:00:31+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h3><p>早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">function</span> add(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) + parseFloat(b);</div><div class="line">&#125;</div><div class="line">   <span class="keyword">function</span> subtract(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) - parseFloat(b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h3><p>形成传统编程语言中的命名空间的概念，从代码层面就已经有了模块的感觉，但是没有私有空间，注意私有空间和对象边界是不同的概念</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var math = &#123;&#125;;</div><div class="line">math.calculator = &#123;&#125;;</div><div class="line">math.calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">  <span class="built_in">return</span> a + b;</div><div class="line">&#125;;</div><div class="line">math.convertor = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h3 id="阶段三"><a href="#阶段三" class="headerlink" title="阶段三"></a>阶段三</h3><p>这里形成一个单独的私有的空间，私有成员的作用，将一个成员私有化，抽象公共方法（其他成员中都会用到的）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> var calculator = (<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var name = <span class="string">''</span>;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> convert(input)&#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> add(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">return</span> &#123;</div><div class="line">    add: add</div><div class="line">  &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h3 id="阶段四"><a href="#阶段四" class="headerlink" title="阶段四"></a>阶段四</h3><p>开闭原则，对新增开放，对修改关闭；容易拓展,这个阶段已经相对成熟了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// calc_v2015.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line"></div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div><div class="line"></div><div class="line">// 新增需求</div><div class="line">// calc_v2016.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  // calculator 如果存在的话，我就是扩展，不存在我就新建</div><div class="line">  calculator.remain = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) % convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div></pre></td></tr></table></figure>
+<h3 id="阶段五"><a href="#阶段五" class="headerlink" title="阶段五"></a>阶段五</h3><p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架<br>requirejs是一个遵循AMD规范的JavaScript模块加载框架<br>commonjs规范已经不再维护</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/Angular之抽象配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1628,153 +1780,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular之跨域请求/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/09/Angular之跨域请求/" itemprop="url">
-                  Angular之跨域请求
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T15:05:56+08:00">
-                2017-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="angular自定义跨域请求"><a href="#angular自定义跨域请求" class="headerlink" title="angular自定义跨域请求"></a>angular自定义跨域请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//自定义跨域请求</div><div class="line">(<span class="keyword">function</span>(angular) &#123;</div><div class="line">	var http = angular.module(<span class="string">'moviecat.services.http'</span>,[]);</div><div class="line">	http.service(<span class="string">'HttpService'</span>,[<span class="string">'$window'</span>,<span class="string">'$document'</span>,<span class="keyword">function</span>(<span class="variable">$window</span>,<span class="variable">$document</span>) &#123;</div><div class="line">		this.jsonp = <span class="keyword">function</span>(url, data, callback) &#123;</div><div class="line">			// 在全局变量中挂载毁掉函数</div><div class="line">			var fuSuffix = Math.random().toString().replace(<span class="string">'.'</span>, <span class="string">''</span>);</div><div class="line">			var cbFuncName = <span class="string">'my_cb_'</span> + fuSuffix;</div><div class="line">			<span class="variable">$window</span>[cbFuncName] = callback;</div><div class="line">			var querystring = url.indexOf(<span class="string">'?'</span>) == -1 ? <span class="string">'?'</span> :<span class="string">''</span>;</div><div class="line">			<span class="keyword">for</span> (var key <span class="keyword">in</span> data) &#123;</div><div class="line">				querystring += key + <span class="string">'='</span> + data[key] + <span class="string">'&amp;'</span>;</div><div class="line">			&#125;</div><div class="line">			querystring += <span class="string">'callback'</span> + <span class="string">'='</span> +cbFuncName;</div><div class="line">			var scriptElement = <span class="variable">$document</span>[0].createElement(<span class="string">'script'</span>);</div><div class="line">			scriptElement.src = url + querystring;</div><div class="line">			<span class="variable">$document</span>[0].body.appendChild(scriptElement);</div><div class="line">			console.log(scriptElement.src)</div><div class="line">		&#125;;</div><div class="line">	&#125;]);</div><div class="line">&#125;)(angular)</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="variable">$scope</span>.check = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  HttpService.jsonp(<span class="string">'http://218.6.160.55:7766/jsdApi/getToken'</span>,&#123;userName:<span class="variable">$scope</span>.user,<span class="built_in">pwd</span>: <span class="variable">$scope</span>.pwd&#125;,<span class="keyword">function</span>(data) &#123;</div><div class="line">    <span class="keyword">if</span> (data.code == 1) &#123;</div><div class="line">          <span class="variable">$scope</span>.token = data.data.token;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">          alert(data.msg);</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$scope</span>.<span class="variable">$apply</span>();//对<span class="variable">$scope</span>的数据重新同步</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用方法：<br>1，引入自定义跨域请求所在的js文件<br>2，注入moviecat.services.http模块以及HttpService服务到控制器中，通过HttpService调用jsonp方法<br>3，注意apply的使用。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1824,7 +1829,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

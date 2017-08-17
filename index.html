@@ -271,6 +271,168 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/webpack详解（环境搭建及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/17/webpack详解（环境搭建及使用/" itemprop="url">
+                  webpack详解（环境搭建及使用）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T15:18:40+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p>1.全局安装 npm install webpack -g</p>
+<p>2.创建文件夹，初始化npm init</p>
+<p>3.npm install webpack –save-dev </p>
+<p>4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;</p>
+<p>5.创建index.html文件，结构如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">	&lt;div id=<span class="string">"app"</span>&gt;&lt;/div&gt;</div><div class="line">	&lt;script src=<span class="string">"bundle.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>6.根目录 webpack entry.js bundle.js //entry.js入口文件 //bundle.js生成文件</p>
+<p>7.还可以定义模块并导入到entry.js中，它会自动分析依赖，进行打包</p>
+<p>8.webpack默认值编译js，至于css之类的我们可以用loader资源转化。</p>
+<p>9.创建style.css之后npm install css-loader style-loader –save-dev</p>
+<p>10.通过require(‘style!css!./style.css’)main.js中 </p>
+<p>11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配</p>
+<p>12.创建webpack.config.js： {<br>    module.exports = {<br>        entry:’./entry.js’,<br>        output: {<br>            path:__dirname,<br>            filename: ‘bundle.js’<br>        },<br>        devtool：’source-map’,//为打包的文件生成一个source-map<br>        module: {<br>            loader:[<br>                {test:/.css$/, loader: ‘style!css!’}//loader: ‘style!css!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>            ]<br>        }<br>    };<br>}</p>
+<p>13.操作完之后就执行webpack</p>
+<p>14.生成开发工具：webpack –devtool source-map</p>
+<p>15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev</p>
+<p>16.接下来创建配置文件.babelrc ，添加预设：{<br>    {<br>        “presets”:[“es2015”,]<br>    }<br>    接下来在webpack.config.js中配置那些需要babel的文件<br>    loader:[<br>        {test:/.css$/, loader: ‘style!css!’},//loader: ‘style!css!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>        {test:/.js$/, loader: ‘babel’}<br>    ]<br>}</p>
+<p>17.webpack-dev-server:生成开发应用的服务器，当文件有变化的时候自动打包刷新，还有一个具有热替换功能的模块（只替换有变化的部分，不需要刷新页面），npm install webpack-dev-server -g</p>
+<p>18.npm install webpack-dev-server -save-dev</p>
+<p>19.webpack-dev-server –inline –hot，生成服务器网址，在最上边有</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/jspm详解（环境搭建及使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1663,158 +1825,6 @@ tom.say;//获取
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化编程的发展过程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/12/模块化编程的发展过程/" itemprop="url">
-                  模块化编程的发展过程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T18:00:31+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h3><p>早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">function</span> add(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) + parseFloat(b);</div><div class="line">&#125;</div><div class="line">   <span class="keyword">function</span> subtract(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) - parseFloat(b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h3><p>形成传统编程语言中的命名空间的概念，从代码层面就已经有了模块的感觉，但是没有私有空间，注意私有空间和对象边界是不同的概念</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var math = &#123;&#125;;</div><div class="line">math.calculator = &#123;&#125;;</div><div class="line">math.calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">  <span class="built_in">return</span> a + b;</div><div class="line">&#125;;</div><div class="line">math.convertor = &#123;&#125;;</div></pre></td></tr></table></figure>
-<h3 id="阶段三"><a href="#阶段三" class="headerlink" title="阶段三"></a>阶段三</h3><p>这里形成一个单独的私有的空间，私有成员的作用，将一个成员私有化，抽象公共方法（其他成员中都会用到的）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> var calculator = (<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var name = <span class="string">''</span>;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> convert(input)&#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> add(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">return</span> &#123;</div><div class="line">    add: add</div><div class="line">  &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
-<h3 id="阶段四"><a href="#阶段四" class="headerlink" title="阶段四"></a>阶段四</h3><p>开闭原则，对新增开放，对修改关闭；容易拓展,这个阶段已经相对成熟了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// calc_v2015.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line"></div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div><div class="line"></div><div class="line">// 新增需求</div><div class="line">// calc_v2016.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  // calculator 如果存在的话，我就是扩展，不存在我就新建</div><div class="line">  calculator.remain = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) % convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div></pre></td></tr></table></figure>
-<h3 id="阶段五"><a href="#阶段五" class="headerlink" title="阶段五"></a>阶段五</h3><p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架<br>requirejs是一个遵循AMD规范的JavaScript模块加载框架<br>commonjs规范已经不再维护</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1864,7 +1874,7 @@ tom.say;//获取
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
