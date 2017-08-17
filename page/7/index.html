@@ -271,6 +271,183 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/01/读《JavaScript权威指南（第六版）》第一章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/01/读《JavaScript权威指南（第六版）》第一章/" itemprop="url">
+                  读《JavaScript权威指南（第六版）》第一章
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T17:02:28+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1、对于第一章一些个人理解和看法"><a href="#1、对于第一章一些个人理解和看法" class="headerlink" title="1、对于第一章一些个人理解和看法"></a>1、对于第一章一些个人理解和看法</h2><p>第一章主要讲的是JavaScript概述，我摘抄了一些书中的概念谈谈我的一些看法，以及一些零碎的知识点；</p>
+<p>###1.JavaScript早已超出了其“脚本语言”本身的范畴，成为一种健壮，高校，通用的编程语言。</p>
+<p>首先，我们学JavaScript这门语言，那么就不能将之狭义的理解为单纯的“脚本语言”，而应该以编程语言来看待，它具有和其他语言同样的地位，因为语言的局限性体现在语言所运行的平台，而不是程序员，当然了，人也是一种影响因素。这里只是想说，在心里要重视它，因为它和其他语言一样具有活力和能力。</p>
+<p>###2，JavaScript是一种面向对象的编程语言，但是和传统的面向对象有很大区别</p>
+<p>关于JavaScript是不是一门面向对象的语言这个争论很多，有人说是，有人说不是，有人提出伪对象的概念，其争论的点在于，JavaScript并没有类的概念，而是通过原型去创建对象，在我看来，正如书里所说，JavaScript是一个面向对象的语言，只是创建对象的方式不用罢了，类的概念或许说起来在面向对象的理论中更加合理，但我们不能因为一种思想而去否定另一种思想或者说方式的诞生，因为类的高度抽象也是人为的去定义，原型也是一种途径罢了，我不去否定它，但我对我所学所见保持好奇和疑问。</p>
+<p>3，值可以通过等号赋给变量，也可以用变量读取值<br>4，对象:是名/值对的集合或者字符串到值映射的集合。由花括号包裹，通过“.”或者“ [ ] ”的方式访问，可以通过赋值的方法创建新的属性，同时属性也可以是对象。<br>5，数组：获取数组最后一个元素arr[arr.length-1],空数组的数组长度为0<br>6,数组和对象都可以包含另一个数组或对象<br>7，函数是一种值，可以赋值给变量，但需要“;”标识赋值结束，且该方法定义的函数必须先定义后使用<br>8，当函数和对象合写在一起时，才叫做方法<br>9，构造函数均以大写字母开始，不需要return<br>10，将对象的属性在构造函数中定义，方法在原型中定义</p>
+<p>做了一个js版本的鼠标点击高亮的简单版本：</p>
+<pre><code class="bash">&lt;script&gt;
+  window.onload = <span class="function"><span class="title">function</span></span>() {
+    var li = document.getElementsByTagName(<span class="string">'li'</span>);
+    <span class="keyword">for</span> (var i = 0; i &lt; li.length; i++) {
+      var lis = li[i];
+      <span class="keyword">if</span> (lis.addEventListener) {
+        lis.addEventListener(<span class="string">'click'</span>,hide,<span class="literal">false</span>);
+      }
+      <span class="keyword">else</span> {
+        lis.attachEvent(<span class="string">'onclick'</span>,hide);
+      }
+    }
+    <span class="keyword">function</span> hide(event) {
+      // event.target.style.visibility = <span class="string">'hidden'</span>;
+      // event.target.className += <span class="string">' active'</span>;
+      <span class="keyword">if</span> (event.target.className.indexOf(<span class="string">'active'</span>) == -1) {
+        <span class="keyword">for</span> (var i = 0; i &lt; li.length; i++) {
+          li[i].className = <span class="string">' '</span>;
+        }
+        event.target.className += <span class="string">' active'</span>;
+      }<span class="keyword">else</span> {
+        event.target.className = <span class="string">' '</span>;
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/05/01/Ionic中使用scrollTop值为0的问题解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1578,152 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/13/禁止手机浏览器、微信浏览器的上下滑动问题/" itemprop="url">
-                  禁止手机浏览器、微信浏览器的上下滑动问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T11:30:33+08:00">
-                2017-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微信/" itemprop="url" rel="index">
-                    <span itemprop="name">微信</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- ## 禁止移动端（包括微信浏览器）的上下滑动产生浮动的问题 -->
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">'text/javascript'</span>&gt;</div><div class="line">document.querySelector(<span class="string">'body'</span>).addEventListener(<span class="string">'touchstart'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    event.preventDefault();</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>这个是官方给出的解决方案，我就以自己的案例为主，提出一点思考，就代码而言有用，但是禁用掉了所有包含在body下的一些touch，scroll事件，可以考虑将需要touch，和scroll的事件元素放在所要禁用的元素外层，这样就可以规避此类问题，转为从html的嵌套层次上下手去解决问题。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1773,7 +1804,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
