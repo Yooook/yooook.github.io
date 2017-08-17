@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ECMAScript6" />
+  <meta name="keywords" content="React" />
 
 
 
@@ -80,25 +80,19 @@
 
 
 
-<meta name="description" content="笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效
-2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据
-3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3
-4.解构对象 let {one1:one,two1:two,">
+<meta name="description" content="环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。
+ jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECMAScript6学习(上)">
-<meta property="og:url" content="http://apskt.com/2017/08/15/ECMAScript6学习/index.html">
+<meta property="og:title" content="jspm详解（环境搭建及使用）">
+<meta property="og:url" content="http://apskt.com/2017/08/17/jspm详解（环境搭建及使用/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效
-2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据
-3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3
-4.解构对象 let {one1:one,two1:two,">
-<meta property="og:updated_time" content="2017-08-16T01:43:24.833Z">
+<meta property="og:description" content="环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。
+ jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它">
+<meta property="og:updated_time" content="2017-08-17T07:00:34.405Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ECMAScript6学习(上)">
-<meta name="twitter:description" content="笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效
-2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据
-3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3
-4.解构对象 let {one1:one,two1:two,">
+<meta name="twitter:title" content="jspm详解（环境搭建及使用）">
+<meta name="twitter:description" content="环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。
+ jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它">
 
 
 
@@ -126,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/08/15/ECMAScript6学习/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/17/jspm详解（环境搭建及使用/"/>
 
 
 
 
 
-  <title> ECMAScript6学习(上) | Finch's blog </title>
+  <title> jspm详解（环境搭建及使用） | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/15/ECMAScript6学习/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/jspm详解（环境搭建及使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Finch">
@@ -300,7 +294,7 @@
             
             
               
-                ECMAScript6学习(上)
+                jspm详解（环境搭建及使用）
               
             
           </h1>
@@ -315,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T15:50:02+08:00">
-                2017-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T11:04:25+08:00">
+                2017-08-17
               </time>
             
 
@@ -338,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ECMAScript6/" itemprop="url" rel="index">
-                    <span itemprop="name">ECMAScript6</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -373,22 +367,31 @@
       
 
       
-        <h2 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h2><p>1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效</p>
-<p>2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据</p>
-<p>3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3</p>
-<p>4.解构对象 let {one1:one,two1:two,three1:three} = {one:1,two:2,three:3}</p>
-<p>5.模板字符串： let apple = ‘apples’ ;var string = <code>今天吃 ${apple}</code>//注意反引号，另外支持换行</p>
-<p>6.带标签的模板字符串 var string = kitchen<code>今天吃 ${apple}</code>;function kitchen(strings,…values) {//strings是指字符串的每个部分的数组集合，values只是变量的数组集合}</p>
-<p>7.判断字符串里是否有其他字符串：包含baohastring.includes(‘apple’)&amp;开始string.startsWith(‘apple’)&amp;结尾string.endsWith(‘apple’)</p>
-<p>8.给函数设置[默认值]function breakfast(one=1,two=2) {}；不代表不可以传参</p>
-<p>9.’…’展开操作符，举个例子，将一个数组添加到另一个数组，var arr1 = [1,2,3];var arr2 = [4,5];arr1 = [1,2,3,…arr2]//arr1 = [1,2,3,4,5]</p>
-<p>10.剩余操作符function open(one,two,…three) {console.log(one,two，three);console.log(one,two，..three)};open(1,2,3,4)//1,2,[3,4] //1,2,3,4</p>
-<p>11.解构参数function(three,{one,two}={}) { console.log(three,one,two)}</p>
-<p>12.函数名的name属性: var one = function two() {};console.log(one.name);//two，如果没有two则输出变量的名称，这是权重的问题</p>
-<p>13.箭头函数，<br> {<br>     一个参数并返回：let open = one =&gt; one;<br>     多个参数：let open = (one,two) =&gt; {…;return one + two};<br>     没有参数：let open = ( ) =&gt; {…;return one + two};//小括号里面是一个空格<br> }</p>
-<p> 14.对象表达式：<br> {<br>     let one=1,two=2;<br>     var food = {<br>         one,//直接写变量名，不需要赋值<br>         two,<br>         breakfast() {}//不需要function关键字<br>     }<br> }</p>
-<p> 15.添加带空格的属性：let foo = {} ; foo[‘hot drink’] = ‘xxx’//也可以str = ‘hot drink’ ；foo[str] = ‘xxx’</p>
-<p> 16.就判断两个值相等：Object.is(NaN,NaN)//true,Object.is(+0,-0)//false</p>
+        <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p> JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。</p>
+<p> jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它是工作在SystemJs(模块加载器)通用模块之上，jspm不是一个全新的包管理器，而是基于已存在的包资源进行的，它是与NPM和GitHub协同合作的</p>
+<h3 id="过度"><a href="#过度" class="headerlink" title="过度"></a>过度</h3><p> 1.npm install -g babel//全局安装babel，因为我们需要在自己的项目中去安装babel插件</p>
+<p> 2.创建项目文件夹react，进行npm初始化。执行npm init。</p>
+<p> 3.项目根目录下，npm  install babel-core –save-dev</p>
+<p> 4.根目录创建scrip.js,可以写一些es6的代码，我们将要去编译它</p>
+<p> 5.在scrip.js的目录，执行babel script.js,将会在dos里显示编译好的代码，我们可以将它编译到文件里babel –watch script.js –out-file script_compiled.js –source-maps//watch 监视并修改 –source-maps记录编译前的所有文件</p>
+<p> 6.同样的。我们可以针对目录进行编译babel –watch src –out-dir lib //src目录到lib目录</p>
+<p> 7.可以将一个目录编译到一个js文件里，babel –watch src –out-file script_compiled.js </p>
+<p> 8.在项目的开发阶段，不需要每次都编译js，可以在浏览器端实时编译，这样我们需要两个插件<br> {<br>     1.在项目文件夹根目录创建一个index.html文件<br>     2.添加<script src="node_modules/babel-core/browser.js"></script><br>     3.添加<script src="node_modules/babel-core/browser-polyfill.js"></script>//这是一个修补浏览器功能的文件<br>     4.添加<script src="script.js" type="text/babel"></script>//这个里面的代码会被browser.js解释<br> }</p>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>1.npm isntall jspm -g//完成之后输入jspm返回信息</p>
+<p>2.创建项目文件夹，npm初始化，npm init</p>
+<p>3.npm isntall jspm –save-dev  将文件放到开发依赖里面</p>
+<p>4.jspm init//初始化jspm</p>
+<p>5.package.json中的”name”: “myapp”,不能为react否则不可以安装react</p>
+<p>6.创建app文件夹，内部创建main.js，编写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">'use strict'</span></div><div class="line"></div><div class="line"><span class="built_in">let</span> fruits = [<span class="string">'apple'</span>,<span class="string">'banana'</span>],</div><div class="line">foods = [...fruits,<span class="string">'pink'</span>];</div><div class="line"></div><div class="line">document.body.innerText = foods.toString();</div><div class="line"></div><div class="line">console.log(foods);</div><div class="line"></div><div class="line"><span class="built_in">export</span> default &#123;&#125;;</div></pre></td></tr></table></figure>
+<p>7.在根目录创建index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;!-- 导入system.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./jspm_packages/system.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;!-- 导入config.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./config.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    System.import(<span class="string">'./app/main'</span>);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>8.我们需要在http协议上运行：browser-sync start –server –files “<em>.html , ./app/</em>.js”</p>
+<p>9.添加第三方工具：jQuery</p>
+<p>10.jspm install jquery=github:components/jquery === jspm install jquery</p>
+<p>11.在github上面的jspm/registry中可以查看包的映射关系</p>
+<p>12.jQuery使用 import $ from ‘jquery’</p>
+<p>13.bundle打包：jspm bundle app/main app/build.js –inject//–inject可以不要，用来修改config文件</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -419,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ECMAScript6/" rel="tag"># ECMAScript6</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -432,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/13/实现分页组件/" rel="next" title="实现分页组件">
-                <i class="fa fa-chevron-left"></i> 实现分页组件
+              <a href="/2017/08/17/react之babel详解/" rel="next" title="babel详解（环境搭建及使用）">
+                <i class="fa fa-chevron-left"></i> babel详解（环境搭建及使用）
               </a>
             
           </div>
@@ -441,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/15/ECMAScript6学习1/" rel="prev" title="ECMAScript6学习(下)">
-                ECMAScript6学习(下) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,7 +471,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="ECMAScript6学习(上)" ></div> 
+<div id="SOHUCS" sid="jspm详解（环境搭建及使用）" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -582,7 +581,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记："><span class="nav-number">1.</span> <span class="nav-text">笔记：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建及使用"><span class="nav-number">1.</span> <span class="nav-text">环境搭建及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过度"><span class="nav-number">1.1.</span> <span class="nav-text">过度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题"><span class="nav-number">1.2.</span> <span class="nav-text">主题</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -271,6 +271,174 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/jspm详解（环境搭建及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/17/jspm详解（环境搭建及使用/" itemprop="url">
+                  jspm详解（环境搭建及使用）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T11:04:25+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p> JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。</p>
+<p> jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它是工作在SystemJs(模块加载器)通用模块之上，jspm不是一个全新的包管理器，而是基于已存在的包资源进行的，它是与NPM和GitHub协同合作的</p>
+<h3 id="过度"><a href="#过度" class="headerlink" title="过度"></a>过度</h3><p> 1.npm install -g babel//全局安装babel，因为我们需要在自己的项目中去安装babel插件</p>
+<p> 2.创建项目文件夹react，进行npm初始化。执行npm init。</p>
+<p> 3.项目根目录下，npm  install babel-core –save-dev</p>
+<p> 4.根目录创建scrip.js,可以写一些es6的代码，我们将要去编译它</p>
+<p> 5.在scrip.js的目录，执行babel script.js,将会在dos里显示编译好的代码，我们可以将它编译到文件里babel –watch script.js –out-file script_compiled.js –source-maps//watch 监视并修改 –source-maps记录编译前的所有文件</p>
+<p> 6.同样的。我们可以针对目录进行编译babel –watch src –out-dir lib //src目录到lib目录</p>
+<p> 7.可以将一个目录编译到一个js文件里，babel –watch src –out-file script_compiled.js </p>
+<p> 8.在项目的开发阶段，不需要每次都编译js，可以在浏览器端实时编译，这样我们需要两个插件<br> {<br>     1.在项目文件夹根目录创建一个index.html文件<br>     2.添加<script src="node_modules/babel-core/browser.js"></script><br>     3.添加<script src="node_modules/babel-core/browser-polyfill.js"></script>//这是一个修补浏览器功能的文件<br>     4.添加<script src="script.js" type="text/babel"></script>//这个里面的代码会被browser.js解释<br> }</p>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>1.npm isntall jspm -g//完成之后输入jspm返回信息</p>
+<p>2.创建项目文件夹，npm初始化，npm init</p>
+<p>3.npm isntall jspm –save-dev  将文件放到开发依赖里面</p>
+<p>4.jspm init//初始化jspm</p>
+<p>5.package.json中的”name”: “myapp”,不能为react否则不可以安装react</p>
+<p>6.创建app文件夹，内部创建main.js，编写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">'use strict'</span></div><div class="line"></div><div class="line"><span class="built_in">let</span> fruits = [<span class="string">'apple'</span>,<span class="string">'banana'</span>],</div><div class="line">foods = [...fruits,<span class="string">'pink'</span>];</div><div class="line"></div><div class="line">document.body.innerText = foods.toString();</div><div class="line"></div><div class="line">console.log(foods);</div><div class="line"></div><div class="line"><span class="built_in">export</span> default &#123;&#125;;</div></pre></td></tr></table></figure>
+<p>7.在根目录创建index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;!-- 导入system.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./jspm_packages/system.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;!-- 导入config.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./config.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    System.import(<span class="string">'./app/main'</span>);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>8.我们需要在http协议上运行：browser-sync start –server –files “<em>.html , ./app/</em>.js”</p>
+<p>9.添加第三方工具：jQuery</p>
+<p>10.jspm install jquery=github:components/jquery === jspm install jquery</p>
+<p>11.在github上面的jspm/registry中可以查看包的映射关系</p>
+<p>12.jQuery使用 import $ from ‘jquery’</p>
+<p>13.bundle打包：jspm bundle app/main app/build.js –inject//–inject可以不要，用来修改config文件</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/react之babel详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -294,7 +462,7 @@
               
                 
                 <a class="post-title-link" href="/2017/08/17/react之babel详解/" itemprop="url">
-                  react之babel详解
+                  babel详解（环境搭建及使用）
                 </a>
               
             
@@ -1647,152 +1815,6 @@ tom.say;//获取
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/Angular之抽象配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/12/Angular之抽象配置/" itemprop="url">
-                  Angular之抽象配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T17:32:46+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="angular抽象配置"><a href="#angular抽象配置" class="headerlink" title="angular抽象配置"></a>angular抽象配置</h2><p>1.创建父模块模块，编写配置<br>var myApp = angular.module(‘myApp’,[]);<br>myApp.constant(‘appConfig’,{<br>    pageSize:10,<br>    listApi:’www.baidu.com/api’<br>})</p>
-<p>2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以被子模块获取，</p>
-<p>3.利用对象的方式调用并替换相应的字符串。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1842,7 +1864,7 @@ tom.say;//获取
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
