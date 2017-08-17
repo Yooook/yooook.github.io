@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="笔迹：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
+<meta name="description" content="笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
 2.设置对象的prototype{    let foo = {        get() {}    }    let fmm = {}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECMAScript6学习(下)">
 <meta property="og:url" content="http://apskt.com/2017/08/15/ECMAScript6学习1/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="笔迹：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
+<meta property="og:description" content="笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
 2.设置对象的prototype{    let foo = {        get() {}    }    let fmm = {}">
-<meta property="og:updated_time" content="2017-08-15T10:13:02.322Z">
+<meta property="og:updated_time" content="2017-08-16T01:43:27.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript6学习(下)">
-<meta name="twitter:description" content="笔迹：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
+<meta name="twitter:description" content="笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
 2.设置对象的prototype{    let foo = {        get() {}    }    let fmm = {}">
 
 
@@ -367,7 +367,7 @@
       
 
       
-        <h2 id="笔迹："><a href="#笔迹：" class="headerlink" title="笔迹："></a>笔迹：</h2><p>1.把一个对象的属性赋值给另一个对象Object.assign()<br>{<br>    let foo = {};<br>    Object.assign(<br>        foo,//第一个参数是需要复制的对象<br>        {one:1}//被复制的对象<br>    );<br>}</p>
+        <h2 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h2><p>1.把一个对象的属性赋值给另一个对象Object.assign()<br>{<br>    let foo = {};<br>    Object.assign(<br>        foo,//第一个参数是需要复制的对象<br>        {one:1}//被复制的对象<br>    );<br>}</p>
 <p>2.设置对象的prototype<br>{<br>    let foo = {<br>        get() {}<br>    }<br>    let fmm = {}<br>    fun = Object.create(foo)//创建对象<br>    Object.getPrototypeOf(fun) === foo//true<br>    Object.setPrototypeOf(fun,fmm)//第一个参数是当前对象，第二个是prototype属性将要指向的对象，这样就可以调用fmm里面的方法<br>}</p>
 <p>3.<strong>proto</strong>: {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>}</p>
 <p>4.super属性重写父类方法 {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>    get() {//重写父类的get方法<br>        return super.get() + ‘xxxxxx’;//super.get()父类get方法的返回值<br>    }<br>}</p>
@@ -436,6 +436,10 @@ tom.say;//获取
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/16/初遇React系列之一/" rel="prev" title="初遇React系列之一">
+                初遇React系列之一 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -516,7 +520,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -527,7 +531,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -538,7 +542,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -573,7 +577,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔迹："><span class="nav-number">1.</span> <span class="nav-text">笔迹：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记："><span class="nav-number">1.</span> <span class="nav-text">笔记：</span></a></li></ol></div>
             
 
           </div>
