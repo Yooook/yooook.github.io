@@ -94,7 +94,7 @@
 3.npm install webpack –save-dev 
 4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;
 5.创建index.html文件，结构如下：1234&amp;lt;body&amp;gt">
-<meta property="og:updated_time" content="2017-08-17T08:10:55.153Z">
+<meta property="og:updated_time" content="2017-08-18T03:00:10.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack详解（环境搭建及使用）">
 <meta name="twitter:description" content="环境搭建及使用1.全局安装 npm install webpack -g
@@ -385,9 +385,9 @@
 <p>7.还可以定义模块并导入到entry.js中，它会自动分析依赖，进行打包</p>
 <p>8.webpack默认值编译js，至于css之类的我们可以用loader资源转化。</p>
 <p>9.创建style.css之后npm install css-loader style-loader –save-dev</p>
-<p>10.通过require(‘style!css!./style.css’)main.js中 </p>
+<p>10.通过require(‘style-loader!css-loader!./style.css’)main.js中 </p>
 <p>11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配</p>
-<p>12.创建webpack.config.js： {<br>    module.exports = {<br>        entry:’./entry.js’,<br>        output: {<br>            path:__dirname,<br>            filename: ‘bundle.js’<br>        },<br>        devtool：’source-map’,//为打包的文件生成一个source-map<br>        module: {<br>            loader:[<br>                {test:/.css$/, loader: ‘style!css!’}//loader: ‘style!css!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>            ]<br>        }<br>    };<br>}</p>
+<p>12.创建webpack.config.js： {<br>    module.exports = {<br>        entry:’./entry.js’,<br>        output: {<br>            path:__dirname,<br>            filename: ‘bundle.js’<br>        },<br>        devtool:’source-map’,//为打包的文件生成一个source-map<br>        module: {<br>            loader:[<br>                {test:/.css$/, loader: ‘style-loader!css-loader!’}//loader: ‘style-loader!css-loader!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>            ]<br>        }<br>    };<br>}</p>
 <p>13.操作完之后就执行webpack</p>
 <p>14.生成开发工具：webpack –devtool source-map</p>
 <p>15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev</p>
