@@ -94,7 +94,7 @@
 3.npm install webpack –save-dev 
 4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;
 5.创建index.html文件，结构如下：1234&amp;lt;body&amp;gt">
-<meta property="og:updated_time" content="2017-08-18T03:00:10.669Z">
+<meta property="og:updated_time" content="2017-08-19T10:33:22.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack详解（环境搭建及使用）">
 <meta name="twitter:description" content="环境搭建及使用1.全局安装 npm install webpack -g
@@ -387,11 +387,11 @@
 <p>9.创建style.css之后npm install css-loader style-loader –save-dev</p>
 <p>10.通过require(‘style-loader!css-loader!./style.css’)main.js中 </p>
 <p>11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配</p>
-<p>12.创建webpack.config.js： {<br>    module.exports = {<br>        entry:’./entry.js’,<br>        output: {<br>            path:__dirname,<br>            filename: ‘bundle.js’<br>        },<br>        devtool:’source-map’,//为打包的文件生成一个source-map<br>        module: {<br>            loader:[<br>                {test:/.css$/, loader: ‘style-loader!css-loader!’}//loader: ‘style-loader!css-loader!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>            ]<br>        }<br>    };<br>}</p>
+<p>12.创建webpack.config.js：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">		entry:<span class="string">'./entry.js'</span>,</div><div class="line">		output: &#123;</div><div class="line">			path:__dirname,</div><div class="line">			filename: <span class="string">'bundle.js'</span></div><div class="line">		&#125;,</div><div class="line">		devtool:<span class="string">'source-map'</span>,//为打包的文件生成一个<span class="built_in">source</span>-map</div><div class="line">		module: &#123;</div><div class="line">			loader:[</div><div class="line">				&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style-loader!css-loader!'</span>&#125;//loader: <span class="string">'style-loader!css-loader!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">			]</div><div class="line">		&#125;</div><div class="line">	&#125;;</div></pre></td></tr></table></figure></p>
 <p>13.操作完之后就执行webpack</p>
 <p>14.生成开发工具：webpack –devtool source-map</p>
 <p>15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev</p>
-<p>16.接下来创建配置文件.babelrc ，添加预设：{<br>    {<br>        “presets”:[“es2015”,]<br>    }<br>    接下来在webpack.config.js中配置那些需要babel的文件<br>    loader:[<br>        {test:/.css$/, loader: ‘style!css!’},//loader: ‘style!css!’这里配置了之后，修改引入的部分为require(‘./style.css’)<br>        {test:/.js$/, loader: ‘babel’}<br>    ]<br>}</p>
+<p>16.接下来创建配置文件.babelrc ，添加预设：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>:[<span class="string">"es2015"</span>,]</div><div class="line">&#125;</div><div class="line"></div><div class="line">1.接下来在webpack.config.js中配置那些需要babel的文件</div><div class="line"></div><div class="line">loader:[</div><div class="line">	&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style!css!'</span>&#125;,//loader: <span class="string">'style!css!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">	&#123;<span class="built_in">test</span>:/\.js$/, loader: <span class="string">'babel'</span>&#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
 <p>17.webpack-dev-server:生成开发应用的服务器，当文件有变化的时候自动打包刷新，还有一个具有热替换功能的模块（只替换有变化的部分，不需要刷新页面），npm install webpack-dev-server -g</p>
 <p>18.npm install webpack-dev-server -save-dev</p>
 <p>19.webpack-dev-server –inline –hot，生成服务器网址，在最上边有</p>

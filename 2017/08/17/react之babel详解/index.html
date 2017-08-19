@@ -94,7 +94,7 @@
 2.npm install babel-cli –save-dev //安装开发依赖
 3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件
 4.因为是局部安装，没有配置环境变量，所以利用cmd，进入到node_modules/.bin目录下，可以babel">
-<meta property="og:updated_time" content="2017-08-18T02:30:52.768Z">
+<meta property="og:updated_time" content="2017-08-19T10:33:50.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="babel详解（环境搭建及使用）">
 <meta name="twitter:description" content="环境搭建及使用首先我们不再全局安装babel，若有请先卸载
@@ -393,9 +393,9 @@
 <p>13.重新执行 npm run build 发现我们用es6写的代码已经被编译 </p>
 <p>14.在react中的jsx就需要被转化成普通的javascript代码，官方推荐babel，那么我们需要安装相关预设，npm install babel-preset-react –save-dev,下载完成后在.babelrc文件中添加预设</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>: [<span class="string">"es2015"</span>,<span class="string">"react"</span>]//es2015解决的是代码编译，react解决的是jsx</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>15，babel可以和许多的build system及配合使用，比如gulp，webpack等等，这里要说的是babel+gulp的形式：<br>{<br>    1.npm install gulp gulp-babel –save-dev<br>    2.创建gulp的配置文件gulpfile.js<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 引入模块 --&gt;</div><div class="line">	var gulp = require(<span class="string">'gulp'</span>);</div><div class="line">	var babel = require(<span class="string">"gulp-babel"</span>);</div><div class="line">&lt;!-- 创建任务 --&gt;</div><div class="line">	gulp.task(<span class="string">'default'</span>,() =&gt; &#123;</div><div class="line">		<span class="built_in">return</span> gulp.src(<span class="string">'src/*.js'</span>)</div><div class="line">		.pipe(babel())</div><div class="line">		.pipe(gulp.dest(<span class="string">'lib'</span>))</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
+<p>15，babel可以和许多的build system及配合使用，比如gulp，webpack等等，这里要说的是babel+gulp的形式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.npm install gulp gulp-babel --save-dev</div><div class="line">2.创建gulp的配置文件gulpfile.js </div><div class="line">```bash</div><div class="line">&lt;!-- 引入模块 --&gt;</div><div class="line">	var gulp = require(<span class="string">'gulp'</span>);</div><div class="line">	var babel = require(<span class="string">"gulp-babel"</span>);</div><div class="line">&lt;!-- 创建任务 --&gt;</div><div class="line">	gulp.task(<span class="string">'default'</span>,() =&gt; &#123;</div><div class="line">		<span class="built_in">return</span> gulp.src(<span class="string">'src/*.js'</span>)</div><div class="line">		.pipe(babel())</div><div class="line">		.pipe(gulp.dest(<span class="string">'lib'</span>))</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
 <pre><code>3.执行gulp编译成功
-</code></pre><p>}</p>
+</code></pre><p>```</p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
