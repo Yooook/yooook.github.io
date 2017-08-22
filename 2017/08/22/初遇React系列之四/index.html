@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="seajs" />
+  <meta name="keywords" content="React" />
 
 
 
@@ -80,25 +80,19 @@
 
 
 
-<meta name="description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
-SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
-1.安装seajs，引入，并编写入口模块，一般加载都在head部分
-1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
+<meta name="description" content="关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”
+1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模块化seajs使用实现CMD规范">
-<meta property="og:url" content="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/index.html">
+<meta property="og:title" content="初遇React系列之四">
+<meta property="og:url" content="http://apskt.com/2017/08/22/初遇React系列之四/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
-SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
-1.安装seajs，引入，并编写入口模块，一般加载都在head部分
-1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
-<meta property="og:updated_time" content="2017-08-13T01:51:32.887Z">
+<meta property="og:description" content="关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”
+1">
+<meta property="og:updated_time" content="2017-08-22T14:58:01.535Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模块化seajs使用实现CMD规范">
-<meta name="twitter:description" content="关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
-SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
-1.安装seajs，引入，并编写入口模块，一般加载都在head部分
-1234567&amp;lt;\script src=&quot;node_modules/seajs/dist/sea.js&quot;&amp;gt;&amp;lt;\/script&amp;gt; &amp;lt;\script&amp;gt;">
+<meta name="twitter:title" content="初遇React系列之四">
+<meta name="twitter:description" content="关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”
+1">
 
 
 
@@ -126,13 +120,13 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/22/初遇React系列之四/"/>
 
 
 
 
 
-  <title> 模块化seajs使用实现CMD规范 | Finch's blog </title>
+  <title> 初遇React系列之四 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +273,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/22/初遇React系列之四/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Finch">
@@ -300,7 +294,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
             
             
               
-                模块化seajs使用实现CMD规范
+                初遇React系列之四
               
             
           </h1>
@@ -315,8 +309,8 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T21:32:10+08:00">
-                2017-08-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T22:55:18+08:00">
+                2017-08-22
               </time>
             
 
@@ -338,8 +332,8 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/seajs/" itemprop="url" rel="index">
-                    <span itemprop="name">seajs</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -373,25 +367,8 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
       
 
       
-        <p>关于为什么要使用seajs，我已经在上次的文章里体现的很具体了</p>
-<p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：</p>
-<p>1.安装seajs，引入，并编写入口模块，一般加载都在head部分</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;\script src=<span class="string">"node_modules/seajs/dist/sea.js"</span>&gt;&lt;\/script&gt;</div><div class="line"> &lt;\script&gt;</div><div class="line">   seajs.use(<span class="string">'./calculate.js'</span>, <span class="keyword">function</span>(calculator) &#123;</div><div class="line">     console.log(<span class="string">'模块加载完成'</span>);</div><div class="line">     // console.log(e);</div><div class="line">   &#125;);</div><div class="line">&lt;\/script&gt;</div></pre></td></tr></table></figure>
-<p>需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径<br>入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){})</p>
-<p>2.定义单独的js模块文件，并且定义模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> // 定义一个计算模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var add = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var result = 0;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arguments.length; i++) &#123;</div><div class="line">      result += parseFloat(arguments[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> result;</div><div class="line">  &#125;</div><div class="line">	</div><div class="line">  //exports.add = add;</div><div class="line">  module.exports = &#123;</div><div class="line">    add: add</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>首先，函数的参数不推荐自己定义，以防止和nodejs的命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
-<p>3.模块间的调用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 定义一个模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  // require(<span class="string">'./modules/02-calculator.js'</span>);用一个变量接受返回值，从而调用引入模块的方法，同步</div><div class="line">  require.async(<span class="string">'./modules/02-calculator.js'</span>,<span class="keyword">function</span> (c) &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;);//异步方法加载模块，没有返回值，有回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>4.使用第三方依赖，用jQuery做例子：</p>
-<p>对jQuery做相应的修改，非压缩文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//适配CMD</div><div class="line"> <span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">    define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象</p>
-<p>5.seajs配置</p>
-<p>//别名配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    <span class="built_in">alias</span>: &#123; <span class="string">'jquery'</span>: <span class="string">'./jquery/jquery/1.10.1/jquery.js'</span> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">    //引用jQuery模块</div><div class="line">    var $ = require(<span class="string">'jquery'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p> // 变量配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    vars: &#123;</div><div class="line">        <span class="string">'locale'</span>: <span class="string">'zh-cn'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var lang = require(<span class="string">'./i18n/&#123;locale&#125;.js'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+        <h2 id="关于fetch："><a href="#关于fetch：" class="headerlink" title="关于fetch："></a>关于fetch：</h2><p>“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。<br>现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">constructor(props) &#123;</div><div class="line">    super(props);//引用this.super(props)执行之后才能使用this.props</div><div class="line">    this.state = &#123;</div><div class="line">      //创建dataSource对象，传入更新row的策略，一般来说都是prevRowData和nextRowData不相等时更新row</div><div class="line">      movies:new ListView.DataSource(&#123;</div><div class="line">        rowHasChanged:(row1,row2) =&gt; row1 !== row2</div><div class="line">      &#125;),</div><div class="line">      loaded:<span class="literal">false</span>//loading状态</div><div class="line">    &#125;; </div><div class="line">    this.fetchData();//构造函数内加载时执行</div><div class="line">&#125;</div><div class="line">  </div><div class="line"> <span class="function"><span class="title">fetchData</span></span>()&#123;</div><div class="line">    fetch(REQUIRE_URL)</div><div class="line">        .then(response =&gt; response.json())</div><div class="line">        .then(responseData =&gt; &#123;</div><div class="line">            console.log(responseData);</div><div class="line">            this.setState(&#123;</div><div class="line">                movies:this.state.movies.cloneWithRows(responseData.subjects),//传入请求数据，更新状态</div><div class="line">                loaded:<span class="literal">true</span></div><div class="line">            &#125;)</div><div class="line">        &#125;)</div><div class="line">        .done();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -422,7 +399,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
       
         <div class="post-tags">
           
-            <a href="/tags/seajs/" rel="tag"># seajs</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -435,8 +412,8 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/12/模块化编程的发展过程/" rel="next" title="模块化编程的发展过程">
-                <i class="fa fa-chevron-left"></i> 模块化编程的发展过程
+              <a href="/2017/08/22/初遇React系列之三/" rel="next" title="初遇React系列之三">
+                <i class="fa fa-chevron-left"></i> 初遇React系列之三
               </a>
             
           </div>
@@ -444,10 +421,6 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/13/基于bootstrap（复杂）分页样式的js原生实现/" rel="prev" title="基于bootstrap（复杂）分页样式的js原生实现">
-                基于bootstrap（复杂）分页样式的js原生实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,7 +448,7 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="模块化seajs使用实现CMD规范" ></div> 
+<div id="SOHUCS" sid="初遇React系列之四" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -503,8 +476,17 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/tx.jpg"
@@ -566,6 +548,22 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于fetch："><span class="nav-number">1.</span> <span class="nav-text">关于fetch：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
