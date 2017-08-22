@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JS" />
+  <meta name="keywords" content="React" />
 
 
 
@@ -80,16 +80,28 @@
 
 
 
-<meta name="description" content="~对象字面量的属性定义可以用字符串”name” = alg;~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&amp;lt;7和早版本的opera中会报错~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参~使用方括号访问属性的唯一优点是可以以变量的方式访问。~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数~检测数组：if(Array.isAr">
+<meta name="description" content="React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
+2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下：
+1.getInitialState() //初始化state状态
+2.componentWillMount() //组件即将加载
+3.render()创建虚拟的dom">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计 第三版》第五章补">
-<meta property="og:url" content="http://apskt.com/2017/07/08/读《JavaScript高级程序设计 第三版》第五章补/index.html">
+<meta property="og:title" content="初遇React系列之二">
+<meta property="og:url" content="http://apskt.com/2017/08/21/初遇React系列之二/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="~对象字面量的属性定义可以用字符串”name” = alg;~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&amp;lt;7和早版本的opera中会报错~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参~使用方括号访问属性的唯一优点是可以以变量的方式访问。~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数~检测数组：if(Array.isAr">
-<meta property="og:updated_time" content="2017-07-08T07:01:01.834Z">
+<meta property="og:description" content="React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
+2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下：
+1.getInitialState() //初始化state状态
+2.componentWillMount() //组件即将加载
+3.render()创建虚拟的dom">
+<meta property="og:updated_time" content="2017-08-21T02:53:27.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计 第三版》第五章补">
-<meta name="twitter:description" content="~对象字面量的属性定义可以用字符串”name” = alg;~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&amp;lt;7和早版本的opera中会报错~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参~使用方括号访问属性的唯一优点是可以以变量的方式访问。~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数~检测数组：if(Array.isAr">
+<meta name="twitter:title" content="初遇React系列之二">
+<meta name="twitter:description" content="React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
+2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下：
+1.getInitialState() //初始化state状态
+2.componentWillMount() //组件即将加载
+3.render()创建虚拟的dom">
 
 
 
@@ -117,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/07/08/读《JavaScript高级程序设计 第三版》第五章补/"/>
+  <link rel="canonical" href="http://apskt.com/2017/08/21/初遇React系列之二/"/>
 
 
 
 
 
-  <title> 读《JavaScript高级程序设计 第三版》第五章补 | Finch's blog </title>
+  <title> 初遇React系列之二 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +282,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/08/读《JavaScript高级程序设计 第三版》第五章补/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/21/初遇React系列之二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Finch">
@@ -291,7 +303,7 @@
             
             
               
-                读《JavaScript高级程序设计 第三版》第五章补
+                初遇React系列之二
               
             
           </h1>
@@ -306,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T15:00:29+08:00">
-                2017-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T10:53:26+08:00">
+                2017-08-21
               </time>
             
 
@@ -329,8 +341,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -364,12 +376,20 @@
       
 
       
-        <p>~对象字面量的属性定义可以用字符串”name” = alg;<br>~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&lt;7和早版本的opera中会报错<br>~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参<br>~使用方括号访问属性的唯一优点是可以以变量的方式访问。<br>~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数<br>~检测数组：if(Array.isArray(value)){//对数组操作};<br>~如果数组中有一项的值是null或者undefined，那么该值在join().toString()，和valueOf()<br>方法的返回结果中以空字符串表示。<br>~栈方法：Array.push()接受任意数量的参数，把他们添加到数组末尾，返回修改后数组的长度。Array.pop()从数组末尾移除最后一项，返回移除项。<br>~队列方法：Array.push()和Array.shift()，shift方法移除数组中第一个项并返回该项，同时数组长度减1；<br>~unshift()在数组前端添加任意个 项并返回数组的长度。<br>~reverse()和sort()返回排序后得数组<br>~sort()对数组排序会将数值转化为字符比较所以5会比10大，针对这个进行改造,传入函数compare如下Array.sort(ccompare);</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> compare(value1,value2) &#123;</div><div class="line">	<span class="keyword">if</span>(value1 &lt; varue2) &#123;</div><div class="line">	<span class="built_in">return</span> -1;//换为1同时将下面换成-1则为降序排列，当然了如果只是反转顺序，reserve()更快</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(value1 &lt; varue2)&#123;</div><div class="line">	<span class="built_in">return</span> 1;</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">	<span class="built_in">return</span> 0;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>操作方法：<br>~concat()方法：创建当前数组的副本，然后将参数添加到副本的末尾，返回新数组。反悔的数组和之前的数组是两个数组。<br>~slice()方法：返回新数组，一个参数时，从该参数位置到结尾的所有元素返回数组，两个参数时返回起始到结束位置的新数组，不包括结束位置的索引，且该方法不影响原始数组。如果参数有负数，则加数组长度，长度为5（-2，-1）== （3,4），若结束位置小于初始位置则返回空数组。<br>~splice()方法：算是最强大的数组方法，传入两个参数，则删除对应起始位置的元素。三个或者三个以上的参数，第一个是起始位置，第二个是删除项的个数，第三个以后是要插入的元素，三个参数时，第一个参数从1开始。</p>
-<p>~位置方法：indexOf()方法和lastIndexOf()返回查找项的位置索引，没有则返回-1；<br>~Data.now()获取当前的毫秒数可以用来计算函数执行时间。<br>~JavaScript没有重载<br>~可以同时使用函数声明和函数表达式，但是在Safari中会导致错误<br>~在函数内部有两个特殊的对象，this和arguments，arguments是一个类数组对象，有一个callee的属性，指向拥有这个arguments对象的函数。<br>~函数名只是一个包含指针的变量而已，无临时全局的say()还是o.say()指向的都是同一个函数。<br>~严格模式不能为caller属性赋值，不然会导致错误；<br>~每个函数都包含两个非继承而来的方法：apply()和call()用途都是在特定的作用域中调用函数。sum.apply(this,arguments)/sum.call(this,arg1,arg2,arg3)…他们真正强大的是可以扩充函数赖以运行的作用于。</p>
-<p>~num.toFixed(2)返回两位小数的数字。会自动舍入<br>~字符方法：charAt()：接受一个参数，返回该参数的字符。charCodeAt()接受一个参数，返回该参数的字符编码。或者以string[i]的方式返回。<br>~字符串操作方法：string.concat()，返回新的字符串。slice()，substr(),substring()返回子字符串。一个参数或者两个参数，subtr()传入两个参数的时候，后者标识要返回字符串的个数。传入负值时，slice()会加字符串长度。substr()会将第一个参数加字符串的长度，第二个负的参数转化为0；substring()会把所有负值转化为0，从小数部分开始算；<br>~如果字符出现一次则indeOf()和lastIndexOf()返回的相同。他们的第二个可选参数指定查询开始位置。<br>~string.trim()方法，删除前后的空格，中间的不会删除。并返回结果。<br>~大小写转化：string.toLocalUpperCase() == string.toUpperCase();string.toLocalLowerCase() == string.toLowerCase();<br>~模式匹配：match()，serach()；<br>~将字符串转化为数组：split(),第一个参数为分隔符。第二个可选参数是元素个数。<br>~单体内置对象：不需要显示的实例化内置对象，Global，Math<br>~Global不属于任何其他对象的属性和方法，最终都是它的属性和方法<br>~encodeURIComponent(url);decodeURIComponent(url)<br>~严格模式下访问不到任何eval()中穿件的变量或者函数，并且为eval赋值也会错误。<br>~Object是一个基础类型，其他所有类型都要从Object继承基本的行为</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+        <h2 id="React组件的生命周期："><a href="#React组件的生命周期：" class="headerlink" title="React组件的生命周期："></a>React组件的生命周期：</h2><h3 id="1-创建阶段："><a href="#1-创建阶段：" class="headerlink" title="1.创建阶段："></a>1.创建阶段：</h3><pre><code>执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
+</code></pre><h3 id="2-实例化阶段：（React-render-方法之后调用的函数）"><a href="#2-实例化阶段：（React-render-方法之后调用的函数）" class="headerlink" title="2.实例化阶段：（React.render()方法之后调用的函数）"></a>2.实例化阶段：（React.render()方法之后调用的函数）</h3><p>执行顺序如下：</p>
+<pre><code>1.getInitialState() //初始化state状态
+2.componentWillMount() //组件即将加载
+3.render()创建虚拟的dom树
+4.componentDidMount() //组件加载结束
+</code></pre><h3 id="3-更新阶段："><a href="#3-更新阶段：" class="headerlink" title="3.更新阶段："></a>3.更新阶段：</h3><p>执行顺序如下：</p>
+<pre><code>1.componentWillReceiveProps() //父组件的props值发生变化时调用
+2.shouldComponentUpdate() //是否更新，返回bool值，ture更新，false不更新
+3.componentWillUpdate() //组件更新前，或者组件即将更新
+4.render() //更新虚拟dom树
+5.componentDidUpdate() //组件已经更新
+</code></pre><h3 id="4-销毁阶段："><a href="#4-销毁阶段：" class="headerlink" title="4.销毁阶段："></a>4.销毁阶段：</h3><pre><code>componentWillUnmount() //组件销毁时调用，常用来清除定时器，移除dom树‘
+</code></pre><p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
     </div>
@@ -399,7 +419,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JS/" rel="tag"># JS</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -412,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/06/读《JavaScript高级程序设计 第三版》前五章/" rel="next" title="读《JavaScript高级程序设计 第三版》前五章">
-                <i class="fa fa-chevron-left"></i> 读《JavaScript高级程序设计 第三版》前五章
+              <a href="/2017/08/17/webpack详解（环境搭建及使用/" rel="next" title="webpack详解（环境搭建及使用）">
+                <i class="fa fa-chevron-left"></i> webpack详解（环境搭建及使用）
               </a>
             
           </div>
@@ -421,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/16/读《JavaScript高级程序设计 第三版》前六章/" rel="prev" title="读《JavaScript高级程序设计 第三版》前六章">
-                读《JavaScript高级程序设计 第三版》前六章 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -452,7 +468,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="读《JavaScript高级程序设计 第三版》第五章补" ></div> 
+<div id="SOHUCS" sid="初遇React系列之二" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -480,8 +496,17 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/tx.jpg"
@@ -543,6 +568,22 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React组件的生命周期："><span class="nav-number">1.</span> <span class="nav-text">React组件的生命周期：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建阶段："><span class="nav-number">1.1.</span> <span class="nav-text">1.创建阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实例化阶段：（React-render-方法之后调用的函数）"><span class="nav-number">1.2.</span> <span class="nav-text">2.实例化阶段：（React.render()方法之后调用的函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-更新阶段："><span class="nav-number">1.3.</span> <span class="nav-text">3.更新阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-销毁阶段："><span class="nav-number">1.4.</span> <span class="nav-text">4.销毁阶段：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
