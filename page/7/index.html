@@ -271,6 +271,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/08/读《JavaScript权威指南（第六版）》第8,9章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/08/读《JavaScript权威指南（第六版）》第8,9章/" itemprop="url">
+                  读《JavaScript权威指南（第六版）》第8,9章
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T19:20:02+08:00">
+                2017-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.每一个函数都包括一个prototype属性，这个属性指向一个对象的引用。这个对象叫做原型对象，当将函数用作构造函数的时候会从原型对象上继承属性<br>2.想要以对象o的方法调用函数f()，f.call(o)/f.apply(o)<br>3.function()构造函数可以传入任意数量的字符串实参，最后一个实参文本是函数体<br>4.高阶函数：操作函数的函数<br>5.在JavaScript中，类的实现是基于其原型继承机制、<br>6.如果两个对象继承自同一个原型，往往意味着（不绝对），他们由同一个构造函数创建并初始化<br>7，JavaScript的类的一个重要特性就是“动态可继承”<br>8.关于构造函数的编程约定：从某种意义上讲，定义构造函数既是定义类，并且类名首字母大写，而普通的函数和方法都是首字母小写<br>9.构造函数的原型中存在预先定义好的constructor属性，意味着对象通常继承的constructor均指代他们的构造函数，因此说constructor属性为对象提供了类<br>10.鸭式辩型：像鸭子一样走路，游泳并且嘎嘎叫的鸟就是鸭子。（不要关注“对象的类是什么”，而是关注“对象能做什么”）<br>11.JavaScript的相等运算符比较对象时，比较的是引用而不是值。<br>12.函数表达式不会对外创建全局变量<br>13.模块开发：将代码组织到类中的一个重要原因是，让代码“模块化”，可以用在不同的场景事实现代码重用。但是累不是唯一模块化代码的方式。一般来说，模块式一个独立的JavaScript文件。模块文件中可以包含一个类定义，一组相关的类，一个使用的函数库等。<br>14.模块化的目标是支持大规模的程序开发，处理分散源中代码的组装、避免修改全局执行上下文。意味着尽可能少的定义全标识。理想状态是所有的模块都不应当定义超过一个全局标识。每个类都只包含一个全局标识，整个模块定义了很少的全局变量<br>15.如果想让代码在私有的命名空间中运行，就必须用立即执行的匿名函数。<br>JavaScript的模块化开发：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">  //创建一个全局变量用来存放集合相关模块，这个是顶层命名空间</div><div class="line">  var collections = &#123;&#125;;</div><div class="line">  <span class="keyword">if</span>(!collections) collections = &#123;&#125;;</div><div class="line">  //sets是模块的命名空间，并且每个集合类都定义为这个对象的属性，如果想要使用这样定义的类，就需要同伙命名空间调用相对的构造函数,namespace返回了这个模块命名空间对象。应为“(<span class="keyword">function</span> namespace()”属于表达式，所以不会创建全局的namespace变量</div><div class="line">  collections.sets = (<span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</div><div class="line">  //这里有很多集合类,，使用局部变量和函数</div><div class="line">    <span class="keyword">function</span> <span class="function"><span class="title">Set</span></span>() &#123;</div><div class="line">      this.value = &#123;&#125;;</div><div class="line">    &#125;</div><div class="line">    Set.prototype.contains = <span class="keyword">function</span>(value) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    //辅助函数和变量</div><div class="line">    <span class="keyword">function</span> <span class="function"><span class="title">v2s</span></span>() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    var index = 1;</div><div class="line">    <span class="keyword">function</span> <span class="function"><span class="title">Get</span></span>() &#123;</div><div class="line">      this.value = &#123;&#125;;</div><div class="line">    &#125;</div><div class="line">    Get.prototype.contains = <span class="keyword">function</span>(value) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    .....</div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">    //导出构造函数，供外部调用</div><div class="line">      Set:Set,</div><div class="line">      Get:Gets</div><div class="line">    &#125;;</div><div class="line">  &#125;());</div><div class="line">  //外部调用</div><div class="line">  var Set = collections.sets.Set;</div><div class="line">  var s = new Set();</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/05/读《JavaScript权威指南（第六版）》【闭包详解】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1611,152 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/26/【详细】JS原生实现Ajax的post提交方式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/26/【详细】JS原生实现Ajax的post提交方式/" itemprop="url">
-                  【详细】JS原生实现Ajax的post提交方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T18:03:39+08:00">
-                2017-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ajax-JS/" itemprop="url" rel="index">
-                    <span itemprop="name">Ajax,JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=<span class="string">"en"</span>&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</div><div class="line">  &lt;title&gt;Document&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;form action=<span class="string">"./data.php"</span> method=<span class="string">"post"</span>&gt;</div><div class="line">    用户：&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"username"</span>&gt;</div><div class="line">    密码：&lt;input <span class="built_in">type</span>=<span class="string">"password"</span> id=<span class="string">"password"</span>&gt;</div><div class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"button"</span> id=<span class="string">"btn"</span> value=<span class="string">"登录"</span>&gt;</div><div class="line">  &lt;/form&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script&gt;</div><div class="line">(<span class="keyword">function</span>(window,document)&#123;</div><div class="line">    window.onload = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      var btn = document.getElementById(<span class="string">'btn'</span>);</div><div class="line">      btn.onclick = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">        var username = document.getElementById(<span class="string">'username'</span>).value;</div><div class="line">        var password = document.getElementById(<span class="string">'password'</span>).value;</div><div class="line">        // 常见XMLHttpRequest对象，分为ie和其他浏览器</div><div class="line">        var xhr = null;</div><div class="line">        <span class="keyword">if</span> (window.XMLHttpRequest) &#123;</div><div class="line">          // 其他浏览器的内置对象</div><div class="line">            xhr = new XMLHttpRequest();</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">          // ie浏览器的内置对象</div><div class="line">            xhr = new ActiveXObject(<span class="string">'Mircrosoft.XMLHTTP'</span>);</div><div class="line">        &#125;</div><div class="line">        // 拼接form表单提交地址</div><div class="line">        var url = <span class="string">'./data.php'</span>;</div><div class="line">        </div><div class="line">        // 通过open方法进行初始化配置</div><div class="line">        xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">        // 设置表单提交的的编码格式，post默认提交类型（enctype属性），主要是post提交在低版本浏览器会产生表单变量未定义；</div><div class="line">        xhr.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">        var param = <span class="string">'username='</span> + encodeURIComponent(username) + <span class="string">'&amp;password='</span> + password;</div><div class="line">        // 数据请求之后的回调函数</div><div class="line">        xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">          // 判断服务器数据请求是否成功</div><div class="line">          <span class="keyword">if</span> (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</div><div class="line">            // 请求的数据类型为responseText</div><div class="line">            var data = xhr.responseText;</div><div class="line">            console.log(data);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">     </div><div class="line">        // 执行发送请求的动作</div><div class="line">        xhr.send(param);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)(window,document);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	<span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">'username'</span>];</div><div class="line">	<span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">'password'</span>];</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="variable">$username</span> == <span class="string">'admin'</span> &amp;&amp; <span class="variable">$password</span> == 123) &#123;</div><div class="line">		<span class="built_in">echo</span> <span class="string">"登录成功"</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">echo</span> <span class="string">"登录失败"</span>;</div><div class="line">	&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-<p>一定要把 xhr.setRequestHeader(‘Content-Type’,’application/x-www-form-urlencoded’);写上，并且正确，否则返回的数据会出现多余的html代码，返回失败</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1806,7 +1804,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
