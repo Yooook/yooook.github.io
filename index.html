@@ -271,6 +271,160 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/24/初遇React系列九/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/24/初遇React系列九/" itemprop="url">
+                  初遇React系列九
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T11:57:00+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="react-native之导航栏：Navigator组件【详解】"><a href="#react-native之导航栏：Navigator组件【详解】" class="headerlink" title="react-native之导航栏：Navigator组件【详解】"></a>react-native之导航栏：Navigator组件【详解】</h2><p>“使用导航器可以让你在应用的不同场景（页面）间进行切换。导航器通过路由对象来分辨不同的场景。利用renderScene方法，导航栏可以根据指定的路由来渲染场景。可以通过configureScene属性获取指定路由对象的配置信息，从而改变场景的动画或者手势。查看Navigator.SceneConfigs来获取默认的动画和更多的场景配置选项。”  —–官方文档</p>
+<p>第一步：这是因为版本升级到0.43以上的话，Navigator不能直接从react-native里面获取了，所以：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react-native-deprecated-custom-components --save</div></pre></td></tr></table></figure>
+<p>然后在需要的页面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import &#123; Navigator &#125; from <span class="string">'react-native-deprecated-custom-components'</span>;</div></pre></td></tr></table></figure>
+<p>第二步：因为之前已经用了react-native-tab-navigator，所以我这边并没有将navigator的入口代码放在index.android.js文件里面，而是单独出来一个文件（featured.js），在这个文件中引入navigator默认页面，然后将这个文件在添加到index.android.js里，相当于这里用featured.js做了一个过渡。</p>
+<p>第三步：featured.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> import &#123;</div><div class="line">  Text,</div><div class="line">  View,</div><div class="line">  Component</div><div class="line">&#125; from <span class="string">'react-native'</span>;</div><div class="line">import &#123; Navigator &#125; from <span class="string">'react-native-deprecated-custom-components'</span>;</div><div class="line"></div><div class="line"> <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">let</span> defaultName = <span class="string">'MovieList'</span>;  </div><div class="line">    <span class="built_in">let</span> defaultComponent = MovieList;  </div><div class="line">    <span class="built_in">return</span> (  </div><div class="line">      &lt;Navigator  </div><div class="line">      initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125;  </div><div class="line">      configureScene=&#123;(route) =&gt; &#123;  </div><div class="line">        <span class="built_in">return</span> Navigator.SceneConfigs.FadeAndroid;//FadeAndroid:表示的是淡入淡出的动画效果  </div><div class="line">      &#125;&#125;  </div><div class="line">    </div><div class="line">      renderScene=&#123;(route, navigator) =&gt; &#123;  </div><div class="line">        <span class="built_in">let</span> Component = route.component;  </div><div class="line">         <span class="keyword">if</span>(route.component)&#123;</div><div class="line">                <span class="built_in">return</span> &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt;</div><div class="line">            &#125; </div><div class="line">      &#125;&#125;  </div><div class="line">       /&gt;  </div><div class="line">    );  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>默认页面movieList.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">import Detail from <span class="string">'./detail'</span>;</div><div class="line"></div><div class="line">class MovieList extends React.Component &#123;</div><div class="line"> constructor(props) &#123;</div><div class="line">   super(props);</div><div class="line">   this.state = &#123;</div><div class="line">     resultMessage:<span class="string">"hello"</span>,</div><div class="line">   &#125;; </div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="title">_pressButton</span></span>() &#123;</div><div class="line">    var _this = this;</div><div class="line">       const &#123; navigator&#125; = this.props;</div><div class="line">       <span class="keyword">if</span> (navigator) &#123;</div><div class="line">           navigator.push(&#123;</div><div class="line">               name:<span class="string">'Detail'</span>,</div><div class="line">               component:Detail,</div><div class="line">               params:&#123;</div><div class="line">                   message:<span class="string">"I am from FirstPageComponent"</span>,</div><div class="line">                   getResult:<span class="keyword">function</span>(myMessage)&#123;</div><div class="line">                       _this.setState(&#123;</div><div class="line">                           resultMessage:myMessage,</div><div class="line">                       &#125;)</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line">           &#125;)</div><div class="line">       &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"></div><div class="line"> randerMovieList(movie) &#123;</div><div class="line">   <span class="built_in">return</span>(</div><div class="line">     &lt;TouchableHighlight underlayColor=<span class="string">"rgba(34,26,38,0.2)"</span> onPress=&#123;this._pressButton.bind(this)&#125;&gt;</div><div class="line">       ...</div><div class="line">       &lt;/TouchableHighlight&gt;</div><div class="line">   );</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">   <span class="built_in">return</span> (</div><div class="line">       &lt;View&gt;</div><div class="line">         &lt;ListView </div><div class="line">             dataSource = &#123;this.state.movies&#125;</div><div class="line">             renderRow = &#123;this.randerMovieList.bind(this)&#125; /&gt;//这个地方一定要<span class="built_in">bind</span>(this)，否则onPress=&#123;this._pressButton.bind(this)&#125;会报错</div><div class="line">       &lt;/View&gt;</div><div class="line">     );</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>detail.js页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"> import React from <span class="string">'react'</span>;</div><div class="line"> import &#123;</div><div class="line">  Text,</div><div class="line">  View,</div><div class="line">  TouchableOpacity</div><div class="line">&#125; from <span class="string">'react-native'</span>;</div><div class="line">import MovieList from <span class="string">'./movieList'</span>;</div><div class="line"> import styles from <span class="string">'../style/Main'</span>;</div><div class="line"></div><div class="line"></div><div class="line"> class Detail extends React.Component &#123;</div><div class="line">      constructor(props)&#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123;</div><div class="line">            message:<span class="string">""</span>,</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">       <span class="function"><span class="title">componentDidMount</span></span>()&#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            message:this.props.message,</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">     <span class="function"><span class="title">_pressButton</span></span>()&#123;</div><div class="line">        const &#123; navigator &#125; = this.props;</div><div class="line">        <span class="keyword">if</span>(this.props.getResult)&#123;</div><div class="line">            this.props.getResult(<span class="string">"This is from SecondPageComponent"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(navigator)&#123;</div><div class="line">            navigator.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">          &lt;View&gt;  </div><div class="line">        &lt;TouchableOpacity onPress=&#123;this._pressButton.bind(this)&#125;&gt;  </div><div class="line">    &lt;Text style=&#123;&#123;fontSize:30&#125;&#125;&gt;点击返回前一个界面&lt;/Text&gt;  </div><div class="line">        &lt;/TouchableOpacity&gt;  </div><div class="line">  </div><div class="line">        &lt;Text&gt;第一个界面传入：&#123;this.state.message&#125;&lt;/Text&gt;  </div><div class="line">        &lt;/View&gt;  </div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="built_in">export</span> &#123;Detail as default&#125;</div></pre></td></tr></table></figure></p>
+<p>完成！注意的是这三个文件的框架。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/23/初遇React系列之八/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -370,7 +524,7 @@
       
         
           
-            <h2 id="react-native之标签栏："><a href="#react-native之标签栏：" class="headerlink" title="react-native之标签栏："></a>react-native之标签栏：</h2><p>“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的</p>
+            <h2 id="react-native之标签栏：react-native-tab-navigator组件"><a href="#react-native之标签栏：react-native-tab-navigator组件" class="headerlink" title="react-native之标签栏：react-native-tab-navigator组件"></a>react-native之标签栏：react-native-tab-navigator组件</h2><p>“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的</p>
 <p>android经历:</p>
 <p>第一步：在根目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react-native-tab-navigator --save</div></pre></td></tr></table></figure></p>
 <p>注意：如果安装报错，那么一定要看一下node_modules里面是否有react-native-tab-navigator，如果没有继续安装，如果有，一定要先卸载再安装，否则即使后面安装成功也会出现bug</p>
@@ -1630,169 +1784,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/react之babel详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/17/react之babel详解/" itemprop="url">
-                  babel详解（环境搭建及使用）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T08:49:53+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p>首先我们不再全局安装babel，若有请先卸载</p>
-<p>1.npm init //创建项目文件夹react，初始化npm</p>
-<p>2.npm install babel-cli –save-dev //安装开发依赖</p>
-<p>3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件</p>
-<p>4.因为是局部安装，没有配置环境变量，所以利用cmd，进入到node_modules/.bin目录下，可以babel –help查看安装是否成功</p>
-<p>5.在react目录下创建js文件(script.js),并用js在编写要在控制台输出的内容</p>
-<p>6.通过第4步的操作，在node_modules/.bin目录，执行babel script.js 这样就会在cmd窗口输出控制台的内容</p>
-<p>7.如果我们要导出编译好的文件，那么就执行babel script.js –out-file script-compiled.js那么script.js的同级目录下就会出现script-compiled.js。</p>
-<p>8.同样的，我们可以针对整个文件夹操作babel src –out-dir lib那么它的意思就是讲src目录下的文件编译后放在lib文件夹下</p>
-<p>9.另外,我们可以同过babel src –watch –out-dir lib监视文件变化，每次变化自动编译，需要手动停止，我们可以在package.json里面配置script脚本，”build”:”babel src –watch –out-dir lib”,这样每次就可以通过npm run build 执行相应的代码。</p>
-<p>10.presets预设，简单来说就是一个工具的集合，我们需要通过不同的预设来处理我们的代码</p>
-<p>11.npm install babel-preset-es2015 –save-dev//我们需要编译es2015的代码，并且添加到开发依赖。</p>
-<p>12.下载完预设工具之后，我们需要在更目录创建”.babelrc”文件，它是babel的一个配置文件，它可以指定想要使用的预设，写法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>: [<span class="string">"es2015"</span>]//它的意思是我们要是用es2015这个预设下面的所有插件</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>13.重新执行 npm run build 发现我们用es6写的代码已经被编译 </p>
-<p>14.在react中的jsx就需要被转化成普通的javascript代码，官方推荐babel，那么我们需要安装相关预设，npm install babel-preset-react –save-dev,下载完成后在.babelrc文件中添加预设</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>: [<span class="string">"es2015"</span>,<span class="string">"react"</span>]//es2015解决的是代码编译，react解决的是jsx</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>15，babel可以和许多的build system及配合使用，比如gulp，webpack等等，这里要说的是babel+gulp的形式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.npm install gulp gulp-babel --save-dev</div><div class="line">2.创建gulp的配置文件gulpfile.js </div><div class="line">```bash</div><div class="line">&lt;!-- 引入模块 --&gt;</div><div class="line">	var gulp = require(<span class="string">'gulp'</span>);</div><div class="line">	var babel = require(<span class="string">"gulp-babel"</span>);</div><div class="line">&lt;!-- 创建任务 --&gt;</div><div class="line">	gulp.task(<span class="string">'default'</span>,() =&gt; &#123;</div><div class="line">		<span class="built_in">return</span> gulp.src(<span class="string">'src/*.js'</span>)</div><div class="line">		.pipe(babel())</div><div class="line">		.pipe(gulp.dest(<span class="string">'lib'</span>))</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
-<pre><code>3.执行gulp编译成功
-</code></pre><p>```</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1842,7 +1833,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

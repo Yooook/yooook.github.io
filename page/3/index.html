@@ -271,6 +271,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/Angular之异步加载包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/12/Angular之异步加载包/" itemprop="url">
+                  Angular之异步加载包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T10:58:27+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="angular异步加载包"><a href="#angular异步加载包" class="headerlink" title="angular异步加载包"></a>angular异步加载包</h2><p>主要是针对angular-seed项目框架的修改！</p>
+<p>首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的依赖顺序进行管理。</p>
+<p>1.打开app文件夹下的index-async.html文件中进行修改。<br>2.下载并在head部分引入angular-loader和script.js<br>3.head内容如下：</p>
+<pre><code class="bash">
+<span class="variable">$script</span>([ 
+    <span class="string">'./bower_components/angular/angular.js'</span>, 
+    <span class="string">'./bower_components/angular-route/angular-route.js'</span>, 
+    <span class="string">'./app.js'</span>
+    ], <span class="function"><span class="title">function</span></span>() { 
+    angular.bootstrap(document, [<span class="string">'moviecat'</span>]);
+ });
+</code></pre>
+<p>index-async.html查看加载状态,<br>通过angular.bootstrap(document, [‘moviecat’])加载包，就不需要再指明ng-app<br>完成操作。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/11/每天十道面试题2-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1622,150 +1778,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular见闻之三/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/09/Angular见闻之三/" itemprop="url">
-                  Angular见闻之三
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T13:57:10+08:00">
-                2017-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular见闻</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ng-class=”{complate:todo.complate}”//只有一个括号<br>$scope是双向数据绑定的核心<br>可以用form + ng-submit 实现回车提交<br>ng中路由是单独提供功能的模块ngRoute<br>注意页面逻辑和界面逻辑的划分<br>&lt;\input class=”toggle” type=”checkbox” ng-model=”item.completed”&gt;//绑定的value值<br>页面统计时候直接用数组的length属性<br>//angular实现回车提交的方法<br>&lt;\form ng-submit=”add()”&gt;<br>    &lt;\input class=”new-todo” placeholder=”What needs to be done?” ng-model=’text’ autofocus&gt;<br>&lt;\/form&gt;<br>过滤器的作用是进行数据筛选，尤其指repeat类型的列表数据<br>$watch只能监视scope成员<br>在$location对象中hash()和path()根据具体浏览器做出调整<br>自定义匹配规则，规避模糊匹配，可以自定义方法精确匹配<br>引入第三方文件的时候不写协议是为了适应http和https两种情况<br>所有有输入有输出的都叫做api<br>angular进行异步操作之后都需要进行$scope.apply()方法让scope数据重新进行绑定</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1815,7 +1827,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
