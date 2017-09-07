@@ -241,6 +241,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/02/读《JavaScript权威指南（第六版）》第2,3,4章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/02/读《JavaScript权威指南（第六版）》第2,3,4章/" itemprop="url">
+                  读《JavaScript权威指南（第六版）》第二，三，四章
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T20:06:01+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>&amp; JavaScript用Unicode字符集编写，Unicode是ASCII和Latin-1的超集，几乎支持地球上的所有语言<br>&amp; JavaScript区分大小写，HTML不区分。XHTML区分,但有时文档中存在大写，主要原因是浏览器纠错<br>&amp; JavaScript的数据类型分为两种：原始类型（数字，字符串，布尔值，以及特殊的null和undefined）和对象类型（其他的都是对象，包括函数）<br>&amp; JavaScript解释器有自己的内存管理机制，可以自动对内存进行垃圾回收<br>&amp; 从技术上讲，只有JavaScript对象才能拥有方法，然而数字，字符串，布尔值也可以拥有自己的方法，只有null和undefined是无法拥有方法的值<br>&amp; 在ECMAScript 5 中，字符串可以当做只读数组，可以使用索引读取某个位置字符<br>&amp; 任何JavaScript值都可以转换为布尔值，转化为false的有（undefined，null，0，-0，NaN，””空字符串），其他值包括对象（数组）都会转化为true；<br>&amp; 关于null和undefined，null是一个特殊值，typeof返回object，可以认为null是一个特殊的对象值，含义是“非对象”，undefined是更深层次描述“空值”，<br>&amp; 他是 【 变量 】的一种取值，表明变量没有初始化。两者都是空缺的意思，其中’==’判断两者是true，’===’判断两者是false，如果想把他们赋值给变量或者属性，或者作为函数的参数传递，最佳选择是null，因为你可以认为undefined是系统级的而null是程序级的<br>&amp; 包装对象：存取字符串，数字或者布尔值的属性时创建的临时对象叫做包装对象。比如，要引用字符串s的属性，JavaScript就会将字符串值通过new String（s）的方式转化为对象，这个对象继承了字符串的方法，并被用来处理属性的引用。一旦属性引用结束，该对象就会被销毁。数字和布尔值也类似，null和undefined则没有。<br>&amp; 不可变的原始值和可变的对象引用，例如，字符串s.toUpperCase()后输出的s仍然为原值，原始值得比较是值得比较，对象比较是引用的比较，是否是同一个对象。<br>&amp; 除了null和unde之外的任何值都具有toString()方法<br>&amp; 对象转化为原始值得方法:toString()/valueOf();0<br>&amp; 变量在赋初值前，初始值是undefined<br>&amp; 全局变量具有全局作用于，函数参数也是局部变量，只在函数体内有用。并且局部变量的优先级高于全局变量<br>&amp; 全局作用域编写代码时不需要var语句，但局部变量必须使用var语句。<br>&amp; JavaScript并没有块级作用域，取而代之的是函数作用域，变量在声明它的函数体和嵌套的函数体内都有声明<br>&amp; if语句和for语句的花括号并没有划分独立的作用域<br>&amp; 声明提升：局部变量在函数中始终有定义，只有在执行到var时才会被真正赋值，并且会覆盖同名的全局变量，将函数内的变量声明提到函数体的顶部，将变量初始化留着原来的位置，这也是为什么要将变量的声明写在最前边，否则容易输出undefined；<br>&amp; 创建对象的时候如果没有参数传入可以省略构造函数的‘()’<br>&amp; in运算符：可以判断左侧的字符串或者可以转换成字符串的左操作数，右操作数是一个对象（数组），返回布尔值，可以判断某属性在某对象中是否存在<br>&amp; instanceof运算符：希望左操作数是一个对象，右操作数是一个标识对象的类，var d = new Date()； d instanceof Object 返回TRUE；<br>&amp; 所有的对象都是object的实例，instanceof判断一个对象是否是一个类的实例，也会包含对父类检查<br>&amp; eval()已经被当做运算符来对待，它有一个参数，如果传入字符串当做JavaScript代码执行，如果是非字符串则返回这个值<br>&amp; eval()通过别名调用的话，会抛出EvalError错误<br>&amp; typeof常用写法：(typeof value == ‘string’)? ‘“‘ + value + ‘“‘ :value<br>&amp; delete运算符：用来删除对象属性或者数组元素<br>&amp; void运算符：忽略计算结果并返回undefined；<a href="javascript:void window.open();" target="_blank" rel="external">打开新窗口</a><br>&amp; 逗号运算符在for循环中的作用，先计算左边的，后计算右边的，返回右边的值</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/01/读《JavaScript权威指南（第六版）》第一章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1579,152 +1723,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/15/微信浏览器实现canvas画笔+手势放大缩小（任然可以画）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/15/微信浏览器实现canvas画笔+手势放大缩小（任然可以画）/" itemprop="url">
-                  微信浏览器利用手势实现canvas画笔+放大缩小（任然可以画）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T09:30:23+08:00">
-                2017-04-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微信/" itemprop="url" rel="index">
-                    <span itemprop="name">微信</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- ## 微信浏览器利用手势实现canvas画笔+放大缩小（任然可以画） -->
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">  &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</div><div class="line">    (<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">      var canvas = document.querySelector(<span class="string">'#cavsElem'</span>);</div><div class="line">      var togger = 0;</div><div class="line">  // 判断是否取消微信默认的下拉事件</div><div class="line">  document.querySelector(<span class="string">'.swiper-container'</span>).addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    <span class="keyword">if</span> (togger == 1) &#123;event.preventDefault();&#125;</div><div class="line">    <span class="keyword">else</span> &#123;<span class="built_in">return</span>;&#125;</div><div class="line">  &#125;);</div><div class="line">  var ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">  // canvas全屏自适应</div><div class="line">  var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;</div><div class="line">  var h =  window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; </div><div class="line">  canvas.width = w;</div><div class="line">  canvas.height = h+2;</div><div class="line">  canvas.style.border = <span class="string">"1px solid #000"</span>;</div><div class="line">  ctx.strokeStyle = <span class="string">"red"</span>;</div><div class="line">  ctx.lineWidth = 3;</div><div class="line">  // 画笔功能</div><div class="line">  canvas.addEventListener(<span class="string">'touchstart'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">    var x =  parseInt(ev.changedTouches[0].clientX);</div><div class="line">    var y =  parseInt(ev.changedTouches[0].clientY);</div><div class="line">    ctx.beginPath();</div><div class="line">    canvas.addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">      // 判断触点个数 </div><div class="line">      togger = ev.touches.length;</div><div class="line">      <span class="keyword">if</span> (ev.touches.length == 1) &#123;</div><div class="line">        var x =  parseInt(ev.changedTouches[0].clientX);</div><div class="line">        var y =  parseInt(ev.changedTouches[0].clientY);</div><div class="line">        ctx.lineTo(x, y);</div><div class="line">        ctx.stroke();</div><div class="line">        console.log(<span class="string">'('</span>+x +<span class="string">','</span>+ y+<span class="string">')'</span>);</div><div class="line">      &#125;</div><div class="line">      ev.touches.length = 2</div><div class="line">    &#125;);</div><div class="line">    canvas.addEventListener(<span class="string">'touchend'</span>, <span class="keyword">function</span> (ev) &#123;</div><div class="line">      canvas.removeEventListener(<span class="string">'touchstart'</span>,null);</div><div class="line">      canvas.removeEventListener(<span class="string">'touchmove'</span>,null);</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">&#125;());</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>【1】微信浏览器对原生的js事件监听的语法不能较好的识别，无法监听到touch的整个过程，必须使用规范的HTML5的书写方式去实现事件监听，也就是所谓的DOM2级事件处理程序。尤其是对touch事件的处理。【2】这里通过判断touchmove过程中的touchs的个数决定了是否取消微信浏览器默认的下拉刷新的浮动事件，从而将批注和手势缩放区分开来。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1774,7 +1772,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

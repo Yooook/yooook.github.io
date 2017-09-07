@@ -241,6 +241,155 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular之异步请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/09/Angular之异步请求/" itemprop="url">
+                  Angular之异步请求
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T14:19:42+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular见闻/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular见闻</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用angular本身提供的-http服务进行异步请求"><a href="#使用angular本身提供的-http服务进行异步请求" class="headerlink" title="使用angular本身提供的$http服务进行异步请求"></a>使用angular本身提供的$http服务进行异步请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>(&#123;</div><div class="line">		method:<span class="string">'GET'</span>,</div><div class="line">		url:<span class="string">'/app/data.json'</span></div><div class="line">	&#125;).then(<span class="keyword">function</span>(response) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(response)</div><div class="line">	&#125;, <span class="keyword">function</span>(response) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;);</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>.get(<span class="string">'./data.json'</span>).then(<span class="keyword">function</span>(data) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(data.data)</div><div class="line">	&#125;,<span class="keyword">function</span>(err) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;)</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>针对Chrome和Firefox进行测试，结果如下：</p>
+<p>Firefox（file协议下）：可以正常请求到数据，但是提示报错（XML 解析错误：格式不佳 位置：file:///C:/Users/Administrator/Desktop angular_test2/angular-seed(Modified)/app/data.json 行 1，列 1：）<br>Firefox（http协议下）：一切正常</p>
+<p>Chrome（file协议下）：不能请求到数据，但是提示报错（XMLHttpRequest cannot load file:///C:/Users/Administrator/Desktop/angular_test2/angular-seed(Modified)/app/view1/view1.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.）<br>Chrome（http协议下）：一切正常</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/Angular见闻之三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1612,155 +1761,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/28/读《JavaScript高级程序设计 第三版》第7~8章/" itemprop="url">
-                  读《JavaScript高级程序设计 第三版》第7~8章
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T11:01:18+08:00">
-                2017-07-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.window对象：{<br>    ~window对象是BOM的核心对象<br>    ~全局作用域:{<br>        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行<br>        ~window对象有location和navigator属性，他们分别指向自己所代表的对象<br>        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.frame[i]获取<br>        ~window对象位置属性：{<br>            ~IE,Safari,Chrome和Chrome都提供了screenLeft，screenTop，分别表示窗口相对屏幕左边和上边的位置<br>            ~Firefox则提供了screenX和screenY<br>        }<br>        ~window对象的方法：alert(), confirm(),prompt();<br>    }<br>}</p>
-<p>2.location对象：{<br>    ~location对象是Bom最有用的对象之一<br>    ~window.location === document.location 他们引用同一个对象<br>    ~location.search.substring(1).split(‘&amp;’)处理参数<br>    ~location.hash用来处理页内锚点跳转<br>}</p>
-<p>3.navigator： {<br>    navigator.appName:浏览器名称<br>    navigator.APPVersion:浏览器版本<br>}</p>
-<p>4.history: {<br>    ~history保存的是用户上网的浏览记录，从窗口打开的那一刻算起。<br>    ~方法{<br>        history.go(-1) = history.back();<br>        history.go(1) = history.forward();;<br>        history.go(‘baidu.com’);</p>
-<pre><code>}
-</code></pre><p>}</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1810,7 +1810,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
