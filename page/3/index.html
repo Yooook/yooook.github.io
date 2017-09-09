@@ -241,6 +241,168 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化seajs使用实现CMD规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/12/模块化seajs使用实现CMD规范/" itemprop="url">
+                  模块化seajs使用实现CMD规范
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T21:32:10+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/seajs/" itemprop="url" rel="index">
+                    <span itemprop="name">seajs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>关于为什么要使用seajs，我已经在上次的文章里体现的很具体了</p>
+<p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：</p>
+<p>1.安装seajs，引入，并编写入口模块，一般加载都在head部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;\script src=<span class="string">"node_modules/seajs/dist/sea.js"</span>&gt;&lt;\/script&gt;</div><div class="line"> &lt;\script&gt;</div><div class="line">   seajs.use(<span class="string">'./calculate.js'</span>, <span class="keyword">function</span>(calculator) &#123;</div><div class="line">     console.log(<span class="string">'模块加载完成'</span>);</div><div class="line">     // console.log(e);</div><div class="line">   &#125;);</div><div class="line">&lt;\/script&gt;</div></pre></td></tr></table></figure>
+<p>需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径<br>入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){})</p>
+<p>2.定义单独的js模块文件，并且定义模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> // 定义一个计算模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var add = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var result = 0;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arguments.length; i++) &#123;</div><div class="line">      result += parseFloat(arguments[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> result;</div><div class="line">  &#125;</div><div class="line">	</div><div class="line">  //exports.add = add;</div><div class="line">  module.exports = &#123;</div><div class="line">    add: add</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>首先，函数的参数不推荐自己定义，以防止和nodejs的命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
+<p>3.模块间的调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 定义一个模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  // require(<span class="string">'./modules/02-calculator.js'</span>);用一个变量接受返回值，从而调用引入模块的方法，同步</div><div class="line">  require.async(<span class="string">'./modules/02-calculator.js'</span>,<span class="keyword">function</span> (c) &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;);//异步方法加载模块，没有返回值，有回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4.使用第三方依赖，用jQuery做例子：</p>
+<p>对jQuery做相应的修改，非压缩文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//适配CMD</div><div class="line"> <span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">    define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象</p>
+<p>5.seajs配置</p>
+<p>//别名配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    <span class="built_in">alias</span>: &#123; <span class="string">'jquery'</span>: <span class="string">'./jquery/jquery/1.10.1/jquery.js'</span> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">    //引用jQuery模块</div><div class="line">    var $ = require(<span class="string">'jquery'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p> // 变量配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    vars: &#123;</div><div class="line">        <span class="string">'locale'</span>: <span class="string">'zh-cn'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var lang = require(<span class="string">'./i18n/&#123;locale&#125;.js'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/12/模块化编程的发展过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1583,173 +1745,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/每天十道面试题1-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/09/每天十道面试题1-1/" itemprop="url">
-                  每天十道面试题__2017/8/9(1)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T15:33:02+08:00">
-                2017-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端面试/" itemprop="url" rel="index">
-                    <span itemprop="name">前端面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1、什么是盒子模型？</p>
-<p>在网页中，一个元素占有空间的大小由元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分构成，他们一同构成css中元素的盒模型。不区分行内元素和块级元素。</p>
-<p>2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？</p>
-<p>行内元素：a、span、img、input、strong、select、label、em、button、textarea 块级元素：div、列表元素（ul、li、dl、dt、dd）标题元素（h1-h6）<br>空元素：即系没有内容的HTML元素，例如：br、meta、hr、link、input、img</p>
-<p>3.CSS实现垂直水平居中</p>
-<p>方法一：相对某个元素垂直水平居中<br>    .parent{<br>      width: 500px;<br>      height: 500px;<br>      position:relative;<br>    }<br>    .son{<br>      width:100px;<br>      height:100px;<br>      position: absolute;<br>      top: 50%;<br>      left: 50%;<br>      margin-top:-50px;<br>      margin-left: -50px;<br>      background-color:#6699FF;<br>    }</p>
-<pre><code>或者：
-.parent{
-  width: 500px;
-  height: 500px;
-  position:relative;
- }
-.son{
-  width:100px;
-  height:100px;
-  position: absolute; 
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 50%;
-  margin-top:-50px;
-  background-color:#6699FF;
-}
-</code></pre><p>方法二：相对视口垂直水平居中<br>    .parent {<br>      width: 100%;<br>      height: 100%;<br>      position: fixed;<br>    }<br>    .son {<br>      width: 100px;<br>      height: 100px;<br>      background: #ddd;<br>      position: relative;<br>      margin: 0 auto;<br>      top: 50%;<br>      margin-top: -50px;<br>    }</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1799,7 +1794,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
