@@ -241,6 +241,151 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/09/数据可视化【D3.js】之一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/09/数据可视化【D3.js】之一/" itemprop="url">
+                  数据可视化【D3.js】之一
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T13:44:46+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/D3/" itemprop="url" rel="index">
+                    <span itemprop="name">D3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这个时代最重要的是数据，呈现数据的方式有很多种，我想用web技术实现自己的一些数据可视化的网站，而d3作为佼佼者，这个甚至热度超过jQuery的类库当然是不二之选。我将用demo展示自己的一个学习过程，注释的方式展示细节。</p>
+<h2 id="简单的柱状图"><a href="#简单的柱状图" class="headerlink" title="简单的柱状图"></a>简单的柱状图</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">	// 需要绑定的数据</div><div class="line">	var arr = [10,30,42,59,18];</div><div class="line">	// 选择创建区域</div><div class="line">	var svg = d3.select(<span class="string">'body'</span>)</div><div class="line">		// 创建svg画布</div><div class="line">		.append(<span class="string">'svg'</span>)</div><div class="line">		// 设置画布属性</div><div class="line">		.attr(<span class="string">'width'</span>,400)</div><div class="line">		.attr(<span class="string">'height'</span>,400)</div><div class="line">		// 创建矩形，必须先selectAll一次</div><div class="line">		.selectAll(<span class="string">'rect'</span>)</div><div class="line">		// 绑定数据</div><div class="line">		.data(arr)</div><div class="line">		// 创建空元素，让数据驱动元素个数</div><div class="line">		.enter()</div><div class="line">		.append(<span class="string">'rect'</span>)</div><div class="line">		// 针对每个rect，设置坐标（起始位置）</div><div class="line">		.attr(<span class="string">'x'</span>,20)</div><div class="line">		.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">			<span class="built_in">return</span> i*20;</div><div class="line">		&#125;)</div><div class="line">		// 设置宽高</div><div class="line">		.attr(<span class="string">'width'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">			<span class="built_in">return</span> d;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'height'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">			<span class="built_in">return</span> 18;</div><div class="line">		&#125;)</div><div class="line">		// 颜色填充</div><div class="line">		.attr(<span class="string">'fill'</span>,<span class="string">'steelblue'</span>);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/07/javascript原生实现滚动条(滚动+拖动)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1568,168 +1713,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/17/webpack详解（环境搭建及使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/17/webpack详解（环境搭建及使用/" itemprop="url">
-                  webpack详解（环境搭建及使用）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T15:18:40+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p>1.全局安装 npm install webpack -g</p>
-<p>2.创建文件夹，初始化npm init</p>
-<p>3.npm install webpack –save-dev </p>
-<p>4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;</p>
-<p>5.创建index.html文件，结构如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">	&lt;div id=<span class="string">"app"</span>&gt;&lt;/div&gt;</div><div class="line">	&lt;script src=<span class="string">"bundle.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
-<p>6.根目录 webpack entry.js bundle.js //entry.js入口文件 //bundle.js生成文件</p>
-<p>7.还可以定义模块并导入到entry.js中，它会自动分析依赖，进行打包</p>
-<p>8.webpack默认值编译js，至于css之类的我们可以用loader资源转化。</p>
-<p>9.创建style.css之后npm install css-loader style-loader –save-dev</p>
-<p>10.通过require(‘style-loader!css-loader!./style.css’)main.js中 </p>
-<p>11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配</p>
-<p>12.创建webpack.config.js：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">		entry:<span class="string">'./entry.js'</span>,</div><div class="line">		output: &#123;</div><div class="line">			path:__dirname,</div><div class="line">			filename: <span class="string">'bundle.js'</span></div><div class="line">		&#125;,</div><div class="line">		devtool:<span class="string">'source-map'</span>,//为打包的文件生成一个<span class="built_in">source</span>-map</div><div class="line">		module: &#123;</div><div class="line">			loader:[</div><div class="line">				&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style-loader!css-loader!'</span>&#125;//loader: <span class="string">'style-loader!css-loader!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">			]</div><div class="line">		&#125;</div><div class="line">	&#125;;</div></pre></td></tr></table></figure></p>
-<p>13.操作完之后就执行webpack</p>
-<p>14.生成开发工具：webpack –devtool source-map</p>
-<p>15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev</p>
-<p>16.接下来创建配置文件.babelrc ，添加预设：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>:[<span class="string">"es2015"</span>,]</div><div class="line">&#125;</div><div class="line"></div><div class="line">1.接下来在webpack.config.js中配置那些需要babel的文件</div><div class="line"></div><div class="line">loader:[</div><div class="line">	&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style!css!'</span>&#125;,//loader: <span class="string">'style!css!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">	&#123;<span class="built_in">test</span>:/\.js$/, loader: <span class="string">'babel'</span>&#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<p>17.webpack-dev-server:生成开发应用的服务器，当文件有变化的时候自动打包刷新，还有一个具有热替换功能的模块（只替换有变化的部分，不需要刷新页面），npm install webpack-dev-server -g</p>
-<p>18.npm install webpack-dev-server -save-dev</p>
-<p>19.webpack-dev-server –inline –hot，生成服务器网址，在最上边有</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1779,7 +1762,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1790,7 +1773,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1801,7 +1784,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
