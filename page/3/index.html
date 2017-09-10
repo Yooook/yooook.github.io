@@ -241,6 +241,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/13/实现分页组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/13/实现分页组件/" itemprop="url">
+                  实现分页组件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T16:45:58+08:00">
+                2017-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bootstrap-JS，JS-seajs/" itemprop="url" rel="index">
+                    <span itemprop="name">bootstrap,JS，JS,seajs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="记得引入bootstrap的css样式-我们使用seajs去封装"><a href="#记得引入bootstrap的css样式-我们使用seajs去封装" class="headerlink" title="记得引入bootstrap的css样式,我们使用seajs去封装"></a>记得引入bootstrap的css样式,我们使用seajs去封装</h3><p>pagination.js如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">  &lt;!-- 创建 --&gt;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">Pagination</span></span>() &#123;</div><div class="line">      this.currentPage = 14;</div><div class="line">      this.total = 20;</div><div class="line">      this.show  = 7;</div><div class="line">      this.region = Math.floor(this.show/2);</div><div class="line">      var begin = this.currentPage -  this.region;</div><div class="line">      begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      var end = begin + this.show - 1;</div><div class="line">      <span class="keyword">if</span> ( end &gt; this.total) &#123;</div><div class="line">        end = this.total;</div><div class="line">        begin = end - this.show;</div><div class="line">        begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      &#125;</div><div class="line">      this.begin = begin;</div><div class="line">      this.end = end;</div><div class="line">  &#125;</div><div class="line">   &lt;!-- 渲染 --&gt;</div><div class="line">  Pagination.prototype.render = <span class="keyword">function</span>(container) &#123;</div><div class="line">      //获取容器Dom对象</div><div class="line">      <span class="keyword">if</span>(typeof container === <span class="string">'string'</span>) &#123;</div><div class="line">          container = document.querySelectorAll(container);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span>(container.length === undefined) &#123;</div><div class="line">          container = [container];</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span>(var s = 0; s&lt;=container.length;s++) &#123;</div><div class="line">          var container = container[s];</div><div class="line">          var prevElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          prevElement.innerHTML = <span class="string">'&lt;\a href="#" aria-label="Previous"&gt;&lt;\span ariahidden="true"&gt;&amp;laquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage == 1) &#123;</div><div class="line">            prevElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(prevElement);</div><div class="line">          <span class="keyword">for</span> (var i = this.begin; i &lt;= this.end; i++) &#123;</div><div class="line">            var liElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">            liElement.innerHTML = <span class="string">'&lt;\a href="#"&gt;'</span>+i+<span class="string">'&lt;\/a&gt;'</span>;</div><div class="line">            <span class="keyword">if</span> (this.currentPage == i ) &#123;</div><div class="line">              liElement.classList.add(<span class="string">'active'</span>);</div><div class="line">            &#125;</div><div class="line">            container.appendChild(liElement);</div><div class="line">          &#125;</div><div class="line">          var nextElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          nextElement.innerHTML = <span class="string">' &lt;\a href="#" aria-label="Next"&gt;&lt;\span ariahidden="true"&gt;&amp;raquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage &gt;= ( this.end- this.region)) &#123;</div><div class="line">            nextElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(nextElement);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  module.exports = Pagination;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>main.js如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">    var Pagination = require(<span class="string">'./modules/pagination.js'</span>);</div><div class="line">    var pager = new Pagination(1,20,7);</div><div class="line">    pager.render(ElementDom);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/13/基于bootstrap（复杂）分页样式的js原生实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1586,155 +1732,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/09/每天十道面试题1-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/09/每天十道面试题1-3/" itemprop="url">
-                  每天十道面试题__2017/8/9(3)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T16:11:05+08:00">
-                2017-08-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端面试/" itemprop="url" rel="index">
-                    <span itemprop="name">前端面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>8、什么叫优雅降级和渐进增强？</p>
-<p>渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。<br>优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。</p>
-<p>9、浏览器的内核分别是什么?</p>
-<p>IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是presto内核，Opera现已改用Google Chrome的Blink内核 Chrome：Blink(基于webkit，Google与Opera Software共同开发)</p>
-<p>10、怎样添加、移除、移动、复制、创建和查找节点？</p>
-<p>1）创建新节点 createDocumentFragment() //创建一个DOM片段 createElement() //创建一个具体的元素 createTextNode() //创建一个文本节点<br>2）添加、移除、替换、插入 appendChild() //添加 removeChild() //移除 replaceChild() //替换 insertBefore() //插入<br>3）查找 getElementsByTagName() //通过标签名称 getElementsByName() //通过元素的Name属性的值 getElementById() //通过元素Id，唯一性</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1784,7 +1781,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -241,6 +241,151 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/10/数据可视化【D3.js】之四/" itemprop="url">
+                  数据可视化【D3.js】之四
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T13:59:31+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/D3/" itemprop="url" rel="index">
+                    <span itemprop="name">D3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="饼状图"><a href="#饼状图" class="headerlink" title="饼状图"></a>饼状图</h2><p>个人感觉d3的链式调用要比konva.js的面向对象写法更加结构清晰</p>
+<p>主要代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">	var arr = [ 30 , 10 , 43 , 55 , 13 ];</div><div class="line">	// 创建布局</div><div class="line">	var pie = d3.layout.pie();</div><div class="line">	// 用相应布局，计算图形数据</div><div class="line">	var piedata = pie(arr);</div><div class="line">	// 内外圆半径</div><div class="line">	var outerRadius = 150;</div><div class="line">	var innerRadius = 0;</div><div class="line">	// 弧线路径生成</div><div class="line">	var arc = d3.svg.arc()</div><div class="line">		.innerRadius(innerRadius)</div><div class="line">		.outerRadius(outerRadius);</div><div class="line">	// 创建画布</div><div class="line">	var svg = d3.select(<span class="string">'body'</span>).append(<span class="string">'svg'</span>).attr(<span class="string">'width'</span>,500).attr(<span class="string">'height'</span>,500);</div><div class="line">	// d3自己的一个颜色表，有十种颜色</div><div class="line">	var color = d3.scale.category10(); </div><div class="line">	// 创建分组元素</div><div class="line">	var arcs = svg.selectAll(<span class="string">'g'</span>)</div><div class="line">		.data(piedata)</div><div class="line">		.enter()</div><div class="line">		.append(<span class="string">'g'</span>)</div><div class="line">		.attr(<span class="string">"transform"</span>,<span class="string">"translate(200,200)"</span>);</div><div class="line">	// 创建图形</div><div class="line">	arcs.append(<span class="string">"path"</span>)</div><div class="line">	    .attr(<span class="string">"d"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">	        <span class="built_in">return</span> arc(d);   //调用弧生成器，得到路径值</div><div class="line">	    &#125;)</div><div class="line">	    .attr(<span class="string">"fill"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">	        <span class="built_in">return</span> color(i);</div><div class="line">	    &#125;)</div><div class="line">	    .attr(<span class="string">"opacity"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">	        <span class="built_in">return</span> 0.8;   //调用弧生成器，得到路径值</div><div class="line">	    &#125;)</div><div class="line">	    // 鼠标滑过扇区变色</div><div class="line">	    .on(<span class="string">'mouseover'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">	    	d3.select(this)</div><div class="line">	    		.transition()</div><div class="line">                .duration(500)</div><div class="line">                .attr(<span class="string">"fill"</span>,color(i))</div><div class="line">                .attr(<span class="string">"transform"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">                    <span class="built_in">return</span> <span class="string">"translate("</span> + arc.centroid(d)[0]*0.2 +<span class="string">','</span>+ arc.centroid(d)[1]*0.2 +  <span class="string">") scale(1.1)"</span>;</div><div class="line">                &#125;)</div><div class="line">                 .attr(<span class="string">"opacity"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">			        <span class="built_in">return</span> 1;   //调用弧生成器，得到路径值</div><div class="line">			    &#125;);</div><div class="line">            d3.select(<span class="string">'text'</span>)</div><div class="line">            	.transition(i)</div><div class="line">                .duration(500)</div><div class="line">                .attr(<span class="string">"transform"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">                    <span class="built_in">return</span> <span class="string">"translate("</span> + arc.centroid(d)[0]*1.2 +<span class="string">','</span>+ arc.centroid(d)[1]*1.2 +  <span class="string">") scale(1.1)"</span>;</div><div class="line">                &#125;)</div><div class="line">	    &#125;)</div><div class="line">	    .on(<span class="string">'mouseout'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">	    	d3.select(this)</div><div class="line">	    		.transition()</div><div class="line">                .duration(500)</div><div class="line">                .attr(<span class="string">"fill"</span>,color(i))</div><div class="line">                .attr(<span class="string">"transform"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">                   <span class="built_in">return</span> <span class="string">"translate("</span> + [0,0] + <span class="string">")"</span>;</div><div class="line">                &#125;)</div><div class="line">                 .attr(<span class="string">"opacity"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">			        <span class="built_in">return</span> 0.8;   //调用弧生成器，得到路径值</div><div class="line">			    &#125;);</div><div class="line">	    &#125;);</div><div class="line">	// 创建文本</div><div class="line">	arcs.append(<span class="string">"text"</span>)</div><div class="line">	    .attr(<span class="string">"transform"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">	    	// arc.centroid(d) 能算出弧线的中心s</div><div class="line">	        <span class="built_in">return</span> <span class="string">"translate("</span> + arc.centroid(d) + <span class="string">")"</span>;</div><div class="line">	    &#125;)</div><div class="line">	    .attr(<span class="string">"text-anchor"</span>,<span class="string">"middle"</span>)</div><div class="line">	    .text(<span class="keyword">function</span>(d)&#123;</div><div class="line">	    	//  d.data 才是转换前的整数的值</div><div class="line">	        <span class="built_in">return</span> d.data;</div><div class="line">	    &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -341,7 +486,7 @@
         
           
             <h2 id="柱状图-最终版本"><a href="#柱状图-最终版本" class="headerlink" title="柱状图[最终版本]"></a>柱状图[最终版本]</h2><h3 id="我们在上一节的基础上，加上了动画和自动适应以及事件绑定"><a href="#我们在上一节的基础上，加上了动画和自动适应以及事件绑定" class="headerlink" title="我们在上一节的基础上，加上了动画和自动适应以及事件绑定"></a>我们在上一节的基础上，加上了动画和自动适应以及事件绑定</h3><p>坐标轴的样式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">	.axis path,</div><div class="line">	.axis line&#123;</div><div class="line">	    fill: none;</div><div class="line">	    stroke: black;</div><div class="line">	    shape-rendering: crispEdges;</div><div class="line">	&#125;</div><div class="line">	 </div><div class="line">	.axis text &#123;</div><div class="line">	    font-family: sans-serif;</div><div class="line">	    font-size: 11px;</div><div class="line">	&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
-<p>主要代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">	&lt;script&gt;</div><div class="line">		var arr = [10,30,42,59,18,34];</div><div class="line">		// 通过改变svgW和svgH实现自适应</div><div class="line">		var svgW = 500;</div><div class="line">		var svgH = 200;</div><div class="line">		var barH = 10;</div><div class="line">		var colors = [<span class="string">'#ddd'</span>,<span class="string">'#f00'</span>,<span class="string">'#6453c9'</span>,<span class="string">'#000'</span>,<span class="string">'#eee'</span>];</div><div class="line">		var padding = &#123;left:30, right:30, top:20, bottom:20&#125;;</div><div class="line">		var xlinear = d3.scale.linear()</div><div class="line">			.domain([0,100])</div><div class="line">			.range([0,svgW-padding.left*2]);</div><div class="line">		var yordinal = d3.scale.ordinal()</div><div class="line">			.domain(d3.range(arr.length))</div><div class="line">			// 在序列比例尺下才可以用rangeRoundBands</div><div class="line">			.rangeRoundBands([svgH-padding.top*2,0]);</div><div class="line">		var ordinal = d3.scale.ordinal()</div><div class="line">			.domain(colors.length)</div><div class="line">			.range(colors);</div><div class="line">		var axis = d3.svg.axis()</div><div class="line">			.scale(xlinear)</div><div class="line">			.orient(<span class="string">'bottom'</span>)</div><div class="line">			.ticks(10);</div><div class="line">		var yaxis = d3.svg.axis()</div><div class="line">			.scale(yordinal)</div><div class="line">			.orient(<span class="string">'left'</span>)</div><div class="line">			// .ticks(7);</div><div class="line">		var svg = d3.select(<span class="string">'body'</span>)</div><div class="line">			.append(<span class="string">'svg'</span>);</div><div class="line">		// 进度条</div><div class="line">		svg.attr(<span class="string">'width'</span>,svgW)</div><div class="line">			.attr(<span class="string">'height'</span>,svgH)</div><div class="line">			.selectAll(<span class="string">'rect'</span>)</div><div class="line">			.data(arr)</div><div class="line">			.enter()</div><div class="line">			.append(<span class="string">'rect'</span>)</div><div class="line">			// 时间绑定</div><div class="line">			.attr(<span class="string">'fill'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> ordinal(i)</div><div class="line">			&#125;)</div><div class="line">			.on(<span class="string">"mouseover"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">	            d3.select(this)</div><div class="line">	                .attr(<span class="string">"fill"</span>,<span class="string">"yellow"</span>);</div><div class="line">	        &#125;)</div><div class="line">	        .on(<span class="string">"mouseout"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">	            d3.select(this)</div><div class="line">	                .transition()</div><div class="line">	                .duration(500)</div><div class="line">	                .attr(<span class="string">"fill"</span>,ordinal(i));</div><div class="line">	        &#125;)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">				<span class="built_in">return</span> padding.left;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">			&#125;)</div><div class="line">			// 动画</div><div class="line">			.attr(<span class="string">'width'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				var min = xlinear.domain()[0];</div><div class="line">    			<span class="built_in">return</span> xlinear(min);</div><div class="line">				// <span class="built_in">return</span> xlinear(d)-padding.right;</div><div class="line">			&#125;)</div><div class="line">			.transition()</div><div class="line">			.delay(<span class="keyword">function</span>(d,i)&#123;</div><div class="line">			    <span class="built_in">return</span> i * 200;</div><div class="line">			&#125;)</div><div class="line">			.duration(2000)</div><div class="line">			.ease(<span class="string">"bounce"</span>)</div><div class="line">			.attr(<span class="string">"width"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">			    <span class="built_in">return</span>  xlinear(d)-padding.right;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'height'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">				<span class="built_in">return</span> (svgH-padding.top*2-barH*arr.length+1)/arr.length;</div><div class="line">			&#125;);</div><div class="line">			</div><div class="line">			</div><div class="line">		// 文字</div><div class="line">		svg.selectAll(<span class="string">'.text'</span>)</div><div class="line">			.data(arr)</div><div class="line">			.enter()</div><div class="line">			.append(<span class="string">'text'</span>)</div><div class="line">			.attr(<span class="string">'class'</span>,<span class="string">'text'</span>)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> padding.left;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				// 水平显示</div><div class="line">				// <span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">				<span class="built_in">return</span> 0;</div><div class="line">			&#125;)</div><div class="line">			.transition()</div><div class="line">			.delay(<span class="keyword">function</span>(d,i)&#123;</div><div class="line">			    <span class="built_in">return</span> i * 200;</div><div class="line">			&#125;)</div><div class="line">			.duration(2000)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> xlinear(d);</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'dx'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">				<span class="built_in">return</span> 10;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'dy'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">				// 文字居中</div><div class="line">				<span class="built_in">return</span> (yordinal.rangeBand() - barH/2)/2;;</div><div class="line">			&#125;)</div><div class="line">			.text(<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> d;</div><div class="line">			&#125;)</div><div class="line">		svg.append(<span class="string">"g"</span>)</div><div class="line">			.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">			.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+(svgH-padding.top)+<span class="string">")"</span>)</div><div class="line">			.call(axis);</div><div class="line">		svg.append(<span class="string">"g"</span>)</div><div class="line">			.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">			.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+padding.top+<span class="string">")"</span>)</div><div class="line">			.call(yaxis);</div><div class="line">	&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>主要代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">	&lt;script&gt;</div><div class="line">		var arr = [10,30,42,59,18,34];</div><div class="line">		// 通过改变svgW和svgH实现自适应</div><div class="line">		var svgW = 500;</div><div class="line">		var svgH = 200;</div><div class="line">		var barH = 10;</div><div class="line">		var colors = [<span class="string">'#ddd'</span>,<span class="string">'#f00'</span>,<span class="string">'#6453c9'</span>,<span class="string">'#000'</span>,<span class="string">'#eee'</span>];</div><div class="line">		var padding = &#123;left:30, right:30, top:20, bottom:20&#125;;</div><div class="line">		var xlinear = d3.scale.linear()</div><div class="line">			.domain([0,100])</div><div class="line">			.range([0,svgW-padding.left*2]);</div><div class="line">		var yordinal = d3.scale.ordinal()</div><div class="line">			.domain(d3.range(arr.length))</div><div class="line">			// 在序列比例尺下才可以用rangeRoundBands</div><div class="line">			.rangeRoundBands([svgH-padding.top*2,0]);</div><div class="line">		var ordinal = d3.scale.ordinal()</div><div class="line">			.domain(colors.length)</div><div class="line">			.range(colors);</div><div class="line">		var axis = d3.svg.axis()</div><div class="line">			.scale(xlinear)</div><div class="line">			.orient(<span class="string">'bottom'</span>)</div><div class="line">			.ticks(10);</div><div class="line">		var yaxis = d3.svg.axis()</div><div class="line">			.scale(yordinal)</div><div class="line">			.orient(<span class="string">'left'</span>)</div><div class="line">			// .ticks(7);</div><div class="line">		var svg = d3.select(<span class="string">'body'</span>)</div><div class="line">			.append(<span class="string">'svg'</span>)</div><div class="line">			.attr(<span class="string">'width'</span>,svgW)</div><div class="line">			.attr(<span class="string">'height'</span>,svgH);</div><div class="line">		// 进度条</div><div class="line">		svg.selectAll(<span class="string">'rect'</span>)</div><div class="line">			.data(arr)</div><div class="line">			.enter()</div><div class="line">			.append(<span class="string">'rect'</span>)</div><div class="line">			// 时间绑定</div><div class="line">			.attr(<span class="string">'fill'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> ordinal(i)</div><div class="line">			&#125;)</div><div class="line">			.on(<span class="string">"mouseover"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">	            d3.select(this)</div><div class="line">	                .attr(<span class="string">"fill"</span>,<span class="string">"yellow"</span>);</div><div class="line">	        &#125;)</div><div class="line">	        .on(<span class="string">"mouseout"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">	            d3.select(this)</div><div class="line">	                .transition()</div><div class="line">	                .duration(500)</div><div class="line">	                .attr(<span class="string">"fill"</span>,ordinal(i));</div><div class="line">	        &#125;)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">				<span class="built_in">return</span> padding.left;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">			&#125;)</div><div class="line">			// 动画</div><div class="line">			.attr(<span class="string">'width'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				var min = xlinear.domain()[0];</div><div class="line">    			<span class="built_in">return</span> xlinear(min);</div><div class="line">				// <span class="built_in">return</span> xlinear(d)-padding.right;</div><div class="line">			&#125;)</div><div class="line">			.transition()</div><div class="line">			.delay(<span class="keyword">function</span>(d,i)&#123;</div><div class="line">			    <span class="built_in">return</span> i * 200;</div><div class="line">			&#125;)</div><div class="line">			.duration(2000)</div><div class="line">			.ease(<span class="string">"bounce"</span>)</div><div class="line">			.attr(<span class="string">"width"</span>,<span class="keyword">function</span>(d)&#123;</div><div class="line">			    <span class="built_in">return</span>  xlinear(d)-padding.right;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'height'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">				<span class="built_in">return</span> (svgH-padding.top*2-barH*arr.length+1)/arr.length;</div><div class="line">			&#125;);</div><div class="line">			</div><div class="line">			</div><div class="line">		// 文字</div><div class="line">		svg.selectAll(<span class="string">'.text'</span>)</div><div class="line">			.data(arr)</div><div class="line">			.enter()</div><div class="line">			.append(<span class="string">'text'</span>)</div><div class="line">			.attr(<span class="string">'class'</span>,<span class="string">'text'</span>)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> padding.left;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				// 水平显示</div><div class="line">				// <span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">				<span class="built_in">return</span> 0;</div><div class="line">			&#125;)</div><div class="line">			.transition()</div><div class="line">			.delay(<span class="keyword">function</span>(d,i)&#123;</div><div class="line">			    <span class="built_in">return</span> i * 200;</div><div class="line">			&#125;)</div><div class="line">			.duration(2000)</div><div class="line">			.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> xlinear(d);</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">				<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'dx'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">				<span class="built_in">return</span> 10;</div><div class="line">			&#125;)</div><div class="line">			.attr(<span class="string">'dy'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">				// 文字居中</div><div class="line">				<span class="built_in">return</span> (yordinal.rangeBand() - barH/2)/2;;</div><div class="line">			&#125;)</div><div class="line">			.text(<span class="keyword">function</span>(d) &#123;</div><div class="line">				<span class="built_in">return</span> d;</div><div class="line">			&#125;)</div><div class="line">		svg.append(<span class="string">"g"</span>)</div><div class="line">			.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">			.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+(svgH-padding.top)+<span class="string">")"</span>)</div><div class="line">			.call(axis);</div><div class="line">		svg.append(<span class="string">"g"</span>)</div><div class="line">			.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">			.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+padding.top+<span class="string">")"</span>)</div><div class="line">			.call(yaxis);</div><div class="line">	&lt;/script&gt;</div></pre></td></tr></table></figure></p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
           
@@ -1557,151 +1702,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/22/初遇React系列之四/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/22/初遇React系列之四/" itemprop="url">
-                  初遇React系列之四
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T22:55:18+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="关于fetch："><a href="#关于fetch：" class="headerlink" title="关于fetch："></a>关于fetch：</h2><p>“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。<br>现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//定义在类外</div><div class="line">const REQUIRE_URL = `http://api.douban.com/v2/movie/top250?start=0&amp;count=10`</div><div class="line"></div><div class="line">constructor(props) &#123;</div><div class="line">    super(props);//引用this.super(props)执行之后才能使用this.props</div><div class="line">    this.state = &#123;</div><div class="line">      //创建dataSource对象，传入更新row的策略，一般来说都是prevRowData和nextRowData不相等时更新row</div><div class="line">      movies:new ListView.DataSource(&#123;</div><div class="line">        rowHasChanged:(row1,row2) =&gt; row1 !== row2</div><div class="line">      &#125;),</div><div class="line">      loaded:<span class="literal">false</span>//loading状态</div><div class="line">    &#125;; </div><div class="line">    this.fetchData();//构造函数内加载时执行</div><div class="line">&#125;</div><div class="line">  </div><div class="line"> <span class="function"><span class="title">fetchData</span></span>()&#123;</div><div class="line">    fetch(REQUIRE_URL)</div><div class="line">        .then(response =&gt; response.json())</div><div class="line">        .then(responseData =&gt; &#123;</div><div class="line">            console.log(responseData);</div><div class="line">            this.setState(&#123;</div><div class="line">                movies:this.state.movies.cloneWithRows(responseData.subjects),//传入请求数据，更新状态</div><div class="line">                loaded:<span class="literal">true</span></div><div class="line">            &#125;)</div><div class="line">        &#125;)</div><div class="line">        .done();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1751,7 +1751,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
