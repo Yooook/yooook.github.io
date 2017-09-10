@@ -241,6 +241,294 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/05/读《JavaScript Dom编程艺术》笔记之二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/05/读《JavaScript Dom编程艺术》笔记之二/" itemprop="url">
+                  读《JavaScript Dom编程艺术》笔记之二
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-05T18:02:19+08:00">
+                2017-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则<br>~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名的文件，都必须要等脚本加载完毕后下载。之所以要把JavaScript放在body结束的地方，就是基于，渐进增强和分离JavaScript的观点。<br>~如果有两个函数绑定在onload事件上，那么只有最后一个函数有效，才会执行.解决方法如下，window.onload = function(){//多个函数pakr();lade()};<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span>(func) &#123;</div><div class="line">	var oldonload = window.onload;</div><div class="line">	<span class="keyword">if</span>(typeof window.onload != <span class="string">'function'</span>)&#123;</div><div class="line">		window.onload = func;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		window.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">			oldonload();</div><div class="line">			func();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line">~document.getElementsByTagName(<span class="string">'form'</span>) == document.forms</div><div class="line">~document.getAttribute(<span class="string">'src'</span>) = document.src</div><div class="line">~动态添加标记：1，document.write(<span class="string">'&lt;\p&gt;wf&lt;\/p&gt;'</span>),最大的问题是违背‘行为与表现分离’</div><div class="line">~targetElement.parentNode.inserBefore(newElement,targetElement);</div><div class="line">~编写inertAfter函数</div><div class="line"></div><div class="line">``` bash</div><div class="line"><span class="keyword">function</span>(newElement,targetElement) &#123;</div><div class="line">	var parent = targetElement.parentNode;</div><div class="line">	<span class="keyword">if</span>(parent.lastChild == targetElement)&#123;</div><div class="line">		parent.appendChild(newElement);</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		parent.insertBefore(newElement,targetElement.nextSibing)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/02/Ionic中遇到的问题之二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/02/Ionic中遇到的问题之二/" itemprop="url">
+                  Ionic中遇到的问题之二
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-02T15:05:18+08:00">
+                2017-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ionic-JS/" itemprop="url" rel="index">
+                    <span itemprop="name">Ionic,JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Try…-force-to-use-installed-plugin-as-dependency"><a href="#Try…-force-to-use-installed-plugin-as-dependency" class="headerlink" title="Try….force to use installed plugin as dependency.?"></a>Try….force to use installed plugin as dependency.?</h2><p>这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cordova plugin remove --force cordova-plugin-compat  </div><div class="line">cordova plugin add cordova-plugin-compat  </div><div class="line">cordova plugins  </div><div class="line">cordova platform remove android  </div><div class="line">cordova platform add android  </div><div class="line">cordova plugin add cordova-plugin-camera</div></pre></td></tr></table></figure></p>
+<p>安装完后，在打包的时候会出现错误，要求安装Gradle，每次就是因为删了平台，第二次新建平台的原因，所以再去手动下载配置。具体方法：<a href="http://www.jianshu.com/p/9595eccac3d1" target="_blank" rel="external">http://www.jianshu.com/p/9595eccac3d1</a><br>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/07/02/Ionic中遇到的问题之一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1385,328 +1673,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/18/js对insertafter()方法的实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/18/js对insertafter()方法的实现/" itemprop="url">
-                  js对insertafter()方法的实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T12:15:09+08:00">
-                2017-06-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="come-from-wang-hes’s-blog"><a href="#come-from-wang-hes’s-blog" class="headerlink" title="come from wang_hes’s blog"></a>come from wang_hes’s blog</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//DOM没有提供insertAfter()方法</div><div class="line"><span class="keyword">function</span> insertAfter(newElement, targetElement)&#123;</div><div class="line">	var parent = targetElement.parentNode;</div><div class="line">	<span class="keyword">if</span> (parent.lastChild == targetElement) &#123;</div><div class="line">	// 如果最后的节点是目标元素，则直接添加。因为默认是最后</div><div class="line">	parent.appendChild(newElement);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">	parent.insertBefore(newElement, targetElement.nextSibling);</div><div class="line">	//如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/06/11/for循环中多对象点击事件ajax绑定【原生】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/11/for循环中多对象点击事件ajax绑定【原生】/" itemprop="url">
-                  for循环中多对象点击事件ajax绑定【原生】
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T09:30:58+08:00">
-                2017-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ajax-JS/" itemprop="url" rel="index">
-                    <span itemprop="name">Ajax,JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var li = document.getElementById(<span class="string">'list'</span>).getElementsByTagName(<span class="string">'p'</span>);</div><div class="line">     <span class="keyword">for</span> (var i = 0; i &lt; li.length; i++) &#123;</div><div class="line">        (<span class="keyword">function</span>(arg)&#123;</div><div class="line">         var param = &#123;</div><div class="line">               data:<span class="string">'uid='</span>+i,</div><div class="line">               url:<span class="string">'data1.php'</span>,</div><div class="line">               <span class="built_in">type</span>:<span class="string">'post'</span>,</div><div class="line">               dataType:<span class="string">'json'</span>,</div><div class="line">               success:<span class="keyword">function</span>(data) &#123;</div><div class="line">               p.chapter();</div><div class="line">               &#125;</div><div class="line">             &#125;</div><div class="line">           var lis = li[i];</div><div class="line">           <span class="keyword">if</span> (lis.addEventListener) &#123;</div><div class="line">             lis.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span>()&#123;alt(param)&#125;,<span class="literal">false</span>);</div><div class="line">           &#125;</div><div class="line">        &#125;)(i);</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">function</span> alt(param) &#123;</div><div class="line">       p.ajax_sfq(param);</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<p>以下是一点改动，进行两个页面的双向绑定，实现异步的返回功能。</p>
-<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">digui</span></span>() {
-         <span class="keyword">for</span> (var i = 0; i &lt; li.length; i++) {
-       (<span class="keyword">function</span>(arg){
-        var param = {
-              data:<span class="string">'uid='</span>+i,
-              url:<span class="string">'data1.php'</span>,
-              <span class="built_in">type</span>:<span class="string">'post'</span>,
-              dataType:<span class="string">'json'</span>,
-              success:<span class="keyword">function</span>(data) {
-              p.chapter();
-              var btn1 = document.getElementById(<span class="string">'btn1'</span>);
-              btn1.onclick = <span class="function"><span class="title">function</span></span> (){
-                p.back();
-                var li = document.getElementById(<span class="string">'list'</span>).getElementsByTagName(<span class="string">'p'</span>);
-                digui();
-              }
-              }
-            }
-          var lis = li[i];
-          <span class="keyword">if</span> (lis.addEventListener) {
-            lis.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span>(){alt(param)},<span class="literal">false</span>);
-          }
-       })(i);
-    }
-   }
-   digui();
-</code></pre>
-<p>这里为了追踪i变量，使用了闭包的概念，以及addEventListener绑定函数传参数的方法。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1751,7 +1722,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

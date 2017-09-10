@@ -241,6 +241,299 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之七/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/10/数据可视化【D3.js】之七/" itemprop="url">
+                  数据可视化【D3.js】之七
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T22:37:55+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/D3/" itemprop="url" rel="index">
+                    <span itemprop="name">D3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="集群图"><a href="#集群图" class="headerlink" title="集群图"></a>集群图</h2><p>感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….</p>
+<p>数据格式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"name"</span>:<span class="string">"中国"</span>,</div><div class="line"><span class="string">"children"</span>:</div><div class="line">[</div><div class="line">  &#123; </div><div class="line">    <span class="string">"name"</span>:<span class="string">"浙江"</span> , </div><div class="line">      <span class="string">"children"</span>:</div><div class="line">      [</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"杭州"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"宁波"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"温州"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"绍兴"</span> &#125;</div><div class="line">      ] </div><div class="line">    &#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>样式表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line"></div><div class="line">.node circle &#123;</div><div class="line">  fill: <span class="comment">#fff;</span></div><div class="line">  /*圆心样式，不带引号*/</div><div class="line">  stroke: steelblue;</div><div class="line">  stroke-width: 1.5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.node &#123;</div><div class="line">  font: 12px sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.link &#123;</div><div class="line">  fill: none;</div><div class="line">  stroke: <span class="comment">#ccc;</span></div><div class="line">  stroke-width: 1.5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>核心代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">var width = 500,</div><div class="line">    height = 500;</div><div class="line">// 创建集群布局</div><div class="line">var cluster = d3.layout.cluster()</div><div class="line">    // size() 设定尺寸，即转换后的各节点的坐标所在范围</div><div class="line">    .size([width, height - 200]);</div><div class="line">// d3.svg.diagonal() 。这是一个对角线生成器，只需要输入两个顶点坐标，即可生成一条贝塞尔曲线</div><div class="line">// 创建一个对角线生成器</div><div class="line">var diagonal = d3.svg.diagonal()</div><div class="line">    // projection() 是一个点变换器，默认是 [ d.x , d.y ]，即保持原坐标不变，如果写成 [ d.y , d.x ] ，即是说对任意输入的顶点，都交换 x 和 y 坐标</div><div class="line">    .projection(<span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> [d.y, d.x]; &#125;);</div><div class="line">// 创建画布</div><div class="line">var svg = d3.select(<span class="string">"body"</span>).append(<span class="string">"svg"</span>)</div><div class="line">    .attr(<span class="string">"width"</span>, width)</div><div class="line">    .attr(<span class="string">"height"</span>, height)</div><div class="line">    .append(<span class="string">"g"</span>)</div><div class="line">    .attr(<span class="string">"transform"</span>, <span class="string">"translate(40,0)"</span>);</div><div class="line">// 转换数据</div><div class="line">// root 是传入的数据</div><div class="line">d3.json(<span class="string">"city.json"</span>, <span class="keyword">function</span>(error, root) &#123;</div><div class="line">  // 转换节点数据</div><div class="line">  var nodes = cluster.nodes(root);</div><div class="line">  // 转换连线数据</div><div class="line">  var links = cluster.links(nodes);</div><div class="line">  // 绘制连线</div><div class="line">  var link = svg.selectAll(<span class="string">".link"</span>)</div><div class="line">      .data(links)</div><div class="line">      .enter()</div><div class="line">      .append(<span class="string">"path"</span>)</div><div class="line">      .attr(<span class="string">"class"</span>, <span class="string">"link"</span>)</div><div class="line">      .attr(<span class="string">"d"</span>, diagonal);</div><div class="line">  // 创建分组，还礼文字和图形</div><div class="line">  var node = svg.selectAll(<span class="string">".node"</span>)</div><div class="line">      .data(nodes)</div><div class="line">      .enter()</div><div class="line">      .append(<span class="string">"g"</span>)</div><div class="line">      .attr(<span class="string">"class"</span>, <span class="string">"node"</span>)</div><div class="line">      .attr(<span class="string">"transform"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> <span class="string">"translate("</span> + d.y + <span class="string">","</span> + d.x + <span class="string">")"</span>; &#125;)</div><div class="line">  // 添加圆形</div><div class="line">  node.append(<span class="string">"circle"</span>)</div><div class="line">      .attr(<span class="string">"r"</span>, 4.5);</div><div class="line">  // 添加文字</div><div class="line">  node.append(<span class="string">"text"</span>)</div><div class="line">      .attr(<span class="string">"dx"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> d.children ? -8 : 8; &#125;)</div><div class="line">      .attr(<span class="string">"dy"</span>, 3)</div><div class="line">      // 文字位于圆心的左右偏移</div><div class="line">      .style(<span class="string">"text-anchor"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> d.children ? <span class="string">"end"</span> : <span class="string">"start"</span>; &#125;)</div><div class="line">      .text(<span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> d.name; &#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之六/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/10/数据可视化【D3.js】之六/" itemprop="url">
+                  数据可视化【D3.js】之六
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T21:57:50+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/D3/" itemprop="url" rel="index">
+                    <span itemprop="name">D3</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="弦图"><a href="#弦图" class="headerlink" title="弦图"></a>弦图</h2><p>关于弦图的制作，不仅仅可以联系人后[迁移对城市]的现象，还有[通话记录对人]或者[消费关系]这种有出有进的数据流动的现象我们都可以用弦图去数据可视化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">   // 节点数组，有联系的个体</div><div class="line">   var city_name = [ <span class="string">"北京"</span> , <span class="string">"上海"</span> , <span class="string">"广州"</span> , <span class="string">"深圳"</span> , <span class="string">"香港"</span>  ];</div><div class="line">     // 联系个体间的数据</div><div class="line">     var population = [</div><div class="line">     // 每一个数组就是每个节点或者说每段弧的的数据传动情况</div><div class="line">       [ 1000,  3045　 , 4567　, 1234 , 3714 ],</div><div class="line">       [ 3214,  2000　 , 2060　, 124  , 3234 ],</div><div class="line">       [ 8761,  6545　 , 3000　, 8045 , 647  ],</div><div class="line">       [ 3211,  1067  , 3214 , 4000  , 1006 ],</div><div class="line">       [ 2146,  1034　 , 6745 , 4764  , 5000 ]</div><div class="line">     ];</div><div class="line"></div><div class="line">     var width = 500;</div><div class="line">     var height = 500;</div><div class="line">     var innerRadius = width/2*0.7;</div><div class="line">     var outerRadius = innerRadius*1.1;</div><div class="line">     var color20 = d3.scale.category20();</div><div class="line">     // 创建弦图布局</div><div class="line">     var chord_layout = d3.layout.chord()</div><div class="line">      .padding(0.03) //节点之间的间隔</div><div class="line">      .sortSubgroups(d3.descending) //排序</div><div class="line">      .matrix(population); //输入矩阵</div><div class="line">    // 转换弦图数据</div><div class="line">     var groups = chord_layout.groups(city_name);</div><div class="line">   var chords = chord_layout.chords(population);</div><div class="line">   // 创建画布</div><div class="line">     var svg = d3.select(<span class="string">'body'</span>)</div><div class="line">      .append(<span class="string">'svg'</span>)</div><div class="line">      .attr(<span class="string">'width'</span>,width)</div><div class="line">      .attr(<span class="string">'height'</span>,height)</div><div class="line">      .append(<span class="string">'g'</span>)</div><div class="line">      .attr(<span class="string">'transform'</span>,<span class="string">'translate('</span>+width/2+<span class="string">','</span>+height/2+<span class="string">')'</span>);</div><div class="line">     // 生成弧路径参数</div><div class="line">     var outer_arc = d3.svg.arc()</div><div class="line">      .innerRadius(innerRadius)</div><div class="line">      .outerRadius(outerRadius);</div><div class="line">     // 绘制路径</div><div class="line">     var g_outer = svg.append(<span class="string">"g"</span>);</div><div class="line">     g_outer.selectAll(<span class="string">'path'</span>)</div><div class="line">      .data(groups)</div><div class="line">      .enter()</div><div class="line">      .append(<span class="string">'path'</span>)</div><div class="line">      .style(<span class="string">"fill"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> color20(d.index); &#125;)</div><div class="line">      .style(<span class="string">"stroke"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> color20(d.index); &#125;)</div><div class="line">      .attr(<span class="string">"d"</span>, outer_arc );</div><div class="line">   // 添加文字</div><div class="line">    g_outer.selectAll(<span class="string">"text"</span>)</div><div class="line">       .data(groups)</div><div class="line">       .enter()</div><div class="line">       .append(<span class="string">"text"</span>)</div><div class="line">       .each( <span class="keyword">function</span>(d,i) &#123; </div><div class="line">         // 计算每个节点或者说每段弧的中间度数0~360</div><div class="line">          d.angle = (d.startAngle + d.endAngle) / 2; </div><div class="line">          // 绑定初始的城市名称数据</div><div class="line">          d.name = city_name[i];</div><div class="line">       &#125;)</div><div class="line">       // 文字偏移量</div><div class="line">       .attr(<span class="string">"dy"</span>,<span class="string">".35em"</span>)</div><div class="line">       // 必须先选择再平移</div><div class="line">       .attr(<span class="string">"transform"</span>, <span class="keyword">function</span>(d)&#123;</div><div class="line">         // console.log(d.angle * 180 / Math.PI)弧度转化为角度，利用这个角度使得文字位于每段弧的切线方向</div><div class="line">          <span class="built_in">return</span> <span class="string">"rotate("</span> + ( d.angle * 180 / Math.PI ) + <span class="string">")"</span> +</div><div class="line">          <span class="string">"translate(0,"</span>+ -1.0*(outerRadius+10) +<span class="string">")"</span> +</div><div class="line">          ( ( d.angle &gt; Math.PI*3/4 &amp;&amp; d.angle &lt; Math.PI*6/4 ) ? <span class="string">"rotate(180)"</span> : <span class="string">""</span>);</div><div class="line">        &#125;)</div><div class="line">       // 必须-1.0*(outerRadius+10)才能对应相对的弧线，否则中间会有outerRadius*2+10长度</div><div class="line">       .text(<span class="keyword">function</span>(d)&#123;</div><div class="line">          <span class="built_in">return</span> d.name;</div><div class="line">       &#125;);</div><div class="line">       // 绘制弦</div><div class="line">       // D3 提供了 d3.svg.chord() ，只需要将弦的对象传递给它，即可得到路径值。</div><div class="line">      var inner_chord = d3.svg.chord()</div><div class="line">          .radius(innerRadius);</div><div class="line">       </div><div class="line">      svg.append(<span class="string">"g"</span>)</div><div class="line">          .attr(<span class="string">"class"</span>, <span class="string">"chord"</span>)</div><div class="line">          .selectAll(<span class="string">"path"</span>)</div><div class="line">          .data(chords)</div><div class="line">          .enter()</div><div class="line">          .append(<span class="string">"path"</span>)</div><div class="line">          .attr(<span class="string">"d"</span>, inner_chord )  //</div><div class="line">          .style(<span class="string">"fill"</span>, <span class="keyword">function</span>(d) &#123; <span class="built_in">return</span> color20(d.source.index); &#125;)</div><div class="line">          .style(<span class="string">"opacity"</span>, 0.7)</div><div class="line">          .on(<span class="string">"mouseover"</span>,<span class="keyword">function</span>(d,i)&#123;</div><div class="line">              d3.select(this)</div><div class="line">                .style(<span class="string">"fill"</span>,<span class="string">"yellow"</span>);</div><div class="line">          &#125;)</div><div class="line">          .on(<span class="string">"mouseout"</span>,<span class="keyword">function</span>(d,i) &#123; </div><div class="line">              d3.select(this)</div><div class="line">                .transition()</div><div class="line">                .duration(1000)</div><div class="line">                .style(<span class="string">"fill"</span>,color20(d.source.index));</div><div class="line">          &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之五/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1407,307 +1700,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/23/初遇React系列之七/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/23/初遇React系列之七/" itemprop="url">
-                  初遇React系列之七
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T11:24:32+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="react-native之触摸高亮：TouchableHighlight组件"><a href="#react-native之触摸高亮：TouchableHighlight组件" class="headerlink" title="react-native之触摸高亮：TouchableHighlight组件"></a>react-native之触摸高亮：TouchableHighlight组件</h2><p>使用方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//导入组件</div><div class="line">import &#123; TouchableHighlight &#125; from <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line">//标签化使用</div><div class="line"> &lt;TouchableHighlight underlayColor=<span class="string">"rgba(34,26,38,0.2)"</span> onPress=&#123;()=&gt;&#123;&#125;&#125;&gt;</div><div class="line"> 	//列表的每一项</div><div class="line"> &lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
-<p>TouchableHighlight这个标签有坑，我们必须设置onPress属性才能生效</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/23/初遇React系列之六/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/23/初遇React系列之六/" itemprop="url">
-                  初遇React系列之六
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T10:47:58+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="react-native的进度组件："><a href="#react-native的进度组件：" class="headerlink" title="react-native的进度组件："></a>react-native的进度组件：</h2><h3 id="android-ActivityIndicator组件"><a href="#android-ActivityIndicator组件" class="headerlink" title="android:ActivityIndicator组件"></a>android:ActivityIndicator组件</h3><p>ProgressBarAndroid已经被ActivityIndicator组件取代。</p>
-<p>使用方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//导入组件</div><div class="line">import &#123; ActivityIndicator &#125; from <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line">//标签化使用</div><div class="line">&lt;ActivityIndicator </div><div class="line"> styleAttr=<span class="string">'Large'</span></div><div class="line"> color=<span class="string">"#6425c9"</span></div><div class="line">/&gt;</div></pre></td></tr></table></figure>
-<p>属性：<br> <em>animating：这个参数接受布尔型的值，表示是否显示加载指示器。
- </em>color：string型参数，用来设置指示器的颜色，默认是灰色的，我们一般也不管他。<br> <em>hidesWhenStopped（仅iOS可用）：在没有动画的时候，是否要隐藏指示器（默认为true）。
- </em>size：这就是设置尺寸的，就两个选项，small和large，一小一大。</p>
-<p> IOS:使用ActivityIndicatorIOS组件，拥有size和color属性，使用方法类似。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1752,7 +1749,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">91</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
