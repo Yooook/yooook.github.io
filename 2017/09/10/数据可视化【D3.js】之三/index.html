@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="bootstrap,JS,原生,seajs" />
+  <meta name="keywords" content="D3" />
 
 
 
@@ -80,19 +80,16 @@
 
 
 
-<meta name="description" content="记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253define(function(require,exports,module) &amp;#123;  &amp;lt;!-">
+<meta name="description" content="简单的柱状图[改进]我们在上一节的基础上，加上了两种比例尺和坐标轴坐标轴的样式：12345678910111213&amp;lt;style&amp;gt;	.axis path,	.axis line&amp;#123;	    fill: none;	    stroke: black;	    shape-rendering: crispEdges;	&amp;#125;	 	.axis text &amp;#123;	    f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现分页组件">
-<meta property="og:url" content="http://apskt.com/2017/08/13/实现分页组件/index.html">
+<meta property="og:title" content="数据可视化【D3.js】之三">
+<meta property="og:url" content="http://apskt.com/2017/09/10/数据可视化【D3.js】之三/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253define(function(require,exports,module) &amp;#123;  &amp;lt;!-">
-<meta property="og:updated_time" content="2017-08-13T09:12:56.652Z">
+<meta property="og:description" content="简单的柱状图[改进]我们在上一节的基础上，加上了两种比例尺和坐标轴坐标轴的样式：12345678910111213&amp;lt;style&amp;gt;	.axis path,	.axis line&amp;#123;	    fill: none;	    stroke: black;	    shape-rendering: crispEdges;	&amp;#125;	 	.axis text &amp;#123;	    f">
+<meta property="og:updated_time" content="2017-09-10T01:21:50.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现分页组件">
-<meta name="twitter:description" content="记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253define(function(require,exports,module) &amp;#123;  &amp;lt;!-">
+<meta name="twitter:title" content="数据可视化【D3.js】之三">
+<meta name="twitter:description" content="简单的柱状图[改进]我们在上一节的基础上，加上了两种比例尺和坐标轴坐标轴的样式：12345678910111213&amp;lt;style&amp;gt;	.axis path,	.axis line&amp;#123;	    fill: none;	    stroke: black;	    shape-rendering: crispEdges;	&amp;#125;	 	.axis text &amp;#123;	    f">
 
 
 
@@ -120,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://apskt.com/2017/08/13/实现分页组件/"/>
+  <link rel="canonical" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之三/"/>
 
 
 
 
 
-  <title> 实现分页组件 | Finch's blog </title>
+  <title> 数据可视化【D3.js】之三 | Finch's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -243,7 +240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/13/实现分页组件/">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/09/10/数据可视化【D3.js】之三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Finch">
@@ -264,7 +261,7 @@
             
             
               
-                实现分页组件
+                数据可视化【D3.js】之三
               
             
           </h1>
@@ -279,8 +276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T16:45:58+08:00">
-                2017-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T09:12:13+08:00">
+                2017-09-10
               </time>
             
 
@@ -302,8 +299,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bootstrap-JS，JS-seajs/" itemprop="url" rel="index">
-                    <span itemprop="name">bootstrap,JS，JS,seajs</span>
+                  <a href="/categories/D3/" itemprop="url" rel="index">
+                    <span itemprop="name">D3</span>
                   </a>
                 </span>
 
@@ -337,9 +334,8 @@
       
 
       
-        <h3 id="记得引入bootstrap的css样式-我们使用seajs去封装"><a href="#记得引入bootstrap的css样式-我们使用seajs去封装" class="headerlink" title="记得引入bootstrap的css样式,我们使用seajs去封装"></a>记得引入bootstrap的css样式,我们使用seajs去封装</h3><p>pagination.js如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">  &lt;!-- 创建 --&gt;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">Pagination</span></span>() &#123;</div><div class="line">      this.currentPage = 14;</div><div class="line">      this.total = 20;</div><div class="line">      this.show  = 7;</div><div class="line">      this.region = Math.floor(this.show/2);</div><div class="line">      var begin = this.currentPage -  this.region;</div><div class="line">      begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      var end = begin + this.show - 1;</div><div class="line">      <span class="keyword">if</span> ( end &gt; this.total) &#123;</div><div class="line">        end = this.total;</div><div class="line">        begin = end - this.show;</div><div class="line">        begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      &#125;</div><div class="line">      this.begin = begin;</div><div class="line">      this.end = end;</div><div class="line">  &#125;</div><div class="line">   &lt;!-- 渲染 --&gt;</div><div class="line">  Pagination.prototype.render = <span class="keyword">function</span>(container) &#123;</div><div class="line">      //获取容器Dom对象</div><div class="line">      <span class="keyword">if</span>(typeof container === <span class="string">'string'</span>) &#123;</div><div class="line">          container = document.querySelectorAll(container);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span>(container.length === undefined) &#123;</div><div class="line">          container = [container];</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span>(var s = 0; s&lt;=container.length;s++) &#123;</div><div class="line">          var container = container[s];</div><div class="line">          var prevElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          prevElement.innerHTML = <span class="string">'&lt;\a href="#" aria-label="Previous"&gt;&lt;\span ariahidden="true"&gt;&amp;laquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage == 1) &#123;</div><div class="line">            prevElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(prevElement);</div><div class="line">          <span class="keyword">for</span> (var i = this.begin; i &lt;= this.end; i++) &#123;</div><div class="line">            var liElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">            liElement.innerHTML = <span class="string">'&lt;\a href="#"&gt;'</span>+i+<span class="string">'&lt;\/a&gt;'</span>;</div><div class="line">            <span class="keyword">if</span> (this.currentPage == i ) &#123;</div><div class="line">              liElement.classList.add(<span class="string">'active'</span>);</div><div class="line">            &#125;</div><div class="line">            container.appendChild(liElement);</div><div class="line">          &#125;</div><div class="line">          var nextElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          nextElement.innerHTML = <span class="string">' &lt;\a href="#" aria-label="Next"&gt;&lt;\span ariahidden="true"&gt;&amp;raquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage &gt;= ( this.end- this.region)) &#123;</div><div class="line">            nextElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(nextElement);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  module.exports = Pagination;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>main.js如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">    var Pagination = require(<span class="string">'./modules/pagination.js'</span>);</div><div class="line">    var pager = new Pagination(1,20,7);</div><div class="line">    pager.render(ElementDom);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+        <h2 id="简单的柱状图-改进"><a href="#简单的柱状图-改进" class="headerlink" title="简单的柱状图[改进]"></a>简单的柱状图[改进]</h2><h3 id="我们在上一节的基础上，加上了两种比例尺和坐标轴"><a href="#我们在上一节的基础上，加上了两种比例尺和坐标轴" class="headerlink" title="我们在上一节的基础上，加上了两种比例尺和坐标轴"></a>我们在上一节的基础上，加上了两种比例尺和坐标轴</h3><p>坐标轴的样式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">	.axis path,</div><div class="line">	.axis line&#123;</div><div class="line">	    fill: none;</div><div class="line">	    stroke: black;</div><div class="line">	    shape-rendering: crispEdges;</div><div class="line">	&#125;</div><div class="line">	 </div><div class="line">	.axis text &#123;</div><div class="line">	    font-family: sans-serif;</div><div class="line">	    font-size: 11px;</div><div class="line">	&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>主要代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://d3js.org/d3.v3.min.js"</span> charset=<span class="string">"utf-8"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">	var arr = [10,30,42,59,18];</div><div class="line">	var svgW = 300;</div><div class="line">	var svgH = 200;</div><div class="line">	var barH = 18;</div><div class="line">	var colors = [<span class="string">'#ddd'</span>,<span class="string">'#f00'</span>,<span class="string">'#6453c9'</span>,<span class="string">'#000'</span>,<span class="string">'#eee'</span>];</div><div class="line">	var padding = &#123;left:30, right:30, top:20, bottom:20&#125;;</div><div class="line">	var xlinear = d3.scale.linear()</div><div class="line">		.domain([0,d3.max(arr)])</div><div class="line">		.range([0,svgW-padding.left*2]);</div><div class="line">	var yordinal = d3.scale.ordinal()</div><div class="line">		.domain(d3.range(arr.length))</div><div class="line">		.rangeRoundBands([svgH-padding.top*2,0]);</div><div class="line">	var ordinal = d3.scale.ordinal()</div><div class="line">		.domain(colors.length)</div><div class="line">		.range(colors);</div><div class="line">	var axis = d3.svg.axis()</div><div class="line">		.scale(xlinear)</div><div class="line">		.orient(<span class="string">'bottom'</span>)</div><div class="line">		.ticks(7);</div><div class="line">	var yaxis = d3.svg.axis()</div><div class="line">		.scale(yordinal)</div><div class="line">		.orient(<span class="string">'left'</span>)</div><div class="line">		// .ticks(7);</div><div class="line">	var svg = d3.select(<span class="string">'body'</span>)</div><div class="line">		.append(<span class="string">'svg'</span>);</div><div class="line">	// 进度条</div><div class="line">	svg.attr(<span class="string">'width'</span>,svgW)</div><div class="line">		.attr(<span class="string">'height'</span>,svgH)</div><div class="line">		.selectAll(<span class="string">'rect'</span>)</div><div class="line">		.data(arr)</div><div class="line">		.enter()</div><div class="line">		.append(<span class="string">'rect'</span>)</div><div class="line">		.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">			<span class="built_in">return</span> padding.left;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">			<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'width'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">			<span class="built_in">return</span> xlinear(d)-padding.right;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'height'</span>,<span class="keyword">function</span>(i) &#123;</div><div class="line">			<span class="built_in">return</span> (svgH-padding.top*2-barH*arr.length+1)/arr.length;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'fill'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">			<span class="built_in">return</span> ordinal(i)</div><div class="line">		&#125;);</div><div class="line">	// 文字</div><div class="line">	svg.selectAll(<span class="string">'.text'</span>)</div><div class="line">		.data(arr)</div><div class="line">		.enter()</div><div class="line">		.append(<span class="string">'text'</span>)</div><div class="line">		.attr(<span class="string">'class'</span>,<span class="string">'text'</span>)</div><div class="line">		.attr(<span class="string">'x'</span>,<span class="keyword">function</span>(d) &#123;</div><div class="line">			<span class="built_in">return</span> xlinear(d);</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'y'</span>,<span class="keyword">function</span>(d,i) &#123;</div><div class="line">			<span class="built_in">return</span> yordinal(i)+padding.top+barH/2;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'dx'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">			<span class="built_in">return</span> 10;</div><div class="line">		&#125;)</div><div class="line">		.attr(<span class="string">'dy'</span>,<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">			// 居中</div><div class="line">			<span class="built_in">return</span> (yordinal.rangeBand() - barH/2)/2;;</div><div class="line">		&#125;)</div><div class="line">		.text(<span class="keyword">function</span>(d) &#123;</div><div class="line">			<span class="built_in">return</span> d;</div><div class="line">		&#125;)</div><div class="line">	svg.append(<span class="string">"g"</span>)</div><div class="line">		.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">		.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+(svgH-padding.top)+<span class="string">")"</span>)</div><div class="line">		.call(axis);</div><div class="line">	svg.append(<span class="string">"g"</span>)</div><div class="line">		.attr(<span class="string">"class"</span>,<span class="string">"axis"</span>)</div><div class="line">		.attr(<span class="string">"transform"</span>,<span class="string">"translate("</span>+ padding.left +<span class="string">","</span>+padding.top+<span class="string">")"</span>)</div><div class="line">		.call(yaxis);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
 <p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
       
@@ -370,7 +366,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/bootstrap-JS-seajs/" rel="tag"># bootstrap,JS,seajs</a>
+            <a href="/tags/D3/" rel="tag"># D3</a>
           
         </div>
       
@@ -383,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/13/基于bootstrap（复杂）分页样式的js原生实现/" rel="next" title="基于bootstrap（复杂）分页样式的js原生实现">
-                <i class="fa fa-chevron-left"></i> 基于bootstrap（复杂）分页样式的js原生实现
+              <a href="/2017/09/09/数据可视化【D3.js】之二/" rel="next" title="数据可视化【D3.js】之二">
+                <i class="fa fa-chevron-left"></i> 数据可视化【D3.js】之二
               </a>
             
           </div>
@@ -392,10 +388,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/15/ECMAScript6学习/" rel="prev" title="ECMAScript6学习(上)">
-                ECMAScript6学习(上) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -423,7 +415,7 @@
    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </span>
 <!--PC和WAP自适应版-->
-<div id="SOHUCS" sid="实现分页组件" ></div> 
+<div id="SOHUCS" sid="数据可视化【D3.js】之三" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = 'cysUJYvpg'; 
@@ -533,7 +525,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#记得引入bootstrap的css样式-我们使用seajs去封装"><span class="nav-number">1.</span> <span class="nav-text">记得引入bootstrap的css样式,我们使用seajs去封装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的柱状图-改进"><span class="nav-number">1.</span> <span class="nav-text">简单的柱状图[改进]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我们在上一节的基础上，加上了两种比例尺和坐标轴"><span class="nav-number">1.1.</span> <span class="nav-text">我们在上一节的基础上，加上了两种比例尺和坐标轴</span></a></li></ol></li></ol></div>
             
 
           </div>

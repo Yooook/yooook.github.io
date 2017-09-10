@@ -241,6 +241,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/26/【详细】JS原生实现Ajax的post提交方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/26/【详细】JS原生实现Ajax的post提交方式/" itemprop="url">
+                  【详细】JS原生实现Ajax的post提交方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T18:03:39+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax-JS/" itemprop="url" rel="index">
+                    <span itemprop="name">Ajax,JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=<span class="string">"en"</span>&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</div><div class="line">  &lt;title&gt;Document&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;form action=<span class="string">"./data.php"</span> method=<span class="string">"post"</span>&gt;</div><div class="line">    用户：&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"username"</span>&gt;</div><div class="line">    密码：&lt;input <span class="built_in">type</span>=<span class="string">"password"</span> id=<span class="string">"password"</span>&gt;</div><div class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"button"</span> id=<span class="string">"btn"</span> value=<span class="string">"登录"</span>&gt;</div><div class="line">  &lt;/form&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script&gt;</div><div class="line">(<span class="keyword">function</span>(window,document)&#123;</div><div class="line">    window.onload = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      var btn = document.getElementById(<span class="string">'btn'</span>);</div><div class="line">      btn.onclick = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">        var username = document.getElementById(<span class="string">'username'</span>).value;</div><div class="line">        var password = document.getElementById(<span class="string">'password'</span>).value;</div><div class="line">        // 常见XMLHttpRequest对象，分为ie和其他浏览器</div><div class="line">        var xhr = null;</div><div class="line">        <span class="keyword">if</span> (window.XMLHttpRequest) &#123;</div><div class="line">          // 其他浏览器的内置对象</div><div class="line">            xhr = new XMLHttpRequest();</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">          // ie浏览器的内置对象</div><div class="line">            xhr = new ActiveXObject(<span class="string">'Mircrosoft.XMLHTTP'</span>);</div><div class="line">        &#125;</div><div class="line">        // 拼接form表单提交地址</div><div class="line">        var url = <span class="string">'./data.php'</span>;</div><div class="line">        </div><div class="line">        // 通过open方法进行初始化配置</div><div class="line">        xhr.open(<span class="string">'post'</span>,url,<span class="literal">true</span>);</div><div class="line">        // 设置表单提交的的编码格式，post默认提交类型（enctype属性），主要是post提交在低版本浏览器会产生表单变量未定义；</div><div class="line">        xhr.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/x-www-form-urlencoded'</span>);</div><div class="line">        var param = <span class="string">'username='</span> + encodeURIComponent(username) + <span class="string">'&amp;password='</span> + password;</div><div class="line">        // 数据请求之后的回调函数</div><div class="line">        xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">          // 判断服务器数据请求是否成功</div><div class="line">          <span class="keyword">if</span> (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123;</div><div class="line">            // 请求的数据类型为responseText</div><div class="line">            var data = xhr.responseText;</div><div class="line">            console.log(data);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">     </div><div class="line">        // 执行发送请求的动作</div><div class="line">        xhr.send(param);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)(window,document);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	<span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">'username'</span>];</div><div class="line">	<span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">'password'</span>];</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="variable">$username</span> == <span class="string">'admin'</span> &amp;&amp; <span class="variable">$password</span> == 123) &#123;</div><div class="line">		<span class="built_in">echo</span> <span class="string">"登录成功"</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">echo</span> <span class="string">"登录失败"</span>;</div><div class="line">	&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<p>一定要把 xhr.setRequestHeader(‘Content-Type’,’application/x-www-form-urlencoded’);写上，并且正确，否则返回的数据会出现多余的html代码，返回失败</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/04/25/【详细】JS原生实现Ajax的get提交方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1157,7 +1303,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
