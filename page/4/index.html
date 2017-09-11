@@ -363,16 +363,14 @@
       
         
           
-          实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。
-12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &#123;    var o;    switch (typeof obj) &#123;        case "undefined
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/每天十道面试题2-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="built_in">clone</span>(obj) &#123;</div><div class="line">    var o;</div><div class="line">    switch (typeof obj) &#123;</div><div class="line">        <span class="keyword">case</span> <span class="string">"undefined"</span>:</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"Function"</span>:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"string"</span>:</div><div class="line">            o = obj + <span class="string">""</span>;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"number"</span>:</div><div class="line">            o = obj - 0;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"boolean"</span>:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="string">"object"</span>: // object 分为两种情况 对象（Object）或数组（Array）</div><div class="line">            <span class="keyword">if</span> (obj === null) &#123;</div><div class="line">                o = null;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">if</span> (Object.prototype.toString.call(obj).slice(8, -1) === <span class="string">"Array"</span>) &#123;</div><div class="line">                    o = [];</div><div class="line">                    <span class="keyword">for</span> (var i = 0; i &lt; obj.length; i++) &#123;</div><div class="line">                        o.push(<span class="built_in">clone</span>(obj[i]));</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    o = &#123;&#125;;</div><div class="line">                    <span class="keyword">for</span> (var k <span class="keyword">in</span> obj) &#123;</div><div class="line">                        o[k] = <span class="built_in">clone</span>(obj[k]);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">        default:</div><div class="line">            o = obj;</div><div class="line">            <span class="built_in">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> o;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要说一下这个Object.prototype.toString.call(obj).slice(8, -1)。对于基本类型的判断我们可以typeof或者insctanceof，但是对于复杂的我们就可以用Object.prototype.toString.call(obj).slice(8, -1)精确判断。</p>
+<p>Object.prototype.toString.call(obj)返回值如下类型：<br>[object String]<br>[object Array]<br>[object Function]</p>
+<p>所以通过Object.prototype.toString.call(obj).slice(8, -1) === “Array”，我们可以很好的判断复杂类型</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -513,15 +511,16 @@
       
         
           
-          有两种方法，第一种，通过控制器12345&lt;\ul class="nav nav-sidebar" ng-controller="NavController"&gt;  &lt;\li ng-class="&#123;active:type=='in_theaters'&#125;"&gt;&lt;\a href="#/in_theaters/1"&gt;正在热映&lt;\/a&gt;&lt;\/li&gt;  &lt;\li ng-class="&#123;active:type=='co
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/10/Angular之焦点切换/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h3 id="有两种方法，第一种，通过控制器"><a href="#有两种方法，第一种，通过控制器" class="headerlink" title="有两种方法，第一种，通过控制器"></a>有两种方法，第一种，通过控制器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;\ul class=<span class="string">"nav nav-sidebar"</span> ng-controller=<span class="string">"NavController"</span>&gt;</div><div class="line">  &lt;\li ng-class=<span class="string">"&#123;active:type=='in_theaters'&#125;"</span>&gt;&lt;\a href=<span class="string">"#/in_theaters/1"</span>&gt;正在热映&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">  &lt;\li ng-class=<span class="string">"&#123;active:type=='coming_soon'&#125;"</span>&gt;&lt;\a href=<span class="string">"#/coming_soon/1"</span>&gt;即将上映&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">  &lt;\li ng-class=<span class="string">"&#123;active:type=='top250'&#125;"</span>&gt;&lt;\a href=<span class="string">"#/top250/1"</span>&gt;TOP&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">&lt;\/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">.controller(<span class="string">'NavController'</span>, [</div><div class="line">  <span class="string">'$scope'</span>,</div><div class="line">  <span class="string">'$location'</span>,</div><div class="line">  <span class="keyword">function</span>(<span class="variable">$scope</span>, <span class="variable">$location</span>) &#123;</div><div class="line">    <span class="variable">$scope</span>.<span class="variable">$location</span> = <span class="variable">$location</span>;</div><div class="line">    <span class="variable">$scope</span>.<span class="variable">$watch</span>(<span class="string">'$location.path()'</span>, <span class="keyword">function</span>(now) &#123;</div><div class="line">      <span class="keyword">if</span> (now.startsWith(<span class="string">'/in_theaters'</span>)) &#123;</div><div class="line">        <span class="variable">$scope</span>.type = <span class="string">'in_theaters'</span>;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now.startsWith(<span class="string">'/coming_soon'</span>)) &#123;</div><div class="line">        <span class="variable">$scope</span>.type = <span class="string">'coming_soon'</span>;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now.startsWith(<span class="string">'/top250'</span>)) &#123;</div><div class="line">        <span class="variable">$scope</span>.type = <span class="string">'top250'</span>;</div><div class="line">      &#125;</div><div class="line">      console.log(<span class="variable">$scope</span>.type);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">])</div></pre></td></tr></table></figure>
+<p>这里并没有使用$routeparams去获取路由后传入的参数，是因为不在同一个模块，无法获取/in_theaters/:page的page参数，所以注入$location对象，通过监视path()的返回值来进行焦点状态的切换。</p>
+<h3 id="第二种方法：自定义指令实现焦点切换"><a href="#第二种方法：自定义指令实现焦点切换" class="headerlink" title="第二种方法：自定义指令实现焦点切换"></a>第二种方法：自定义指令实现焦点切换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;\ul class=<span class="string">"nav nav-sidebar"</span>&gt;</div><div class="line">  &lt;\li auto-focus&gt;&lt;\a href=<span class="string">"#/in_theaters/1"</span>&gt;正在热映&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">  &lt;\li auto-focus&gt;&lt;\a href=<span class="string">"#/coming_soon/1"</span>&gt;即将上映&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">  &lt;\li auto-focus&gt;&lt;\a href=<span class="string">"#/top250/1"</span>&gt;TOP&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">&lt;\/ul&gt;</div></pre></td></tr></table></figure>
+<p>公共的js指令文件如下，使用必须先引入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span>(angular) &#123;</div><div class="line">  angular.module(<span class="string">'moviecat.directives.auto_focus'</span>, [])</div><div class="line">    .directive(<span class="string">'autoFocus'</span>, [<span class="string">'$location'</span>, <span class="keyword">function</span>(<span class="variable">$location</span>) &#123;</div><div class="line">      <span class="built_in">return</span> &#123;</div><div class="line">        restrict: <span class="string">'A'</span>, // E = Element, A = Attribute, C = Class, M = Comment</div><div class="line">        link: <span class="keyword">function</span>(<span class="variable">$scope</span>, iElm, iAttrs, controller) &#123;</div><div class="line">          <span class="variable">$scope</span>.<span class="variable">$location</span> = <span class="variable">$location</span>;</div><div class="line">          <span class="variable">$scope</span>.<span class="variable">$watch</span>(<span class="string">'$location.path()'</span>, <span class="keyword">function</span>(now) &#123;</div><div class="line">            // 当path发生变化时执行，now是变化后的值</div><div class="line">            var aLink = iElm.children().attr(<span class="string">'href'</span>);</div><div class="line">            var <span class="built_in">type</span> = aLink.replace(/<span class="comment">#(\/.+?)\/\d+/, '$1'); // /coming_soon</span></div><div class="line">            <span class="keyword">if</span> (now.startsWith(<span class="built_in">type</span>)) &#123;</div><div class="line">              iElm.parent().children().removeClass(<span class="string">'active'</span>);</div><div class="line">              iElm.addClass(<span class="string">'active'</span>);</div><div class="line">            &#125;</div><div class="line">          &#125;)</div><div class="line">        &#125;</div><div class="line">      &#125;;</div><div class="line">    &#125;]);</div><div class="line">&#125;)(angular);</div></pre></td></tr></table></figure>
+<p>需要说明的是angular所有的DOM操作应该在link中完成，语法类似jquery，iElm代表当前对象</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -662,16 +661,17 @@
       
         
           
-          首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)}
-根据传入的start和coun
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/10/Angular之分页实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>首先要明确一下路由的配置：<br>{<br>    1.npm install angular-route –save<br>    2.在模块中注入ngRoute模块<br>    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});<br>    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)<br>}</p>
+<p>根据传入的start和count控制分页，关系如下<br>start = (页码page-1)* count<br>pagecount = Math.ceil(total/count)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span> (angular) &#123;</div><div class="line">	<span class="string">'use strict'</span>;</div><div class="line">	var module = angular.module(<span class="string">'moviecat.in_theaters'</span>, [<span class="string">'ngRoute'</span>,<span class="string">'moviecat.services.http'</span>]);</div><div class="line">	</div><div class="line">	//该模块对路由的地址添加了page参数，传入用于控制翻页的页码</div><div class="line">	module.config([<span class="string">'$routeProvider'</span>, <span class="keyword">function</span>(<span class="variable">$routeProvider</span>) &#123;</div><div class="line">		<span class="variable">$routeProvider</span>.when(<span class="string">'/in_theaters/:page'</span>, &#123;</div><div class="line">			templateUrl: <span class="string">'in_theaters/view.html'</span>,</div><div class="line">			controller: <span class="string">'InTheatersController'</span></div><div class="line">		&#125;);</div><div class="line">	&#125;])</div><div class="line">	</div><div class="line">	module.controller(<span class="string">'InTheatersController'</span>, [</div><div class="line">		<span class="string">'$scope'</span>,</div><div class="line">		<span class="string">'$route'</span>,</div><div class="line">		<span class="string">'$routeParams'</span>,</div><div class="line">		<span class="string">'HttpService'</span>,</div><div class="line">		<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$route</span>,<span class="variable">$routeParams</span>,HttpService) &#123;</div><div class="line">			var count = 10;</div><div class="line"></div><div class="line">			//获取传入的参数</div><div class="line">			var page = parseInt(<span class="variable">$routeParams</span>.page);</div><div class="line"></div><div class="line">			var start = (page - 1)*count;</div><div class="line">			<span class="variable">$scope</span>.loading = <span class="literal">true</span>;</div><div class="line">			<span class="variable">$scope</span>.subjects = [];</div><div class="line">			<span class="variable">$scope</span>.message = <span class="string">''</span>;</div><div class="line">			<span class="variable">$scope</span>.totalCount = 0;</div><div class="line"></div><div class="line">			//赋值给currentPage变量，默认值为1，这个1是在总路由中提前配置的</div><div class="line">			<span class="variable">$scope</span>.currentPage = page;</div><div class="line"></div><div class="line">			<span class="variable">$scope</span>.totalPages = 0;</div><div class="line">			HttpService.jsonp(<span class="string">'http://api.douban.com/v2/movie/in_theaters'</span>,&#123;start:start,count:count&#125;,<span class="keyword">function</span>(data) &#123;</div><div class="line">				<span class="variable">$scope</span>.subjects = data.subjects;</div><div class="line">				<span class="variable">$scope</span>.totalCount = data.total;</div><div class="line">				<span class="variable">$scope</span>.title = data.title;</div><div class="line"></div><div class="line">				//计算总页数</div><div class="line">				<span class="variable">$scope</span>.totalPages = Math.ceil(<span class="variable">$scope</span>.totalCount/count);</div><div class="line"></div><div class="line">				<span class="variable">$scope</span>.loading = <span class="literal">false</span>;</div><div class="line">				<span class="variable">$scope</span>.<span class="variable">$apply</span>();</div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			//这个是控制翻页的函数，我们采用的是上一页下一页两个按钮进行翻页的</div><div class="line">			<span class="variable">$scope</span>.go = <span class="keyword">function</span>(page) &#123;</div><div class="line">				<span class="keyword">if</span> (page&gt;=1&amp;&amp;page&lt;=<span class="variable">$scope</span>.totalPages)</div><div class="line">				<span class="variable">$route</span>.updateParams(&#123; page:page &#125;);</div><div class="line">			&#125;</div><div class="line">		   &#125;</div><div class="line">		]);</div><div class="line">&#125;)(angular);</div></pre></td></tr></table></figure>
+<p>html部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;\div ng-show=<span class="string">"!loading"</span>&gt;</div><div class="line">	&lt;\p&gt;总共：&#123;&#123;totalCount&#125;&#125; 条记录,&#123;&#123;totalPages&#125;&#125;页&lt;\/p&gt;	</div><div class="line">	&lt;\nav aria-label=<span class="string">"..."</span>&gt;</div><div class="line">	  &lt;\ul class=<span class="string">"pager"</span>&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&lt;=1&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage - 1)"</span>&gt;&lt;&lt; Previous&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	    &lt;\li ng-class=<span class="string">"&#123;disabled:currentPage&gt;=totalPages&#125;"</span>&gt;&lt;\a ng-click=<span class="string">"go(currentPage + 1)"</span>&gt;Next &gt;&gt;&lt;\/a&gt;&lt;\/li&gt;</div><div class="line">	  &lt;\/ul&gt;</div><div class="line">	&lt;\/nav&gt;</div><div class="line">&lt;\/div&gt;</div></pre></td></tr></table></figure>
+<p>总路由部分，初始1的由来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$routeProvider</span>.otherwise(&#123;redirectTo: <span class="string">'/in_theaters/1'</span>&#125;);</div></pre></td></tr></table></figure>
+<p>分页制作完成，disabled类控制按钮是否可以点</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -812,16 +812,11 @@
       
         
           
-          有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：
-1.复制相应动画的html和css到项目对应页面2.$scope暴露变量，值为bool，例如$scope.flag = true;3.加载完成后改变变量的值,$scope.flag = fal
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/10/Angular之loading动画实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’<a href="https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：" target="_blank" rel="external">https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：</a></p>
+<p>1.复制相应动画的html和css到项目对应页面<br>2.$scope暴露变量，值为bool，例如$scope.flag = true;<br>3.加载完成后改变变量的值,$scope.flag = false;<br>4.html部分，ng-show=”flag”;<br>5.在回调函数中$scope.apply()重新同步数据;</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -962,18 +957,15 @@
       
         
           
-          8、什么叫优雅降级和渐进增强？
-渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
-9、浏览器的内核分别是什么?
-IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是presto内核，Opera现已改用G
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/每天十道面试题1-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>8、什么叫优雅降级和渐进增强？</p>
+<p>渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。<br>优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。</p>
+<p>9、浏览器的内核分别是什么?</p>
+<p>IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是presto内核，Opera现已改用Google Chrome的Blink内核 Chrome：Blink(基于webkit，Google与Opera Software共同开发)</p>
+<p>10、怎样添加、移除、移动、复制、创建和查找节点？</p>
+<p>1）创建新节点 createDocumentFragment() //创建一个DOM片段 createElement() //创建一个具体的元素 createTextNode() //创建一个文本节点<br>2）添加、移除、替换、插入 appendChild() //添加 removeChild() //移除 replaceChild() //替换 insertBefore() //插入<br>3）查找 getElementsByTagName() //通过标签名称 getElementsByName() //通过元素的Name属性的值 getElementById() //通过元素Id，唯一性</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1114,18 +1106,20 @@ IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是p
       
         
           
-          4、简述一下src与href的区别
-href 是指向网络资源所在位置，仅仅是建立链接，用于超链接。src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求src资源时会将其指向的资源下载并应用到文档内。
-5、什么是CSS Hack?
-针对不同的浏览器写不同的CSS,就是 CSS Hack，IE浏览器Hack一般又分为三种，条件Hack、属性级Hack、选择符Hack{    // 1、条件Hack  \&lt;!–[if IE]&gt;;     &lt;\style&gt
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/每天十道面试题1-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>4、简述一下src与href的区别</p>
+<p>href 是指向网络资源所在位置，仅仅是建立链接，用于超链接。<br>src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求src资源时会将其指向的资源下载并应用到文档内。</p>
+<p>5、什么是CSS Hack?</p>
+<p>针对不同的浏览器写不同的CSS,就是 CSS Hack，IE浏览器Hack一般又分为三种，条件Hack、属性级Hack、选择符Hack<br>{<br>    // 1、条件Hack<br>  \&lt;!–[if IE]&gt;;<br>     &lt;\style&gt;;<br>            .test{color:red;}<br>     &lt;\/style&gt;;<br>  &lt;![endif]–&gt;;<br>   // 2、属性Hack<br>    .test{<br>    color:#090\9; /<em> For IE8+ </em>/<br>    <em>color:#f00;  /</em> For IE7 and earlier <em>/<br>    _color:#ff0;  /</em> For IE6 and earlier */<br>    }<br>   // 3、选择符Hack</p>
+<pre><code>* html .test{color:#090;}       /* For IE6 and earlier */
+* + html .test{color:#ff0;}     /* For IE7 */
+</code></pre><p>}</p>
+<p>6、简述同步和异步的区别</p>
+<p>同步是阻塞模式，异步是非阻塞模式。 同步就是指一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去； 异步是指进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。</p>
+<p>7、px和em的区别</p>
+<p>px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em得值不是固定的，并且em会继承父级元素的字体大小。 浏览器的默认字体高都是16px。所以未经调整的浏览器都符合: 1em=16px。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1266,18 +1260,33 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          1、什么是盒子模型？
-在网页中，一个元素占有空间的大小由元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分构成，他们一同构成css中元素的盒模型。不区分行内元素和块级元素。
-2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
-行内元素：a、span、img、input、strong、select、label、em、button、textarea 块级元素：div、列表元素（ul、li、dl、dt、dd）标题
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/每天十道面试题1-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>1、什么是盒子模型？</p>
+<p>在网页中，一个元素占有空间的大小由元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分构成，他们一同构成css中元素的盒模型。不区分行内元素和块级元素。</p>
+<p>2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？</p>
+<p>行内元素：a、span、img、input、strong、select、label、em、button、textarea 块级元素：div、列表元素（ul、li、dl、dt、dd）标题元素（h1-h6）<br>空元素：即系没有内容的HTML元素，例如：br、meta、hr、link、input、img</p>
+<p>3.CSS实现垂直水平居中</p>
+<p>方法一：相对某个元素垂直水平居中<br>    .parent{<br>      width: 500px;<br>      height: 500px;<br>      position:relative;<br>    }<br>    .son{<br>      width:100px;<br>      height:100px;<br>      position: absolute;<br>      top: 50%;<br>      left: 50%;<br>      margin-top:-50px;<br>      margin-left: -50px;<br>      background-color:#6699FF;<br>    }</p>
+<pre><code>或者：
+.parent{
+  width: 500px;
+  height: 500px;
+  position:relative;
+ }
+.son{
+  width:100px;
+  height:100px;
+  position: absolute; 
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  margin-top:-50px;
+  background-color:#6699FF;
+}
+</code></pre><p>方法二：相对视口垂直水平居中<br>    .parent {<br>      width: 100%;<br>      height: 100%;<br>      position: fixed;<br>    }<br>    .son {<br>      width: 100px;<br>      height: 100px;<br>      background: #ddd;<br>      position: relative;<br>      margin: 0 auto;<br>      top: 50%;<br>      margin-top: -50px;<br>    }</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1418,16 +1427,13 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          angular自定义跨域请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。
-123456
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/Angular之跨域请求/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="angular自定义跨域请求"><a href="#angular自定义跨域请求" class="headerlink" title="angular自定义跨域请求"></a>angular自定义跨域请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//自定义跨域请求</div><div class="line">(<span class="keyword">function</span>(angular) &#123;</div><div class="line">	var http = angular.module(<span class="string">'moviecat.services.http'</span>,[]);</div><div class="line">	http.service(<span class="string">'HttpService'</span>,[<span class="string">'$window'</span>,<span class="string">'$document'</span>,<span class="keyword">function</span>(<span class="variable">$window</span>,<span class="variable">$document</span>) &#123;</div><div class="line">		this.jsonp = <span class="keyword">function</span>(url, data, callback) &#123;</div><div class="line">			// 在全局变量中挂载毁掉函数</div><div class="line">			var fuSuffix = Math.random().toString().replace(<span class="string">'.'</span>, <span class="string">''</span>);</div><div class="line">			var cbFuncName = <span class="string">'my_cb_'</span> + fuSuffix;</div><div class="line">			<span class="variable">$window</span>[cbFuncName] = callback;</div><div class="line">			var querystring = url.indexOf(<span class="string">'?'</span>) == -1 ? <span class="string">'?'</span> :<span class="string">''</span>;</div><div class="line">			<span class="keyword">for</span> (var key <span class="keyword">in</span> data) &#123;</div><div class="line">				querystring += key + <span class="string">'='</span> + data[key] + <span class="string">'&amp;'</span>;</div><div class="line">			&#125;</div><div class="line">			querystring += <span class="string">'callback'</span> + <span class="string">'='</span> +cbFuncName;</div><div class="line">			var scriptElement = <span class="variable">$document</span>[0].createElement(<span class="string">'script'</span>);</div><div class="line">			scriptElement.src = url + querystring;</div><div class="line">			<span class="variable">$document</span>[0].body.appendChild(scriptElement);</div><div class="line">			console.log(scriptElement.src)</div><div class="line">		&#125;;</div><div class="line">	&#125;]);</div><div class="line">&#125;)(angular)</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="variable">$scope</span>.check = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  HttpService.jsonp(<span class="string">'http://218.6.160.55:7766/jsdApi/getToken'</span>,&#123;userName:<span class="variable">$scope</span>.user,<span class="built_in">pwd</span>: <span class="variable">$scope</span>.pwd&#125;,<span class="keyword">function</span>(data) &#123;</div><div class="line">    <span class="keyword">if</span> (data.code == 1) &#123;</div><div class="line">          <span class="variable">$scope</span>.token = data.data.token;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">          alert(data.msg);</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$scope</span>.<span class="variable">$apply</span>();//对<span class="variable">$scope</span>的数据重新同步</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用方法：<br>1，引入自定义跨域请求所在的js文件<br>2，注入moviecat.services.http模块以及HttpService服务到控制器中，通过HttpService调用jsonp方法<br>3，注意apply的使用。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1568,15 +1574,15 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/Angular之异步请求/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="使用angular本身提供的-http服务进行异步请求"><a href="#使用angular本身提供的-http服务进行异步请求" class="headerlink" title="使用angular本身提供的$http服务进行异步请求"></a>使用angular本身提供的$http服务进行异步请求</h2><p>以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：<br>1，都需要现在控制器里进行$http服务的注入，而不是模块的注入<br>2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。<br>3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>(&#123;</div><div class="line">		method:<span class="string">'GET'</span>,</div><div class="line">		url:<span class="string">'/app/data.json'</span></div><div class="line">	&#125;).then(<span class="keyword">function</span>(response) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(response)</div><div class="line">	&#125;, <span class="keyword">function</span>(response) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;);</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">view1Model.controller(<span class="string">'view1Controller'</span>,[<span class="string">'$scope'</span>,<span class="string">'$http'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>,<span class="variable">$http</span>)&#123;</div><div class="line"> 	<span class="variable">$scope</span>.name = <span class="string">''</span>;</div><div class="line">	<span class="variable">$http</span>.get(<span class="string">'./data.json'</span>).then(<span class="keyword">function</span>(data) &#123;</div><div class="line">		<span class="variable">$scope</span>.name = response;</div><div class="line">		console.log(data.data)</div><div class="line">	&#125;,<span class="keyword">function</span>(err) &#123;</div><div class="line">		console.log(<span class="string">'请求失败'</span>);</div><div class="line">	&#125;)</div><div class="line">&#125;]);</div></pre></td></tr></table></figure>
+<p>针对Chrome和Firefox进行测试，结果如下：</p>
+<p>Firefox（file协议下）：可以正常请求到数据，但是提示报错（XML 解析错误：格式不佳 位置：file:///C:/Users/Administrator/Desktop angular_test2/angular-seed(Modified)/app/data.json 行 1，列 1：）<br>Firefox（http协议下）：一切正常</p>
+<p>Chrome（file协议下）：不能请求到数据，但是提示报错（XMLHttpRequest cannot load file:///C:/Users/Administrator/Desktop/angular_test2/angular-seed(Modified)/app/view1/view1.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.）<br>Chrome（http协议下）：一切正常</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1717,15 +1723,10 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          ng-class=”{complate:todo.complate}”//只有一个括号$scope是双向数据绑定的核心可以用form + ng-submit 实现回车提交ng中路由是单独提供功能的模块ngRoute注意页面逻辑和界面逻辑的划分&lt;\input class=”toggle” type=”checkbox” ng-model=”item.completed”&gt;//绑定的value值页面统计时候直接用数组的length属性//angular实现回车提交的方法&lt;\form
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/09/Angular见闻之三/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>ng-class=”{complate:todo.complate}”//只有一个括号<br>$scope是双向数据绑定的核心<br>可以用form + ng-submit 实现回车提交<br>ng中路由是单独提供功能的模块ngRoute<br>注意页面逻辑和界面逻辑的划分<br>&lt;\input class=”toggle” type=”checkbox” ng-model=”item.completed”&gt;//绑定的value值<br>页面统计时候直接用数组的length属性<br>//angular实现回车提交的方法<br>&lt;\form ng-submit=”add()”&gt;<br>    &lt;\input class=”new-todo” placeholder=”What needs to be done?” ng-model=’text’ autofocus&gt;<br>&lt;\/form&gt;<br>过滤器的作用是进行数据筛选，尤其指repeat类型的列表数据<br>$watch只能监视scope成员<br>在$location对象中hash()和path()根据具体浏览器做出调整<br>自定义匹配规则，规避模糊匹配，可以自定义方法精确匹配<br>引入第三方文件的时候不写协议是为了适应http和https两种情况<br>所有有输入有输出的都叫做api<br>angular进行异步操作之后都需要进行$scope.apply()方法让scope数据重新进行绑定</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>

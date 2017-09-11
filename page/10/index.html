@@ -363,18 +363,29 @@
       
         
           
-          系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接
-1$ java -version
-命令窗口检查是否安装成功
-2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/08/Ionic+cordova+windows配置Android的App环境/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h3 id="1、Java-JDK-配置（Android-ADT需要）"><a href="#1、Java-JDK-配置（Android-ADT需要）" class="headerlink" title="1、Java JDK 配置（Android ADT需要）"></a>1、Java JDK 配置（Android ADT需要）</h3><p>最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，<br>在这里将它们记录下来，提供给需要的小伙伴们参考…….<br>详细配置: <a href="http://jingyan.baidu.com/article/f96699bb8b38e0894e3c1bef.html" target="_blank" rel="external">java环境配置链接</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ java -version</div></pre></td></tr></table></figure>
+<p>命令窗口检查是否安装成功</p>
+<h3 id="2、C-配置（node需要）"><a href="#2、C-配置（node需要）" class="headerlink" title="2、C++ 配置（node需要）"></a>2、C++ 配置（node需要）</h3><p>我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET Framework 4.5]安装发现严重错误，查了相关文档，是系统的问题，而我懒得升级系统或者重装系统（w7 sp1 支持Microsoft .NET Framework 4.5），所以安装了visual studio 2012，没有报错，很顺利！ 提示：并不影响app的生产<br>各种版本下载地址: <a href="http://blog.csdn.net/cometnet/article/details/19551125" target="_blank" rel="external">visual studio</a></p>
+<h3 id="3、Android-配置（打包Android应用需要）"><a href="#3、Android-配置（打包Android应用需要）" class="headerlink" title="3、Android 配置（打包Android应用需要）"></a>3、Android 配置（打包Android应用需要）</h3><p>【重点】</p>
+<h4 id="1、下载Android-SDK-Tools-Android工具链接"><a href="#1、下载Android-SDK-Tools-Android工具链接" class="headerlink" title="1、下载Android SDK Tools: Android工具链接"></a>1、下载Android SDK Tools: <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android工具链接</a></h4><h4 id="2、配置环境变量-Android配置环境变量"><a href="#2、配置环境变量-Android配置环境变量" class="headerlink" title="2、配置环境变量: Android配置环境变量"></a>2、配置环境变量: <a href="http://jingyan.baidu.com/article/" target="_blank" rel="external">Android配置环境变量</a></h4><h4 id="3、检查是否配置成功"><a href="#3、检查是否配置成功" class="headerlink" title="3、检查是否配置成功"></a>3、检查是否配置成功</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb</div></pre></td></tr></table></figure>
+<h4 id="4、相关组件下载"><a href="#4、相关组件下载" class="headerlink" title="4、相关组件下载"></a>4、相关组件下载</h4><p>现在有些人推荐离线安装，具体要下载的目录看下边写的，不过好几个包需要下载，这里我先说一下最方便的方法，可能会慢一些，不过步骤比较少，如果我所说的几个包，你没有显示，那就手动下载，地址就是 <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">Android</a><br>如果配置好了环境变量，输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ android</div></pre></td></tr></table></figure>
+<p>弹出Android SDK Manger窗口，勾选（所需要的几个包）Tools&gt; Android SDK Tools / Android SDK Platform-tools / Android SDK Build-tools 与Tools平级的勾选 API22（Android5.1.1）、API23（Android6.0），Extras里面勾选Android Support Respository 和 Google USB Driver 等待下载安装好即可，比较慢，可以喝杯茶了。</p>
+<p>手动下载的具体放置位置<a href="http://oo2fh73dq.bkt.clouddn.com/%E6%8D%95%E8%8E%B7.PNG" target="_blank" rel="external">目录图片链接</a>，解压放到相应位置即可</p>
+<h3 id="4、Node-配置（插件环境需要）"><a href="#4、Node-配置（插件环境需要）" class="headerlink" title="4、Node 配置（插件环境需要）"></a>4、Node 配置（插件环境需要）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node -v</div></pre></td></tr></table></figure>
+<h3 id="5、GIt-配置（需要从github上下载模板，团队开发）"><a href="#5、GIt-配置（需要从github上下载模板，团队开发）" class="headerlink" title="5、GIt 配置（需要从github上下载模板，团队开发）"></a>5、GIt 配置（需要从github上下载模板，团队开发）</h3><p>这个还用写？提示一下记得检查是否安装成功！！！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git version</div></pre></td></tr></table></figure></p>
+<h2 id="项目依赖环境搭建"><a href="#项目依赖环境搭建" class="headerlink" title="项目依赖环境搭建"></a>项目依赖环境搭建</h2><p>1、cordova（打包工具）<br>2、Ionic（框架）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cordova ionic</div></pre></td></tr></table></figure></p>
+<p>想说的是安装可能有点慢，如果安装不正常，估计是被墙了，那么就要利用淘宝镜像安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g cordova ionic</div></pre></td></tr></table></figure>
+<p>安装完成肯定都要迫不及待要创建app啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ionic start myapp</div></pre></td></tr></table></figure></p>
+<p>好啦，那么问题来啦！！！【坑】<br>如果报的错里面有：npminstall的字样<br>那就是npm需要全局安装（默认不是全局的）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g npm</div></pre></td></tr></table></figure></p>
+<p>然后再试试，好了那就没什么了，如果没好？<br>弹出了缺少一个gulp-sass这个模块？？【十分 超级 坑】<br>解决方法：<br>由于gulp-sass需要依赖于node-sass，所以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm rebuild node-sass</div></pre></td></tr></table></figure></p>
+<p>然后再次创建项目ok；</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -493,17 +504,17 @@
       
         
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-M
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/25/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
         
       
     </div>

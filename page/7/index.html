@@ -363,15 +363,11 @@
       
         
           
-          想法：先说一下个人的JavaScript使用的一个经历，这门语言使用了三年，基本平均下来每天使用两个小时还是有的，看过仅JavaScript相关的视频也有近千部，目测自己属于过渡高手的过程，当然了，每个人的标准也不一样。在读《JavaScript权威指南（第六版）》的时候，我觉得可以给自己较多惊喜的地方，也和自己之前想的不一样，我觉得这本书，是针对有一些JavaScript基础的人写的，如果没有之前的一些学习经验，我觉得自己不会在读的时候有像现在这样深的体会。这本书涉及的概念很多，我觉得前20章
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/05/《JavaScript权威指南》《JavaScript Dom编程艺术》读书感想/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="想法："><a href="#想法：" class="headerlink" title="想法："></a>想法：</h2><p>先说一下个人的JavaScript使用的一个经历，这门语言使用了三年，基本平均下来每天使用两个小时还是有的，看过仅JavaScript相关的视频也有近千部，目测自己属于过渡高手的过程，当然了，每个人的标准也不一样。在读《JavaScript权威指南（第六版）》的时候，我觉得可以给自己较多惊喜的地方，也和自己之前想的不一样，我觉得这本书，是针对有一些JavaScript基础的人写的，如果没有之前的一些学习经验，我觉得自己不会在读的时候有像现在这样深的体会。这本书涉及的概念很多，我觉得前20章都值得详细阅读学习，当然了，这是出于想当好一个程序员的人的看法，剩下的两章，关于H5的，前期了解就好，看的懂就行。我觉得这本书更多的是在JavaScript这一块，建立一个知识体系的作用，而不是教你如何写代码。相对《JavaScript Dom编程艺术》这本书，写代码的部分会多一些，也不难，主要是教会你为什么这么写，和如何写的问题，不过个人觉得内容有点少，案例也有点少。它的出发点主要是从三层分离的角度上去讲解JavaScript。从渐进增强，平稳退化的方面去解释一些概念，给人惊喜的部分比较少，不过读过之后也算有些收获。难道是因为我的水平太高了？？？？！！！！！哈哈哈~~~~原谅我神经质一下。</p>
+<p>每个人理解的深度不一样，还是好好体会。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -512,15 +508,10 @@
       
         
           
-          ~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名的文件，都必须要等脚本加载完毕后下载。之所以要把JavaScript放在body结束的地方，就是基于，渐进增强和分离JavaScript的观点。~如果有两个函数绑定在onload事件上，那么只有最后一
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/05/读《JavaScript Dom编程艺术》笔记之二/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则<br>~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名的文件，都必须要等脚本加载完毕后下载。之所以要把JavaScript放在body结束的地方，就是基于，渐进增强和分离JavaScript的观点。<br>~如果有两个函数绑定在onload事件上，那么只有最后一个函数有效，才会执行.解决方法如下，window.onload = function(){//多个函数pakr();lade()};<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span>(func) &#123;</div><div class="line">	var oldonload = window.onload;</div><div class="line">	<span class="keyword">if</span>(typeof window.onload != <span class="string">'function'</span>)&#123;</div><div class="line">		window.onload = func;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		window.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">			oldonload();</div><div class="line">			func();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line">~document.getElementsByTagName(<span class="string">'form'</span>) == document.forms</div><div class="line">~document.getAttribute(<span class="string">'src'</span>) = document.src</div><div class="line">~动态添加标记：1，document.write(<span class="string">'&lt;\p&gt;wf&lt;\/p&gt;'</span>),最大的问题是违背‘行为与表现分离’</div><div class="line">~targetElement.parentNode.inserBefore(newElement,targetElement);</div><div class="line">~编写inertAfter函数</div><div class="line"></div><div class="line">``` bash</div><div class="line"><span class="keyword">function</span>(newElement,targetElement) &#123;</div><div class="line">	var parent = targetElement.parentNode;</div><div class="line">	<span class="keyword">if</span>(parent.lastChild == targetElement)&#123;</div><div class="line">		parent.appendChild(newElement);</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		parent.insertBefore(newElement,targetElement.nextSibing)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -661,15 +652,10 @@
       
         
           
-          Try….force to use installed plugin as dependency.?这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：123456cordova plugin remove --force cordova-plugin-compat  cordova plugin add cordova-plugin-compat  cordova plugins  cordova platform remove android  co
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/02/Ionic中遇到的问题之二/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="Try…-force-to-use-installed-plugin-as-dependency"><a href="#Try…-force-to-use-installed-plugin-as-dependency" class="headerlink" title="Try….force to use installed plugin as dependency.?"></a>Try….force to use installed plugin as dependency.?</h2><p>这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cordova plugin remove --force cordova-plugin-compat  </div><div class="line">cordova plugin add cordova-plugin-compat  </div><div class="line">cordova plugins  </div><div class="line">cordova platform remove android  </div><div class="line">cordova platform add android  </div><div class="line">cordova plugin add cordova-plugin-camera</div></pre></td></tr></table></figure></p>
+<p>安装完后，在打包的时候会出现错误，要求安装Gradle，每次就是因为删了平台，第二次新建平台的原因，所以再去手动下载配置。具体方法：<a href="http://www.jianshu.com/p/9595eccac3d1" target="_blank" rel="external">http://www.jianshu.com/p/9595eccac3d1</a><br>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -810,17 +796,10 @@
       
         
           
-          Error: libsass bindings not found. Try reinstalling node-sass?1npm install -S gulp-sass@latest
-如果有用，请留言点赞，或者提出你们的问题，共同学习！
+            <h2 id="Error-libsass-bindings-not-found-Try-reinstalling-node-sass"><a href="#Error-libsass-bindings-not-found-Try-reinstalling-node-sass" class="headerlink" title="Error: libsass bindings not found. Try reinstalling node-sass?"></a>Error: <code>libsass</code> bindings not found. Try reinstalling <code>node-sass</code>?</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -S gulp-sass@latest</div></pre></td></tr></table></figure>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/02/Ionic中遇到的问题之一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -961,15 +940,10 @@
       
         
           
-          ~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&lt;\/body&gt;之前，这样能够使浏览器更快的加载页面~虽然关联数组的可读性更高，但是不推荐使用，因为它改变了array对象的属性；~DOM的前提是有文档，一份文档就是一棵节点树。~节点分为不同
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/01/读《JavaScript Dom编程艺术》笔记之一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、<br>~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;<br>~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&lt;\/body&gt;之前，这样能够使浏览器更快的加载页面<br>~虽然关联数组的可读性更高，但是不推荐使用，因为它改变了array对象的属性；<br>~DOM的前提是有文档，一份文档就是一棵节点树。<br>~节点分为不同的类型，元素节点，属性节点，文本节点<br>~若是一个站点用到多个JavaScript文件，为了减少对站点的请求次数，提高性能，应该合并到一个js文件里<br>~&lt;\a href=”###”  onclick=”showPic(this) return false;”&gt; 这里的this代表a对象，false是为了阻止默认行为<br>~每一个节点都有nodeType属性，元素节点1，属性节点2，文本节点3<br>~nodeValue是文本节点的属性<br>~’Javascript:’伪协议，让我们通过一个连接来调用JavaScript函数</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1110,15 +1084,10 @@
       
         
           
-          ~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。~jQuery对象是类数组，具有length属性~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组比之更有用~jQuery.borwser用于客户端嗅探。如果是IE会有msie属性值为true，如果是Firefox,会有值为true的mozilla属性，如果是Safari和Chrome，huiou
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/29/读《JavaScript权威指南（第六版）》第十九章/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。<br>~jQuery对象是类数组，具有length属性<br>~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组比之更有用<br>~jQuery.borwser用于客户端嗅探。如果是IE会有msie属性值为true，如果是Firefox,会有值为true的mozilla属性，如果是Safari和Chrome，huiou值为true的webkit属性，在Opera中会有值为true的opera属性。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1259,15 +1228,10 @@
       
         
           
-          ~非标准css属性：Firefox使用-moz-，chrome使用-webkit-,IE使用-ms-~box-boxsize：border-box包括内边距和边框，content-box不包括~visibility和display的区别在在于是否脱离标准文档流~脚本化的css中的style属性对应的值都是字符串。并且要包含相关单位。’399px’。~设置、获取css样式e.setAttribute(“style”,s) ==&gt; e.style.cssText = s;var s = e.s
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/29/读《JavaScript权威指南（第六版）》第十六章/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~非标准css属性：Firefox使用-moz-，chrome使用-webkit-,IE使用-ms-<br>~box-boxsize：border-box包括内边距和边框，content-box不包括<br>~visibility和display的区别在在于是否脱离标准文档流<br>~脚本化的css中的style属性对应的值都是字符串。并且要包含相关单位。’399px’。<br>~设置、获取css样式e.setAttribute(“style”,s) ==&gt; e.style.cssText = s;var s = e.setAttribute(“style”)==&gt;var s = e.style.cssText<br>~focus和blur，mouseenter，mouseleave事件不会冒泡，IE定义了focusion和focusout事件可以冒泡，jquery不支持。<br>~注册时间处理程序的两种方法，一种是设置目标对象或文档元素的属性的方式，另一种是将事件处理程序传递给对象或者元素，标准方法为addEventListener()，ie&lt;9时，attachEvent();<br>~IE&lt;9时的事件对象时window.event<br>~当通过设置html属性注册事件处理程序时，浏览器会把JavaScript编码转换到一个函数中。非Ie浏览器使用event参数来构造函数，Ie并没有要求参数，如果要是圆通event标识符在函数内，那么引用的是window.event.<br>~attachEvent注册事件处理程序时，函数内的this并不是指事件目标，而是全局对象window。<br>~IE可以通过event.returnValue = false;来取消事件，其他浏览器可以用event.preventDefault()取消默认事件；取消事件传播：event.stopPropagation();<br>~Ajax技术只能是在http或https协议下工作，file协议不行<br>~open方法指定请求的第一个参数除了get，post,还有delete，head，options和put。以及一些别禁止的；<br>~Ajax请求如果是post方式，需要‘Content-Type’头指定请求的主题的MIME类型：request.setRequestHeader(‘Content-Type’,’text/plain’);</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1408,15 +1372,10 @@
       
         
           
-          ~关于DOM：html的节点树，document节点=&gt;树的根部代表整个文档，text节点=&gt;文本节点，elemet是html元素的节点。他们都是Node的子类。~在低版本浏览器中getElementById匹配的Id不区分大小写，而且也可以返回匹配name~html的name属性最初打算为了表单元素分配名字，和id不同的是name属性只有在极少的html元素中有效，包括表单，表单元素，&lt;\iframe&gt;,&lt;\img&gt;~基于名字选择html元素，getElem
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/27/读《JavaScript权威指南（第六版）》第十五章/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~关于DOM：html的节点树，document节点=&gt;树的根部代表整个文档，text节点=&gt;文本节点，elemet是html元素的节点。他们都是Node的子类。<br>~在低版本浏览器中getElementById匹配的Id不区分大小写，而且也可以返回匹配name<br>~html的name属性最初打算为了表单元素分配名字，和id不同的是name属性只有在极少的html元素中有效，包括表单，表单元素，&lt;\iframe&gt;,&lt;\img&gt;<br>~基于名字选择html元素，getElementsByName()<br>~document.all[]获取所有文档中的元素，现已经废弃<br>~element对象的children类似于childnodes但并不是标准属性<br>~对于类似&lt;%i&gt;,&lt;%code&gt;,&lt;%span&gt;这些内联元素，clientWidth和clientHeight总是返回0；<br>~&lt;%form&gt;元素中的元素都有一个form属性引用了该包含的表单，事件处理程序总能够通过this.form来得到form对象的引用，这样就意味着，表单的元素可以通过this.form.x得方式获取；<br>~在H5中，placeholder属性制定了用户输入前在输入域中的信息提示<br>~option对象可以通过options.length = 0l来移除所有选项，通过option[]获取某个option对象，具体插入删除用，insertBefore(),removeChild()方法<br>~在设置了defer或者async属性的脚本中不要使用document.write();<br>该章节内容广度大，但是就项目开发而言，实际运用涉及的少</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1557,15 +1516,10 @@
       
         
           
-          ~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location对象，即wi~ndow.location === document.location//true~window.location和location输出相同，location.href和location
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/27/读《JavaScript权威指南（第六版）》第十四章/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用<br>~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location对象，即wi<br>~ndow.location === document.location//true<br>~window.location和location输出相同，location.href和location.toString()输出相同 解析URL：var<br>~query = location.search.substring(1)//找到查询串并去掉‘？’；var pairs =<br>~query.split(‘&amp;’)//用&amp;符号分割字符串，并且返回数组； assign()可以使窗口载入并显示你说指定的URL中的文档，replace()类<br>~似，推荐用后者，因为后者在载入的时候会在历史记录中删除当前文档，否则后退按钮会把浏览器带回到原始文档，再次载入新文档；<br>~可以通过location.replace()方法载入静态的html，例如if(!XMLHttpRequest)<br>~location.replace(“staticpage.html”);//重定向<br>~location对象除了上面的两个方法之外，还有reload()方法，可以让浏览器重新载入当前文档<br>~跳转还可以，直接将新的URL或者相对URL赋值给location，例如 location = ‘www.baidu.com’;location =<br>‘index.html’; 其他方式：location = ‘#top’;location.search = ‘?page=’ +<br>~(pagenum+1);//进入下一页 浏览历史：window对象的history属性引用的是History对象。这个对象将窗口浏览历史用文档和文档状态列<br>~表的形式标识。具有length属性，表示历史记录的数量，出于安全考虑吗，脚本不能访问已经保存了的URL；<br>~History对象有back(),forward(),go()方法等实现前进后退，go()方法接受正负整形参数<br>~window对象的navigator和screen属性分别引用的是navigator对象和screen对象<br>~Navigator对象的命名是为了纪念Netscape之后的navigator浏览器<br>~一般用navigator的userAgent属性进行网络嗅探，它包含了APPVersion所有的信息，以及一些其他信息<br>~通过navigator对象的onLine属性可以判断当前网络是否链接<br>~Screen对象提供有关窗口大小和颜色数量的信息。属性width，height指定以像素为单位的窗口大小，属性availWidth和availHeight指定实际可用的显示大小<br>~关于对话框：window对象提供了3个方法1。alert(),comfirm(),prompt()后两种会产生阻塞，在用户关掉他们所显示的对话框之前，不会返回，意味着代码运行会停止，alert()也会,但不是总是。<br>~一个浏览器有可以有多个标签页，他们都是独立的“浏览器上下文”，都具有独立的window对象，但并不是总是没有关系，可以用过一个窗口的脚本打开另一个标签页面。<br>~window对象的open(‘url’,’窗口名字’,’设置属性’，’bool替换或创建历史记录当前条目’)和close()方法打开和关闭一个窗口。<br>~窗口关闭了，对象依然存在，已经关闭的窗口会有个值为true的closed属性，它的document是null，方法通常也不会再工作。</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
@@ -1706,15 +1660,11 @@
       
         
           
-          ~web浏览器中的JavaScript称为客户端JavaScript~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它~alert，settimeout，location等都是window的方法或者属性~在客户端JavaScript中，window对象也是全局对象，处于作用域的顶部，它的属性和方法都是全局变量和全局函数~Window对象有一个引用自身的属性，叫做window，如果需要引用窗口对象本身，可以使用这
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/23/读《JavaScript权威指南（第六版）》第13章/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>~web浏览器中的JavaScript称为客户端JavaScript<br>~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它<br>~alert，settimeout，location等都是window的方法或者属性<br>~在客户端JavaScript中，window对象也是全局对象，处于作用域的顶部，它的属性和方法都是全局变量和全局函数<br>~Window对象有一个引用自身的属性，叫做window，如果需要引用窗口对象本身，可以使用这个属性，如果只是引用全局窗口对象的属性，通常不需要用到window<br>~Window对象中最重要的一个属性是document，它引用Document对象，后者表示在窗口中的文档。<br>~Document对象有一些重要的方法，比如getElemenById(),返回element对象，element对象还有其他重要的属性和方法；每个element对象都有style和className属性<br>~用户体验不应该依赖于JavaScript，但JavaScript可以增强体验<br>~注意区分web文档（document,element,css,事件处理程序）和web应用里面的JavaScript（XMLHttpRequest）<br>~嵌入客户端JavaScript代码有四种方式，内联，外联，事件处理程序内onclick，放在一个URL里，这个URL使用特殊的”javascript：”协议，后两种已经很少使用，内联也用的少了，主要是‘unobtrusive JavaScript’编程哲学。（html和JavaScript分离）</p>
+<p>~在XHTML中有些字符会被解释成XML标记，所以应该这样写&lt;\script&gt;&lt;!&gt;[CDATA[//这里写JavaScript代码]]&lt;\/script&gt;<br>~JavaScript脚本类型type=”text/javascript”,language=”text/javascript”<br>~当脚本所在的html文件被载入时，脚本里的JavaScript只会执行一次，为了可以交互，必须先定义事件处理程序——web浏览器先注册JavaScript函数，并在之后调用他作为事件响应、<br>~JavaScript载入阶段是相对短暂的（1-2秒）在文档载入完成后，只有在web浏览器显示文档，事件驱动阶段就会一直持续下去，因为这个阶段是异步和事件驱动的，长时间处于不活动状态。<br>~脚本和事件处理程序在同一个时间只能执行一个，没有并发性，这保持了JavaScript编程的简单性<br>~脚本的执行在默认情况下是同步和阻塞的，但是可以配合src属性设置异步或者延迟执行，不影响文档的解析和渲染，注意的是延迟的脚本会按照它们在文档里出现的顺序执行，异步的则不会<br>~事件具有目标，它是一个对象（DOM对象），事件就在它上面发生。<br>~注册（脚本执行的第1阶段）事件处理程序，最简单的方法就是将JavaScript函数赋值给目标对象的属性<br>~传递给settimeout()的函数和事件处理程序的注册不用，他们通常叫做“回调逻辑”，而不是“处理程序”，但是它们和事件处理程序一样，都是异步的。<br>~事件处理程序注册技术addEventListaner();允许注册多个监听器；<br>~H5定义了一种并发控制方式，叫做“web worker”；用来执行计算密集任务而不冻结用户界面的后台线程<br>~浏览器在document对象上触发DOMContentLoaded事件（ 在load事件之前触发）。这标志着程序执行从同步脚本执行阶段，转换到了异步事件驱动阶段。但要注意的是，可能还有异步脚本没有执行完。<br>~框架必不可少的一个重要功能是：他们定义了新的客户端API并且兼容所有浏览器；<br>~解决不兼容问题的方法：使用类库，功能检测，浏览器检测，条件注释（比如IE）<br>~怪异模式和标准模式（CSS兼容模式）：根据是否有DOCTYPE声明决定是否遵循css标准。两种方法的检测方法：document.compatMode属性，如果值为“CSS1Compat”则为标准模式“BackCompat”则为怪异模式<br>~浏览器检测，主要是用Navigator对象，检测浏览器类型和版本。<br>~浏览器嗅探（客户端嗅探）：确定当前浏览器厂商和版本的代码叫做浏览器嗅探。<br>~为什么要说安全性，因为web浏览器包含JavaScript解释器，一旦加载web页面，可以让任意的JavaScript代码在计算机里执行。<br>~校本化插件和ActiveX控件，是为了使用安全性的前提下屏蔽的恶意代码调用文件系统功能和网络功能的一种途径，但是也有很糟糕的历史遗留问题，操作系统还存在很多可以被控件利用的安全漏洞；</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
         
       
     </div>
