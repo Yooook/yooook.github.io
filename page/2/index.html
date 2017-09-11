@@ -241,6 +241,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/23/初遇React系列之八/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Finch">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Finch's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/23/初遇React系列之八/" itemprop="url">
+                  初遇React系列之八
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T17:52:05+08:00">
+                2017-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="react-native之标签栏：react-native-tab-navigator组件"><a href="#react-native之标签栏：react-native-tab-navigator组件" class="headerlink" title="react-native之标签栏：react-native-tab-navigator组件"></a>react-native之标签栏：react-native-tab-navigator组件</h2><p>“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的</p>
+<p>android经历:</p>
+<p>第一步：在根目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react-native-tab-navigator --save</div></pre></td></tr></table></figure></p>
+<p>注意：如果安装报错，那么一定要看一下node_modules里面是否有react-native-tab-navigator，如果没有继续安装，如果有，一定要先卸载再安装，否则即使后面安装成功也会出现bug</p>
+<p>第二步：在index.android.js文件中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import TabNavigator from <span class="string">'react-native-tab-navigator'</span>;</div></pre></td></tr></table></figure></p>
+<p>提示：在node_modules文件夹下的组件直接引入就好。</p>
+<p>第三步：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123;&#123;flex: 1&#125;&#125;&gt;</div><div class="line">   &lt;TabNavigator tabBarStyle=&#123;styles.tab&#125; &gt;</div><div class="line">     &lt;TabNavigator.Item</div><div class="line">      selected=&#123;this.state.selectedTab === <span class="string">'home'</span>&#125;</div><div class="line">      title=<span class="string">"Home"</span></div><div class="line">      titleStyle=&#123;styles.himiTextStyle&#125; </div><div class="line">      renderIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_1.png'</span>)&#125; /&gt;&#125;</div><div class="line">      renderSelectedIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_1_press.png'</span>)&#125; /&gt;&#125;</div><div class="line">      onPress=&#123;() =&gt; this.setState(&#123; selectedTab: <span class="string">'home'</span> &#125;)&#125;&gt;</div><div class="line">   &lt;USList/&gt;</div><div class="line">     &lt;/TabNavigator.Item&gt;</div><div class="line">     &lt;TabNavigator.Item</div><div class="line">      selected=&#123;this.state.selectedTab === <span class="string">'profile'</span>&#125;</div><div class="line">      title=<span class="string">"Profile"</span></div><div class="line">      titleStyle=&#123;styles.himiTextStyle&#125;  </div><div class="line">      renderIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_2.png'</span>)&#125; /&gt;&#125;</div><div class="line">      renderSelectedIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_2_press.png'</span>)&#125; /&gt;&#125;</div><div class="line">      onPress=&#123;() =&gt; this.setState(&#123; selectedTab: <span class="string">'profile'</span> &#125;)&#125;&gt;</div><div class="line">          &lt;MovieList/&gt;</div><div class="line">     &lt;/TabNavigator.Item&gt;</div><div class="line">   &lt;/TabNavigator&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var styles = StyleSheet.create(&#123;</div><div class="line">  tab: &#123;</div><div class="line">        height:90,</div><div class="line">        paddingTop:5,</div><div class="line">        backgroundColor: <span class="string">'#fff'</span>,</div><div class="line">        alignItems: <span class="string">'center'</span>,</div><div class="line">        justifyContent:<span class="string">'center'</span></div><div class="line">    &#125;,</div><div class="line">    himiTextStyle:&#123;</div><div class="line">      color:<span class="string">'#777'</span>,</div><div class="line">      fontSize:16,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>IOS:自带TabBarIOS插件，简单易用</p>
+<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/23/初遇React系列之七/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1611,159 +1763,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://apskt.com/2017/08/16/解决Browsersync无法实时刷新/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Finch">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Finch's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/16/解决Browsersync无法实时刷新/" itemprop="url">
-                  解决Browsersync无法实时刷新
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T12:41:34+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Browsersync/" itemprop="url" rel="index">
-                    <span itemprop="name">Browsersync</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>不适用gulp搭建自动化工作流利，而是单纯的用Browsersync进行实时同步显示的时候，会发现页面无法同步刷新，需要手动F5去更新数据。保证基本的环境（node）之下，具体步骤如下</p>
-<p>1.npm install -g browser-sync</p>
-<ol>
-<li>browser-sync start –server –files “<em>.html , css/</em>.css , js/*.js”</li>
-</ol>
-<p>我之所以出现无法自动刷新同步，是因为我用的是这句话：</p>
-<p>browser-sync start –server –files ‘<em>.html , css/</em>.css , js/*.js’</p>
-<p>这句话是错误的，因为单引号并不能被解析，所以无法同步。</p>
-<p>npm的script配置如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">   <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</div><div class="line">   <span class="string">"serve"</span>: <span class="string">"browser-sync start --server --no-notify  --files \"index.html, app/**/*.js\""</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1813,7 +1812,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
