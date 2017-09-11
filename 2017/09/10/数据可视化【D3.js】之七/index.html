@@ -103,19 +103,16 @@
 
 
 
-<meta name="description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….
-数据格式：12345678910111213141516&amp;#123;&quot;name&quot;:&quot;中国&quot;,&quot;children&quot;:[  &amp;#123;     &quot;name&quot;:&quot;浙江&quot; ,       &quot;children&quot;:      [          &amp;#123;&quot;name&quot;:&quot;杭州&quot; &amp;#125;,">
+<meta name="description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据可视化【D3.js】之七">
 <meta property="og:url" content="http://apskt.com/2017/09/10/数据可视化【D3.js】之七/index.html">
 <meta property="og:site_name" content="Finch's blog">
-<meta property="og:description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….
-数据格式：12345678910111213141516&amp;#123;&quot;name&quot;:&quot;中国&quot;,&quot;children&quot;:[  &amp;#123;     &quot;name&quot;:&quot;浙江&quot; ,       &quot;children&quot;:      [          &amp;#123;&quot;name&quot;:&quot;杭州&quot; &amp;#125;,">
-<meta property="og:updated_time" content="2017-09-10T14:58:46.139Z">
+<meta property="og:description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….">
+<meta property="og:updated_time" content="2017-09-11T03:28:58.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据可视化【D3.js】之七">
-<meta name="twitter:description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….
-数据格式：12345678910111213141516&amp;#123;&quot;name&quot;:&quot;中国&quot;,&quot;children&quot;:[  &amp;#123;     &quot;name&quot;:&quot;浙江&quot; ,       &quot;children&quot;:      [          &amp;#123;&quot;name&quot;:&quot;杭州&quot; &amp;#125;,">
+<meta name="twitter:description" content="集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….">
 
 
 
@@ -361,6 +358,7 @@
 
       
         <h2 id="集群图"><a href="#集群图" class="headerlink" title="集群图"></a>集群图</h2><p>感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习….</p>
+<a id="more"></a>
 <p>数据格式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"name"</span>:<span class="string">"中国"</span>,</div><div class="line"><span class="string">"children"</span>:</div><div class="line">[</div><div class="line">  &#123; </div><div class="line">    <span class="string">"name"</span>:<span class="string">"浙江"</span> , </div><div class="line">      <span class="string">"children"</span>:</div><div class="line">      [</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"杭州"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"宁波"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"温州"</span> &#125;,</div><div class="line">          &#123;<span class="string">"name"</span>:<span class="string">"绍兴"</span> &#125;</div><div class="line">      ] </div><div class="line">    &#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>样式表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line"></div><div class="line">.node circle &#123;</div><div class="line">  fill: <span class="comment">#fff;</span></div><div class="line">  /*圆心样式，不带引号*/</div><div class="line">  stroke: steelblue;</div><div class="line">  stroke-width: 1.5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.node &#123;</div><div class="line">  font: 12px sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.link &#123;</div><div class="line">  fill: none;</div><div class="line">  stroke: <span class="comment">#ccc;</span></div><div class="line">  stroke-width: 1.5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
 <p>核心代码：</p>
