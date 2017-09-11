@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之八]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E5%85%AB%2F</url>
+    <content type="text"><![CDATA[树状图树状图和集群图的区别，在于集群图在展示的时候的最内层的children保持在同一列，至于前边的数据展示向前压，而树状图则不需要在乎最后一列是否对齐，按照数据展开就好。 和集群图类似只需要将：1234// 创建集群布局var cluster = d3.layout.cluster() // size() 设定尺寸，即转换后的各节点的坐标中范围内 .size([width, height - 200]); 改为：123var tree = d3.layout.tree() .size([width, height-200]) .separation(function(a, b) &#123; return (a.parent == b.parent ? 1 : 2); &#125;); 然后将：1234// 转换节点数据 var nodes = cluster.nodes(root); // 转换连线数据 var links = cluster.links(nodes); 改为：1234// 转换节点数据 var nodes = tree.nodes(root); // 转换连线数据 var links = tree.links(nodes); 改造完毕。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之七]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E4%B8%83%2F</url>
+    <content type="text"><![CDATA[集群图感觉越往后学，改动的地方越少，创意很多，很难实现，主要是对于数据转换之后坐标的操作，继续学习…. 数据格式：12345678910111213141516&#123;"name":"中国","children":[ &#123; "name":"浙江" , "children": [ &#123;"name":"杭州" &#125;, &#123;"name":"宁波" &#125;, &#123;"name":"温州" &#125;, &#123;"name":"绍兴" &#125; ] &#125;]&#125; 样式表：1234567891011121314151617181920&lt;style&gt;.node circle &#123; fill: #fff; /*圆心样式，不带引号*/ stroke: steelblue; stroke-width: 1.5px;&#125;.node &#123; font: 12px sans-serif;&#125;.link &#123; fill: none; stroke: #ccc; stroke-width: 1.5px;&#125;&lt;/style&gt; 核心代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;&lt;script&gt;var width = 500, height = 500;// 创建集群布局var cluster = d3.layout.cluster() // size() 设定尺寸，即转换后的各节点的坐标所在范围 .size([width, height - 200]);// d3.svg.diagonal() 。这是一个对角线生成器，只需要输入两个顶点坐标，即可生成一条贝塞尔曲线// 创建一个对角线生成器var diagonal = d3.svg.diagonal() // projection() 是一个点变换器，默认是 [ d.x , d.y ]，即保持原坐标不变，如果写成 [ d.y , d.x ] ，即是说对任意输入的顶点，都交换 x 和 y 坐标 .projection(function(d) &#123; return [d.y, d.x]; &#125;);// 创建画布var svg = d3.select("body").append("svg") .attr("width", width) .attr("height", height) .append("g") .attr("transform", "translate(40,0)");// 转换数据// root 是传入的数据d3.json("city.json", function(error, root) &#123; // 转换节点数据 var nodes = cluster.nodes(root); // 转换连线数据 var links = cluster.links(nodes); // 绘制连线 var link = svg.selectAll(".link") .data(links) .enter() .append("path") .attr("class", "link") .attr("d", diagonal); // 创建分组，管理文字和图形 var node = svg.selectAll(".node") .data(nodes) .enter() .append("g") .attr("class", "node") .attr("transform", function(d) &#123; return "translate(" + d.y + "," + d.x + ")"; &#125;) // 添加圆形 node.append("circle") .attr("r", 4.5); // 添加文字 node.append("text") .attr("dx", function(d) &#123; return d.children ? -8 : 8; &#125;) .attr("dy", 3) // 文字位于圆心的左右偏移 .style("text-anchor", function(d) &#123; return d.children ? "end" : "start"; &#125;) .text(function(d) &#123; return d.name; &#125;);&#125;);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之六]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E5%85%AD%2F</url>
+    <content type="text"><![CDATA[弦图关于弦图的制作，不仅仅可以联系人后[迁移对城市]的现象，还有[通话记录对人]或者[消费关系]这种有出有进的数据流动的现象我们都可以用弦图去数据可视化。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;&lt;script&gt; // 节点数组，有联系的个体 var city_name = [ "北京" , "上海" , "广州" , "深圳" , "香港" ]; // 联系个体间的数据 var population = [ // 每一个数组就是每个节点或者说每段弧的的数据传动情况 [ 1000, 3045 , 4567 , 1234 , 3714 ], [ 3214, 2000 , 2060 , 124 , 3234 ], [ 8761, 6545 , 3000 , 8045 , 647 ], [ 3211, 1067 , 3214 , 4000 , 1006 ], [ 2146, 1034 , 6745 , 4764 , 5000 ] ]; var width = 500; var height = 500; var innerRadius = width/2*0.7; var outerRadius = innerRadius*1.1; var color20 = d3.scale.category20(); // 创建弦图布局 var chord_layout = d3.layout.chord() .padding(0.03) //节点之间的间隔 .sortSubgroups(d3.descending) //排序 .matrix(population); //输入矩阵 // 转换弦图数据 var groups = chord_layout.groups(city_name); var chords = chord_layout.chords(population); // 创建画布 var svg = d3.select('body') .append('svg') .attr('width',width) .attr('height',height) .append('g') .attr('transform','translate('+width/2+','+height/2+')'); // 生成弧路径参数 var outer_arc = d3.svg.arc() .innerRadius(innerRadius) .outerRadius(outerRadius); // 绘制路径 var g_outer = svg.append("g"); g_outer.selectAll('path') .data(groups) .enter() .append('path') .style("fill", function(d) &#123; return color20(d.index); &#125;) .style("stroke", function(d) &#123; return color20(d.index); &#125;) .attr("d", outer_arc ); // 添加文字 g_outer.selectAll("text") .data(groups) .enter() .append("text") .each( function(d,i) &#123; // 计算每个节点或者说每段弧的中间度数0~360 d.angle = (d.startAngle + d.endAngle) / 2; // 绑定初始的城市名称数据 d.name = city_name[i]; &#125;) // 文字偏移量 .attr("dy",".35em") // 必须先选择再平移 .attr("transform", function(d)&#123; // console.log(d.angle * 180 / Math.PI)弧度转化为角度，利用这个角度使得文字位于每段弧的切线方向 return "rotate(" + ( d.angle * 180 / Math.PI ) + ")" + "translate(0,"+ -1.0*(outerRadius+10) +")" + ( ( d.angle &gt; Math.PI*3/4 &amp;&amp; d.angle &lt; Math.PI*6/4 ) ? "rotate(180)" : ""); &#125;) // 必须-1.0*(outerRadius+10)才能对应相对的弧线，否则中间会有outerRadius*2+10长度 .text(function(d)&#123; return d.name; &#125;); // 绘制弦 // D3 提供了 d3.svg.chord() ，只需要将弦的对象传递给它，即可得到路径值。 var inner_chord = d3.svg.chord() .radius(innerRadius); svg.append("g") .attr("class", "chord") .selectAll("path") .data(chords) .enter() .append("path") .attr("d", inner_chord ) // .style("fill", function(d) &#123; return color20(d.source.index); &#125;) .style("opacity", 0.7) .on("mouseover",function(d,i)&#123; d3.select(this) .style("fill","yellow"); &#125;) .on("mouseout",function(d,i) &#123; d3.select(this) .transition() .duration(1000) .style("fill",color20(d.source.index)); &#125;);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之五]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E4%BA%94%2F</url>
+    <content type="text"><![CDATA[做了圆形的，实现了方形的，更多的改变在后面的章节 力导向图12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;&lt;script&gt; // 节点数据，也就是每个圈 var nodes = [ &#123; name: "大娃" &#125;, &#123; name: "二娃" &#125;, &#123; name: "三娃" &#125;, &#123; name: "四娃" &#125;, &#123; name: "五娃" &#125;, &#123; name: "六娃" &#125;, &#123; name: "七娃" &#125;, &#123; name: "爷爷" &#125; ]; // 连线数据，source和target分别代表着连线的两端元素，具体序号根据节点数据而来 var edges = [ &#123; source : 0 , target: 7 &#125; , &#123; source : 1 , target: 7 &#125; , &#123; source : 2 , target: 7 &#125; , &#123; source : 3 , target: 7 &#125; , &#123; source : 4 , target: 7 &#125; , &#123; source : 5 , target: 7 &#125;, &#123; source : 6 , target: 7 &#125;]; // 颜色集合 var color = d3.scale.category20(); //创建画布 var svg = d3.select('body') .append('svg') .attr('width',500) .attr('height',500); // 创建力导向图布局 var force = d3.layout.force() // 设置节点数据 .nodes(nodes) // 设置连线数据 .links(edges) // 指定作用域范围 .size([500,500]) // 连线长度 .linkDistance(150) // 作用力 .charge([-400]); // 力学作用生效 force.start(); // 创建线条 var svg_edges = svg.selectAll('line') .data(edges) .enter() .append('line') .style('stroke','#ccc') .style('stroke-width',1); // 创建圆形节点 var svg_nodes = svg.selectAll('circle') .data(nodes) .enter() .append('circle') .attr('r',20) .style('fill',function(d,i) &#123; return color(i); &#125;) .call(force.drag) // // 创建正方形节点 // var svg_nodes = svg.selectAll('rect') // .data(nodes) // .enter() // .append('rect') // .attr('width',30) // .attr('height',30) // .style('fill',function(d,i) &#123; // return color(i); // &#125;) // .call(force.drag) //添加描述节点的文字 var svg_texts = svg.selectAll("text") .data(nodes) .enter() .append("text") .style("fill", "black") .attr("dx", 20) .attr("dy", 8) .text(function(d)&#123; return d.name; &#125;); // 固定写法，更新节点位置 force.on("tick", function()&#123; //对于每一个时间间隔 //更新连线坐标 svg_edges.attr("x1",function(d)&#123; return d.source.x; &#125;) .attr("y1",function(d)&#123; return d.source.y; &#125;) .attr("x2",function(d)&#123; return d.target.x; &#125;) .attr("y2",function(d)&#123; return d.target.y; &#125;); //更新节点坐标 // 正方形 // svg_nodes.attr("x",function(d)&#123; return d.x-10; &#125;) // .attr("y",function(d)&#123; return d.y-10; &#125;); svg_nodes.attr("cx",function(d)&#123; return d.x; &#125;) .attr("cy",function(d)&#123; return d.y; &#125;); //更新文字坐标 svg_texts.attr("x", function(d)&#123; return d.x; &#125;) .attr("y", function(d)&#123; return d.y; &#125;); &#125;);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之四]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E5%9B%9B%2F</url>
+    <content type="text"><![CDATA[饼状图个人感觉d3的链式调用要比konva.js的面向对象写法更容易理解 主要代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;&lt;script&gt; var arr = [ 30 , 10 , 43 , 55 , 13 ]; // 创建布局 var pie = d3.layout.pie(); // 用相应布局，计算图形数据 var piedata = pie(arr); // 内外圆半径 var outerRadius = 150; var innerRadius = 0; // 弧线路径生成 var arc = d3.svg.arc() .innerRadius(innerRadius) .outerRadius(outerRadius); // 创建画布 var svg = d3.select('body').append('svg').attr('width',500).attr('height',500); // d3自己的一个颜色表，有十种颜色 var color = d3.scale.category10(); // 创建分组元素 var arcs = svg.selectAll('g') .data(piedata) .enter() .append('g') .attr("transform","translate(200,200)"); // 创建图形 arcs.append("path") .attr("d",function(d)&#123; return arc(d); //调用弧生成器，得到路径值 &#125;) .attr("fill",function(d,i)&#123; return color(i); &#125;) .attr("opacity",function(d)&#123; return 0.8; //调用弧生成器，得到路径值 &#125;) // 鼠标滑过扇区变色 .on('mouseover',function(d,i) &#123; d3.select(this) .transition() .duration(500) .attr("fill",color(i)) .attr("transform",function(d)&#123; return "translate(" + arc.centroid(d)[0]*0.2 +','+ arc.centroid(d)[1]*0.2 + ") scale(1.1)"; &#125;) .attr("opacity",function(d)&#123; return 1; //调用弧生成器，得到路径值 &#125;); d3.select('text') .transition(i) .duration(500) .attr("transform",function(d,i)&#123; return "translate(" + arc.centroid(d)[0]*1.2 +','+ arc.centroid(d)[1]*1.2 + ") scale(1.1)"; &#125;) &#125;) .on('mouseout',function(d,i) &#123; d3.select(this) .transition() .duration(500) .attr("fill",color(i)) .attr("transform",function(d)&#123; return "translate(" + [0,0] + ")"; &#125;) .attr("opacity",function(d)&#123; return 0.8; //调用弧生成器，得到路径值 &#125;); &#125;); // 创建文本 arcs.append("text") .attr("transform",function(d)&#123; // arc.centroid(d) 能算出弧线的中心s return "translate(" + arc.centroid(d) + ")"; &#125;) .attr("text-anchor","middle") .text(function(d)&#123; // d.data 才是转换前的整数的值 return d.data; &#125;);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之三]]></title>
+    <url>%2F2017%2F09%2F10%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E4%B8%89%2F</url>
+    <content type="text"><![CDATA[柱状图[最终版本]我们在上一节的基础上，加上了动画和自动适应以及事件绑定坐标轴的样式：12345678910111213&lt;style&gt; .axis path, .axis line&#123; fill: none; stroke: black; shape-rendering: crispEdges; &#125; .axis text &#123; font-family: sans-serif; font-size: 11px; &#125;&lt;/style&gt; 主要代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt; &lt;script&gt; var arr = [10,30,42,59,18,34]; // 通过改变svgW和svgH实现自适应 var svgW = 500; var svgH = 200; var barH = 10; var colors = ['#ddd','#f00','#6453c9','#000','#eee']; var padding = &#123;left:30, right:30, top:20, bottom:20&#125;; var xlinear = d3.scale.linear() .domain([0,100]) .range([0,svgW-padding.left*2]); var yordinal = d3.scale.ordinal() .domain(d3.range(arr.length)) // 在序列比例尺下才可以用rangeRoundBands .rangeRoundBands([svgH-padding.top*2,0]); var ordinal = d3.scale.ordinal() .domain(colors.length) .range(colors); var axis = d3.svg.axis() .scale(xlinear) .orient('bottom') .ticks(10); var yaxis = d3.svg.axis() .scale(yordinal) .orient('left') // .ticks(7); var svg = d3.select('body') .append('svg') .attr('width',svgW) .attr('height',svgH); // 进度条 svg.selectAll('rect') .data(arr) .enter() .append('rect') // 时间绑定 .attr('fill',function(d,i) &#123; return ordinal(i) &#125;) .on("mouseover",function(d,i)&#123; d3.select(this) .attr("fill","yellow"); &#125;) .on("mouseout",function(d,i)&#123; d3.select(this) .transition() .duration(500) .attr("fill",ordinal(i)); &#125;) .attr('x',function(i) &#123; return padding.left; &#125;) .attr('y',function(d,i) &#123; return yordinal(i)+padding.top+barH/2; &#125;) // 动画 .attr('width',function(d) &#123; var min = xlinear.domain()[0]; return xlinear(min); // return xlinear(d)-padding.right; &#125;) .transition() .delay(function(d,i)&#123; return i * 200; &#125;) .duration(2000) .ease("bounce") .attr("width",function(d)&#123; return xlinear(d)-padding.right; &#125;) .attr('height',function(i) &#123; return (svgH-padding.top*2-barH*arr.length+1)/arr.length; &#125;); // 文字 svg.selectAll('.text') .data(arr) .enter() .append('text') .attr('class','text') .attr('x',function(d) &#123; return padding.left; &#125;) .attr('y',function(d,i) &#123; // 水平显示 // return yordinal(i)+padding.top+barH/2; return 0; &#125;) .transition() .delay(function(d,i)&#123; return i * 200; &#125;) .duration(2000) .attr('x',function(d) &#123; return xlinear(d); &#125;) .attr('y',function(d,i) &#123; return yordinal(i)+padding.top+barH/2; &#125;) .attr('dx',function() &#123; return 10; &#125;) .attr('dy',function() &#123; // 文字居中 return (yordinal.rangeBand() - barH/2)/2;; &#125;) .text(function(d) &#123; return d; &#125;) svg.append("g") .attr("class","axis") .attr("transform","translate("+ padding.left +","+(svgH-padding.top)+")") .call(axis); svg.append("g") .attr("class","axis") .attr("transform","translate("+ padding.left +","+padding.top+")") .call(yaxis); &lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之二]]></title>
+    <url>%2F2017%2F09%2F09%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[简单的柱状图[改进]我们在上一节的基础上，加上了两种比例尺和坐标轴坐标轴的样式：12345678910111213&lt;style&gt; .axis path, .axis line&#123; fill: none; stroke: black; shape-rendering: crispEdges; &#125; .axis text &#123; font-family: sans-serif; font-size: 11px; &#125;&lt;/style&gt; 主要代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;&lt;script&gt; //模拟需要绑定的数据 var arr = [10,30,42,59,18]; var colors = ['#ddd','#f00','#6453c9','#000','#eee'] // 创建线性比例尺 var linear = d3.scale.linear() .domain([0,d3.max(arr)]) .range([0,250]); // 创建序数比例尺 var ordinal = d3.scale.ordinal() // 直接用length，不要单独创建离散的数组 .domain(colors.length) .range(colors); // 创建坐标轴 var axis = d3.svg.axis() .scale(linear) //指定比例尺 .orient('bottom') //刻度的方向 .ticks(7); //刻度的数量 //这里做了改进，将svg对象单独拿出来，为了防止链式调用导致的对象不同问题 var svg = d3.select('body') .append('svg'); // 柱状图部分 svg.attr('width',400) .attr('height',400) .selectAll('rect') .data(arr) .enter() .append('rect') .attr('x',20) .attr('y',function(d,i) &#123; return i*20; &#125;) .attr('width',function(d) &#123; return linear(d); &#125;) .attr('height',function() &#123; return 18; &#125;) .attr('fill',function(d,i) &#123; return ordinal(i) &#125;) // 坐标轴部分 svg.append("g") .attr("class","axis") .attr("transform","translate(20,110)") .call(axis);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据可视化【D3.js】之一]]></title>
+    <url>%2F2017%2F09%2F09%2F%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E3%80%90D3.js%E3%80%91%E4%B9%8B%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[这个时代最重要的是数据，呈现数据的方式有很多种，我想用web技术实现自己的一些数据可视化的网站，而d3作为佼佼者，这个甚至热度超过jQuery的类库当然是不二之选。我将用demo展示自己的一个学习过程，注释的方式展示细节。 简单的柱状图123456789101112131415161718192021222324252627282930313233&lt;script src="http://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;&lt;script&gt; // 需要绑定的数据 var arr = [10,30,42,59,18]; // 选择创建区域 var svg = d3.select('body') // 创建svg画布 .append('svg') // 设置画布属性 .attr('width',400) .attr('height',400) // 创建矩形，必须先selectAll一次 .selectAll('rect') // 绑定数据 .data(arr) // 创建空元素，让数据驱动元素个数 .enter() .append('rect') // 针对每个rect，设置坐标（起始位置） .attr('x',20) .attr('y',function(d,i) &#123; return i*20; &#125;) // 设置宽高 .attr('width',function(d) &#123; return d; &#125;) .attr('height',function() &#123; return 18; &#125;) // 颜色填充 .attr('fill','steelblue');&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[javascript原生实现滚动条(滚动+拖动)]]></title>
+    <url>%2F2017%2F09%2F07%2Fjavascript%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E6%BB%9A%E5%8A%A8%E6%9D%A1(%E6%BB%9A%E5%8A%A8%2B%E6%8B%96%E5%8A%A8)%2F</url>
+    <content type="text"><![CDATA[以下代码仅供参考，学习。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182// contentScrolldefine(function(require,exports,module) &#123; var ContentScroll = Class.extend(&#123; init: function() &#123; &#125;, scroll: function() &#123; //容器 var aboutBox = document.getElementById('about'); //内容 var contentBox = document.getElementById('contentbox'); //滚动条 var bar = document.getElementById('scroll'); // 计算滚动条高度 var barHeight = aboutBox.offsetHeight/contentBox.offsetHeight*aboutBox.offsetHeight; bar.style.height = barHeight+"px"; bar.onmousedown = function(event) &#123; var event = event || window.event; var t = event.clientY - this.offsetTop; var that = this; document.onmousemove = function(event) &#123; var event = event || window.event; var barTop = event.clientY - t; // 计算内容显示位置 var contentTop = (contentBox.offsetHeight-aboutBox.offsetHeight) / (aboutBox.offsetHeight - that.offsetHeight) * barTop; if (barTop &lt; 0) &#123; barTop = 0; &#125;else if (barTop &gt; aboutBox.offsetHeight - that.offsetHeight) &#123; barTop = aboutBox.offsetHeight - that.offsetHeight; &#125;else &#123; contentBox.style.top = -contentTop +"px"; &#125; that.style.top = barTop + "px"; window.getSelection?window.getSelection().removeAllRanges():document.selection.empty(); &#125; &#125; document.onmouseup = function() &#123; document.onmousemove = null; &#125; // 滚轮事件 function onMouseWheel(ev) &#123; var ev = ev || window.event; var down = true; // 定义一个标志，当滚轮向下滚时，执行一些操作 down = ev.wheelDelta?ev.wheelDelta&lt;0:ev.detail&gt;0; if (aboutBox.offsetHeight &gt;= contentBox.offsetHeight) &#123; bar.style.top = 0; &#125; var contentTop = (contentBox.offsetHeight-aboutBox.offsetHeight) / (aboutBox.offsetHeight - bar.offsetHeight) * bar.offsetTop; if(down)&#123; if ((bar.offsetTop+bar.offsetHeight) &gt;= aboutBox.offsetHeight-10) &#123; bar.style.top = aboutBox.offsetHeight-bar.offsetHeight+'px'; &#125;else &#123; bar.style.top = bar.offsetTop+40+'px'; &#125; &#125;else&#123; if (10 &gt;= bar.offsetTop) &#123; bar.style.top = 0; &#125;else &#123; bar.style.top = bar.offsetTop-40+'px'; &#125; &#125; contentBox.style.top = -contentTop +"px"; if(ev.preventDefault)&#123;/*FF 和 Chrome*/ ev.preventDefault();// 阻止默认事件 &#125; return false; &#125; addEvent(aboutBox,'mousewheel',onMouseWheel); addEvent(aboutBox,'DOMMouseScroll',onMouseWheel); function addEvent(obj,xEvent,fn) &#123; if(obj.attachEvent)&#123; obj.attachEvent('on'+xEvent,fn); &#125;else&#123; obj.addEventListener(xEvent,fn,false); &#125; &#125; &#125; &#125;);module.exports = ContentScroll;&#125;) 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之九]]></title>
+    <url>%2F2017%2F08%2F24%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%9D%2F</url>
+    <content type="text"><![CDATA[react-native之导航栏：Navigator组件【详解】“使用导航器可以让你在应用的不同场景（页面）间进行切换。导航器通过路由对象来分辨不同的场景。利用renderScene方法，导航栏可以根据指定的路由来渲染场景。可以通过configureScene属性获取指定路由对象的配置信息，从而改变场景的动画或者手势。查看Navigator.SceneConfigs来获取默认的动画和更多的场景配置选项。” —–官方文档 第一步：这是因为版本升级到0.43以上的话，Navigator不能直接从react-native里面获取了，所以： 1npm install react-native-deprecated-custom-components --save 然后在需要的页面： 1import &#123; Navigator &#125; from 'react-native-deprecated-custom-components'; 第二步：因为之前已经用了react-native-tab-navigator，所以我这边并没有将navigator的入口代码放在index.android.js文件里面，而是单独出来一个文件（featured.js），在这个文件中引入navigator默认页面，然后将这个文件在添加到index.android.js里，相当于这里用featured.js做了一个过渡。 第三步：featured.js1234567891011121314151617181920212223242526 import &#123; Text, View, Component&#125; from 'react-native';import &#123; Navigator &#125; from 'react-native-deprecated-custom-components'; render() &#123; let defaultName = 'MovieList'; let defaultComponent = MovieList; return ( &lt;Navigator initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125; configureScene=&#123;(route) =&gt; &#123; return Navigator.SceneConfigs.FadeAndroid;//FadeAndroid:表示的是淡入淡出的动画效果 &#125;&#125; renderScene=&#123;(route, navigator) =&gt; &#123; let Component = route.component; if(route.component)&#123; return &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt; &#125; &#125;&#125; /&gt; ); &#125; 默认页面movieList.js 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import Detail from './detail';class MovieList extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123; resultMessage:"hello", &#125;; &#125; _pressButton(movie) &#123; var _this = this; const &#123; navigator&#125; = this.props; if (navigator) &#123; navigator.push(&#123; name:'Detail', component:Detail, params:&#123; message:movie,//传入到子页面的内容 getResult:function(message)&#123; _this.setState(&#123; resultMessage:message, &#125;) &#125; &#125; &#125;) &#125; &#125; randerMovieList(movie) &#123; return( &lt;TouchableHighlight underlayColor="rgba(34,26,38,0.2)" onPress=&#123;()=&gt;this._pressButton(movie)&#125;&gt; ... &lt;/TouchableHighlight&gt; ); &#125; render() &#123; return ( &lt;View&gt; &lt;ListView dataSource = &#123;this.state.movies&#125; renderRow = &#123;this.randerMovieList.bind(this)&#125; /&gt;//这个地方一定要bind(this)，否则onPress=&#123;this._pressButton.bind(this)&#125;会报错 &lt;/View&gt; ); &#125; &#125; detail.js页面1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374 import React from 'react'; import &#123; Text, View, TouchableOpacity, ActivityIndicator&#125; from 'react-native';import MovieList from './movieList'; import styles from '../style/Main'; class Detail extends React.Component &#123; constructor(props)&#123; super(props); this.state = &#123; message:"", load:false &#125;; const REQUIRE_URL = `http://api.douban.com/v2/movie/subject/$&#123;this.props.message.id&#125;`; this.fetchData(REQUIRE_URL); &#125; fetchData(url)&#123; fetch(url) .then(response =&gt; response.json()) .then(responseData =&gt; &#123; console.log(responseData); this.setState(&#123; message:responseData.summary, load:true &#125;) &#125;) .done(); &#125;; _pressButton()&#123; const &#123; navigator &#125; = this.props; if(this.props.getResult)&#123; this.props.getResult("This is from SecondPageComponent"); &#125; if(navigator)&#123; navigator.pop(); &#125; &#125; render() &#123; if (!this.state.load) &#123; return( &lt;View style=&#123;styles.container&#125;&gt; &lt;View style= &#123;styles.loading&#125;&gt; &lt;ActivityIndicator size='large' color="#6425c9" /&gt; &lt;/View&gt; &lt;/View&gt; ); &#125; return ( &lt;View&gt; &lt;TouchableOpacity onPress=&#123;this._pressButton.bind(this)&#125;&gt; &lt;Text style=&#123;&#123;fontSize:30&#125;&#125;&gt;点击返回前一个界面&lt;/Text&gt; &lt;/TouchableOpacity&gt; &lt;Text&gt;第一个界面传入：&#123;this.state.message&#125;&lt;/Text&gt; &lt;/View&gt; ); &#125; &#125;export &#123;Detail as default&#125; 完成！注意的是这三个文件的框架。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之八]]></title>
+    <url>%2F2017%2F08%2F23%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E5%85%AB%2F</url>
+    <content type="text"><![CDATA[react-native之标签栏：react-native-tab-navigator组件“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的 android经历: 第一步：在根目录1npm install react-native-tab-navigator --save 注意：如果安装报错，那么一定要看一下node_modules里面是否有react-native-tab-navigator，如果没有继续安装，如果有，一定要先卸载再安装，否则即使后面安装成功也会出现bug 第二步：在index.android.js文件中1import TabNavigator from 'react-native-tab-navigator'; 提示：在node_modules文件夹下的组件直接引入就好。 第三步：12345678910111213141516171819202122&lt;View style=&#123;&#123;flex: 1&#125;&#125;&gt; &lt;TabNavigator tabBarStyle=&#123;styles.tab&#125; &gt; &lt;TabNavigator.Item selected=&#123;this.state.selectedTab === 'home'&#125; title="Home" titleStyle=&#123;styles.himiTextStyle&#125; renderIcon=&#123;() =&gt; &lt;Image source=&#123;require('./app/images/tabbar_1.png')&#125; /&gt;&#125; renderSelectedIcon=&#123;() =&gt; &lt;Image source=&#123;require('./app/images/tabbar_1_press.png')&#125; /&gt;&#125; onPress=&#123;() =&gt; this.setState(&#123; selectedTab: 'home' &#125;)&#125;&gt; &lt;USList/&gt; &lt;/TabNavigator.Item&gt; &lt;TabNavigator.Item selected=&#123;this.state.selectedTab === 'profile'&#125; title="Profile" titleStyle=&#123;styles.himiTextStyle&#125; renderIcon=&#123;() =&gt; &lt;Image source=&#123;require('./app/images/tabbar_2.png')&#125; /&gt;&#125; renderSelectedIcon=&#123;() =&gt; &lt;Image source=&#123;require('./app/images/tabbar_2_press.png')&#125; /&gt;&#125; onPress=&#123;() =&gt; this.setState(&#123; selectedTab: 'profile' &#125;)&#125;&gt; &lt;MovieList/&gt; &lt;/TabNavigator.Item&gt; &lt;/TabNavigator&gt;&lt;/View&gt; 12345678910111213var styles = StyleSheet.create(&#123; tab: &#123; height:90, paddingTop:5, backgroundColor: '#fff', alignItems: 'center', justifyContent:'center' &#125;, himiTextStyle:&#123; color:'#777', fontSize:16, &#125;,&#125;); IOS:自带TabBarIOS插件，简单易用 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之七]]></title>
+    <url>%2F2017%2F08%2F23%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%83%2F</url>
+    <content type="text"><![CDATA[react-native之触摸高亮：TouchableHighlight组件使用方法： 1234567//导入组件import &#123; TouchableHighlight &#125; from 'react-native';//标签化使用 &lt;TouchableHighlight underlayColor="rgba(34,26,38,0.2)" onPress=&#123;()=&gt;&#123;&#125;&#125;&gt; //列表的每一项 &lt;/TouchableHighlight&gt; TouchableHighlight这个标签有坑，我们必须设置onPress属性才能生效 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之六]]></title>
+    <url>%2F2017%2F08%2F23%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E5%85%AD%2F</url>
+    <content type="text"><![CDATA[react-native的进度组件：android:ActivityIndicator组件ProgressBarAndroid已经被ActivityIndicator组件取代。 使用方法： 12345678//导入组件import &#123; ActivityIndicator &#125; from 'react-native';//标签化使用&lt;ActivityIndicator styleAttr='Large' color="#6425c9"/&gt; 属性： animating：这个参数接受布尔型的值，表示是否显示加载指示器。 color：string型参数，用来设置指示器的颜色，默认是灰色的，我们一般也不管他。 hidesWhenStopped（仅iOS可用）：在没有动画的时候，是否要隐藏指示器（默认为true）。 size：这就是设置尺寸的，就两个选项，small和large，一小一大。 IOS:使用ActivityIndicatorIOS组件，拥有size和color属性，使用方法类似。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之五]]></title>
+    <url>%2F2017%2F08%2F22%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%94%2F</url>
+    <content type="text"><![CDATA[关于app组件管理：我们需要在项目根目录下创建app文件，用来管理我们的组件，在app文件夹下，我们可以 创建components和style文件夹，分别存放相应的文件。关于style的文件，如果是一个js文件，那就需要在index.android.js文件和模块文件中同时引入，style文件导出模块为styles变量，不需要创建类。500的错误一般都是模块导入出错。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之四]]></title>
+    <url>%2F2017%2F08%2F22%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%2F</url>
+    <content type="text"><![CDATA[关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。” 12345678910111213141516171819202122232425262728//定义在类外const REQUIRE_URL = `http://api.douban.com/v2/movie/top250?start=0&amp;count=10`constructor(props) &#123; super(props);//引用this.super(props)执行之后才能使用this.props this.state = &#123; //创建dataSource对象，传入更新row的策略，一般来说都是prevRowData和nextRowData不相等时更新row movies:new ListView.DataSource(&#123; rowHasChanged:(row1,row2) =&gt; row1 !== row2 &#125;), loaded:false//loading状态 &#125;; this.fetchData();//构造函数内加载时执行&#125; fetchData()&#123; fetch(REQUIRE_URL) .then(response =&gt; response.json()) .then(responseData =&gt; &#123; console.log(responseData); this.setState(&#123; movies:this.state.movies.cloneWithRows(responseData.subjects),//传入请求数据，更新状态 loaded:true &#125;) &#125;) .done();&#125;; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之三]]></title>
+    <url>%2F2017%2F08%2F22%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%2F</url>
+    <content type="text"><![CDATA[React-Native安装需要注意的两点：1.需要在项目的android目录下创建local.properties文件，设置android SDK的目录指向，比如：1sdk.dir=D\:\\android； 2.需要删除项目下.babelrc文件 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之二]]></title>
+    <url>%2F2017%2F08%2F21%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用 2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下： 1.getInitialState() //初始化state状态 2.componentWillMount() //组件即将加载 3.render()创建虚拟的dom树 4.componentDidMount() //组件加载结束 3.更新阶段：执行顺序如下： 1.componentWillReceiveProps() //父组件的props值发生变化时调用 2.shouldComponentUpdate() //是否更新，返回bool值，ture更新，false不更新 3.componentWillUpdate() //组件更新前，或者组件即将更新 4.render() //更新虚拟dom树 5.componentDidUpdate() //组件已经更新 4.销毁阶段：componentWillUnmount() //组件销毁时调用，常用来清除定时器，移除dom树‘ 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[webpack详解（环境搭建及使用）]]></title>
+    <url>%2F2017%2F08%2F17%2Fwebpack%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[环境搭建及使用1.全局安装 npm install webpack -g 2.创建文件夹，初始化npm init 3.npm install webpack –save-dev 4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’; 5.创建index.html文件，结构如下：1234&lt;body&gt; &lt;div id="app"&gt;&lt;/div&gt; &lt;script src="bundle.js"&gt;&lt;/script&gt;&lt;/body&gt; 6.根目录 webpack entry.js bundle.js //entry.js入口文件 //bundle.js生成文件 7.还可以定义模块并导入到entry.js中，它会自动分析依赖，进行打包 8.webpack默认值编译js，至于css之类的我们可以用loader资源转化。 9.创建style.css之后npm install css-loader style-loader –save-dev 10.通过require(‘style-loader!css-loader!./style.css’)main.js中 11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配 12.创建webpack.config.js：12345678910111213module.exports = &#123; entry:'./entry.js', output: &#123; path:__dirname, filename: 'bundle.js' &#125;, devtool:'source-map',//为打包的文件生成一个source-map module: &#123; loader:[ &#123;test:/\.css$/, loader: 'style-loader!css-loader!'&#125;//loader: 'style-loader!css-loader!'这里配置了之后，修改引入的部分为require('./style.css') ] &#125; &#125;; 13.操作完之后就执行webpack 14.生成开发工具：webpack –devtool source-map 15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev 16.接下来创建配置文件.babelrc ，添加预设：12345678910&#123; "presets":["es2015",]&#125;1.接下来在webpack.config.js中配置那些需要babel的文件loader:[ &#123;test:/\.css$/, loader: 'style!css!'&#125;,//loader: 'style!css!'这里配置了之后，修改引入的部分为require('./style.css') &#123;test:/\.js$/, loader: 'babel'&#125;] 17.webpack-dev-server:生成开发应用的服务器，当文件有变化的时候自动打包刷新，还有一个具有热替换功能的模块（只替换有变化的部分，不需要刷新页面），npm install webpack-dev-server -g 18.npm install webpack-dev-server -save-dev 19.webpack-dev-server –inline –hot，生成服务器网址，在最上边有 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jspm详解（环境搭建及使用）]]></title>
+    <url>%2F2017%2F08%2F17%2Fjspm%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。 jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它是工作在SystemJs(模块加载器)通用模块之上，jspm不是一个全新的包管理器，而是基于已存在的包资源进行的，它是与NPM和GitHub协同合作的 过度 1.npm install -g babel//全局安装babel，因为我们需要在自己的项目中去安装babel插件 2.创建项目文件夹react，进行npm初始化。执行npm init。 3.项目根目录下，npm install babel-core –save-dev 4.根目录创建scrip.js,可以写一些es6的代码，我们将要去编译它 5.在scrip.js的目录，执行babel script.js,将会在dos里显示编译好的代码，我们可以将它编译到文件里babel –watch script.js –out-file script_compiled.js –source-maps//watch 监视并修改 –source-maps记录编译前的所有文件 6.同样的。我们可以针对目录进行编译babel –watch src –out-dir lib //src目录到lib目录 7.可以将一个目录编译到一个js文件里，babel –watch src –out-file script_compiled.js 8.在项目的开发阶段，不需要每次都编译js，可以在浏览器端实时编译，这样我们需要两个插件 { 1.在项目文件夹根目录创建一个index.html文件 2.添加 3.添加//这是一个修补浏览器功能的文件 4.添加//这个里面的代码会被browser.js解释 } 主题1.npm isntall jspm -g//完成之后输入jspm返回信息 2.创建项目文件夹，npm初始化，npm init 3.npm isntall jspm –save-dev 将文件放到开发依赖里面 4.jspm init//初始化jspm 5.package.json中的”name”: “myapp”,不能为react否则不可以安装react 6.创建app文件夹，内部创建main.js，编写 12345678910'use strict'let fruits = ['apple','banana'],foods = [...fruits,'pink'];document.body.innerText = foods.toString();console.log(foods);export default &#123;&#125;; 7.在根目录创建index.html 123456789&lt;body&gt;&lt;!-- 导入system.js--&gt;&lt;script src="./jspm_packages/system.js"&gt;&lt;/script&gt;&lt;!-- 导入config.js--&gt;&lt;script src="./config.js"&gt;&lt;/script&gt;&lt;script&gt; System.import('./app/main');&lt;/script&gt;&lt;/body&gt; 8.我们需要在http协议上运行：browser-sync start –server –files “.html , ./app/.js” 9.添加第三方工具：jQuery 10.jspm install jquery=github:components/jquery === jspm install jquery 11.在github上面的jspm/registry中可以查看包的映射关系 12.jQuery使用 import $ from ‘jquery’ 13.bundle打包：jspm bundle app/main app/build.js –inject//–inject可以不要，用来修改config文件 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[babel详解（环境搭建及使用）]]></title>
+    <url>%2F2017%2F08%2F17%2Freact%E4%B9%8Bbabel%E8%AF%A6%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[环境搭建及使用首先我们不再全局安装babel，若有请先卸载 1.npm init //创建项目文件夹react，初始化npm 2.npm install babel-cli –save-dev //安装开发依赖 3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件 4.因为是局部安装，没有配置环境变量，所以利用cmd，进入到node_modules/.bin目录下，可以babel –help查看安装是否成功 5.在react目录下创建js文件(script.js),并用js在编写要在控制台输出的内容 6.通过第4步的操作，在node_modules/.bin目录，执行babel script.js 这样就会在cmd窗口输出控制台的内容 7.如果我们要导出编译好的文件，那么就执行babel script.js –out-file script-compiled.js那么script.js的同级目录下就会出现script-compiled.js。 8.同样的，我们可以针对整个文件夹操作babel src –out-dir lib那么它的意思就是讲src目录下的文件编译后放在lib文件夹下 9.另外,我们可以同过babel src –watch –out-dir lib监视文件变化，每次变化自动编译，需要手动停止，我们可以在package.json里面配置script脚本，”build”:”babel src –watch –out-dir lib”,这样每次就可以通过npm run build 执行相应的代码。 10.presets预设，简单来说就是一个工具的集合，我们需要通过不同的预设来处理我们的代码 11.npm install babel-preset-es2015 –save-dev//我们需要编译es2015的代码，并且添加到开发依赖。 12.下载完预设工具之后，我们需要在更目录创建”.babelrc”文件，它是babel的一个配置文件，它可以指定想要使用的预设，写法如下： 123&#123; "presets": ["es2015"]//它的意思是我们要是用es2015这个预设下面的所有插件&#125; 13.重新执行 npm run build 发现我们用es6写的代码已经被编译 14.在react中的jsx就需要被转化成普通的javascript代码，官方推荐babel，那么我们需要安装相关预设，npm install babel-preset-react –save-dev,下载完成后在.babelrc文件中添加预设 123&#123; "presets": ["es2015","react"]//es2015解决的是代码编译，react解决的是jsx&#125; 15，babel可以和许多的build system及配合使用，比如gulp，webpack等等，这里要说的是babel+gulp的形式：1234567891011121.npm install gulp gulp-babel --save-dev2.创建gulp的配置文件gulpfile.js ```bash&lt;!-- 引入模块 --&gt; var gulp = require('gulp'); var babel = require("gulp-babel");&lt;!-- 创建任务 --&gt; gulp.task('default',() =&gt; &#123; return gulp.src('src/*.js') .pipe(babel()) .pipe(gulp.dest('lib')) &#125;); 3.执行gulp编译成功 ``` 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[解决Browsersync无法实时刷新]]></title>
+    <url>%2F2017%2F08%2F16%2F%E8%A7%A3%E5%86%B3Browsersync%E6%97%A0%E6%B3%95%E5%AE%9E%E6%97%B6%E5%88%B7%E6%96%B0%2F</url>
+    <content type="text"><![CDATA[不适用gulp搭建自动化工作流利，而是单纯的用Browsersync进行实时同步显示的时候，会发现页面无法同步刷新，需要手动F5去更新数据。保证基本的环境（node）之下，具体步骤如下 1.npm install -g browser-sync browser-sync start –server –files “.html , css/.css , js/*.js” 我之所以出现无法自动刷新同步，是因为我用的是这句话： browser-sync start –server –files ‘.html , css/.css , js/*.js’ 这句话是错误的，因为单引号并不能被解析，所以无法同步。 npm的script配置如下 1234"scripts": &#123; "test": "echo \"Error: no test specified\" &amp;&amp; exit 1", "serve": "browser-sync start --server --no-notify --files \"index.html, app/**/*.js\"" &#125; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Browsersync</category>
+      </categories>
+      <tags>
+        <tag>Browsersync</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[初遇React系列之一]]></title>
+    <url>%2F2017%2F08%2F16%2F%E5%88%9D%E9%81%87React%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[笔记：1.react 是一个创建显示组件的东西(组件化开发) 2.jspm包的管理工具，它里面的SystemJS可以加载不同规范的js模块，里面的babel可以编译JavaScript代码，并且可以将JSX代码编译成JavaScript代码3.props: 1234567891011121314151617181920211.这个属性是用来接受父模块给子模块传递的数据的，也可以从主模块多层传递，每层用this.props.date传递2.在主模块中写法：&lt;Comment author="小明" data="五分钟前" &gt;今天吃了apples&lt;/Comment&gt;3.在子模块中写法：&lt;div className="text"&gt;&#123;this.props.children&#125;&lt;/div&gt; //&#123;this.props.children&#125;获取的是标签内容，既"天吃了apples"4.这里的this.props就相当于Comment这个元素对象（Element）5.this.props.data在子模块中的遍历 render() &#123; let commentNodes = this.props.data.map((comment,key) =&gt; &#123;//新版本必须传入key值 return ( &lt;Comment key=&#123;key&#125; author=&#123;comment.author&#125; date=&#123;comment.date&#125;&gt;//属性不能带引号!!!!!!! &#123;comment.text&#125; &lt;\/Comment&gt; ); &#125;); return( &lt;\div&gt; &#123;commentNodes&#125;//上面的变量 &lt;\/div&gt; ); &#125; 4.state: 123456789101112131415161718191.可以在父模块中添加属性url，&lt;CommentBox url="app/data.json"/&gt;2.安装jquery，创建构造函数，声明属性 constructor (props) &#123; super(props);//必须要写 this.state = &#123;data:[]&#125;;//接收返回的数据 $.ajax(&#123; url:this.props.url,//拿到父模块传入的地址 dataType:'json', cache:false, success: comment =&gt; &#123; this.setState(&#123;data:comment&#125;);//设置this.state.data &#125;, error: (xhr,status,error) =&gt; &#123; console.log(error); &#125; &#125;); &#125;3.在render方法中加载&lt;CommentList data=&#123;this.state.data&#125;/&gt; 5.event: 12345678定义：handleSubmit (event) &#123; event.preventDefault(); console.log('提交表单。。。'); &#125; render() &#123;&#125;使用：&lt;form className="ui reply form" onSubmit=&#123;this.handleSubmit&#125;&gt; 5.refs:123456789101.handleSubmit (event) &#123; event.preventDefault(); console.log('提交表单。。。'); let author = this.refs.author.value;//this.refs.author获取标签对象 console.log(author);&#125;2. onSubmit=&#123;this.handleSubmit.bind(this)&#125;//表单必须绑定this来获取HTML对象3. &lt;input type="text" placeholder="姓名" ref="author"/&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ECMAScript6学习(下)]]></title>
+    <url>%2F2017%2F08%2F15%2FECMAScript6%E5%AD%A6%E4%B9%A01%2F</url>
+    <content type="text"><![CDATA[笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){ let foo = {}; Object.assign( foo,//第一个参数是需要复制的对象 {one:1}//被复制的对象 );} 2.设置对象的prototype{ let foo = { get() {} } let fmm = {} fun = Object.create(foo)//创建对象 Object.getPrototypeOf(fun) === foo//true Object.setPrototypeOf(fun,fmm)//第一个参数是当前对象，第二个是prototype属性将要指向的对象，这样就可以调用fmm里面的方法} 3.proto: { let fun = { proto:foo//用proto修改prototype属性，从而调用父类方法 }} 4.super属性重写父类方法 { let fun = { proto:foo//用proto修改prototype属性，从而调用父类方法 } get() {//重写父类的get方法 return super.get() + ‘xxxxxx’;//super.get()父类get方法的返回值 }} 5.Class:{ class Person { constructor(name) { this.name = name; } say() { console.log(this.name) } } let tom = new Person(&apos;tom&apos;); tom.say(); } 6.get和set关键字 { class Person { constructor(name) { this.name = name; } get say() { return this.name; } set say(bb) { this.name = bb; } } let tom = new Person(&apos;tom&apos;); tom.say = &apos;哈哈哈哈&apos;;//设置 tom.say;//获取 } 7.static { class Person { constructor(name) { this.name = name; } static foot (a) {console.log(a)} } Person.foot(a) ;//static定义的静态方法不需要实例化就可以调用} 8.extends继承 { class Person extends Animinal { //主要是构造函数的写法 constructor(name) { super(name); } }} 9.set：一堆东西的集合，不能有重复 { var something = new Set(‘123’)//输出为：Set {“1”,”2”,”3”} 添加：something.add(‘4’) 添加：something.add(‘4’)//第二次无效 长度：something.size 判断存在：something.has(‘4’) 删除：something.delete(‘4’) 遍历：something.forEach (item =&gt; { console.log(item) }) 清空:something.clear();} 迭代器，生成器，Module需要借助工具，导入导出 暂时了解 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>ECMAScript6</category>
+      </categories>
+      <tags>
+        <tag>ECMAScript6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ECMAScript6学习(上)]]></title>
+    <url>%2F2017%2F08%2F15%2FECMAScript6%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效 2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据 3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3 4.解构对象 let {one1:one,two1:two,three1:three} = {one:1,two:2,three:3} 5.模板字符串： let apple = ‘apples’ ;var string = 今天吃 ${apple}//注意反引号，另外支持换行 6.带标签的模板字符串 var string = kitchen今天吃 ${apple};function kitchen(strings,…values) {//strings是指字符串的每个部分的数组集合，values只是变量的数组集合} 7.判断字符串里是否有其他字符串：包含baohastring.includes(‘apple’)&amp;开始string.startsWith(‘apple’)&amp;结尾string.endsWith(‘apple’) 8.给函数设置[默认值]function breakfast(one=1,two=2) {}；不代表不可以传参 9.’…’展开操作符，举个例子，将一个数组添加到另一个数组，var arr1 = [1,2,3];var arr2 = [4,5];arr1 = [1,2,3,…arr2]//arr1 = [1,2,3,4,5] 10.剩余操作符function open(one,two,…three) {console.log(one,two，three);console.log(one,two，..three)};open(1,2,3,4)//1,2,[3,4] //1,2,3,4 11.解构参数function(three,{one,two}={}) { console.log(three,one,two)} 12.函数名的name属性: var one = function two() {};console.log(one.name);//two，如果没有two则输出变量的名称，这是权重的问题 13.箭头函数， { 一个参数并返回：let open = one =&gt; one; 多个参数：let open = (one,two) =&gt; {…;return one + two}; 没有参数：let open = ( ) =&gt; {…;return one + two};//小括号里面是一个空格 } 14.对象表达式： { let one=1,two=2; var food = { one,//直接写变量名，不需要赋值 two, breakfast() {}//不需要function关键字 } } 15.添加带空格的属性：let foo = {} ; foo[‘hot drink’] = ‘xxx’//也可以str = ‘hot drink’ ；foo[str] = ‘xxx’ 16.就判断两个值相等：Object.is(NaN,NaN)//true,Object.is(+0,-0)//false 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>ECMAScript6</category>
+      </categories>
+      <tags>
+        <tag>ECMAScript6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[实现分页组件]]></title>
+    <url>%2F2017%2F08%2F13%2F%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5%E7%BB%84%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253define(function(require,exports,module) &#123; &lt;!-- 创建 --&gt; function Pagination() &#123; this.currentPage = 14; this.total = 20; this.show = 7; this.region = Math.floor(this.show/2); var begin = this.currentPage - this.region; begin = begin &lt; 1 ? 1 :begin; var end = begin + this.show - 1; if ( end &gt; this.total) &#123; end = this.total; begin = end - this.show; begin = begin &lt; 1 ? 1 :begin; &#125; this.begin = begin; this.end = end; &#125; &lt;!-- 渲染 --&gt; Pagination.prototype.render = function(container) &#123; //获取容器Dom对象 if(typeof container === 'string') &#123; container = document.querySelectorAll(container); &#125; if(container.length === undefined) &#123; container = [container]; &#125; for(var s = 0; s&lt;=container.length;s++) &#123; var container = container[s]; var prevElement = document.createElement('li'); prevElement.innerHTML = '&lt;\a href="#" aria-label="Previous"&gt;&lt;\span ariahidden="true"&gt;&amp;laquo;&lt;\/span&gt;&lt;\/a&gt;'; if (this.currentPage == 1) &#123; prevElement.classList.add('disabled'); &#125; container.appendChild(prevElement); for (var i = this.begin; i &lt;= this.end; i++) &#123; var liElement = document.createElement('li'); liElement.innerHTML = '&lt;\a href="#"&gt;'+i+'&lt;\/a&gt;'; if (this.currentPage == i ) &#123; liElement.classList.add('active'); &#125; container.appendChild(liElement); &#125; var nextElement = document.createElement('li'); nextElement.innerHTML = ' &lt;\a href="#" aria-label="Next"&gt;&lt;\span ariahidden="true"&gt;&amp;raquo;&lt;\/span&gt;&lt;\/a&gt;'; if (this.currentPage &gt;= ( this.end- this.region)) &#123; nextElement.classList.add('disabled'); &#125; container.appendChild(nextElement); &#125; &#125; module.exports = Pagination;&#125;); main.js如下：12345define(function(require,exports,module) &#123; var Pagination = require('./modules/pagination.js'); var pager = new Pagination(1,20,7); pager.render(ElementDom);&#125;); 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>bootstrap,JS，JS,seajs</category>
+      </categories>
+      <tags>
+        <tag>bootstrap,JS,seajs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基于bootstrap（复杂）分页样式的js原生实现]]></title>
+    <url>%2F2017%2F08%2F13%2F%E5%9F%BA%E4%BA%8Ebootstrap%EF%BC%88%E5%A4%8D%E6%9D%82%EF%BC%89%E5%88%86%E9%A1%B5%E6%A0%B7%E5%BC%8F%E7%9A%84js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[记得引入bootstrap的css样式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;ul class="pagination"&gt;&lt;/ul&gt;&lt;script&gt; //核心计算部分 var currentPage = 18; //总共显示的条目 var total = 20; // 显示的个数为奇数 var show = 5; //计算左右的个数 var region = Math.floor(show/2); // 计算每次显示的开始序号 var begin = currentPage - region; //对开始序号进行条件约束 begin = begin &lt; 1 ? 1 :begin; //计算每次显示的结束序号 var end = begin + show - 1; //对结束序号进行条件约束 if ( end &gt; total) &#123; end = total; //补充够显示个数 begin = end - show; //重新约束开始序号，防止currentPage&lt;title的情况 begin = begin &lt; 1 ? 1 :begin; &#125; //获取容器Dom对象 var container = document.getElementsByClassName('pagination')[0]; // 创建上一页标志 var prevElement = document.createElement('li'); prevElement.innerHTML = '&lt;a href="#" aria-label="Previous"&gt;&lt;span ariahidden="true"&gt;&amp;laquo;&lt;/span&gt;&lt;/a&gt;'; // 实现首末页点击失效 if (currentPage == 1) &#123; prevElement.classList.add('disabled'); &#125; container.appendChild(prevElement); // 创建显示序列 for (var i = begin; i &lt;= end; i++) &#123; var liElement = document.createElement('li'); liElement.innerHTML = '&lt;a href="#"&gt;'+i+'&lt;/a&gt;'; if (currentPage == i ) &#123; liElement.classList.add('active'); &#125; container.appendChild(liElement); &#125; // 创建下一页标志 var nextElement = document.createElement('li'); nextElement.innerHTML = ' &lt;a href="#" aria-label="Next"&gt;&lt;span ariahidden="true"&gt;&amp;raquo;&lt;/span&gt;&lt;/a&gt;'; if (currentPage &gt;= (end-region)) &#123; nextElement.classList.add('disabled'); &#125; container.appendChild(nextElement);&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>bootstrap,JS</category>
+      </categories>
+      <tags>
+        <tag>bootstrap,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[模块化seajs使用实现CMD规范]]></title>
+    <url>%2F2017%2F08%2F12%2F%E6%A8%A1%E5%9D%97%E5%8C%96seajs%E4%BD%BF%E7%94%A8%E5%AE%9E%E7%8E%B0CMD%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[关于为什么要使用seajs，我已经在上次的文章里体现的很具体了 SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法： 1.安装seajs，引入，并编写入口模块，一般加载都在head部分 1234567&lt;\script src="node_modules/seajs/dist/sea.js"&gt;&lt;\/script&gt; &lt;\script&gt; seajs.use('./calculate.js', function(calculator) &#123; console.log('模块加载完成'); // console.log(e); &#125;);&lt;\/script&gt; 需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){}) 2.定义单独的js模块文件，并且定义模块 123456789101112131415 // 定义一个计算模块define(function(require, exports, module) &#123; var add = function() &#123; var result = 0; for (var i = 0; i &lt; arguments.length; i++) &#123; result += parseFloat(arguments[i]); &#125; return result; &#125; //exports.add = add; module.exports = &#123; add: add &#125;;&#125;); 首先，函数的参数不推荐自己定义，以防止和nodejs的命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用 3.模块间的调用 1234567// 定义一个模块define(function(require, exports, module) &#123; // require('./modules/02-calculator.js');用一个变量接受返回值，从而调用引入模块的方法，同步 require.async('./modules/02-calculator.js',function (c) &#123; console.log(c); &#125;);//异步方法加载模块，没有返回值，有回调函数&#125;); 4.使用第三方依赖，用jQuery做例子： 对jQuery做相应的修改，非压缩文件 123456//适配CMD if (typeof define === "function" &amp;&amp; !define.amd) &#123; define("jquery", [], function() &#123; return jQuery.noConflict(true); &#125;); &#125; 如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象 5.seajs配置 //别名配置 12345678seajs.config(&#123; alias: &#123; 'jquery': './jquery/jquery/1.10.1/jquery.js' &#125;&#125;);define(function(require, exports, module) &#123; //引用jQuery模块 var $ = require('jquery');&#125;); // 变量配置 123456789seajs.config(&#123; vars: &#123; 'locale': 'zh-cn' &#125;&#125;);define(function(require, exports, module) &#123; var lang = require('./i18n/&#123;locale&#125;.js');&#125;); 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>seajs</category>
+      </categories>
+      <tags>
+        <tag>seajs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[模块化编程的发展过程]]></title>
+    <url>%2F2017%2F08%2F12%2F%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B%E7%9A%84%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[阶段一早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块 1234567function add(a, b) &#123; return parseFloat(a) + parseFloat(b);&#125; function subtract(a, b) &#123; return parseFloat(a) - parseFloat(b);&#125; 阶段二形成传统编程语言中的命名空间的概念，从代码层面就已经有了模块的感觉，但是没有私有空间，注意私有空间和对象边界是不同的概念 1234567var math = &#123;&#125;;math.calculator = &#123;&#125;;math.calculator.add = function(a, b) &#123; return a + b;&#125;;math.convertor = &#123;&#125;; 阶段三这里形成一个单独的私有的空间，私有成员的作用，将一个成员私有化，抽象公共方法（其他成员中都会用到的） 12345678910111213141516 var calculator = (function() &#123; var name = ''; function convert(input)&#123; return parseInt(input); &#125; function add(a, b) &#123; return convert(a) + convert(b); &#125; return &#123; add: add &#125;&#125;)(); 阶段四开闭原则，对新增开放，对修改关闭；容易拓展,这个阶段已经相对成熟了 12345678910111213141516171819202122232425// calc_v2015.js(function(calculator,$) &#123; function convert(input) &#123; return parseInt(input); &#125; calculator.add = function(a, b) &#123; return convert(a) + convert(b); &#125; window.calculator = calculator;&#125;)(window.calculator || &#123;&#125;,jquery);// 新增需求// calc_v2016.js(function(calculator,$) &#123; function convert(input) &#123; return parseInt(input); &#125; // calculator 如果存在的话，我就是扩展，不存在我就新建 calculator.remain = function(a, b) &#123; return convert(a) % convert(b); &#125; window.calculator = calculator;&#125;)(window.calculator || &#123;&#125;,jquery); 阶段五SeaJS是一个遵循CMD规范的JavaScript模块加载框架requirejs是一个遵循AMD规范的JavaScript模块加载框架commonjs规范已经不再维护 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之抽象配置]]></title>
+    <url>%2F2017%2F08%2F12%2FAngular%E4%B9%8B%E6%8A%BD%E8%B1%A1%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{ pageSize:10, listApi:’www.baidu.com/api’}) 2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以被子模块获取， 3.利用对象的方式调用并替换相应的字符串。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之异步加载包]]></title>
+    <url>%2F2017%2F08%2F12%2FAngular%E4%B9%8B%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%8C%85%2F</url>
+    <content type="text"><![CDATA[angular异步加载包主要是针对angular-seed项目框架的修改！ 首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的依赖顺序进行管理。 1.打开app文件夹下的index-async.html文件中进行修改。2.下载并在head部分引入angular-loader和script.js3.head内容如下： $script([ './bower_components/angular/angular.js', './bower_components/angular-route/angular-route.js', './app.js' ], function() { angular.bootstrap(document, ['moviecat']); }); index-async.html查看加载状态,通过angular.bootstrap(document, [‘moviecat’])加载包，就不需要再指明ng-app完成操作。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每天十道面试题__2017/8/11]]></title>
+    <url>%2F2017%2F08%2F11%2F%E6%AF%8F%E5%A4%A9%E5%8D%81%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%982-1%2F</url>
+    <content type="text"><![CDATA[实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。 12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &#123; var o; switch (typeof obj) &#123; case "undefined": break; case "Function": o = obj; break; case "string": o = obj + ""; break; case "number": o = obj - 0; break; case "boolean": o = obj; break; case "object": // object 分为两种情况 对象（Object）或数组（Array） if (obj === null) &#123; o = null; &#125; else &#123; if (Object.prototype.toString.call(obj).slice(8, -1) === "Array") &#123; o = []; for (var i = 0; i &lt; obj.length; i++) &#123; o.push(clone(obj[i])); &#125; &#125; else &#123; o = &#123;&#125;; for (var k in obj) &#123; o[k] = clone(obj[k]); &#125; &#125; &#125; break; default: o = obj; break; &#125; return o;&#125; 主要说一下这个Object.prototype.toString.call(obj).slice(8, -1)。对于基本类型的判断我们可以typeof或者insctanceof，但是对于复杂的我们就可以用Object.prototype.toString.call(obj).slice(8, -1)精确判断。 Object.prototype.toString.call(obj)返回值如下类型：[object String][object Array][object Function] 所以通过Object.prototype.toString.call(obj).slice(8, -1) === “Array”，我们可以很好的判断复杂类型 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>前端面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之焦点切换]]></title>
+    <url>%2F2017%2F08%2F10%2FAngular%E4%B9%8B%E7%84%A6%E7%82%B9%E5%88%87%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[有两种方法，第一种，通过控制器12345&lt;\ul class="nav nav-sidebar" ng-controller="NavController"&gt; &lt;\li ng-class="&#123;active:type=='in_theaters'&#125;"&gt;&lt;\a href="#/in_theaters/1"&gt;正在热映&lt;\/a&gt;&lt;\/li&gt; &lt;\li ng-class="&#123;active:type=='coming_soon'&#125;"&gt;&lt;\a href="#/coming_soon/1"&gt;即将上映&lt;\/a&gt;&lt;\/li&gt; &lt;\li ng-class="&#123;active:type=='top250'&#125;"&gt;&lt;\a href="#/top250/1"&gt;TOP&lt;\/a&gt;&lt;\/li&gt;&lt;\/ul&gt; 1234567891011121314151617.controller('NavController', [ '$scope', '$location', function($scope, $location) &#123; $scope.$location = $location; $scope.$watch('$location.path()', function(now) &#123; if (now.startsWith('/in_theaters')) &#123; $scope.type = 'in_theaters'; &#125; else if (now.startsWith('/coming_soon')) &#123; $scope.type = 'coming_soon'; &#125; else if (now.startsWith('/top250')) &#123; $scope.type = 'top250'; &#125; console.log($scope.type); &#125;); &#125;]) 这里并没有使用$routeparams去获取路由后传入的参数，是因为不在同一个模块，无法获取/in_theaters/:page的page参数，所以注入$location对象，通过监视path()的返回值来进行焦点状态的切换。 第二种方法：自定义指令实现焦点切换12345&lt;\ul class="nav nav-sidebar"&gt; &lt;\li auto-focus&gt;&lt;\a href="#/in_theaters/1"&gt;正在热映&lt;\/a&gt;&lt;\/li&gt; &lt;\li auto-focus&gt;&lt;\a href="#/coming_soon/1"&gt;即将上映&lt;\/a&gt;&lt;\/li&gt; &lt;\li auto-focus&gt;&lt;\a href="#/top250/1"&gt;TOP&lt;\/a&gt;&lt;\/li&gt;&lt;\/ul&gt; 公共的js指令文件如下，使用必须先引入 1234567891011121314151617181920(function(angular) &#123; angular.module('moviecat.directives.auto_focus', []) .directive('autoFocus', ['$location', function($location) &#123; return &#123; restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment link: function($scope, iElm, iAttrs, controller) &#123; $scope.$location = $location; $scope.$watch('$location.path()', function(now) &#123; // 当path发生变化时执行，now是变化后的值 var aLink = iElm.children().attr('href'); var type = aLink.replace(/#(\/.+?)\/\d+/, '$1'); // /coming_soon if (now.startsWith(type)) &#123; iElm.parent().children().removeClass('active'); iElm.addClass('active'); &#125; &#125;) &#125; &#125;; &#125;]);&#125;)(angular); 需要说明的是angular所有的DOM操作应该在link中完成，语法类似jquery，iElm代表当前对象 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之分页实现]]></title>
+    <url>%2F2017%2F08%2F10%2FAngular%E4%B9%8B%E5%88%86%E9%A1%B5%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[首先要明确一下路由的配置：{ 1.npm install angular-route –save 2.在模块中注入ngRoute模块 3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{}); 4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)} 根据传入的start和count控制分页，关系如下start = (页码page-1)* countpagecount = Math.ceil(total/count) 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253(function (angular) &#123; 'use strict'; var module = angular.module('moviecat.in_theaters', ['ngRoute','moviecat.services.http']); //该模块对路由的地址添加了page参数，传入用于控制翻页的页码 module.config(['$routeProvider', function($routeProvider) &#123; $routeProvider.when('/in_theaters/:page', &#123; templateUrl: 'in_theaters/view.html', controller: 'InTheatersController' &#125;); &#125;]) module.controller('InTheatersController', [ '$scope', '$route', '$routeParams', 'HttpService', function($scope,$route,$routeParams,HttpService) &#123; var count = 10; //获取传入的参数 var page = parseInt($routeParams.page); var start = (page - 1)*count; $scope.loading = true; $scope.subjects = []; $scope.message = ''; $scope.totalCount = 0; //赋值给currentPage变量，默认值为1，这个1是在总路由中提前配置的 $scope.currentPage = page; $scope.totalPages = 0; HttpService.jsonp('http://api.douban.com/v2/movie/in_theaters',&#123;start:start,count:count&#125;,function(data) &#123; $scope.subjects = data.subjects; $scope.totalCount = data.total; $scope.title = data.title; //计算总页数 $scope.totalPages = Math.ceil($scope.totalCount/count); $scope.loading = false; $scope.$apply(); &#125;); //这个是控制翻页的函数，我们采用的是上一页下一页两个按钮进行翻页的 $scope.go = function(page) &#123; if (page&gt;=1&amp;&amp;page&lt;=$scope.totalPages) $route.updateParams(&#123; page:page &#125;); &#125; &#125; ]);&#125;)(angular); html部分： 123456789&lt;\div ng-show="!loading"&gt; &lt;\p&gt;总共：&#123;&#123;totalCount&#125;&#125; 条记录,&#123;&#123;totalPages&#125;&#125;页&lt;\/p&gt; &lt;\nav aria-label="..."&gt; &lt;\ul class="pager"&gt; &lt;\li ng-class="&#123;disabled:currentPage&lt;=1&#125;"&gt;&lt;\a ng-click="go(currentPage - 1)"&gt;&lt;&lt; Previous&lt;\/a&gt;&lt;\/li&gt; &lt;\li ng-class="&#123;disabled:currentPage&gt;=totalPages&#125;"&gt;&lt;\a ng-click="go(currentPage + 1)"&gt;Next &gt;&gt;&lt;\/a&gt;&lt;\/li&gt; &lt;\/ul&gt; &lt;\/nav&gt;&lt;\/div&gt; 总路由部分，初始1的由来 1$routeProvider.otherwise(&#123;redirectTo: '/in_theaters/1'&#125;); 分页制作完成，disabled类控制按钮是否可以点 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之loading动画实现]]></title>
+    <url>%2F2017%2F08%2F10%2FAngular%E4%B9%8Bloading%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下： 1.复制相应动画的html和css到项目对应页面2.$scope暴露变量，值为bool，例如$scope.flag = true;3.加载完成后改变变量的值,$scope.flag = false;4.html部分，ng-show=”flag”;5.在回调函数中$scope.apply()重新同步数据; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每天十道面试题__2017/8/9(3)]]></title>
+    <url>%2F2017%2F08%2F09%2F%E6%AF%8F%E5%A4%A9%E5%8D%81%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%981-3%2F</url>
+    <content type="text"><![CDATA[8、什么叫优雅降级和渐进增强？ 渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。 9、浏览器的内核分别是什么? IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是presto内核，Opera现已改用Google Chrome的Blink内核 Chrome：Blink(基于webkit，Google与Opera Software共同开发) 10、怎样添加、移除、移动、复制、创建和查找节点？ 1）创建新节点 createDocumentFragment() //创建一个DOM片段 createElement() //创建一个具体的元素 createTextNode() //创建一个文本节点2）添加、移除、替换、插入 appendChild() //添加 removeChild() //移除 replaceChild() //替换 insertBefore() //插入3）查找 getElementsByTagName() //通过标签名称 getElementsByName() //通过元素的Name属性的值 getElementById() //通过元素Id，唯一性 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>前端面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每天十道面试题__2017/8/9(2)]]></title>
+    <url>%2F2017%2F08%2F09%2F%E6%AF%8F%E5%A4%A9%E5%8D%81%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%981-2%2F</url>
+    <content type="text"><![CDATA[4、简述一下src与href的区别 href 是指向网络资源所在位置，仅仅是建立链接，用于超链接。src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求src资源时会将其指向的资源下载并应用到文档内。 5、什么是CSS Hack? 针对不同的浏览器写不同的CSS,就是 CSS Hack，IE浏览器Hack一般又分为三种，条件Hack、属性级Hack、选择符Hack{ // 1、条件Hack \&lt;!–[if IE]&gt;; &lt;\style&gt;; .test{color:red;} &lt;\/style&gt;; &lt;![endif]–&gt;; // 2、属性Hack .test{ color:#090\9; / For IE8+ / color:#f00; / For IE7 and earlier / _color:#ff0; / For IE6 and earlier */ } // 3、选择符Hack * html .test{color:#090;} /* For IE6 and earlier */ * + html .test{color:#ff0;} /* For IE7 */ } 6、简述同步和异步的区别 同步是阻塞模式，异步是非阻塞模式。 同步就是指一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去； 异步是指进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。 7、px和em的区别 px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em得值不是固定的，并且em会继承父级元素的字体大小。 浏览器的默认字体高都是16px。所以未经调整的浏览器都符合: 1em=16px。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>前端面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每天十道面试题__2017/8/9(1)]]></title>
+    <url>%2F2017%2F08%2F09%2F%E6%AF%8F%E5%A4%A9%E5%8D%81%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%981-1%2F</url>
+    <content type="text"><![CDATA[1、什么是盒子模型？ 在网页中，一个元素占有空间的大小由元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分构成，他们一同构成css中元素的盒模型。不区分行内元素和块级元素。 2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？ 行内元素：a、span、img、input、strong、select、label、em、button、textarea 块级元素：div、列表元素（ul、li、dl、dt、dd）标题元素（h1-h6）空元素：即系没有内容的HTML元素，例如：br、meta、hr、link、input、img 3.CSS实现垂直水平居中 方法一：相对某个元素垂直水平居中 .parent{ width: 500px; height: 500px; position:relative; } .son{ width:100px; height:100px; position: absolute; top: 50%; left: 50%; margin-top:-50px; margin-left: -50px; background-color:#6699FF; } 或者： .parent{ width: 500px; height: 500px; position:relative; } .son{ width:100px; height:100px; position: absolute; left: 0; right: 0; margin: auto; top: 50%; margin-top:-50px; background-color:#6699FF; } 方法二：相对视口垂直水平居中 .parent { width: 100%; height: 100%; position: fixed; } .son { width: 100px; height: 100px; background: #ddd; position: relative; margin: 0 auto; top: 50%; margin-top: -50px; } 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>前端面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之跨域请求]]></title>
+    <url>%2F2017%2F08%2F09%2FAngular%E4%B9%8B%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%2F</url>
+    <content type="text"><![CDATA[angular自定义跨域请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。 123456789101112131415161718192021//自定义跨域请求(function(angular) &#123; var http = angular.module('moviecat.services.http',[]); http.service('HttpService',['$window','$document',function($window,$document) &#123; this.jsonp = function(url, data, callback) &#123; // 在全局变量中挂载毁掉函数 var fuSuffix = Math.random().toString().replace('.', ''); var cbFuncName = 'my_cb_' + fuSuffix; $window[cbFuncName] = callback; var querystring = url.indexOf('?') == -1 ? '?' :''; for (var key in data) &#123; querystring += key + '=' + data[key] + '&amp;'; &#125; querystring += 'callback' + '=' +cbFuncName; var scriptElement = $document[0].createElement('script'); scriptElement.src = url + querystring; $document[0].body.appendChild(scriptElement); console.log(scriptElement.src) &#125;; &#125;]);&#125;)(angular) 1234567891011$scope.check = function() &#123; HttpService.jsonp('http://218.6.160.55:7766/jsdApi/getToken',&#123;userName:$scope.user,pwd: $scope.pwd&#125;,function(data) &#123; if (data.code == 1) &#123; $scope.token = data.data.token; &#125;else &#123; alert(data.msg); &#125; $scope.$apply();//对$scope的数据重新同步 &#125;);&#125; 使用方法：1，引入自定义跨域请求所在的js文件2，注入moviecat.services.http模块以及HttpService服务到控制器中，通过HttpService调用jsonp方法3，注意apply的使用。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular之异步请求]]></title>
+    <url>%2F2017%2F08%2F09%2FAngular%E4%B9%8B%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%2F</url>
+    <content type="text"><![CDATA[使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。 123456789101112view1Model.controller('view1Controller',['$scope','$http',function($scope,$http)&#123; $scope.name = ''; $http(&#123; method:'GET', url:'/app/data.json' &#125;).then(function(response) &#123; $scope.name = response; console.log(response) &#125;, function(response) &#123; console.log('请求失败'); &#125;);&#125;]); 123456789view1Model.controller('view1Controller',['$scope','$http',function($scope,$http)&#123; $scope.name = ''; $http.get('./data.json').then(function(data) &#123; $scope.name = response; console.log(data.data) &#125;,function(err) &#123; console.log('请求失败'); &#125;)&#125;]); 针对Chrome和Firefox进行测试，结果如下： Firefox（file协议下）：可以正常请求到数据，但是提示报错（XML 解析错误：格式不佳 位置：file:///C:/Users/Administrator/Desktop angular_test2/angular-seed(Modified)/app/data.json 行 1，列 1：）Firefox（http协议下）：一切正常 Chrome（file协议下）：不能请求到数据，但是提示报错（XMLHttpRequest cannot load file:///C:/Users/Administrator/Desktop/angular_test2/angular-seed(Modified)/app/view1/view1.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.）Chrome（http协议下）：一切正常 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular见闻之三]]></title>
+    <url>%2F2017%2F08%2F09%2FAngular%E8%A7%81%E9%97%BB%E4%B9%8B%E4%B8%89%2F</url>
+    <content type="text"><![CDATA[ng-class=”{complate:todo.complate}”//只有一个括号$scope是双向数据绑定的核心可以用form + ng-submit 实现回车提交ng中路由是单独提供功能的模块ngRoute注意页面逻辑和界面逻辑的划分&lt;\input class=”toggle” type=”checkbox” ng-model=”item.completed”&gt;//绑定的value值页面统计时候直接用数组的length属性//angular实现回车提交的方法&lt;\form ng-submit=”add()”&gt; &lt;\input class=”new-todo” placeholder=”What needs to be done?” ng-model=’text’ autofocus&gt;&lt;\/form&gt;过滤器的作用是进行数据筛选，尤其指repeat类型的列表数据$watch只能监视scope成员在$location对象中hash()和path()根据具体浏览器做出调整自定义匹配规则，规避模糊匹配，可以自定义方法精确匹配引入第三方文件的时候不写协议是为了适应http和https两种情况所有有输入有输出的都叫做apiangular进行异步操作之后都需要进行$scope.apply()方法让scope数据重新进行绑定 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular自定义filter匹配规则]]></title>
+    <url>%2F2017%2F08%2F04%2FAngular%E8%87%AA%E5%AE%9A%E4%B9%89filter%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99%2F</url>
+    <content type="text"><![CDATA[在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定 &lt;div ng-app="app"&gt; &lt;input type="text" ng-model='height'&gt; &lt;p&gt;{{height | height}}&lt;/p&gt; &lt;/div&gt; &lt;script src="node_modules/angular/angular.min.js"&gt;&lt;/script&gt; &lt;script&gt; angular.module('app', []) .filter('height',function() { return function(input) { if (input &gt; 200) { return '太高啦'; }else if (input &lt; 100) { return '太矮了'; } } }); &lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular自定义指令实践]]></title>
+    <url>%2F2017%2F08%2F02%2FAngular%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4%E5%AE%9E%E8%B7%B5%2F</url>
+    <content type="text"><![CDATA[&lt;!DOCTYPE html&gt; &lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt; &lt;link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"&gt; &lt;/head&gt; &lt;body ng-app="barModule" ng-controller="barController"&gt; &lt;breadcrumb data="{{data}}"&gt;111111111&lt;/breadcrumb&gt; &lt;script src="./bower_components/angular/angular.min.js"&gt;&lt;/script&gt; &lt;script&gt; var barModule = angular.module('barModule',[]); barModule.controller('barController',['$scope',function($scope){ $scope.data = { shouyw:1, dierye:2, disanye:3 }; }]); barModule.directive('breadcrumb',[function(){ return { scope:{}, // restrict: 'AE', // template: '', transclude: true, replace: true, templateUrl:'./tpls/breadcrumb.html', link:function(scope,element,attribute) { scope.data = JSON.parse(attribute.data); console.log(scope.data) } }; }]); &lt;/script&gt; &lt;/body&gt; &lt;/html&gt; ./tpls/breadcrumb.html文件如下 &lt;ol class="breadcrumb"&gt; &lt;li ng-repeat="(key, value) in data" ng-class="{active:$last}"&gt; &lt;a href="{{value}}" ng-if="!$last"&gt;{{key}}&lt;/a&gt; &lt;span ng-if="$last"&gt;{{key}}&lt;/span&gt; &lt;/li&gt; &lt;!-- &lt;ng-transclude&gt;&lt;/ng-transclude&gt; --&gt; &lt;/ol&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular见闻之二]]></title>
+    <url>%2F2017%2F08%2F02%2FAngular%E8%A7%81%E9%97%BB%E4%B9%8B%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[~ng-xxx的属性本身并不是标准中定义的属性，语法校验无法通过，所以也有data-ng-xxx的写法，让网页对h5有效，二者相同~按照功能人为划分指令可以分为，普通指令和事件指令ng-app：{ ~创建多个ng-app的时候，默认执行第一个，其他的需要手动去执行 ~ng-app一个页面上有多个，但是不推荐，另外标记的范围要尽可能小， 性能更高 ~每个ng-app都是一个模块，他们可以组成新的模块从而避免多个ng-app}ng-bind： { 在绑定的值包含HTML时会转义，为了预防跨站脚本攻击 绑定函数 ng-bind-html可以包含html，需要依赖于angular-sanitize,并注入ngSanitize模块在ng-app中}ng-repeat: { 往数组添加元素的方法除了push()还有data[data.length]=xxx； 添加给需要的重复的标签forin语法 {&amp;{$first?’开始’:’’}&amp;} {&amp;{$last?’结束’:’’}&amp;} class = “{&amp;{$even?’red’:’green’}&amp;}”隔行换色 ng-class = “{red:$even,green:$odd}” ng-class = “{red:name.startWidth(‘李’【这里可以是一个变量】))}”}nf-show : { settimeout()在angular中是$timeout() 相对应的有ng-hide}ng-src：{ 避免网页报错，导致img标签请求表达式地址，产生的加载失败瞬间 相似的有ng-href} ng-switch ：{ 与ng-switch-when，ng-switch-default配合使用} ng-checked 和 ng-selected ：{ 都只会做数据到视图的同步，相反则不会} 自定义指令：{ 定义：demoApp.directive(‘myButton’,[function(){ return { transclude: true,//该属性在html页面只能用ng-transclude做标签，而不是属性，否则报错 replace: true, templateUrl:’./tpls/breadcrumb.html’ template:’模板代码’ }; }]); 调用：&lt;\my-button&gt;&lt;\/my-button&gt;} 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Angular见闻之一]]></title>
+    <url>%2F2017%2F07%2F31%2FAngular%E8%A7%81%E9%97%BB%2F</url>
+    <content type="text"><![CDATA[是什么：Angular就是一个高级的JavaScript框架 做什么：Angular能够构建SPA[单一页面应用程序]，只有一个页面，内容由AJAX请求得到，Angular整个是利用锚点进行异步请求的，实现局部刷新 为什么用：更少的代码实现更强劲的功能，现在的需求不仅仅是做出一些相应的功能，如果不能在代码里体现出一些思想的话，那么维护和推进都很难，而angular的出现带领着人更加注重前端思维，走向模式化和架构化. Angular的特性:1.MVC 2.模块化 3.自动化双向数据绑定 4.指令系统 所有需要ng管理的代码都需要包裹着ng-app中,ng-app是ng的入口,表示所有的指令都会被angular管理 当代码被执行到ng-app的时候会开辟内存空间,用于创建并存放ng-model对应的’值’的数据模型,并将value属性和内存空间中的某个对象的某个属性建立关系,value和属性的联系,不是ng-model和对象的联系，也不是value和对象的联系,这个时候不需要有值,这只是一种绑定，就想把变量对应到内存空间一样.当代码继续执行遇到表达式的时候[两对花括号],如果表达式中的内容与数据模型对应,那么表达式所在标签的innerHTML属性和内存空间中相应属性建立联系,这样就进行了双向的数据绑定。 使用angular的好处： { 最大程度上减少了页面上的DOM操作，这个很重要。基本不用操作 让JavaScript专注业务逻辑代码 通过自定义指令实现组件化编程 维护成本低} Google浏览器默认情况下file协议无法进行ajax操作 CDN的优势 ：{ 快 节省自己服务器的带宽压力和流量} angular模块：{ 应用程序的最小单元，对页面进行功能业务划分 angular.module(‘myapp’,[‘$scope’,function($scope){}]);必须有第二个参数，否则不是创建模块，而是返回新建的模块} $scope:就想事件对象一样，代表着数据模型，存放在数据,如：$scope.uer.name = ‘dsfsd’。 数据模型仅仅是存数据，真正对数据处理和操作在controller里面 控制器必须在模块下，想创建控制器必须先创建模块 ng-module是绑定数据，和ngular.module创建模块 控制器的三种职责： { 为应用中的模型设置初始状态 通过$scope暴露数据和行为给视图 监视数据变化，做出判断：$scope.$watch(‘user.name’,function(now,old){}) //注意没有$scope} ng-cloak隐藏未渲染的瞬间：{ 方式1：ng-cloak + [ng-cloak] {display:none;} 方式2：class=”ng-cloak” + [ng-cloak],.ng-cloak {display:none;}} 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Angular见闻</category>
+      </categories>
+      <tags>
+        <tag>Angular见闻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集6]]></title>
+    <url>%2F2017%2F07%2F30%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%866%2F</url>
+    <content type="text"><![CDATA[关于location对象属性的一些说明、例如：”http://wwww.baidu.com:8080/abc/index.html/?a=1&amp;b=2#user“ location : { protocol : http: hostname : wwww.baidu.com port : 8080 pathname : abc/index.html search : ?a=1&amp;b=2 hash : #user} 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[吐槽]]></title>
+    <url>%2F2017%2F07%2F29%2F%E5%90%90%E6%A7%BD%2F</url>
+    <content type="text"><![CDATA[最近看《JavaScript高级程序设计 第三版》和 《编写高质量代码 改善JavaScript程序的188个建议》真的是看到吐先说第一本吧，可取的知识点确实多，但是在读完一半的时候，越往后就会发现，这本书就像一个详尽的功能说明书一样，真的是全到让人无可奈何，更偏向理论，它在技术的展示上都很基本，但是在问题的处理上倒是给了不少建议。大家有兴趣可以看看.《编写高质量代码 改善JavaScript程序的188个建议》虽然是188条建议，大概就几个部分吧，正则，数组，对象，继承，循环，作用域块等等，唉，是我心态不好吗? 里面的很多东西我在零碎收集中都有写，读起来心烦，怎么说呢，会的都会，不会的，至少现阶段用不上。再者很多东西在开发中很少有人特别注重和关注。以后有机会再重新拜读这两本书吧。倒是觉得项目中积累的经验或许能体会更深。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《编写高质量代码 改善JavaScript程序的188个建议》之一]]></title>
+    <url>%2F2017%2F07%2F29%2F%E8%AF%BB%E3%80%8A%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%20%E6%94%B9%E5%96%84JavaScript%E7%A8%8B%E5%BA%8F%E7%9A%84188%E4%B8%AA%E5%BB%BA%E8%AE%AE%E3%80%8B%E4%B9%8B%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[1.虽然ECMAScript标准化之后允许用中文命名变量或者函数，但是为了防止Unicode乱码，不推荐使用2.尽可能在函数体的顶部定义素有函数需要的变量，而不是推迟定义，因为JavaScript并没有块级作用域3.避免勿用parseInt();它会从0位置检索，0位置不是数字则返回NaN，如果是小数则到.的位置返回之前的整数4.防止JavaScript自动插入分号，如果要return一个值的时候，这个值的表达式必须和return在同一行，为了避免这种错误，在完整的语句后面都要添加分号5.大多数情况下switch比if运行更快，但是前提条件是条件体数量很大6.使用arguments和switch结合实现重载7.推荐使用构造函数加原型的方式创建类8.推荐使用混合继承方式（构造继承和原型继承） 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》第8~13章]]></title>
+    <url>%2F2017%2F07%2F29%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E7%AC%AC8~13%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[DOM：{ ~BOM相当于api，用于访问操作html和xml ~每一个节点都有nodeType属性 ~documentElement,firstChild,childNodes[0]都指向元素 ~document类型 ~Element类型：{ ~nodeType的值为1； ~nodeValue的值为null； ~父节点可能是document或者element ~element.tarName输出标签名：‘DIV’，大写，所以有element.tagName.toLowerCase() == ‘div’ } ~HTMLElement类型：它直接继承Element并添加了一些属性，比如id，class，title ~HTML5新加方法： { ~querySelector() ~querySelectorAll() ~getElementByClassName() } ~自IE6开始区分渲染页面模式 ：{ 标准模式：document.compatMode == “CSS1Compat” 混杂模式：document.compatMode == “BackCompat” }} 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》第7~8章]]></title>
+    <url>%2F2017%2F07%2F28%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E7%AC%AC7~8%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[1.window对象：{ ~window对象是BOM的核心对象 ~全局作用域:{ ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行 ~window对象有location和navigator属性，他们分别指向自己所代表的对象 ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.frame[i]获取 ~window对象位置属性：{ ~IE,Safari,Chrome和Chrome都提供了screenLeft，screenTop，分别表示窗口相对屏幕左边和上边的位置 ~Firefox则提供了screenX和screenY } ~window对象的方法：alert(), confirm(),prompt(); }} 2.location对象：{ ~location对象是Bom最有用的对象之一 ~window.location === document.location 他们引用同一个对象 ~location.search.substring(1).split(‘&amp;’)处理参数 ~location.hash用来处理页内锚点跳转} 3.navigator： { navigator.appName:浏览器名称 navigator.APPVersion:浏览器版本} 4.history: { ~history保存的是用户上网的浏览记录，从窗口打开的那一刻算起。 ~方法{ history.go(-1) = history.back(); history.go(1) = history.forward();; history.go(‘baidu.com’); } } 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集5]]></title>
+    <url>%2F2017%2F07%2F28%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%865%2F</url>
+    <content type="text"><![CDATA[~早起的事件写法称之为：DOM0时代，也就是click写法。分离事件的写法称之为：DOM2时代，也就是addEventListener~Dom2的核心就是事件流，事件流包括冒泡和捕获。~Dom2—addEventListener:优点：1，给一个对象绑定多个事件2，动态的移除和添加 ~事件委托：通过绑定父元素来绑定子元素(原理：事件冒泡)~Event对象：当你定义一个事件的时候，系统自动生成一个event对象保存当前对象的一些信息，比如type，target。短路表达式（经常在框架中使用）：~ || :如果左边返回true就返回左边，否则返回右边~ &amp;&amp; ：如果左边返回true就返回右边，否则返回左边~缓存是提高性 能的最核心武器~缓存的三种形式1.直接放在内存中2.通过cookie3.通过html5的缓存机制动画框架的封装~大部分的动画都必须要有position：absolute~一般用offsetLeft获取left值，不带px，方便计算 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》第六章]]></title>
+    <url>%2F2017%2F07%2F21%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E7%AC%AC%E5%85%AD%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[关于函数~定义函数有两种方式：函数声明和函数表达式~函数声明最重要的特征是函数声明提升，意思是在代码执行之前会先读取函数申明，这就意味着函数声明课以放在调用他的后面。~函数表达式是创建匿名函数，赋值给一个变量，它的name属性时空字符串。而且必须先赋值后使用~关于递归，最好使用arguments.callee指向原函数~由于闭包会携带包含它的函数作用域，因此会比其他函数占用更多的内存，过度使用则会到时内存占用过多，谨慎使用。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集4]]></title>
+    <url>%2F2017%2F07%2F21%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%864%2F</url>
+    <content type="text"><![CDATA[~实现继承的方式：构造函数和原型分别继承，如下构造：在构造函数内添加Person.call(this,arguments);然后写子类属性原型：Student.prototype = new Person();~如果使用了原型继承那么就要用离散的原型方法，不可以综合去写，否则出错万物都继承自Object（准确的说是Object.prototype）,不管是内置对象还是自定义对象。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集3]]></title>
+    <url>%2F2017%2F07%2F21%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%863%2F</url>
+    <content type="text"><![CDATA[~供爷法则：call/被借用的对象.function.call(要借用的对象，参数1，参数2)，不会拷贝，只是借用~函数也可以借用，因为函数也是对象，形式如下：被借用函数.call(借用函数，参数1，参数2)~call()可以改变被借用函数this指针指向。this指向借用函数~伪数组：就是一个包含有length属性的json对象，他不是一个真数组~apply和call几乎一样，唯一不同的是传参方式不同，apply将参数以数组的方式传入~apply实现高效的求数组最大值，最小值1234function getMax(arr) &#123; return Math.max.apply(null,arr) //return Math.min.apply(null,arr)&#125; ~apply可以实现好多不定参数的函数~调用函数的五种方式：1.普通模式：声明并调用2.函数表达式3.方法调用模式4.构造函数形式5.apply，call形式6.Function对象形式~Object对象时Function对象的一个实例，所以Object的proto属性指向Function对象的原型~proto是每个对象都有的一个属性，而prototype是函数才会有的属性!!!~内置对象和自定义对象的原型链不同，内置对象的原型链中多了一个Function.prototype~Object.prototype.proto指向null，也是原型链结束的地方~Ajax在传输数据的时候应该进行数据分流，减少服务器的链接个数。~分析原型链要分内置对象和自定义对象，以及从构造函数和实例两个对象分析，缺一不可。~只有Function构造函数的proto指向自己的Function.prototype~实现继承的的方式1.原型继承：缺点：子类传参无法实例话父类构造函数属性，只能单独去写2.构造函数继承3.组合继承4。寄生组合继承:封装继承的方法供对象调用5.拷贝继承：base2或者simplejavascriptinheritance~js语言不支持重载，但是有两种方式可以实习重载1.arguments 2.typeof~js中同名函数只会调用后者 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集]]></title>
+    <url>%2F2017%2F07%2F20%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%862%2F</url>
+    <content type="text"><![CDATA[创建对象的几种方式1.Object()方式：对于属性的添加重复太多2.工厂模式：封装性强，不需要知道细节3.构造函数方法 缺点：实例化导致方法重复，无法共享4.原型方法：缺点：只有引用类型可以被共享5.混合模式（原型+构造）6:字面量形式：将json字符串通过JSON.parse()转化为对象7.拷贝模式 (for in/argumnets) 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript零碎知识收集]]></title>
+    <url>%2F2017%2F07%2F20%2FJavaScript%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E6%94%B6%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[~构造函数中如果有return语句，具体执行那个作用域，取决于是否返回的是对象，如果是对象，则执行return对象里的语句，否则还是构造函数内部的内容。~实例拷贝理论：每当我们实例化构造函数的时候都会将构造函数的属性拷贝一份，同事赋给新值，一旦赋予新值，那么内存空间将会被替换，所以说实例化的过程是拷贝构造函数的过程。constructor属性时构造函数的隐藏属性，所以会被拷贝给实例，指向构造函数。~constructor属性时function对象的一个属性，而对象都是由函数实现的，所以对象就是function的一个实例而已~原型对象不管实例化多少次，都只会生成一次。重要的是实例拷贝理论只是针对构造函数，而不会拷贝原型对象的属性。~属性搜索机制：prototype保存的是原型对象的地址，而实例属性是拷贝而来的，因此可以向上访问属性。~双对象法则：js所谓的对象包含两个独立的对象，构造函数对象和原型对象，通过——proto——联系起来~属性屏蔽理论：原型链上有限选择近的，屏蔽其他同名属性，若要访问可以delete或者o.prototype.属性进行访问~引用类型和值类型：将一个值类型的赋值给另一个变量，实际上创建了新的内存空间，并且将值保存进去，两者互不影响。引用类型赋值则只是将保存内容的地址赋值过去，使得他们指向同一个内存空间，相互影响。值类型有：undefined，string，number，boolean。引用类型有:函数，数组，对象，null，内置对象~整个js而言，完全面向对象，包括内置对象，BOM对象，自定义对象 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[javascript面向对象编程的一些想法]]></title>
+    <url>%2F2017%2F07%2F19%2Fjavascript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[下面的例子是单独绑定数据实例。 create : function(){ var html = '&lt;\div class="image"&gt;&lt;\/div&gt;&lt;\div class="description"&gt;&lt;\p class="name"&gt;@(name)&lt;\/p&gt;&lt;\p class="time"&gt;@(time)&lt;\/p&gt;&lt;\div class="mark"&gt;&lt;\/div&gt;&lt;\/div&gt;'; this.dom.html($.formateString(html, this.data), true).appendTo('.xingzuo'); } for(var i = 0, len = data.length; i &lt; len; i++){ new Xingzuo(data[i], i); } JavaScript面向对象编程的时候，传入json数据，在最后实例化的时候是否遍历循环实例化所有的对象取决于数据绑定的时候是否将数据全部绑定，如果全部绑定则只需要实例化一次。当然了，从更专业的角度来说，应该是取决于我们所针对的对象，比如说购物车和星座显示，那么购物车除了商品列表之外还有其他要显示的内容比如 总金额，这些都是购物车这个对象的一部分，而商品列表中的每个商品又是同一对象的不同实例，如何选择呢，我们这里既然以购物车为对象自然使用最后new一次的方法。因为购物车只是一个。星座显示则相反，它是12个相似独立的个体，不包含之外的信息，所以我们可以更好的选择先个体后整体的思想，new多个对象，这样思路则清晰一些。说的这些并没有什么严格的规范，只是选用合适的方法，合理的解决问题，而不仅仅是解决问题，更多的是对面向对象的理解。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Arttemplate模板技术实现数据绑定]]></title>
+    <url>%2F2017%2F07%2F19%2FArttemplate%E6%A8%A1%E6%9D%BF%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132var data = &#123;list:[&#123; img:"./images/1_04799183873717033_mid.jpg", name:"Coppertone水宝宝速干清爽防晒喷雾型45g SPF50 ", intro:"这里是介绍~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", price:"?21.00", account:"销量：0天2时19分6秒"&#125;,&#123; img:"./images/1_04799183873717033_mid.jpg", name:"Coppertone11111111111111", intro:"这里是介绍~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", price:"?21.00", account:"销量：0天2时19分6秒"&#125;,&#123; img:"./images/1_04799183873717033_mid.jpg", name:"Coppertone22222222222222222222", intro:"这里是介绍~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", price:"?21.00", account:"销量：0天2时19分6秒"&#125;,&#123; img:"./images/1_04799183873717033_mid.jpg", name:"Coppertone333333333333", intro:"这里是介绍~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", price:"?21.00", account:"销量：0天2时19分6秒"&#125;,]&#125; 12345678910111213141516&lt;script id="arttemplate" type="text/html"&gt; &#123;&#123;each list as value i&#125;&#125; &lt;div class="row"&gt; &lt;div class="col-sm-6 col-md-4"&gt; &lt;div class="thumbnail"&gt; &lt;img src="&#123;&#123;value.img&#125;&#125;" alt="..."&gt; &lt;div class="caption"&gt; &lt;h3&gt;&#123;&#123;value.name&#125;&#125;&lt;/h3&gt; &lt;p&gt;&#123;&#123;value.intro&#125;&#125;&lt;/p&gt; &lt;p&gt;&lt;a href="javascript:;" class="btn btn-primary spc" role="button"&gt;&#123;&#123;value.price&#125;&#125;&lt;/a&gt; &lt;a href="#" class="btn btn-default" role="button"&gt;&#123;&#123;value.account&#125;&#125;&lt;/a&gt;&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;&lt;/div&gt;&#123;&#123;/each&#125;&#125;&lt;/script&gt; 1234bindDom : function(ndata) &#123;// arttemplate$('.skillList').html(template('arttemplate', ndata));&#125; 主要问题在于需要传入的json格式数据，否则在解析的时候会出问题。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Arttemplate,JS</category>
+      </categories>
+      <tags>
+        <tag>Arttemplate,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》前六章]]></title>
+    <url>%2F2017%2F07%2F16%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E5%89%8D%E5%85%AD%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~ECMAScript有两种属性：数据属性，访问器属性~数据属性包含一个数据值得位置。 这个位置可以读取和写入值。反之访问器属性不包含数据值，而是包含一对getter和setter函数。~Object构造函数方法或者字面量方式创建对象都会产生大量的重复代码。因此产生了工厂模式，封装到函数里返回对象，但是存在无法识别对象的问题，不能知道一个对象的类型。所以出现了新的模式。构造函数模式。~构造函数模式：在new构造函数的过程中会经历以下四个过程：1，创建新对象2，将构造函数的作用域赋给新对象（因此this指向这个新对象）3，执行构造函数中的代码（为这个新对象添加属性）4，返回新对象~检测对象类型的时候还是instanceof要可靠一些~创建自定义构造函数意味着可以将它的实例标识为一种特定的类型，而这正是构造函数模式胜过工厂模式的地方：不过每个实例的方法都会重新创建。所以诞生了原型模式~构造函数与其他函数唯一的区别在于，调用他们的方式不同，不过构造函数也是函数不存在定义构造函数的特殊语法~构造加原型—————&gt;动态原型模式（全部封装到构造函数）使用动态原型模式的时候不能使用对象字面量重写原型，否则会切断实例与新原型之间的联系——————&gt;稳妥构造函数模式~原型链实现继承的情况下，不能通过对象字面量创建新的原型方法，否则会重写原型链。 第六章关于面向对象其中讲到的很多，很有用，需要反复看 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》第五章补]]></title>
+    <url>%2F2017%2F07%2F08%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%A1%A5%2F</url>
+    <content type="text"><![CDATA[~对象字面量的属性定义可以用字符串”name” = alg;~对象字面量的方式中最后一个属性不能逗号结束，否则在ie&lt;7和早版本的opera中会报错~人们更接受对象字面量的方式创建对象，一方面因为代码少有封装的感觉，另一方面用来传参~使用方括号访问属性的唯一优点是可以以变量的方式访问。~与对象一样，在使用数组字面量的表示法时，不会调用Array的构造函数~检测数组：if(Array.isArray(value)){//对数组操作};~如果数组中有一项的值是null或者undefined，那么该值在join().toString()，和valueOf()方法的返回结果中以空字符串表示。~栈方法：Array.push()接受任意数量的参数，把他们添加到数组末尾，返回修改后数组的长度。Array.pop()从数组末尾移除最后一项，返回移除项。~队列方法：Array.push()和Array.shift()，shift方法移除数组中第一个项并返回该项，同时数组长度减1；~unshift()在数组前端添加任意个 项并返回数组的长度。~reverse()和sort()返回排序后得数组~sort()对数组排序会将数值转化为字符比较所以5会比10大，针对这个进行改造,传入函数compare如下Array.sort(ccompare); 123456789function compare(value1,value2) &#123; if(value1 &lt; varue2) &#123; return -1;//换为1同时将下面换成-1则为降序排列，当然了如果只是反转顺序，reserve()更快 &#125;else if(value1 &lt; varue2)&#123; return 1; &#125;else &#123; return 0; &#125;&#125; 操作方法：~concat()方法：创建当前数组的副本，然后将参数添加到副本的末尾，返回新数组。反悔的数组和之前的数组是两个数组。~slice()方法：返回新数组，一个参数时，从该参数位置到结尾的所有元素返回数组，两个参数时返回起始到结束位置的新数组，不包括结束位置的索引，且该方法不影响原始数组。如果参数有负数，则加数组长度，长度为5（-2，-1）== （3,4），若结束位置小于初始位置则返回空数组。~splice()方法：算是最强大的数组方法，传入两个参数，则删除对应起始位置的元素。三个或者三个以上的参数，第一个是起始位置，第二个是删除项的个数，第三个以后是要插入的元素，三个参数时，第一个参数从1开始。 ~位置方法：indexOf()方法和lastIndexOf()返回查找项的位置索引，没有则返回-1；~Data.now()获取当前的毫秒数可以用来计算函数执行时间。~JavaScript没有重载~可以同时使用函数声明和函数表达式，但是在Safari中会导致错误~在函数内部有两个特殊的对象，this和arguments，arguments是一个类数组对象，有一个callee的属性，指向拥有这个arguments对象的函数。~函数名只是一个包含指针的变量而已，无临时全局的say()还是o.say()指向的都是同一个函数。~严格模式不能为caller属性赋值，不然会导致错误；~每个函数都包含两个非继承而来的方法：apply()和call()用途都是在特定的作用域中调用函数。sum.apply(this,arguments)/sum.call(this,arg1,arg2,arg3)…他们真正强大的是可以扩充函数赖以运行的作用于。 ~num.toFixed(2)返回两位小数的数字。会自动舍入~字符方法：charAt()：接受一个参数，返回该参数的字符。charCodeAt()接受一个参数，返回该参数的字符编码。或者以string[i]的方式返回。~字符串操作方法：string.concat()，返回新的字符串。slice()，substr(),substring()返回子字符串。一个参数或者两个参数，subtr()传入两个参数的时候，后者标识要返回字符串的个数。传入负值时，slice()会加字符串长度。substr()会将第一个参数加字符串的长度，第二个负的参数转化为0；substring()会把所有负值转化为0，从小数部分开始算；~如果字符出现一次则indeOf()和lastIndexOf()返回的相同。他们的第二个可选参数指定查询开始位置。~string.trim()方法，删除前后的空格，中间的不会删除。并返回结果。~大小写转化：string.toLocalUpperCase() == string.toUpperCase();string.toLocalLowerCase() == string.toLowerCase();~模式匹配：match()，serach()；~将字符串转化为数组：split(),第一个参数为分隔符。第二个可选参数是元素个数。~单体内置对象：不需要显示的实例化内置对象，Global，Math~Global不属于任何其他对象的属性和方法，最终都是它的属性和方法~encodeURIComponent(url);decodeURIComponent(url)~严格模式下访问不到任何eval()中穿件的变量或者函数，并且为eval赋值也会错误。~Object是一个基础类型，其他所有类型都要从Object继承基本的行为 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript高级程序设计 第三版》前五章]]></title>
+    <url>%2F2017%2F07%2F06%2F%E8%AF%BB%E3%80%8AJavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%E7%AC%AC%E4%B8%89%E7%89%88%E3%80%8B%E5%89%8D%E4%BA%94%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~Dom不仅仅只是针对JavaScript，很多语言也实现了Dom.~如果用var在函数内定义一个变量，那么这个变量就会在函数退出后就会被销毁。~在严格模式下，不能定义名为eval或arguments的变量，否则会导致语法错误。~ECMAScript函数不能重载~在很多语言中，字符串以对象的形式来标识，因此被认为是引用类型的。ECMAScript放弃了这一传统~垃圾收集策略：标记清除，引用计数~解除引用：一般数据不再有用，最好通过将其值设置为null来释放其引用，这个方法叫做解除引用。这一方法适合大多数全局变量和全局对象的属性。局部变量会在他们离开执行环境的时候自动被解除引用。解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便于垃圾收集器下次运行的时候将其回收。~JavaScript变量可以用来保存两种类型的值：基本类型值（栈内存）和引用类型值（堆内存）。~从一个变量向另一个变量复制基本类型的值，会创建这个值的一个副本。~从一个变量向另一个变量复制引用类型的值，仅仅复制了指针，他们指向同一个对象。~确定一个值是那种基本类型可以用typeof操作符，确定一个值是哪种引用类型可以用instanceof操作符~每次进入一个新的执行环境，都会创建一个用于搜索变量和函数的作用域链~“标记清除”离开作用域的值会被自动标记为可回收，在垃圾收集期间被删除。这是目前主流的垃圾收集算法。~“引用计数”追踪记录所有值被引用的次数。JavaScript引擎目前不再使用这种算法。主要原因是当代码中存在循环引用现象时，就会出现问题。~“解除变量”有助于消除循环引用的现象，对垃圾回收也有用好处。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[《JavaScript权威指南》《JavaScript Dom编程艺术》读书感想]]></title>
+    <url>%2F2017%2F07%2F05%2F%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B%E3%80%8AJavaScript%20Dom%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%83%B3%2F</url>
+    <content type="text"><![CDATA[想法：先说一下个人的JavaScript使用的一个经历，这门语言使用了三年，基本平均下来每天使用两个小时还是有的，看过仅JavaScript相关的视频也有近千部，目测自己属于过渡高手的过程，当然了，每个人的标准也不一样。在读《JavaScript权威指南（第六版）》的时候，我觉得可以给自己较多惊喜的地方，也和自己之前想的不一样，我觉得这本书，是针对有一些JavaScript基础的人写的，如果没有之前的一些学习经验，我觉得自己不会在读的时候有像现在这样深的体会。这本书涉及的概念很多，我觉得前20章都值得详细阅读学习，当然了，这是出于想当好一个程序员的人的看法，剩下的两章，关于H5的，前期了解就好，看的懂就行。我觉得这本书更多的是在JavaScript这一块，建立一个知识体系的作用，而不是教你如何写代码。相对《JavaScript Dom编程艺术》这本书，写代码的部分会多一些，也不难，主要是教会你为什么这么写，和如何写的问题，不过个人觉得内容有点少，案例也有点少。它的出发点主要是从三层分离的角度上去讲解JavaScript。从渐进增强，平稳退化的方面去解释一些概念，给人惊喜的部分比较少，不过读过之后也算有些收获。难道是因为我的水平太高了？？？？！！！！！哈哈哈~~~~原谅我神经质一下。 每个人理解的深度不一样，还是好好体会。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,JS</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript Dom编程艺术》笔记之二]]></title>
+    <url>%2F2017%2F07%2F05%2F%E8%AF%BB%E3%80%8AJavaScript%20Dom%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名的文件，都必须要等脚本加载完毕后下载。之所以要把JavaScript放在body结束的地方，就是基于，渐进增强和分离JavaScript的观点。~如果有两个函数绑定在onload事件上，那么只有最后一个函数有效，才会执行.解决方法如下，window.onload = function(){//多个函数pakr();lade()};12345678910111213141516171819202122232425262728function(func) &#123; var oldonload = window.onload; if(typeof window.onload != 'function')&#123; window.onload = func; &#125;else&#123; window.onload = function()&#123; oldonload(); func(); &#125; &#125;&#125;``` ~document.getElementsByTagName('form') == document.forms~document.getAttribute('src') = document.src~动态添加标记：1，document.write('&lt;\p&gt;wf&lt;\/p&gt;'),最大的问题是违背‘行为与表现分离’~targetElement.parentNode.inserBefore(newElement,targetElement);~编写inertAfter函数``` bashfunction(newElement,targetElement) &#123; var parent = targetElement.parentNode; if(parent.lastChild == targetElement)&#123; parent.appendChild(newElement); &#125;else&#123; parent.insertBefore(newElement,targetElement.nextSibing) &#125;&#125; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ionic中遇到的问题之二]]></title>
+    <url>%2F2017%2F07%2F02%2FIonic%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B9%8B%E4%BA%8C%2F</url>
+    <content type="text"><![CDATA[Try….force to use installed plugin as dependency.?这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：123456cordova plugin remove --force cordova-plugin-compat cordova plugin add cordova-plugin-compat cordova plugins cordova platform remove android cordova platform add android cordova plugin add cordova-plugin-camera 安装完后，在打包的时候会出现错误，要求安装Gradle，每次就是因为删了平台，第二次新建平台的原因，所以再去手动下载配置。具体方法：http://www.jianshu.com/p/9595eccac3d1如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ionic,JS</category>
+      </categories>
+      <tags>
+        <tag>Ionic,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ionic中遇到的问题之一]]></title>
+    <url>%2F2017%2F07%2F02%2FIonic%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B9%8B%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[Error: libsass bindings not found. Try reinstalling node-sass?1npm install -S gulp-sass@latest 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ionic,JS</category>
+      </categories>
+      <tags>
+        <tag>Ionic,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript Dom编程艺术》笔记之一]]></title>
+    <url>%2F2017%2F07%2F01%2F%E8%AF%BB%E3%80%8AJavaScript%20Dom%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E3%80%8B%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%B8%80%2F</url>
+    <content type="text"><![CDATA[~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&lt;\/body&gt;之前，这样能够使浏览器更快的加载页面~虽然关联数组的可读性更高，但是不推荐使用，因为它改变了array对象的属性；~DOM的前提是有文档，一份文档就是一棵节点树。~节点分为不同的类型，元素节点，属性节点，文本节点~若是一个站点用到多个JavaScript文件，为了减少对站点的请求次数，提高性能，应该合并到一个js文件里~&lt;\a href=”###” onclick=”showPic(this) return false;”&gt; 这里的this代表a对象，false是为了阻止默认行为~每一个节点都有nodeType属性，元素节点1，属性节点2，文本节点3~nodeValue是文本节点的属性~’Javascript:’伪协议，让我们通过一个连接来调用JavaScript函数 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第十九章]]></title>
+    <url>%2F2017%2F06%2F29%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。~jQuery对象是类数组，具有length属性~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组比之更有用~jQuery.borwser用于客户端嗅探。如果是IE会有msie属性值为true，如果是Firefox,会有值为true的mozilla属性，如果是Safari和Chrome，huiou值为true的webkit属性，在Opera中会有值为true的opera属性。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第十六~十八章]]></title>
+    <url>%2F2017%2F06%2F29%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~非标准css属性：Firefox使用-moz-，chrome使用-webkit-,IE使用-ms-~box-boxsize：border-box包括内边距和边框，content-box不包括~visibility和display的区别在在于是否脱离标准文档流~脚本化的css中的style属性对应的值都是字符串。并且要包含相关单位。’399px’。~设置、获取css样式e.setAttribute(“style”,s) ==&gt; e.style.cssText = s;var s = e.setAttribute(“style”)==&gt;var s = e.style.cssText~focus和blur，mouseenter，mouseleave事件不会冒泡，IE定义了focusion和focusout事件可以冒泡，jquery不支持。~注册时间处理程序的两种方法，一种是设置目标对象或文档元素的属性的方式，另一种是将事件处理程序传递给对象或者元素，标准方法为addEventListener()，ie&lt;9时，attachEvent();~IE&lt;9时的事件对象时window.event~当通过设置html属性注册事件处理程序时，浏览器会把JavaScript编码转换到一个函数中。非Ie浏览器使用event参数来构造函数，Ie并没有要求参数，如果要是圆通event标识符在函数内，那么引用的是window.event.~attachEvent注册事件处理程序时，函数内的this并不是指事件目标，而是全局对象window。~IE可以通过event.returnValue = false;来取消事件，其他浏览器可以用event.preventDefault()取消默认事件；取消事件传播：event.stopPropagation();~Ajax技术只能是在http或https协议下工作，file协议不行~open方法指定请求的第一个参数除了get，post,还有delete，head，options和put。以及一些别禁止的；~Ajax请求如果是post方式，需要‘Content-Type’头指定请求的主题的MIME类型：request.setRequestHeader(‘Content-Type’,’text/plain’); 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第十五章]]></title>
+    <url>%2F2017%2F06%2F27%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~关于DOM：html的节点树，document节点=&gt;树的根部代表整个文档，text节点=&gt;文本节点，elemet是html元素的节点。他们都是Node的子类。~在低版本浏览器中getElementById匹配的Id不区分大小写，而且也可以返回匹配name~html的name属性最初打算为了表单元素分配名字，和id不同的是name属性只有在极少的html元素中有效，包括表单，表单元素，&lt;\iframe&gt;,&lt;\img&gt;~基于名字选择html元素，getElementsByName()~document.all[]获取所有文档中的元素，现已经废弃~element对象的children类似于childnodes但并不是标准属性~对于类似&lt;%i&gt;,&lt;%code&gt;,&lt;%span&gt;这些内联元素，clientWidth和clientHeight总是返回0；~&lt;%form&gt;元素中的元素都有一个form属性引用了该包含的表单，事件处理程序总能够通过this.form来得到form对象的引用，这样就意味着，表单的元素可以通过this.form.x得方式获取；~在H5中，placeholder属性制定了用户输入前在输入域中的信息提示~option对象可以通过options.length = 0l来移除所有选项，通过option[]获取某个option对象，具体插入删除用，insertBefore(),removeChild()方法~在设置了defer或者async属性的脚本中不要使用document.write();该章节内容广度大，但是就项目开发而言，实际运用涉及的少 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第十四章]]></title>
+    <url>%2F2017%2F06%2F27%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location对象，即wi~ndow.location === document.location//true~window.location和location输出相同，location.href和location.toString()输出相同 解析URL：var~query = location.search.substring(1)//找到查询串并去掉‘？’；var pairs =~query.split(‘&amp;’)//用&amp;符号分割字符串，并且返回数组； assign()可以使窗口载入并显示你说指定的URL中的文档，replace()类~似，推荐用后者，因为后者在载入的时候会在历史记录中删除当前文档，否则后退按钮会把浏览器带回到原始文档，再次载入新文档；~可以通过location.replace()方法载入静态的html，例如if(!XMLHttpRequest)~location.replace(“staticpage.html”);//重定向~location对象除了上面的两个方法之外，还有reload()方法，可以让浏览器重新载入当前文档~跳转还可以，直接将新的URL或者相对URL赋值给location，例如 location = ‘www.baidu.com’;location =‘index.html’; 其他方式：location = ‘#top’;location.search = ‘?page=’ +~(pagenum+1);//进入下一页 浏览历史：window对象的history属性引用的是History对象。这个对象将窗口浏览历史用文档和文档状态列~表的形式标识。具有length属性，表示历史记录的数量，出于安全考虑吗，脚本不能访问已经保存了的URL；~History对象有back(),forward(),go()方法等实现前进后退，go()方法接受正负整形参数~window对象的navigator和screen属性分别引用的是navigator对象和screen对象~Navigator对象的命名是为了纪念Netscape之后的navigator浏览器~一般用navigator的userAgent属性进行网络嗅探，它包含了APPVersion所有的信息，以及一些其他信息~通过navigator对象的onLine属性可以判断当前网络是否链接~Screen对象提供有关窗口大小和颜色数量的信息。属性width，height指定以像素为单位的窗口大小，属性availWidth和availHeight指定实际可用的显示大小~关于对话框：window对象提供了3个方法1。alert(),comfirm(),prompt()后两种会产生阻塞，在用户关掉他们所显示的对话框之前，不会返回，意味着代码运行会停止，alert()也会,但不是总是。~一个浏览器有可以有多个标签页，他们都是独立的“浏览器上下文”，都具有独立的window对象，但并不是总是没有关系，可以用过一个窗口的脚本打开另一个标签页面。~window对象的open(‘url’,’窗口名字’,’设置属性’，’bool替换或创建历史记录当前条目’)和close()方法打开和关闭一个窗口。~窗口关闭了，对象依然存在，已经关闭的窗口会有个值为true的closed属性，它的document是null，方法通常也不会再工作。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第十三章]]></title>
+    <url>%2F2017%2F06%2F23%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC13%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[~web浏览器中的JavaScript称为客户端JavaScript~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它~alert，settimeout，location等都是window的方法或者属性~在客户端JavaScript中，window对象也是全局对象，处于作用域的顶部，它的属性和方法都是全局变量和全局函数~Window对象有一个引用自身的属性，叫做window，如果需要引用窗口对象本身，可以使用这个属性，如果只是引用全局窗口对象的属性，通常不需要用到window~Window对象中最重要的一个属性是document，它引用Document对象，后者表示在窗口中的文档。~Document对象有一些重要的方法，比如getElemenById(),返回element对象，element对象还有其他重要的属性和方法；每个element对象都有style和className属性~用户体验不应该依赖于JavaScript，但JavaScript可以增强体验~注意区分web文档（document,element,css,事件处理程序）和web应用里面的JavaScript（XMLHttpRequest）~嵌入客户端JavaScript代码有四种方式，内联，外联，事件处理程序内onclick，放在一个URL里，这个URL使用特殊的”javascript：”协议，后两种已经很少使用，内联也用的少了，主要是‘unobtrusive JavaScript’编程哲学。（html和JavaScript分离） ~在XHTML中有些字符会被解释成XML标记，所以应该这样写&lt;\script&gt;&lt;!&gt;[CDATA[//这里写JavaScript代码]]&lt;\/script&gt;~JavaScript脚本类型type=”text/javascript”,language=”text/javascript”~当脚本所在的html文件被载入时，脚本里的JavaScript只会执行一次，为了可以交互，必须先定义事件处理程序——web浏览器先注册JavaScript函数，并在之后调用他作为事件响应、~JavaScript载入阶段是相对短暂的（1-2秒）在文档载入完成后，只有在web浏览器显示文档，事件驱动阶段就会一直持续下去，因为这个阶段是异步和事件驱动的，长时间处于不活动状态。~脚本和事件处理程序在同一个时间只能执行一个，没有并发性，这保持了JavaScript编程的简单性~脚本的执行在默认情况下是同步和阻塞的，但是可以配合src属性设置异步或者延迟执行，不影响文档的解析和渲染，注意的是延迟的脚本会按照它们在文档里出现的顺序执行，异步的则不会~事件具有目标，它是一个对象（DOM对象），事件就在它上面发生。~注册（脚本执行的第1阶段）事件处理程序，最简单的方法就是将JavaScript函数赋值给目标对象的属性~传递给settimeout()的函数和事件处理程序的注册不用，他们通常叫做“回调逻辑”，而不是“处理程序”，但是它们和事件处理程序一样，都是异步的。~事件处理程序注册技术addEventListaner();允许注册多个监听器；~H5定义了一种并发控制方式，叫做“web worker”；用来执行计算密集任务而不冻结用户界面的后台线程~浏览器在document对象上触发DOMContentLoaded事件（ 在load事件之前触发）。这标志着程序执行从同步脚本执行阶段，转换到了异步事件驱动阶段。但要注意的是，可能还有异步脚本没有执行完。~框架必不可少的一个重要功能是：他们定义了新的客户端API并且兼容所有浏览器；~解决不兼容问题的方法：使用类库，功能检测，浏览器检测，条件注释（比如IE）~怪异模式和标准模式（CSS兼容模式）：根据是否有DOCTYPE声明决定是否遵循css标准。两种方法的检测方法：document.compatMode属性，如果值为“CSS1Compat”则为标准模式“BackCompat”则为怪异模式~浏览器检测，主要是用Navigator对象，检测浏览器类型和版本。~浏览器嗅探（客户端嗅探）：确定当前浏览器厂商和版本的代码叫做浏览器嗅探。~为什么要说安全性，因为web浏览器包含JavaScript解释器，一旦加载web页面，可以让任意的JavaScript代码在计算机里执行。~校本化插件和ActiveX控件，是为了使用安全性的前提下屏蔽的恶意代码调用文件系统功能和网络功能的一种途径，但是也有很糟糕的历史遗留问题，操作系统还存在很多可以被控件利用的安全漏洞； 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基于bootstrap分页样式的js原生实现]]></title>
+    <url>%2F2017%2F06%2F18%2F%E5%9F%BA%E4%BA%8Ebootstrap%E5%88%86%E9%A1%B5%E6%A0%B7%E5%BC%8F%E7%9A%84js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227228229230231232233234&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt; &lt;style&gt; table &#123; position: absolute; left: 50%; &#125; table,tr,td &#123; border: 1px solid #000; &#125; &lt;/style&gt;&lt;/head&gt;&lt;link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"&gt;&lt;body&gt; &lt;nav aria-label="Page navigation" style="text-align: center;"&gt; &lt;ul class="pagination" id="pagination"&gt; &lt;!-- &lt;li&gt; &lt;a href="#" aria-label="Previous"&gt; &lt;span aria-hidden="true"&gt;&amp;laquo;&lt;/span&gt; &lt;/a&gt; &lt;/li&gt; &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href="#"&gt;5&lt;/a&gt;&lt;/li&gt; &lt;li&gt; &lt;a href="#" aria-label="Next"&gt; &lt;span aria-hidden="true"&gt;&amp;raquo;&lt;/span&gt; &lt;/a&gt; &lt;/li&gt; --&gt; &lt;/ul&gt;&lt;/nav&gt;&lt;div id="box"&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&lt;script&gt;// 数据模拟 var arr = [ &#123; name:'xiangming1', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming2', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming3', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming4', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming5', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming6', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming7', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming8', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming9', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming10', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming11', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming12', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming13', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming14', age:Math.ceil(Math.random()*100) &#125; , &#123; name:'xiangming15', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming16', age:Math.ceil(Math.random()*100) &#125; , &#123; name:'xiangming17', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming18', age:Math.ceil(Math.random()*100) &#125; , &#123; name:'xiangming19', age:Math.ceil(Math.random()*100) &#125;, &#123; name:'xiangming20', age:Math.ceil(Math.random()*100) &#125; , &#123; name:'xiangming18', age:Math.ceil(Math.random()*100) &#125; , &#123; name:'xiangming19', age:Math.ceil(Math.random()*100) &#125; ]; (function(window,document)&#123; var numcount = 0; function pagination(array,currentPage) &#123; // 获取要显示内容的标签 var area = document.getElementById('box'); // 获取数据记录总数、 var dataCounts = array.length; // 设置每页显示条数 var pageSize = 3; // 计算分页个数 var pageCounts = Math.ceil(dataCounts/pageSize); // 设置当前页,这里取0，为了和数组对应 var currentPage = currentPage; // 计算每页的开始和结尾的索引值 var startRow = (currentPage - 1) * pageSize+0; var endRow = currentPage * pageSize; // 定义需要在页面上显示的数组，根据索引在异步请求回的数组中截取 var newarr = array.slice(startRow,endRow); // // 显示分页个数到页面，默认显示5页的标签 var pagination = document.getElementById('pagination'); pagination.innerHTML = ''; var list = ' &lt;li&gt;&lt;a href="#" aria-label="Previous"&gt;&lt;span aria-hidden="true"&gt;&amp;laquo;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;'; // 显示分页个数到页面，默认显示5页的标签 var btm = 0+numcount*5; var top = 5+numcount*5; // alert(btm) // alert(top) for (var i = btm; i &lt; top; i++) &#123; // 必须要加括号 list += '&lt;li&gt;&lt;a href="#"&gt;' + (parseInt(i)+1) + '&lt;/a&gt;&lt;/li&gt;' &#125; list += '&lt;li&gt;&lt;a href="#" aria-label="Next"&gt;&lt;span aria-hidden="true"&gt;&amp;raquo;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;'; pagination.innerHTML = list; // 申明字符串变量进行数据品拼接 var str = '&lt;table&gt;'; for (var i = 0; i &lt; newarr.length; i++) &#123; str += '&lt;tr&gt;&lt;td&gt;' + newarr[i].name + '&lt;/td&gt;&lt;td&gt;' + newarr[i].age + '&lt;/td&gt;&lt;/tr&gt;'; &#125; str += '&lt;/table&gt;'; box.innerHTML = str; &#125; pagination(arr,1); // 定义最外层函数的意义在于每次对动态生成的li标签进行动态事件绑定 function clickBind(array)&#123; var liList = document.getElementsByTagName('li'); liList[0].addEventListener('click',function()&#123; if (numcount&lt;=0) &#123; numcount=0; &#125;else &#123; numcount--; &#125; // numcount用来记录翻页次数 shift(numcount*5+5);clickBind(arr); &#125;,false); liList[liList.length-1].addEventListener('click',function()&#123; // 获取数据记录总数、 var dataCounts = array.length; // 设置每页显示条数 var pageSize = 3; // 计算分页个数 var pageCounts = Math.ceil(dataCounts/pageSize); var pageList = Math.ceil(pageCounts/5)-1; if (numcount &gt;= pageList) &#123; numcount=pageList; &#125;else &#123; numcount++; &#125; shift(numcount*5+1);clickBind(arr); &#125;,false); for (var i = 1; i &lt; liList.length-1; i++) &#123; (function(para,numcount)&#123; // 闭包获取i var theOne = liList[i]; if (theOne.addEventListener) &#123; theOne.addEventListener('click',function()&#123;shift(numcount*5+para);clickBind(arr)&#125;,false); &#125; else &#123; theOne.attachEvent('onclick',function()&#123;shift(numcount*5+para);clickBind(arr)&#125;); &#125; &#125;)(i,numcount); &#125; function shift(pages) &#123; pagination(arr,pages); &#125; &#125; clickBind(arr); &#125;)(window,document)&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>bootstrap,JS</category>
+      </categories>
+      <tags>
+        <tag>bootstrap,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[js对insertafter()方法的实现]]></title>
+    <url>%2F2017%2F06%2F18%2Fjs%E5%AF%B9insertafter()%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[come from wang_hes’s blog123456789101112//DOM没有提供insertAfter()方法function insertAfter(newElement, targetElement)&#123; var parent = targetElement.parentNode; if (parent.lastChild == targetElement) &#123; // 如果最后的节点是目标元素，则直接添加。因为默认是最后 parent.appendChild(newElement); &#125; else &#123; parent.insertBefore(newElement, targetElement.nextSibling); //如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面 &#125;&#125; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[for循环中多对象点击事件ajax绑定【原生】]]></title>
+    <url>%2F2017%2F06%2F11%2Ffor%E5%BE%AA%E7%8E%AF%E4%B8%AD%E5%A4%9A%E5%AF%B9%E8%B1%A1%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6ajax%E7%BB%91%E5%AE%9A%E3%80%90%E5%8E%9F%E7%94%9F%E3%80%91%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021var li = document.getElementById('list').getElementsByTagName('p'); for (var i = 0; i &lt; li.length; i++) &#123; (function(arg)&#123; var param = &#123; data:'uid='+i, url:'data1.php', type:'post', dataType:'json', success:function(data) &#123; p.chapter(); &#125; &#125; var lis = li[i]; if (lis.addEventListener) &#123; lis.addEventListener('click', function()&#123;alt(param)&#125;,false); &#125; &#125;)(i); &#125; function alt(param) &#123; p.ajax_sfq(param); &#125; 以下是一点改动，进行两个页面的双向绑定，实现异步的返回功能。 function digui() { for (var i = 0; i &lt; li.length; i++) { (function(arg){ var param = { data:'uid='+i, url:'data1.php', type:'post', dataType:'json', success:function(data) { p.chapter(); var btn1 = document.getElementById('btn1'); btn1.onclick = function (){ p.back(); var li = document.getElementById('list').getElementsByTagName('p'); digui(); } } } var lis = li[i]; if (lis.addEventListener) { lis.addEventListener('click', function(){alt(param)},false); } })(i); } } digui(); 这里为了追踪i变量，使用了闭包的概念，以及addEventListener绑定函数传参数的方法。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,JS</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[swiper关于height适应问题]]></title>
+    <url>%2F2017%2F06%2F10%2Fswiper%E5%85%B3%E4%BA%8Eheight%E9%80%82%E5%BA%94%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Swiper的基础演示中，关于自定义滚动浏览框中，如果想要以卡片的形式插入展示信息，同时实现卡片高度自适应，最好的方法就是不要设置height属性，应为swiper-slide这个类是产生滚动条的关键，如果单纯去设置这个属性，那么就无法实现卡片高度随内容改变，无法良好的兼容移动端，尽管可以通过限定高度在一定的数值内取舍，但是不推荐 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Swiper</category>
+      </categories>
+      <tags>
+        <tag>Swiper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第10,11,12,13章]]></title>
+    <url>%2F2017%2F06%2F09%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC10%2C11%2C12%2C13%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[已经熟悉的内容没有再次记录，这几张内容偏向知识广度，没有具体记录1.正则表达式：var pattern = /s$/;默认创建RegExp对象并赋值2.JavaScript正则表达式的语法也支持非字母匹配吗，但是要通过\转义3.客户端JavaScript：window对象表示web浏览器的一个窗口或者窗体4.每个Element对象都有style和className属性5.当脚本所在的html文件被载入浏览器的时候，这个脚本里的JavaScript代码只会执行一次，因此要先注册函数，并作为事件的响应6.所有的JavaScript代码共用一个window对象，如果一个脚本定义了新的全局变量或者函数，那么这个变量或者函数会在执行脚本之后对任意的JavaScript代码可见。7.JavaScript程序执行有两个阶段。1.第一阶段载入文档内容，自上而下执行脚本（同步脚本执行）。2.第二阶段，异步操作，事件驱动，响应异步发生的事件（异步事件驱动）。8.事件驱动阶段第一个发生的事件是load事件9，核心JavaScript和客户端JavaScript都有一个单线程执行模型。脚本和事件处理程序在同一个时间只能执行一个，没有并发性。10.setinterval和settimeout函数都是window对象的方法。因此是JavaScript的全局函数。他们通常叫做“回调逻辑”，而不是“处理程序”，他们和事件处理程序一样是异步的。11.css标准特性：怪异模式和标准模式，取决于是否有doctype，。两种模式都被h5认可12.xss跨站脚本攻击 %3C %3E =》&lt;&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第8,9章]]></title>
+    <url>%2F2017%2F06%2F08%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC8%2C9%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[1.每一个函数都包括一个prototype属性，这个属性指向一个对象的引用。这个对象叫做原型对象，当将函数用作构造函数的时候会从原型对象上继承属性2.想要以对象o的方法调用函数f()，f.call(o)/f.apply(o)3.function()构造函数可以传入任意数量的字符串实参，最后一个实参文本是函数体4.高阶函数：操作函数的函数5.在JavaScript中，类的实现是基于其原型继承机制、6.如果两个对象继承自同一个原型，往往意味着（不绝对），他们由同一个构造函数创建并初始化7，JavaScript的类的一个重要特性就是“动态可继承”8.关于构造函数的编程约定：从某种意义上讲，定义构造函数既是定义类，并且类名首字母大写，而普通的函数和方法都是首字母小写9.构造函数的原型中存在预先定义好的constructor属性，意味着对象通常继承的constructor均指代他们的构造函数，因此说constructor属性为对象提供了类10.鸭式辩型：像鸭子一样走路，游泳并且嘎嘎叫的鸟就是鸭子。（不要关注“对象的类是什么”，而是关注“对象能做什么”）11.JavaScript的相等运算符比较对象时，比较的是引用而不是值。12.函数表达式不会对外创建全局变量13.模块开发：将代码组织到类中的一个重要原因是，让代码“模块化”，可以用在不同的场景事实现代码重用。但是累不是唯一模块化代码的方式。一般来说，模块式一个独立的JavaScript文件。模块文件中可以包含一个类定义，一组相关的类，一个使用的函数库等。14.模块化的目标是支持大规模的程序开发，处理分散源中代码的组装、避免修改全局执行上下文。意味着尽可能少的定义全标识。理想状态是所有的模块都不应当定义超过一个全局标识。每个类都只包含一个全局标识，整个模块定义了很少的全局变量15.如果想让代码在私有的命名空间中运行，就必须用立即执行的匿名函数。JavaScript的模块化开发：123456789101112131415161718192021222324252627282930313233343536&lt;script&gt; //创建一个全局变量用来存放集合相关模块，这个是顶层命名空间 var collections = &#123;&#125;; if(!collections) collections = &#123;&#125;; //sets是模块的命名空间，并且每个集合类都定义为这个对象的属性，如果想要使用这样定义的类，就需要同伙命名空间调用相对的构造函数,namespace返回了这个模块命名空间对象。应为“(function namespace()”属于表达式，所以不会创建全局的namespace变量 collections.sets = (function namespace()&#123; //这里有很多集合类,，使用局部变量和函数 function Set() &#123; this.value = &#123;&#125;; &#125; Set.prototype.contains = function(value) &#123; &#125; //辅助函数和变量 function v2s() &#123; &#125; var index = 1; function Get() &#123; this.value = &#123;&#125;; &#125; Get.prototype.contains = function(value) &#123; &#125; ..... return &#123; //导出构造函数，供外部调用 Set:Set, Get:Gets &#125;; &#125;()); //外部调用 var Set = collections.sets.Set; var s = new Set();&lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》【闭包详解】]]></title>
+    <url>%2F2017%2F06%2F05%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E3%80%90%E9%97%AD%E5%8C%85%E8%AF%A6%E8%A7%A3%E3%80%91%2F</url>
+    <content type="text"><![CDATA[闭包：关于闭包《JavaScript权威指南第六版》：这个术语非常古老，是指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量’包裹’了起来，闭包的实现：首先我们需要知道词法作用域的基本规则：JavaScript函数的执行用到了作用域链，这个作用域链是函数定义的时候创建的，函数定义时的作用域链到函数执行时依然有效。嵌套函数会定义在这个作用域链里面，其中外层函数内的变量也一定是局部变量，不管在何时执行嵌套函数，这种绑定在执行嵌套函数时依旧有效。换句话说，闭包可以捕捉局部变量和参数，看起来像这些变量绑定到了在其中定义他们的外部函数中， 我们将作用域链描述为一个对象列表，不是绑定的栈，每次调用JavaScript函数时，都会创建一个新的对象来保存局部变量，并且将这个对象添加到作用域链中，当函数返回的时候就从作用域链中将这个绑定变量的对象删除。如果不存在嵌套函数，如果也没有其他引用指向这个绑定对象，那么他就被当做垃圾回收掉，如果定义了嵌套函数，那么每个嵌套函数都有自己各自对应的一个作用域链，并且这个作用域链指向一个变量绑定对象。如果这个嵌套函数在外部函数中保存下来，它们也会像所指向的变量绑定对象一样被当做垃圾回收。但是如果这个函数定义了嵌套函数，并且将之作为返回值或者存储在某处的属性里，这是就会有一个外部的引用指向这个嵌套函数，它就不会被当做垃圾回收，并且它所指向的变量绑定对象也不会被当做垃圾回收。 关于闭包 from blog：1234567891011function a()&#123; var n = 0; function inc()&#123; n++; console.log(n); &#125; return inc;&#125;var c = a();c(); //控制台输出1c(); //控制台输出2 我们知道，js的每个函数都是一个个小黑屋，它可以获取外界信息，但是外界却无法直接看到里面的内容。将变量 n 放进小黑屋里，除了 inc 函数之外，没有其他办法能接触到变量 n，而且在函数 a 外定义同名的变量 n 也是互不影响的，这就是所谓的增强“封装性”。 而之所以要用 return 返回函数标识 inc，是因为在 a 函数外部无法直接调用 inc 函数，所以 return inc 与外部联系起来，代码 2 中的 this 也是将 inc 与外部联系起来而已。 闭包就是一个函数引用另外一个函数的变量，因为变量被引用着所以不会被回收，因此可以用来封装一个私有变量。这是优点也是缺点，不必要的闭包只会徒增内存消耗！另外使用闭包也要注意变量的值是否符合你的要求，因为他就像一个静态私有变量一样。 关于闭包 for me：我觉得要以JavaScript权威指南为理论基础，然后在blog对闭包的解释上，去理解它。闭包很简单，但要看个人对于自己的要求，是从标准的角度去解读还是从理解的角度去解读，我这里主要是从标准的角度去解读，如下： 1.函数的作用域：嵌套在最里面的函数能够访问外层的局部变量,反之则不行，也就是说外层函数对于嵌套函数来说也是局部变量。2.垃圾回收机制：衡量一个对象是否需要被回收的标准是，该对象的引用计数是否为0。3.作用域链：在函数定义的时候创建，我们将之描述为对象列表，不论任何时间，从函数定义到函数执行都有效。它不是绑定的栈。4.变量绑定对象：每次调用JavaScript函数，都会创建对象，保存临时变量，并将对象添加到作用域链中。 在执行闭包时，外层函数执行完后，外层函数和其对应的作用域链中的变量绑定对象被垃圾回收，然而外层函数return了一个嵌套函数，这个函数在之前定义的时候已经创建了作用域链，并存储了变量绑定对象，这里绑定了外层的局部变量，并且在外层函数之外引用了这个变量。所以这个函数和其对应的变量绑定对象不会被垃圾回收，这里return嵌套函数只是起了在外层函数之外调用嵌套函数的一个转换，更多需要关注的是外层函数的局部变量在嵌套函数内被return，从而在外部函数之外引用了该局部变量导致了嵌套函数无法被垃圾回收。实现局部变量私有化，加强封装性。 闭包很容易造成“循环引用”，当DOM对象和JavaScript对象之间存在循环引用的时候需要格外小心，在某些浏览器下会造成内存泄漏。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第五，六，七，八章]]></title>
+    <url>%2F2017%2F06%2F05%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC5%2C6%2C7%EF%BC%8C8%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。5.标签语句:语句是可以添加标签的，标签由语句前的标识符和冒号组成6.通过给循环定义一个标签名，可以在循环体内部使用break和continue后缀标签名，跳出循环或者跳转到下一个循环。break和continue是唯一能够使用语句标签的语句7.‘use strict’严格模式8.JavaScript对象和属性和划分：内置对象，宿主对象 自定义对象，自由属性和继承属性9：创建对象：【1】对象直接量，共享一个原型，属性有空格，有连字符必须用字符串标识，有保留字必须用引号【2】通过new创建对象，通过自定义构造函数实现初始化【3】原型创建，每一个JavaScript对象都和另一个对象关联，另一个对象就是原型，每一个对象都从原型继承属性，&amp;object.prototype没有原型对象【4】ES5通过Object.create()创建对象，第一个参数是这个对象的原型（可以传入null创建没有原型的对象，或者传入Object.prototype创建普通空对象），第二个参数可选，用来对属性进一步描述10，JavaScript对象都是关联数组，可以通过object[‘’]访问11.继承的属性被覆盖，并不会修改原型属性值，只是修改当前对象12,delete运算符只能删除自有属性不能删除继承属性，除非在原型对象上删除该属性13，可以用in运算符检查对象属性是否存在，或者用“！===”例如，o.x !== undefined;14,isPrototypeOf()检查一个对象是否是另一个对象的原型或处于原型链。15.JASON.stringify()序列化对象16，数组是值得有序集合17，通过设置数组length来删除元素18，通过push()方法往数组最后添加元素，等同于给arr【arr。length】赋值，unshift()首部插入19，用delete删除元素但是不会修改length,pop(),shift()。splice()会改变length20.Array.join()将元素转化为字符串拼接在一起，参数是分割符，与Array.split()对应21、Array.reserve()颠倒数组元素顺序，返回逆序顺序22.Array.sort()给数字元素排序，返回排序后得数组23、Array.concat()创建并返回一个新数组，如果元素是数组，则只拼接元素，若元素是二维数组，保留数组元素24，Array.slice()返回数组片段，两个参数，起始和终止索引，不包括第二个索引值25，Array.splice()的前两个参数确定了要删除元素的范围，后面的参数是要添加的元素，插入位置为第一个参数的位置26.数组的toString()方法和无参数的join()返回相同，不管器子元素是否是数组27，forEach()方法，如果只关心数组的值，可以用此方法，参数为匿名函数，函数参数为value，接受数组的值28，map()方法，将调用它的数组每个元素穿个指定的函数，返回一个操作后得数组28，filter()返回调用它的数组的一个子集，参数是方法，方法的参数是x，例如a.filter(function(x){x&gt;2});29，every()和some()用于逻辑判断，返回布尔值a.every(function(x){x&gt;2})检测是否有大于2的元素;some()类似，检测是否存在a.some(function(x){x%2===0});30，indexOf()和lastindexOf()都是返回给定元素的索引，没找到返回-131.判断位置对象是否为数组Array.isArray();返回布尔值32.return语句没有与之相关的表达式，会返回undefined，如果一个函数不包含return语句，它会执行函数体的语句并返回undefined33.printprops()函数没有return。他的作用是输出对象属性的键和值，没有必要要返回值，默认返回undefined34，没有返回值的函数有时称为过程35.嵌套函数的有趣之处在于他的变量作用域规则36.函数主体在定义的时候并不会执行，只有在调用该函数时，才会执行37.函数调用的四种方法：做为函数（调用表达式），作为方法，作为构造函数，通过call()和apply()方法间接调用38，任何函数作为方法调用实际上都会传入一个隐式的实参，这个实参是一个对象，方法调用的母体就是这个对象，this39.链式调用的核心是返回对象40，this是一个关键字，不是变量，也不是属性，JavaScript不允许为this赋值41.如果嵌套函数作为函数调用，this值不是全局对象（非严格模式）就是undefined（严格模式），想要访问外部函数的this值，就必须定义变量self保存this42.当调用函数的时候传入的实参比函数声明的时候指定的形参个数要少的时候，其他形参默认为undefined43.通过arguments[]获取实参，它具有length属性44.实参对象具有callee和caller属性，callee指代当前执行的函数，在递归函数中会用到，caller指代调用当前正在执行的函数的函数，通过该属性可以访问调用栈45.函数参数超过三个的时候，他们传入的顺序会很难控制，所以传入对象，虽然效率稍稍有些低，但是可以忽略顺序问题46，函数可以作为值传递，无论是对象数组或者其他 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第二，三，四章]]></title>
+    <url>%2F2017%2F06%2F02%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC2%2C3%2C4%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[&amp; JavaScript用Unicode字符集编写，Unicode是ASCII和Latin-1的超集，几乎支持地球上的所有语言&amp; JavaScript区分大小写，HTML不区分。XHTML区分,但有时文档中存在大写，主要原因是浏览器纠错&amp; JavaScript的数据类型分为两种：原始类型（数字，字符串，布尔值，以及特殊的null和undefined）和对象类型（其他的都是对象，包括函数）&amp; JavaScript解释器有自己的内存管理机制，可以自动对内存进行垃圾回收&amp; 从技术上讲，只有JavaScript对象才能拥有方法，然而数字，字符串，布尔值也可以拥有自己的方法，只有null和undefined是无法拥有方法的值&amp; 在ECMAScript 5 中，字符串可以当做只读数组，可以使用索引读取某个位置字符&amp; 任何JavaScript值都可以转换为布尔值，转化为false的有（undefined，null，0，-0，NaN，””空字符串），其他值包括对象（数组）都会转化为true；&amp; 关于null和undefined，null是一个特殊值，typeof返回object，可以认为null是一个特殊的对象值，含义是“非对象”，undefined是更深层次描述“空值”，&amp; 他是 【 变量 】的一种取值，表明变量没有初始化。两者都是空缺的意思，其中’==’判断两者是true，’===’判断两者是false，如果想把他们赋值给变量或者属性，或者作为函数的参数传递，最佳选择是null，因为你可以认为undefined是系统级的而null是程序级的&amp; 包装对象：存取字符串，数字或者布尔值的属性时创建的临时对象叫做包装对象。比如，要引用字符串s的属性，JavaScript就会将字符串值通过new String（s）的方式转化为对象，这个对象继承了字符串的方法，并被用来处理属性的引用。一旦属性引用结束，该对象就会被销毁。数字和布尔值也类似，null和undefined则没有。&amp; 不可变的原始值和可变的对象引用，例如，字符串s.toUpperCase()后输出的s仍然为原值，原始值得比较是值得比较，对象比较是引用的比较，是否是同一个对象。&amp; 除了null和unde之外的任何值都具有toString()方法&amp; 对象转化为原始值得方法:toString()/valueOf();0&amp; 变量在赋初值前，初始值是undefined&amp; 全局变量具有全局作用于，函数参数也是局部变量，只在函数体内有用。并且局部变量的优先级高于全局变量&amp; 全局作用域编写代码时不需要var语句，但局部变量必须使用var语句。&amp; JavaScript并没有块级作用域，取而代之的是函数作用域，变量在声明它的函数体和嵌套的函数体内都有声明&amp; if语句和for语句的花括号并没有划分独立的作用域&amp; 声明提升：局部变量在函数中始终有定义，只有在执行到var时才会被真正赋值，并且会覆盖同名的全局变量，将函数内的变量声明提到函数体的顶部，将变量初始化留着原来的位置，这也是为什么要将变量的声明写在最前边，否则容易输出undefined；&amp; 创建对象的时候如果没有参数传入可以省略构造函数的‘()’&amp; in运算符：可以判断左侧的字符串或者可以转换成字符串的左操作数，右操作数是一个对象（数组），返回布尔值，可以判断某属性在某对象中是否存在&amp; instanceof运算符：希望左操作数是一个对象，右操作数是一个标识对象的类，var d = new Date()； d instanceof Object 返回TRUE；&amp; 所有的对象都是object的实例，instanceof判断一个对象是否是一个类的实例，也会包含对父类检查&amp; eval()已经被当做运算符来对待，它有一个参数，如果传入字符串当做JavaScript代码执行，如果是非字符串则返回这个值&amp; eval()通过别名调用的话，会抛出EvalError错误&amp; typeof常用写法：(typeof value == ‘string’)? ‘“‘ + value + ‘“‘ :value&amp; delete运算符：用来删除对象属性或者数组元素&amp; void运算符：忽略计算结果并返回undefined；打开新窗口&amp; 逗号运算符在for循环中的作用，先计算左边的，后计算右边的，返回右边的值 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读《JavaScript权威指南（第六版）》第一章]]></title>
+    <url>%2F2017%2F06%2F01%2F%E8%AF%BB%E3%80%8AJavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%EF%BC%88%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%89%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%2F</url>
+    <content type="text"><![CDATA[1、对于第一章一些个人理解和看法第一章主要讲的是JavaScript概述，我摘抄了一些书中的概念谈谈我的一些看法，以及一些零碎的知识点； ###1.JavaScript早已超出了其“脚本语言”本身的范畴，成为一种健壮，高校，通用的编程语言。 首先，我们学JavaScript这门语言，那么就不能将之狭义的理解为单纯的“脚本语言”，而应该以编程语言来看待，它具有和其他语言同样的地位，因为语言的局限性体现在语言所运行的平台，而不是程序员，当然了，人也是一种影响因素。这里只是想说，在心里要重视它，因为它和其他语言一样具有活力和能力。 ###2，JavaScript是一种面向对象的编程语言，但是和传统的面向对象有很大区别 关于JavaScript是不是一门面向对象的语言这个争论很多，有人说是，有人说不是，有人提出伪对象的概念，其争论的点在于，JavaScript并没有类的概念，而是通过原型去创建对象，在我看来，正如书里所说，JavaScript是一个面向对象的语言，只是创建对象的方式不用罢了，类的概念或许说起来在面向对象的理论中更加合理，但我们不能因为一种思想而去否定另一种思想或者说方式的诞生，因为类的高度抽象也是人为的去定义，原型也是一种途径罢了，我不去否定它，但我对我所学所见保持好奇和疑问。 3，值可以通过等号赋给变量，也可以用变量读取值4，对象:是名/值对的集合或者字符串到值映射的集合。由花括号包裹，通过“.”或者“ [ ] ”的方式访问，可以通过赋值的方法创建新的属性，同时属性也可以是对象。5，数组：获取数组最后一个元素arr[arr.length-1],空数组的数组长度为06,数组和对象都可以包含另一个数组或对象7，函数是一种值，可以赋值给变量，但需要“;”标识赋值结束，且该方法定义的函数必须先定义后使用8，当函数和对象合写在一起时，才叫做方法9，构造函数均以大写字母开始，不需要return10，将对象的属性在构造函数中定义，方法在原型中定义 做了一个js版本的鼠标点击高亮的简单版本： &lt;script&gt; window.onload = function() { var li = document.getElementsByTagName('li'); for (var i = 0; i &lt; li.length; i++) { var lis = li[i]; if (lis.addEventListener) { lis.addEventListener('click',hide,false); } else { lis.attachEvent('onclick',hide); } } function hide(event) { // event.target.style.visibility = 'hidden'; // event.target.className += ' active'; if (event.target.className.indexOf('active') == -1) { for (var i = 0; i &lt; li.length; i++) { li[i].className = ' '; } event.target.className += ' active'; }else { event.target.className = ' '; } } } &lt;/script&gt; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ionic中使用scrollTop输出值为0的问题解决]]></title>
+    <url>%2F2017%2F05%2F01%2FIonic%E4%B8%AD%E4%BD%BF%E7%94%A8scrollTop%E5%80%BC%E4%B8%BA0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%2F</url>
+    <content type="text"><![CDATA[html部分截取简要代码说明一下，在id为home-content的标签的内填充内容1234567&lt;ion-view id="home" view-title="主页" cache-view="false" &gt;&lt;!-- 实现scroll的标签 --&gt; &lt;ion-content id="home-content" scroll="false"&gt; &lt;!--返回顶部的按钮 --&gt; &lt;div class="back_top"&gt;&lt;/div&gt; &lt;/ion-content&gt;&lt;/ion-view&gt; 下面是controller的代码，记得调用123456789101112131415161718 //回到顶部function goTop()&#123; var bg=window.document.getElementById('home-content'); var goTop = document.querySelector(".back_top"); bg.addEventListener('scroll',function()&#123; var top = bg.scrollTop; if(top&gt;200)&#123; goTop.style.opacity = 1; &#125;else&#123; goTop.style.opacity = 0; &#125; &#125;,false); goTop.onclick = function()&#123; bg.scrollTop = 0; &#125;&#125;; 一般做完上述两步后，在控制台输出发现一直在触发scroll事件，但是获取的值恒为0；可以通过在scroll事件中添加事件处理对象event，通过event.detail.scrollTop发现值在随着滚动改变，但是虽然可以监听这个值做一些事件处理，但是无法完成返回顶部的功能，应为click的事件处理对象和scroll是两个对象，且不可以通过变量的形式去传递。这个现象的主要问题是出在css的设置上，因为ion-content的overflow的默认设置导致的。如下写即可：123456789101112131415161718#home ion-content&#123; overflow:scroll;&#125;/*回到头部滚动条*/#home .back_top&#123; width: 35px; height: 35px; position: fixed; bottom: 55px; right: 10px; background: url("../../img/home/scroll-to-top-icon.png") no-repeat; background-size: 35px 35px; opacity: 0; transition: all .3s ease 0s; -webkit-transition: all .3s ease 0s; z-index: 100;&#125; 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ionic,JS</category>
+      </categories>
+      <tags>
+        <tag>Ionic,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jquery实现Ajax技术]]></title>
+    <url>%2F2017%2F04%2F28%2Fjquery%E5%AE%9E%E7%8E%B0Ajax%E6%8A%80%E6%9C%AF%2F</url>
+    <content type="text"><![CDATA[###ajax的原生实现之前已经有很详细的说明，这里主要说说区别1234567891011121314151617181920&lt;script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;&lt;script&gt; $(document).ready(function() &#123; $('#btn').click(function() &#123; $.ajax(&#123; url:'./data.php', async:true, type:'post', data:&#123;username:'admin',password:'123'&#125;, dataType:'text',//json、xml、html、script success:function(data) &#123; console.log(data); &#125;, error:function(e) &#123; alert(e); &#125; &#125;); &#125;) &#125;);&lt;/script&gt; 12345678910&lt;?php $username = $_POST['username']; $password = $_POST['password']; if ($username == 'admin' &amp;&amp; $password == 123) &#123; echo "登录成功"; &#125;else&#123; echo "登录失败"; &#125;?&gt; 简单的例子，引入jQuery的1.x版本去兼容ie浏览器，dataType参数视返回的数据确定。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,jquery</category>
+      </categories>
+      <tags>
+        <tag>Ajax,jquery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ajax原生封装]]></title>
+    <url>%2F2017%2F04%2F27%2FAjax%E5%8E%9F%E7%94%9F%E5%B0%81%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,document)&#123; // 原生封装Ajax function Ajax(data) &#123; // var data = &#123;data:"",dataType:"xml/json",type:"get/post",url:"",asyn:"true/false",success:function() &#123;&#125;,error:function() &#123;&#125;&#125; // data:&#123;username:123,password:123&#125; // data="username=123&amp;password=123" var xhr = null; if (window.XMLHttpRequest) &#123; var xhr = new XMLHttpRequest(); &#125;else &#123; var xhr = new ActiveXObject('Microsoft.XMLHTTP'); &#125; // ---------参数处理------------------ var type = data.type == 'get'?'get':'post'; var url = ''; if (data.url) &#123; url = data.url; if (type == 'get') &#123; url += '?' + data.data + '&amp;_t=' + new Date().getTime();//清除get缓存，加时间戳 &#125; &#125; var flag = data.asyn = 'true'?'true':'false'; // ----------------------------------- xhr.open(type,url,flag); xhr.onreadystatechange = function() &#123; if (this.readyState == 4) &#123; // ---------参数处理------------------ if ( this.status == 200) &#123; if (typeof data.success == 'function') &#123; var d = data.dataType == 'xml' ? xhr.responseXML : xhr.responseText; data.success(d); &#125; &#125;else &#123; if (typeof data.error == 'function') &#123; data.error(); &#125; &#125; // ----------------------------------- &#125; &#125; // ---------参数处理------------------ if (type == 'get') &#123; xhr.send(null); &#125;else if (type == 'post') &#123; xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); xhr.send(data.data); &#125; // ----------------------------------- &#125; window.onload = function() &#123; var btn = document.getElementById('btn'); btn.onclick = function() &#123; var param = &#123; data:'username=admin&amp;password=123', url:'data.php', type:'post', dataType:'json', success:function(data) &#123; console.log(data); &#125; &#125; Ajax(param); &#125; &#125; &#125;)(window,document);&lt;/script&gt; 我只说一句，readyState 中的S是大写！ 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,JS</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[原生Ajax对JSON数据解析注意事项]]></title>
+    <url>%2F2017%2F04%2F27%2F%E5%8E%9F%E7%94%9FAjax%E5%AF%B9JSON%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%2F</url>
+    <content type="text"><![CDATA[###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = './data.json';// 通过open方法进行初始化配置xhr.open('post',url,true);// 执行发送请求的动作xhr.send(null); true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。123456789101112131415161718// 数据请求之后的回调函数xhr.onreadystatechange = function() &#123; // 判断服务器数据请求是否成功 if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123; // 请求的数据类型为responseText var data = JSON.parse(xhr.responseText); var total = data.total; var datas = data.data; var tag = ''; for (var i = 0; i &lt; datas.length; i++) &#123; var data1 = datas[i]; tag += '&lt;tr&gt;&lt;td&gt;' + data1.name + '&lt;/td&gt;&lt;td&gt;' + data1.category+ '&lt;/td&gt;&lt;td&gt;' + data1.desc + '&lt;/td&gt;&lt;/tr&gt;'; &#125; var tbody = document.createElement('tbody'); tbody.innerHTML = tag; document.getElementById('info').appendChild(tbody); &#125;&#125; 回调函数的数据返回类型是responseText，var data = JSON.parse(xhr.responseText);先将文本数据转化为对象，这样才能进行后续的操作，比如遍历，否则输出的是字符串。for循环里var data1 = datas[i];不论是解析xml或者json都需要做的步骤并且一定要正确，否则会出现未定义的状况无法输出内容。123456789101112131415&#123; "total":"4", "data":[ &#123; "name":"三国演义", "category":"文学", "desc":"一个军阀混战的年代" &#125;,&#123; "name":"水浒传", "category":"文学", "desc":"草寇or英雄好汉" &#125; ], "obj":&#123;"adf":"adf"&#125;&#125; 给按钮或者其他标签添加事件，在事件里实现异步请求。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS,JSON</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[原生Ajax对XML数据解析注意事项]]></title>
+    <url>%2F2017%2F04%2F27%2F%E5%8E%9F%E7%94%9FAjax%E5%AF%B9XML%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%2F</url>
+    <content type="text"><![CDATA[###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = './data.xml';// 通过open方法进行初始化配置xhr.open('post',url,true);// 执行发送请求的动作xhr.send(null); true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。123456789101112131415161718192021// 数据请求之后的回调函数xhr.onreadystatechange = function() &#123; // 判断服务器数据请求是否成功 if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123; // 请求的数据类型为responseText var data = xhr.responseXML; var xml = data.getElementsByTagName('bookstore')[0]; var arr = xml.getElementsByTagName('book'); var tag = ''; for (var i = 0; i &lt; arr.length; i++) &#123; var book = arr[i]; var name = book.getElementsByTagName('name')[0]; var category = book.getElementsByTagName('category')[0]; var desc = book.getElementsByTagName('desc')[0]; tag += '&lt;tr&gt;&lt;td&gt;' + getNodeText(name) + '&lt;/td&gt;&lt;td&gt;' + getNodeText(category) + '&lt;/td&gt;&lt;td&gt;' + getNodeText(desc) + '&lt;/td&gt;&lt;/tr&gt;'; &#125; var tbody = document.createElement('tbody'); tbody.innerHTML = tag; document.getElementById('info').appendChild(tbody); &#125;&#125; 首先返回的数据类型是responseXML，其次 var xml = data.getElementsByTagName(‘bookstore’)[0];注意是data下的查找，arr是所要遍历的节点组，在每个组里边实现for循环里面的一些设置，【这些都是对节点对象的一些操作】，注意字符串要在循环外提前定义，最后添加在新建的节点中，将节点提交给页面。123456789function getNodeText(node) &#123; if (window.ActiveXObject) &#123;//IE return node.text; &#125;else&#123;//标准浏览器 if(node.nodeType == 1)&#123; return node.textContent; &#125; &#125;&#125; 针对不同浏览器获取节点内容的方式不同自定义函数，这个函数定义在window.onload外，在拼接字符串的时候传入节点对象获取xml的值。12345678910111213&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;bookstore&gt; &lt;book&gt; &lt;name&gt;Ajax&lt;/name&gt; &lt;category&gt;computer&lt;/category&gt; &lt;desc&gt;this is a book&lt;/desc&gt; &lt;/book&gt; &lt;book&gt; &lt;name&gt;JavaScript&lt;/name&gt; &lt;category&gt;computer&lt;/category&gt; &lt;desc&gt;this is a book&lt;/desc&gt; &lt;/book&gt;&lt;/bookstore&gt; 给按钮或者其他标签添加事件，在事件里实现异步请求。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS,XML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【详细】JS原生实现Ajax的post提交方式]]></title>
+    <url>%2F2017%2F04%2F26%2F%E3%80%90%E8%AF%A6%E7%BB%86%E3%80%91JS%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0Ajax%E7%9A%84post%E6%8F%90%E4%BA%A4%E6%96%B9%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt; &lt;form action="./data.php" method="post"&gt; 用户：&lt;input type="text" id="username"&gt; 密码：&lt;input type="password" id="password"&gt; &lt;input type="button" id="btn" value="登录"&gt; &lt;/form&gt;&lt;/body&gt;&lt;/html&gt;&lt;script&gt;(function(window,document)&#123; window.onload = function() &#123; var btn = document.getElementById('btn'); btn.onclick = function() &#123; var username = document.getElementById('username').value; var password = document.getElementById('password').value; // 常见XMLHttpRequest对象，分为ie和其他浏览器 var xhr = null; if (window.XMLHttpRequest) &#123; // 其他浏览器的内置对象 xhr = new XMLHttpRequest(); &#125;else &#123; // ie浏览器的内置对象 xhr = new ActiveXObject('Mircrosoft.XMLHTTP'); &#125; // 拼接form表单提交地址 var url = './data.php'; // 通过open方法进行初始化配置 xhr.open('post',url,true); // 设置表单提交的的编码格式，post默认提交类型（enctype属性），主要是post提交在低版本浏览器会产生表单变量未定义； xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); var param = 'username=' + encodeURIComponent(username) + '&amp;password=' + password; // 数据请求之后的回调函数 xhr.onreadystatechange = function() &#123; // 判断服务器数据请求是否成功 if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123; // 请求的数据类型为responseText var data = xhr.responseText; console.log(data); &#125; &#125; // 执行发送请求的动作 xhr.send(param); &#125; &#125;&#125;)(window,document);&lt;/script&gt; 12345678910&lt;?php $username = $_POST['username']; $password = $_POST['password']; if ($username == 'admin' &amp;&amp; $password == 123) &#123; echo "登录成功"; &#125;else&#123; echo "登录失败"; &#125;?&gt; 一定要把 xhr.setRequestHeader(‘Content-Type’,’application/x-www-form-urlencoded’);写上，并且正确，否则返回的数据会出现多余的html代码，返回失败 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,JS</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【详细】JS原生实现Ajax的get提交方式]]></title>
+    <url>%2F2017%2F04%2F25%2F%E3%80%90%E8%AF%A6%E7%BB%86%E3%80%91JS%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0Ajax%E7%9A%84get%E6%8F%90%E4%BA%A4%E6%96%B9%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt; &lt;form action="./data.php" method="get"&gt; 用户：&lt;input type="text" id="username"&gt; 密码：&lt;input type="password" id="password"&gt; &lt;input type="button" id="btn" value="登录"&gt; &lt;/form&gt;&lt;/body&gt;&lt;/html&gt;&lt;script&gt;(function(window,document)&#123; window.onload = function() &#123; var btn = document.getElementById('btn'); btn.onclick = function() &#123; var username = document.getElementById('username').value; var password = document.getElementById('password').value; // 常见XMLHttpRequest对象，分为ie和其他浏览器 var xhr = null; if (window.XMLHttpRequest) &#123; // 其他浏览器的内置对象 xhr = new XMLHttpRequest(); &#125;else &#123; // ie浏览器的内置对象 xhr = new ActiveXObject('Mircrosoft.XMLHTTP'); &#125; // 拼接form表单提交地址 var url = './data.php?username=' + encodeURIComponent(username) + "&amp;password=" + password; // 通过open方法进行初始化配置 xhr.open('get',url,true); // 数据请求之后的回调函数 xhr.onreadystatechange = function() &#123; // 判断服务器数据请求是否成功 if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123; // 请求的数据类型为responseText var data = xhr.responseText; console.log(data); &#125; &#125; // 执行发送请求的动作 xhr.send(null); &#125; &#125;&#125;)(window,document);&lt;/script&gt; 12345678910&lt;?php $username = $_GET['username']; $password = $_GET['password']; if ($username == 'admin' &amp;&amp; $password == 123) &#123; echo "登录成功"; &#125;else&#123; echo "登录失败"; &#125;?&gt; 在这一篇里，主要是对js原生实现Ajax的get提交方式做一个详细的说明，需要补充的是【1】encodeURIComponent()：在get方式传递参数的时候不推荐使用汉字，但是并不意味着不可以，这里用这个方法对所传递的参数进行了编译，使得在后台获取的内容不会因为是汉字而乱码。【2】这里再说一说状态码xhr.readyState和xhr.status,注意大小写！xhr.readyState请求状态码总共有四个值 &gt; 0：实例化XMLHttpRequest对象成功 &gt; 1：发送请求的动作已经准备好，但是没有发送 &gt; 2： 发送请求的动作执行完毕 &gt; 3：服务器已经返回数据成功 &gt; 4：服务器已经返回的数据成功且可用；xhr.status == 200 是数据的状态码，也有404/503等 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ajax,JS</category>
+      </categories>
+      <tags>
+        <tag>Ajax,JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iframe实现异步]]></title>
+    <url>%2F2017%2F04%2F25%2Fiframe%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt; &lt;div id="show"&gt;&lt;/div&gt; &lt;form action="./data.php" method="post" target="frame"&gt; 用户：&lt;input type="text" name="username"&gt; 密码 : &lt;input type="text" name="password"&gt; &lt;input type="submit"&gt; &lt;/form&gt; &lt;iframe width="0" height="0" frameborder="0" name="frame"&gt;&lt;/iframe&gt;&lt;/body&gt;&lt;/html&gt; 1234567891011121314&lt;?php $p = $_POST['username']; $q = $_POST['password']; $flag = 1; if ($flag) &#123; echo $p. '+' .$q; &#125;else &#123; return 0; &#125;?&gt;&lt;script&gt; parent.document.getElementById('show').innerHTML = '注册成功';&lt;/script&gt; 需要说明的是form的target指向了一个子页面（和iframe的name需要保持一致），相当于通过iframe这个子页面提交表单而并不刷新父页面(当前含有表单提交的页面)，刷新的是子页面，此外通过 width=”0” height=”0” frameborder=”0” 隐藏iframe窗口，通过后台逻辑判断后，用 parent.document.getElementById(‘show’).innerHTML = ‘注册成功’; 在页面提示信息，其中的parent指的是父页面。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>iframe实现异步</category>
+      </categories>
+      <tags>
+        <tag>异步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[微信浏览器利用手势实现canvas画笔+放大缩小（任然可以画）]]></title>
+    <url>%2F2017%2F04%2F15%2F%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%9E%E7%8E%B0canvas%E7%94%BB%E7%AC%94%2B%E6%89%8B%E5%8A%BF%E6%94%BE%E5%A4%A7%E7%BC%A9%E5%B0%8F%EF%BC%88%E4%BB%BB%E7%84%B6%E5%8F%AF%E4%BB%A5%E7%94%BB%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930313233343536373839404142 &lt;script type="text/javascript"&gt; (function()&#123; var canvas = document.querySelector('#cavsElem'); var togger = 0; // 判断是否取消微信默认的下拉事件 document.querySelector('.swiper-container').addEventListener('touchmove', function (ev) &#123; if (togger == 1) &#123;event.preventDefault();&#125; else &#123;return;&#125; &#125;); var ctx = canvas.getContext('2d'); // canvas全屏自适应 var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; canvas.width = w; canvas.height = h+2; canvas.style.border = "1px solid #000"; ctx.strokeStyle = "red"; ctx.lineWidth = 3; // 画笔功能 canvas.addEventListener('touchstart', function (ev) &#123; var x = parseInt(ev.changedTouches[0].clientX); var y = parseInt(ev.changedTouches[0].clientY); ctx.beginPath(); canvas.addEventListener('touchmove', function (ev) &#123; // 判断触点个数 togger = ev.touches.length; if (ev.touches.length == 1) &#123; var x = parseInt(ev.changedTouches[0].clientX); var y = parseInt(ev.changedTouches[0].clientY); ctx.lineTo(x, y); ctx.stroke(); console.log('('+x +','+ y+')'); &#125; ev.touches.length = 2 &#125;); canvas.addEventListener('touchend', function (ev) &#123; canvas.removeEventListener('touchstart',null); canvas.removeEventListener('touchmove',null); &#125;); &#125;)&#125;());&lt;/script&gt; 【1】微信浏览器对原生的js事件监听的语法不能较好的识别，无法监听到touch的整个过程，必须使用规范的HTML5的书写方式去实现事件监听，也就是所谓的DOM2级事件处理程序。尤其是对touch事件的处理。【2】这里通过判断touchmove过程中的touchs的个数决定了是否取消微信浏览器默认的下拉刷新的浮动事件，从而将批注和手势缩放区分开来。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>微信</category>
+      </categories>
+      <tags>
+        <tag>微信,canvas,手势</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[禁止手机浏览器、微信浏览器的上下滑动问题]]></title>
+    <url>%2F2017%2F04%2F13%2F%E7%A6%81%E6%AD%A2%E6%89%8B%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E3%80%81%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%BB%91%E5%8A%A8%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[12345&lt;script type='text/javascript'&gt;document.querySelector('body').addEventListener('touchstart', function (ev) &#123; event.preventDefault();&#125;);&lt;/script&gt; 这个是官方给出的解决方案，我就以自己的案例为主，提出一点思考，就代码而言有用，但是禁用掉了所有包含在body下的一些touch，scroll事件，可以考虑将需要touch，和scroll的事件元素放在所要禁用的元素外层，这样就可以规避此类问题，转为从html的嵌套层次上下手去解决问题。 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>微信</category>
+      </categories>
+      <tags>
+        <tag>微信,移动端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【详细】Ionic+cordova+windows配置Android的App环境]]></title>
+    <url>%2F2017%2F04%2F08%2FIonic%2Bcordova%2Bwindows%E9%85%8D%E7%BD%AEAndroid%E7%9A%84App%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[系统环境搭建1、Java JDK 配置（Android ADT需要）最近花了些时间去配置了Ionic+cordova+windows的Android环境，在这个过程中踩了一些坑，在这里将它们记录下来，提供给需要的小伙伴们参考…….详细配置: java环境配置链接 1$ java -version 命令窗口检查是否安装成功 2、C++ 配置（node需要）我的电脑是w7，现在只能安装 visual studio 2012 ，安装2013/2015都会报错，具体错误是[Microsoft .NET Framework 4.5]安装发现严重错误，查了相关文档，是系统的问题，而我懒得升级系统或者重装系统（w7 sp1 支持Microsoft .NET Framework 4.5），所以安装了visual studio 2012，没有报错，很顺利！ 提示：并不影响app的生产各种版本下载地址: visual studio 3、Android 配置（打包Android应用需要）【重点】 1、下载Android SDK Tools: Android工具链接2、配置环境变量: Android配置环境变量3、检查是否配置成功1$ adb 4、相关组件下载现在有些人推荐离线安装，具体要下载的目录看下边写的，不过好几个包需要下载，这里我先说一下最方便的方法，可能会慢一些，不过步骤比较少，如果我所说的几个包，你没有显示，那就手动下载，地址就是 Android如果配置好了环境变量，输入 1$ android 弹出Android SDK Manger窗口，勾选（所需要的几个包）Tools&gt; Android SDK Tools / Android SDK Platform-tools / Android SDK Build-tools 与Tools平级的勾选 API22（Android5.1.1）、API23（Android6.0），Extras里面勾选Android Support Respository 和 Google USB Driver 等待下载安装好即可，比较慢，可以喝杯茶了。 手动下载的具体放置位置目录图片链接，解压放到相应位置即可 4、Node 配置（插件环境需要）这个还用写？提示一下记得检查是否安装成功！！！ 1$ node -v 5、GIt 配置（需要从github上下载模板，团队开发）这个还用写？提示一下记得检查是否安装成功！！！1$ git version 项目依赖环境搭建1、cordova（打包工具）2、Ionic（框架）1$ npm install -g cordova ionic 想说的是安装可能有点慢，如果安装不正常，估计是被墙了，那么就要利用淘宝镜像安装了1$ npm install -g cnpm 1$ cnpm install -g cordova ionic 安装完成肯定都要迫不及待要创建app啦1$ ionic start myapp 好啦，那么问题来啦！！！【坑】如果报的错里面有：npminstall的字样那就是npm需要全局安装（默认不是全局的）1$ npm install -g npm 然后再试试，好了那就没什么了，如果没好？弹出了缺少一个gulp-sass这个模块？？【十分 超级 坑】解决方法：由于gulp-sass需要依赖于node-sass，所以1$ npm rebuild node-sass 然后再次创建项目ok； 如果有用，请留言点赞，或者提出你们的问题，共同学习！]]></content>
+      <categories>
+        <category>Ionic</category>
+      </categories>
+      <tags>
+        <tag>Ionic,angular,cordova,android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F03%2F25%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
