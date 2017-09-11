@@ -15,7 +15,7 @@
 <script>
     (function(){
         if(''){
-            if (prompt('<h1>请输入阅读密码</h1>') !== ''){
+            if (prompt('请输入阅读密码') !== ''){
                 alert('密码错误！');
                 history.back();
             }
@@ -363,18 +363,15 @@
       
         
           
-            <h2 id="react-native之标签栏：react-native-tab-navigator组件"><a href="#react-native之标签栏：react-native-tab-navigator组件" class="headerlink" title="react-native之标签栏：react-native-tab-navigator组件"></a>react-native之标签栏：react-native-tab-navigator组件</h2><p>“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的</p>
-<p>android经历:</p>
-<p>第一步：在根目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react-native-tab-navigator --save</div></pre></td></tr></table></figure></p>
-<p>注意：如果安装报错，那么一定要看一下node_modules里面是否有react-native-tab-navigator，如果没有继续安装，如果有，一定要先卸载再安装，否则即使后面安装成功也会出现bug</p>
-<p>第二步：在index.android.js文件中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import TabNavigator from <span class="string">'react-native-tab-navigator'</span>;</div></pre></td></tr></table></figure></p>
-<p>提示：在node_modules文件夹下的组件直接引入就好。</p>
-<p>第三步：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123;&#123;flex: 1&#125;&#125;&gt;</div><div class="line">   &lt;TabNavigator tabBarStyle=&#123;styles.tab&#125; &gt;</div><div class="line">     &lt;TabNavigator.Item</div><div class="line">      selected=&#123;this.state.selectedTab === <span class="string">'home'</span>&#125;</div><div class="line">      title=<span class="string">"Home"</span></div><div class="line">      titleStyle=&#123;styles.himiTextStyle&#125; </div><div class="line">      renderIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_1.png'</span>)&#125; /&gt;&#125;</div><div class="line">      renderSelectedIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_1_press.png'</span>)&#125; /&gt;&#125;</div><div class="line">      onPress=&#123;() =&gt; this.setState(&#123; selectedTab: <span class="string">'home'</span> &#125;)&#125;&gt;</div><div class="line">   &lt;USList/&gt;</div><div class="line">     &lt;/TabNavigator.Item&gt;</div><div class="line">     &lt;TabNavigator.Item</div><div class="line">      selected=&#123;this.state.selectedTab === <span class="string">'profile'</span>&#125;</div><div class="line">      title=<span class="string">"Profile"</span></div><div class="line">      titleStyle=&#123;styles.himiTextStyle&#125;  </div><div class="line">      renderIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_2.png'</span>)&#125; /&gt;&#125;</div><div class="line">      renderSelectedIcon=&#123;() =&gt; &lt;Image <span class="built_in">source</span>=&#123;require(<span class="string">'./app/images/tabbar_2_press.png'</span>)&#125; /&gt;&#125;</div><div class="line">      onPress=&#123;() =&gt; this.setState(&#123; selectedTab: <span class="string">'profile'</span> &#125;)&#125;&gt;</div><div class="line">          &lt;MovieList/&gt;</div><div class="line">     &lt;/TabNavigator.Item&gt;</div><div class="line">   &lt;/TabNavigator&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var styles = StyleSheet.create(&#123;</div><div class="line">  tab: &#123;</div><div class="line">        height:90,</div><div class="line">        paddingTop:5,</div><div class="line">        backgroundColor: <span class="string">'#fff'</span>,</div><div class="line">        alignItems: <span class="string">'center'</span>,</div><div class="line">        justifyContent:<span class="string">'center'</span></div><div class="line">    &#125;,</div><div class="line">    himiTextStyle:&#123;</div><div class="line">      color:<span class="string">'#777'</span>,</div><div class="line">      fontSize:16,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>IOS:自带TabBarIOS插件，简单易用</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          react-native之标签栏：react-native-tab-navigator组件“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/23/初遇React系列之八/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -515,12 +512,16 @@
       
         
           
-            <h2 id="react-native之触摸高亮：TouchableHighlight组件"><a href="#react-native之触摸高亮：TouchableHighlight组件" class="headerlink" title="react-native之触摸高亮：TouchableHighlight组件"></a>react-native之触摸高亮：TouchableHighlight组件</h2><p>使用方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//导入组件</div><div class="line">import &#123; TouchableHighlight &#125; from <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line">//标签化使用</div><div class="line"> &lt;TouchableHighlight underlayColor=<span class="string">"rgba(34,26,38,0.2)"</span> onPress=&#123;()=&gt;&#123;&#125;&#125;&gt;</div><div class="line"> 	//列表的每一项</div><div class="line"> &lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
-<p>TouchableHighlight这个标签有坑，我们必须设置onPress属性才能生效</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          react-native之触摸高亮：TouchableHighlight组件使用方法：
+1234567//导入组件import &#123; TouchableHighlight &#125; from 'react-native';//标签化使用 &lt;TouchableHighlight un
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/23/初遇React系列之七/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -661,16 +662,17 @@
       
         
           
-            <h2 id="react-native的进度组件："><a href="#react-native的进度组件：" class="headerlink" title="react-native的进度组件："></a>react-native的进度组件：</h2><h3 id="android-ActivityIndicator组件"><a href="#android-ActivityIndicator组件" class="headerlink" title="android:ActivityIndicator组件"></a>android:ActivityIndicator组件</h3><p>ProgressBarAndroid已经被ActivityIndicator组件取代。</p>
-<p>使用方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//导入组件</div><div class="line">import &#123; ActivityIndicator &#125; from <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line">//标签化使用</div><div class="line">&lt;ActivityIndicator </div><div class="line"> styleAttr=<span class="string">'Large'</span></div><div class="line"> color=<span class="string">"#6425c9"</span></div><div class="line">/&gt;</div></pre></td></tr></table></figure>
-<p>属性：<br> <em>animating：这个参数接受布尔型的值，表示是否显示加载指示器。
- </em>color：string型参数，用来设置指示器的颜色，默认是灰色的，我们一般也不管他。<br> <em>hidesWhenStopped（仅iOS可用）：在没有动画的时候，是否要隐藏指示器（默认为true）。
- </em>size：这就是设置尺寸的，就两个选项，small和large，一小一大。</p>
-<p> IOS:使用ActivityIndicatorIOS组件，拥有size和color属性，使用方法类似。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          react-native的进度组件：android:ActivityIndicator组件ProgressBarAndroid已经被ActivityIndicator组件取代。
+使用方法：
+12345678//导入组件import &#123; ActivityIndicator &#125; fr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/23/初遇React系列之六/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -811,10 +813,15 @@
       
         
           
-            <h2 id="关于app组件管理："><a href="#关于app组件管理：" class="headerlink" title="关于app组件管理："></a>关于app组件管理：</h2><p>我们需要在项目根目录下创建app文件，用来管理我们的组件，在app文件夹下，我们可以 创建components和style文件夹，分别存放相应的文件。关于style的文件，如果是一个js文件，那就需要在index.android.js文件和模块文件中同时引入，style文件导出模块为styles变量，不需要创建类。500的错误一般都是模块导入出错。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          关于app组件管理：我们需要在项目根目录下创建app文件，用来管理我们的组件，在app文件夹下，我们可以 创建components和style文件夹，分别存放相应的文件。关于style的文件，如果是一个js文件，那就需要在index.android.js文件和模块文件中同时引入，style文件导出模
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/初遇React系列之五/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -955,11 +962,15 @@
       
         
           
-            <h2 id="关于fetch："><a href="#关于fetch：" class="headerlink" title="关于fetch："></a>关于fetch：</h2><p>“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。<br>现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//定义在类外</div><div class="line">const REQUIRE_URL = `http://api.douban.com/v2/movie/top250?start=0&amp;count=10`</div><div class="line"></div><div class="line">constructor(props) &#123;</div><div class="line">    super(props);//引用this.super(props)执行之后才能使用this.props</div><div class="line">    this.state = &#123;</div><div class="line">      //创建dataSource对象，传入更新row的策略，一般来说都是prevRowData和nextRowData不相等时更新row</div><div class="line">      movies:new ListView.DataSource(&#123;</div><div class="line">        rowHasChanged:(row1,row2) =&gt; row1 !== row2</div><div class="line">      &#125;),</div><div class="line">      loaded:<span class="literal">false</span>//loading状态</div><div class="line">    &#125;; </div><div class="line">    this.fetchData();//构造函数内加载时执行</div><div class="line">&#125;</div><div class="line">  </div><div class="line"> <span class="function"><span class="title">fetchData</span></span>()&#123;</div><div class="line">    fetch(REQUIRE_URL)</div><div class="line">        .then(response =&gt; response.json())</div><div class="line">        .then(responseData =&gt; &#123;</div><div class="line">            console.log(responseData);</div><div class="line">            this.setState(&#123;</div><div class="line">                movies:this.state.movies.cloneWithRows(responseData.subjects),//传入请求数据，更新状态</div><div class="line">                loaded:<span class="literal">true</span></div><div class="line">            &#125;)</div><div class="line">        &#125;)</div><div class="line">        .done();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/初遇React系列之四/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1100,11 +1111,17 @@
       
         
           
-            <h2 id="React-Native安装需要注意的两点："><a href="#React-Native安装需要注意的两点：" class="headerlink" title="React-Native安装需要注意的两点："></a>React-Native安装需要注意的两点：</h2><p>1.需要在项目的android目录下创建local.properties文件，设置android SDK的目录指向，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sdk.dir=D\:\\android；</div></pre></td></tr></table></figure></p>
-<p>2.需要删除项目下.babelrc文件</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          React-Native安装需要注意的两点：1.需要在项目的android目录下创建local.properties文件，设置android SDK的目录指向，比如：1sdk.dir=D\:\\android；
+2.需要删除项目下.babelrc文件
+如果有用，请留言点赞，或者提出你们的问题，共同学
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/初遇React系列之三/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1245,22 +1262,18 @@
       
         
           
-            <h2 id="React组件的生命周期："><a href="#React组件的生命周期：" class="headerlink" title="React组件的生命周期："></a>React组件的生命周期：</h2><h3 id="1-创建阶段："><a href="#1-创建阶段：" class="headerlink" title="1.创建阶段："></a>1.创建阶段：</h3><pre><code>执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
-</code></pre><h3 id="2-实例化阶段：（React-render-方法之后调用的函数）"><a href="#2-实例化阶段：（React-render-方法之后调用的函数）" class="headerlink" title="2.实例化阶段：（React.render()方法之后调用的函数）"></a>2.实例化阶段：（React.render()方法之后调用的函数）</h3><p>执行顺序如下：</p>
-<pre><code>1.getInitialState() //初始化state状态
-2.componentWillMount() //组件即将加载
-3.render()创建虚拟的dom树
-4.componentDidMount() //组件加载结束
-</code></pre><h3 id="3-更新阶段："><a href="#3-更新阶段：" class="headerlink" title="3.更新阶段："></a>3.更新阶段：</h3><p>执行顺序如下：</p>
-<pre><code>1.componentWillReceiveProps() //父组件的props值发生变化时调用
-2.shouldComponentUpdate() //是否更新，返回bool值，ture更新，false不更新
-3.componentWillUpdate() //组件更新前，或者组件即将更新
-4.render() //更新虚拟dom树
-5.componentDidUpdate() //组件已经更新
-</code></pre><h3 id="4-销毁阶段："><a href="#4-销毁阶段：" class="headerlink" title="4.销毁阶段："></a>4.销毁阶段：</h3><pre><code>componentWillUnmount() //组件销毁时调用，常用来清除定时器，移除dom树‘
-</code></pre><p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+          React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
+2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下：
+1.getInitialState() //初始化state状态
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/初遇React系列之二/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1401,28 +1414,18 @@
       
         
           
-            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p>1.全局安装 npm install webpack -g</p>
-<p>2.创建文件夹，初始化npm init</p>
-<p>3.npm install webpack –save-dev </p>
-<p>4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;</p>
-<p>5.创建index.html文件，结构如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">	&lt;div id=<span class="string">"app"</span>&gt;&lt;/div&gt;</div><div class="line">	&lt;script src=<span class="string">"bundle.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
-<p>6.根目录 webpack entry.js bundle.js //entry.js入口文件 //bundle.js生成文件</p>
-<p>7.还可以定义模块并导入到entry.js中，它会自动分析依赖，进行打包</p>
-<p>8.webpack默认值编译js，至于css之类的我们可以用loader资源转化。</p>
-<p>9.创建style.css之后npm install css-loader style-loader –save-dev</p>
-<p>10.通过require(‘style-loader!css-loader!./style.css’)main.js中 </p>
-<p>11.webpack.config.js配置文件，自己创建，类似gulp的task任务分配</p>
-<p>12.创建webpack.config.js：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">		entry:<span class="string">'./entry.js'</span>,</div><div class="line">		output: &#123;</div><div class="line">			path:__dirname,</div><div class="line">			filename: <span class="string">'bundle.js'</span></div><div class="line">		&#125;,</div><div class="line">		devtool:<span class="string">'source-map'</span>,//为打包的文件生成一个<span class="built_in">source</span>-map</div><div class="line">		module: &#123;</div><div class="line">			loader:[</div><div class="line">				&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style-loader!css-loader!'</span>&#125;//loader: <span class="string">'style-loader!css-loader!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">			]</div><div class="line">		&#125;</div><div class="line">	&#125;;</div></pre></td></tr></table></figure></p>
-<p>13.操作完之后就执行webpack</p>
-<p>14.生成开发工具：webpack –devtool source-map</p>
-<p>15.如果想要和babel配合，需要先npm install babel-loader babel-core babel-preset-es2015 –save-dev</p>
-<p>16.接下来创建配置文件.babelrc ，添加预设：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>:[<span class="string">"es2015"</span>,]</div><div class="line">&#125;</div><div class="line"></div><div class="line">1.接下来在webpack.config.js中配置那些需要babel的文件</div><div class="line"></div><div class="line">loader:[</div><div class="line">	&#123;<span class="built_in">test</span>:/\.css$/, loader: <span class="string">'style!css!'</span>&#125;,//loader: <span class="string">'style!css!'</span>这里配置了之后，修改引入的部分为require(<span class="string">'./style.css'</span>)</div><div class="line">	&#123;<span class="built_in">test</span>:/\.js$/, loader: <span class="string">'babel'</span>&#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<p>17.webpack-dev-server:生成开发应用的服务器，当文件有变化的时候自动打包刷新，还有一个具有热替换功能的模块（只替换有变化的部分，不需要刷新页面），npm install webpack-dev-server -g</p>
-<p>18.npm install webpack-dev-server -save-dev</p>
-<p>19.webpack-dev-server –inline –hot，生成服务器网址，在最上边有</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          环境搭建及使用1.全局安装 npm install webpack -g
+2.创建文件夹，初始化npm init
+3.npm install webpack –save-dev 
+4.创建entry.js输出内容，document.getElementById(‘app’).textContent 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/17/webpack详解（环境搭建及使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1563,34 +1566,15 @@
       
         
           
-            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p> JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。</p>
-<p> jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它是工作在SystemJs(模块加载器)通用模块之上，jspm不是一个全新的包管理器，而是基于已存在的包资源进行的，它是与NPM和GitHub协同合作的</p>
-<h3 id="过度"><a href="#过度" class="headerlink" title="过度"></a>过度</h3><p> 1.npm install -g babel//全局安装babel，因为我们需要在自己的项目中去安装babel插件</p>
-<p> 2.创建项目文件夹react，进行npm初始化。执行npm init。</p>
-<p> 3.项目根目录下，npm  install babel-core –save-dev</p>
-<p> 4.根目录创建scrip.js,可以写一些es6的代码，我们将要去编译它</p>
-<p> 5.在scrip.js的目录，执行babel script.js,将会在dos里显示编译好的代码，我们可以将它编译到文件里babel –watch script.js –out-file script_compiled.js –source-maps//watch 监视并修改 –source-maps记录编译前的所有文件</p>
-<p> 6.同样的。我们可以针对目录进行编译babel –watch src –out-dir lib //src目录到lib目录</p>
-<p> 7.可以将一个目录编译到一个js文件里，babel –watch src –out-file script_compiled.js </p>
-<p> 8.在项目的开发阶段，不需要每次都编译js，可以在浏览器端实时编译，这样我们需要两个插件<br> {<br>     1.在项目文件夹根目录创建一个index.html文件<br>     2.添加<script src="node_modules/babel-core/browser.js"></script><br>     3.添加<script src="node_modules/babel-core/browser-polyfill.js"></script>//这是一个修补浏览器功能的文件<br>     4.添加<script src="script.js" type="text/babel"></script>//这个里面的代码会被browser.js解释<br> }</p>
-<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>1.npm isntall jspm -g//完成之后输入jspm返回信息</p>
-<p>2.创建项目文件夹，npm初始化，npm init</p>
-<p>3.npm isntall jspm –save-dev  将文件放到开发依赖里面</p>
-<p>4.jspm init//初始化jspm</p>
-<p>5.package.json中的”name”: “myapp”,不能为react否则不可以安装react</p>
-<p>6.创建app文件夹，内部创建main.js，编写</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">'use strict'</span></div><div class="line"></div><div class="line"><span class="built_in">let</span> fruits = [<span class="string">'apple'</span>,<span class="string">'banana'</span>],</div><div class="line">foods = [...fruits,<span class="string">'pink'</span>];</div><div class="line"></div><div class="line">document.body.innerText = foods.toString();</div><div class="line"></div><div class="line">console.log(foods);</div><div class="line"></div><div class="line"><span class="built_in">export</span> default &#123;&#125;;</div></pre></td></tr></table></figure>
-<p>7.在根目录创建index.html</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;!-- 导入system.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./jspm_packages/system.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;!-- 导入config.js--&gt;</div><div class="line">&lt;script src=<span class="string">"./config.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    System.import(<span class="string">'./app/main'</span>);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-<p>8.我们需要在http协议上运行：browser-sync start –server –files “<em>.html , ./app/</em>.js”</p>
-<p>9.添加第三方工具：jQuery</p>
-<p>10.jspm install jquery=github:components/jquery === jspm install jquery</p>
-<p>11.在github上面的jspm/registry中可以查看包的映射关系</p>
-<p>12.jQuery使用 import $ from ‘jquery’</p>
-<p>13.bundle打包：jspm bundle app/main app/build.js –inject//–inject可以不要，用来修改config文件</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/17/jspm详解（环境搭建及使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1731,29 +1715,19 @@
       
         
           
-            <h2 id="环境搭建及使用"><a href="#环境搭建及使用" class="headerlink" title="环境搭建及使用"></a>环境搭建及使用</h2><p>首先我们不再全局安装babel，若有请先卸载</p>
-<p>1.npm init //创建项目文件夹react，初始化npm</p>
-<p>2.npm install babel-cli –save-dev //安装开发依赖</p>
-<p>3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件</p>
-<p>4.因为是局部安装，没有配置环境变量，所以利用cmd，进入到node_modules/.bin目录下，可以babel –help查看安装是否成功</p>
-<p>5.在react目录下创建js文件(script.js),并用js在编写要在控制台输出的内容</p>
-<p>6.通过第4步的操作，在node_modules/.bin目录，执行babel script.js 这样就会在cmd窗口输出控制台的内容</p>
-<p>7.如果我们要导出编译好的文件，那么就执行babel script.js –out-file script-compiled.js那么script.js的同级目录下就会出现script-compiled.js。</p>
-<p>8.同样的，我们可以针对整个文件夹操作babel src –out-dir lib那么它的意思就是讲src目录下的文件编译后放在lib文件夹下</p>
-<p>9.另外,我们可以同过babel src –watch –out-dir lib监视文件变化，每次变化自动编译，需要手动停止，我们可以在package.json里面配置script脚本，”build”:”babel src –watch –out-dir lib”,这样每次就可以通过npm run build 执行相应的代码。</p>
-<p>10.presets预设，简单来说就是一个工具的集合，我们需要通过不同的预设来处理我们的代码</p>
-<p>11.npm install babel-preset-es2015 –save-dev//我们需要编译es2015的代码，并且添加到开发依赖。</p>
-<p>12.下载完预设工具之后，我们需要在更目录创建”.babelrc”文件，它是babel的一个配置文件，它可以指定想要使用的预设，写法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>: [<span class="string">"es2015"</span>]//它的意思是我们要是用es2015这个预设下面的所有插件</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>13.重新执行 npm run build 发现我们用es6写的代码已经被编译 </p>
-<p>14.在react中的jsx就需要被转化成普通的javascript代码，官方推荐babel，那么我们需要安装相关预设，npm install babel-preset-react –save-dev,下载完成后在.babelrc文件中添加预设</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"presets"</span>: [<span class="string">"es2015"</span>,<span class="string">"react"</span>]//es2015解决的是代码编译，react解决的是jsx</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>15，babel可以和许多的build system及配合使用，比如gulp，webpack等等，这里要说的是babel+gulp的形式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.npm install gulp gulp-babel --save-dev</div><div class="line">2.创建gulp的配置文件gulpfile.js </div><div class="line">```bash</div><div class="line">&lt;!-- 引入模块 --&gt;</div><div class="line">	var gulp = require(<span class="string">'gulp'</span>);</div><div class="line">	var babel = require(<span class="string">"gulp-babel"</span>);</div><div class="line">&lt;!-- 创建任务 --&gt;</div><div class="line">	gulp.task(<span class="string">'default'</span>,() =&gt; &#123;</div><div class="line">		<span class="built_in">return</span> gulp.src(<span class="string">'src/*.js'</span>)</div><div class="line">		.pipe(babel())</div><div class="line">		.pipe(gulp.dest(<span class="string">'lib'</span>))</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
-<pre><code>3.执行gulp编译成功
-</code></pre><p>```</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          环境搭建及使用首先我们不再全局安装babel，若有请先卸载
+1.npm init //创建项目文件夹react，初始化npm
+2.npm install babel-cli –save-dev //安装开发依赖
+3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件
+4.因为是局部安
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/17/react之babel详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

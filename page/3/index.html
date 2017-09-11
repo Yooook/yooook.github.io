@@ -15,7 +15,7 @@
 <script>
     (function(){
         if(''){
-            if (prompt('<h1>请输入阅读密码</h1>') !== ''){
+            if (prompt('请输入阅读密码') !== ''){
                 alert('密码错误！');
                 history.back();
             }
@@ -363,19 +363,18 @@
       
         
           
-            <p>不适用gulp搭建自动化工作流利，而是单纯的用Browsersync进行实时同步显示的时候，会发现页面无法同步刷新，需要手动F5去更新数据。保证基本的环境（node）之下，具体步骤如下</p>
-<p>1.npm install -g browser-sync</p>
-<ol>
-<li>browser-sync start –server –files “<em>.html , css/</em>.css , js/*.js”</li>
-</ol>
-<p>我之所以出现无法自动刷新同步，是因为我用的是这句话：</p>
-<p>browser-sync start –server –files ‘<em>.html , css/</em>.css , js/*.js’</p>
-<p>这句话是错误的，因为单引号并不能被解析，所以无法同步。</p>
-<p>npm的script配置如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">   <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</div><div class="line">   <span class="string">"serve"</span>: <span class="string">"browser-sync start --server --no-notify  --files \"index.html, app/**/*.js\""</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
+          不适用gulp搭建自动化工作流利，而是单纯的用Browsersync进行实时同步显示的时候，会发现页面无法同步刷新，需要手动F5去更新数据。保证基本的环境（node）之下，具体步骤如下
+1.npm install -g browser-sync
 
-          
+browser-sync start –server
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/16/解决Browsersync无法实时刷新/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -516,14 +515,16 @@
       
         
           
-            <h2 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h2><p>1.react 是一个创建显示组件的东西(组件化开发)</p>
-<p>2.jspm包的管理工具，它里面的SystemJS可以加载不同规范的js模块，里面的babel可以编译JavaScript代码，并且可以将JSX代码编译成JavaScript代码<br>3.props:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">1.这个属性是用来接受父模块给子模块传递的数据的，也可以从主模块多层传递，每层用this.props.date传递</div><div class="line">2.在主模块中写法：</div><div class="line">&lt;Comment author=<span class="string">"小明"</span> data=<span class="string">"五分钟前"</span> &gt;今天吃了apples&lt;/Comment&gt;</div><div class="line">3.在子模块中写法：</div><div class="line">&lt;div className=<span class="string">"text"</span>&gt;&#123;this.props.children&#125;&lt;/div&gt; //&#123;this.props.children&#125;获取的是标签内容，既<span class="string">"天吃了apples"</span></div><div class="line">4.这里的this.props就相当于Comment这个元素对象（Element）</div><div class="line">5.this.props.data在子模块中的遍历 </div><div class="line">	<span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">		<span class="built_in">let</span> commentNodes = this.props.data.map((comment,key) =&gt; &#123;//新版本必须传入key值</div><div class="line">			<span class="built_in">return</span> (</div><div class="line">				&lt;Comment key=&#123;key&#125; author=&#123;comment.author&#125; date=&#123;comment.date&#125;&gt;//属性不能带引号!!!!!!!</div><div class="line">					&#123;comment.text&#125;</div><div class="line">				&lt;\/Comment&gt;</div><div class="line">			);</div><div class="line">		&#125;);</div><div class="line">		<span class="built_in">return</span>(</div><div class="line">			&lt;\div&gt;</div><div class="line">				&#123;commentNodes&#125;//上面的变量</div><div class="line">			&lt;\/div&gt;</div><div class="line">		);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<p>4.state:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">1.可以在父模块中添加属性url，&lt;CommentBox url=<span class="string">"app/data.json"</span>/&gt;</div><div class="line">2.安装jquery，创建构造函数，声明属性</div><div class="line">	constructor (props) &#123;</div><div class="line">		super(props);//必须要写</div><div class="line">		this.state = &#123;data:[]&#125;;//接收返回的数据</div><div class="line">		$.ajax(&#123;</div><div class="line">			url:this.props.url,//拿到父模块传入的地址</div><div class="line">			dataType:<span class="string">'json'</span>,</div><div class="line">			cache:<span class="literal">false</span>,</div><div class="line">			success: comment =&gt; &#123;</div><div class="line">				this.setState(&#123;data:comment&#125;);//设置this.state.data</div><div class="line">			&#125;,</div><div class="line">			error: (xhr,status,error) =&gt; &#123;</div><div class="line">				console.log(error);</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">3.在render方法中加载&lt;CommentList  data=&#123;this.state.data&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<p>5.event:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">定义：handleSubmit (event) &#123;</div><div class="line">			event.preventDefault();</div><div class="line">			console.log(<span class="string">'提交表单。。。'</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="title">render</span></span>() &#123;&#125;</div><div class="line"></div><div class="line">使用：&lt;form className=<span class="string">"ui reply form"</span> onSubmit=&#123;this.handleSubmit&#125;&gt;</div></pre></td></tr></table></figure></p>
-<p>5.refs:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.handleSubmit (event) &#123;</div><div class="line">	event.preventDefault();</div><div class="line">	console.log(<span class="string">'提交表单。。。'</span>);</div><div class="line"></div><div class="line">	<span class="built_in">let</span> author = this.refs.author.value;//this.refs.author获取标签对象</div><div class="line">	console.log(author);</div><div class="line">&#125;</div><div class="line"></div><div class="line">2. onSubmit=&#123;this.handleSubmit.bind(this)&#125;//表单必须绑定this来获取HTML对象</div><div class="line">3. &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> placeholder=<span class="string">"姓名"</span> ref=<span class="string">"author"</span>/&gt;</div></pre></td></tr></table></figure></p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          笔记：1.react 是一个创建显示组件的东西(组件化开发)
+2.jspm包的管理工具，它里面的SystemJS可以加载不同规范的js模块，里面的babel可以编译JavaScript代码，并且可以将JSX代码编译成JavaScript代码3.props:    123456789101112131
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/16/初遇React系列之一/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -664,26 +665,16 @@
       
         
           
-            <h2 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h2><p>1.把一个对象的属性赋值给另一个对象Object.assign()<br>{<br>    let foo = {};<br>    Object.assign(<br>        foo,//第一个参数是需要复制的对象<br>        {one:1}//被复制的对象<br>    );<br>}</p>
-<p>2.设置对象的prototype<br>{<br>    let foo = {<br>        get() {}<br>    }<br>    let fmm = {}<br>    fun = Object.create(foo)//创建对象<br>    Object.getPrototypeOf(fun) === foo//true<br>    Object.setPrototypeOf(fun,fmm)//第一个参数是当前对象，第二个是prototype属性将要指向的对象，这样就可以调用fmm里面的方法<br>}</p>
-<p>3.<strong>proto</strong>: {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>}</p>
-<p>4.super属性重写父类方法 {<br>    let fun = {<br>        <strong>proto</strong>:foo//用<strong>proto</strong>修改prototype属性，从而调用父类方法<br>    }<br>    get() {//重写父类的get方法<br>        return super.get() + ‘xxxxxx’;//super.get()父类get方法的返回值<br>    }<br>}</p>
-<p>5.Class:{<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        say() {<br>            console.log(this.name)<br>        }<br>    }</p>
-<pre><code>let tom = new Person(&apos;tom&apos;);
-tom.say();
-</code></pre><p>}</p>
-<p>6.get和set关键字 {<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        get say() {<br>            return this.name;<br>        }<br>        set say(bb) {<br>            this.name = bb;<br>        }<br>    }</p>
-<pre><code>let tom = new Person(&apos;tom&apos;);
-tom.say = &apos;哈哈哈哈&apos;;//设置
-tom.say;//获取
-</code></pre><p>}</p>
-<p>7.static {<br>    class Person {<br>        constructor(name) {<br>            this.name = name;<br>        }<br>        static foot (a) {console.log(a)}<br>    }<br>    Person.foot(a) ;//static定义的静态方法不需要实例化就可以调用<br>}</p>
-<p>8.extends继承 {<br>    class Person extends Animinal {<br>        //主要是构造函数的写法<br>        constructor(name) {<br>            super(name);<br>        }<br>    }<br>}</p>
-<p>9.set：一堆东西的集合，不能有重复 {<br>    var something = new Set(‘123’)//输出为：Set {“1”,”2”,”3”}<br>    添加：something.add(‘4’)<br>    添加：something.add(‘4’)//第二次无效<br>    长度：something.size<br>    判断存在：something.has(‘4’)<br>    删除：something.delete(‘4’)<br>    遍历：something.forEach (item =&gt; {<br>        console.log(item)<br>    })<br>    清空:something.clear();<br>}</p>
-<p>迭代器，生成器，Module需要借助工具，导入导出 暂时了解</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
+2.设置对象的prototype{   
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/15/ECMAScript6学习1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -824,25 +815,17 @@ tom.say;//获取
       
         
           
-            <h2 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a>笔记：</h2><p>1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效</p>
-<p>2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据</p>
-<p>3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3</p>
-<p>4.解构对象 let {one1:one,two1:two,three1:three} = {one:1,two:2,three:3}</p>
-<p>5.模板字符串： let apple = ‘apples’ ;var string = <code>今天吃 ${apple}</code>//注意反引号，另外支持换行</p>
-<p>6.带标签的模板字符串 var string = kitchen<code>今天吃 ${apple}</code>;function kitchen(strings,…values) {//strings是指字符串的每个部分的数组集合，values只是变量的数组集合}</p>
-<p>7.判断字符串里是否有其他字符串：包含baohastring.includes(‘apple’)&amp;开始string.startsWith(‘apple’)&amp;结尾string.endsWith(‘apple’)</p>
-<p>8.给函数设置[默认值]function breakfast(one=1,two=2) {}；不代表不可以传参</p>
-<p>9.’…’展开操作符，举个例子，将一个数组添加到另一个数组，var arr1 = [1,2,3];var arr2 = [4,5];arr1 = [1,2,3,…arr2]//arr1 = [1,2,3,4,5]</p>
-<p>10.剩余操作符function open(one,two,…three) {console.log(one,two，three);console.log(one,two，..three)};open(1,2,3,4)//1,2,[3,4] //1,2,3,4</p>
-<p>11.解构参数function(three,{one,two}={}) { console.log(three,one,two)}</p>
-<p>12.函数名的name属性: var one = function two() {};console.log(one.name);//two，如果没有two则输出变量的名称，这是权重的问题</p>
-<p>13.箭头函数，<br> {<br>     一个参数并返回：let open = one =&gt; one;<br>     多个参数：let open = (one,two) =&gt; {…;return one + two};<br>     没有参数：let open = ( ) =&gt; {…;return one + two};//小括号里面是一个空格<br> }</p>
-<p> 14.对象表达式：<br> {<br>     let one=1,two=2;<br>     var food = {<br>         one,//直接写变量名，不需要赋值<br>         two,<br>         breakfast() {}//不需要function关键字<br>     }<br> }</p>
-<p> 15.添加带空格的属性：let foo = {} ; foo[‘hot drink’] = ‘xxx’//也可以str = ‘hot drink’ ；foo[str] = ‘xxx’</p>
-<p> 16.就判断两个值相等：Object.is(NaN,NaN)//true,Object.is(+0,-0)//false</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效
+2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据
+3.解构数组，let [one,two,three] = [1,2,3],console.log(on
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/15/ECMAScript6学习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -983,12 +966,16 @@ tom.say;//获取
       
         
           
-            <h3 id="记得引入bootstrap的css样式-我们使用seajs去封装"><a href="#记得引入bootstrap的css样式-我们使用seajs去封装" class="headerlink" title="记得引入bootstrap的css样式,我们使用seajs去封装"></a>记得引入bootstrap的css样式,我们使用seajs去封装</h3><p>pagination.js如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">  &lt;!-- 创建 --&gt;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">Pagination</span></span>() &#123;</div><div class="line">      this.currentPage = 14;</div><div class="line">      this.total = 20;</div><div class="line">      this.show  = 7;</div><div class="line">      this.region = Math.floor(this.show/2);</div><div class="line">      var begin = this.currentPage -  this.region;</div><div class="line">      begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      var end = begin + this.show - 1;</div><div class="line">      <span class="keyword">if</span> ( end &gt; this.total) &#123;</div><div class="line">        end = this.total;</div><div class="line">        begin = end - this.show;</div><div class="line">        begin = begin &lt; 1 ? 1 :begin;</div><div class="line">      &#125;</div><div class="line">      this.begin = begin;</div><div class="line">      this.end = end;</div><div class="line">  &#125;</div><div class="line">   &lt;!-- 渲染 --&gt;</div><div class="line">  Pagination.prototype.render = <span class="keyword">function</span>(container) &#123;</div><div class="line">      //获取容器Dom对象</div><div class="line">      <span class="keyword">if</span>(typeof container === <span class="string">'string'</span>) &#123;</div><div class="line">          container = document.querySelectorAll(container);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span>(container.length === undefined) &#123;</div><div class="line">          container = [container];</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span>(var s = 0; s&lt;=container.length;s++) &#123;</div><div class="line">          var container = container[s];</div><div class="line">          var prevElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          prevElement.innerHTML = <span class="string">'&lt;\a href="#" aria-label="Previous"&gt;&lt;\span ariahidden="true"&gt;&amp;laquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage == 1) &#123;</div><div class="line">            prevElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(prevElement);</div><div class="line">          <span class="keyword">for</span> (var i = this.begin; i &lt;= this.end; i++) &#123;</div><div class="line">            var liElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">            liElement.innerHTML = <span class="string">'&lt;\a href="#"&gt;'</span>+i+<span class="string">'&lt;\/a&gt;'</span>;</div><div class="line">            <span class="keyword">if</span> (this.currentPage == i ) &#123;</div><div class="line">              liElement.classList.add(<span class="string">'active'</span>);</div><div class="line">            &#125;</div><div class="line">            container.appendChild(liElement);</div><div class="line">          &#125;</div><div class="line">          var nextElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">          nextElement.innerHTML = <span class="string">' &lt;\a href="#" aria-label="Next"&gt;&lt;\span ariahidden="true"&gt;&amp;raquo;&lt;\/span&gt;&lt;\/a&gt;'</span>;</div><div class="line">          <span class="keyword">if</span> (this.currentPage &gt;= ( this.end- this.region)) &#123;</div><div class="line">            nextElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">          &#125;</div><div class="line">          container.appendChild(nextElement);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  module.exports = Pagination;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>main.js如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">define(<span class="keyword">function</span>(require,exports,module) &#123;</div><div class="line">    var Pagination = require(<span class="string">'./modules/pagination.js'</span>);</div><div class="line">    var pager = new Pagination(1,20,7);</div><div class="line">    pager.render(ElementDom);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253defi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/13/实现分页组件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1129,10 +1116,15 @@ tom.say;//获取
       
         
           
-            <h3 id="记得引入bootstrap的css样式"><a href="#记得引入bootstrap的css样式" class="headerlink" title="记得引入bootstrap的css样式"></a>记得引入bootstrap的css样式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">&lt;ul class=<span class="string">"pagination"</span>&gt;&lt;/ul&gt;</div><div class="line">&lt;script&gt;</div><div class="line">  //核心计算部分</div><div class="line">  var currentPage = 18;</div><div class="line">  //总共显示的条目</div><div class="line">  var total = 20;</div><div class="line">  // 显示的个数为奇数</div><div class="line">  var show  = 5;</div><div class="line">  //计算左右的个数</div><div class="line">  var region = Math.floor(show/2);</div><div class="line">  // 计算每次显示的开始序号</div><div class="line">  var begin = currentPage - region;</div><div class="line">  //对开始序号进行条件约束</div><div class="line">  begin = begin &lt; 1 ? 1 :begin;</div><div class="line">  //计算每次显示的结束序号</div><div class="line">  var end = begin + show - 1;</div><div class="line">  //对结束序号进行条件约束</div><div class="line">  <span class="keyword">if</span> ( end &gt; total) &#123;</div><div class="line">    end = total;</div><div class="line">    //补充够显示个数</div><div class="line">    begin = end - show;</div><div class="line">    //重新约束开始序号，防止currentPage&lt;title的情况</div><div class="line">    begin = begin &lt; 1 ? 1 :begin;</div><div class="line">  &#125;</div><div class="line">  //获取容器Dom对象</div><div class="line">  var container = document.getElementsByClassName(<span class="string">'pagination'</span>)[0];</div><div class="line">  // 创建上一页标志</div><div class="line">  var prevElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">  prevElement.innerHTML = <span class="string">'&lt;a href="#" aria-label="Previous"&gt;&lt;span ariahidden="true"&gt;&amp;laquo;&lt;/span&gt;&lt;/a&gt;'</span>;</div><div class="line">  // 实现首末页点击失效</div><div class="line">  <span class="keyword">if</span> (currentPage == 1) &#123;</div><div class="line">    prevElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">  &#125;</div><div class="line">  container.appendChild(prevElement);</div><div class="line">  // 创建显示序列</div><div class="line">  <span class="keyword">for</span> (var i = begin; i &lt;= end; i++) &#123;</div><div class="line">    var liElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">    liElement.innerHTML = <span class="string">'&lt;a href="#"&gt;'</span>+i+<span class="string">'&lt;/a&gt;'</span>;</div><div class="line">    <span class="keyword">if</span> (currentPage == i ) &#123;</div><div class="line">      liElement.classList.add(<span class="string">'active'</span>);</div><div class="line">    &#125;</div><div class="line">    container.appendChild(liElement);</div><div class="line">  &#125;</div><div class="line">  // 创建下一页标志</div><div class="line">  var nextElement = document.createElement(<span class="string">'li'</span>);</div><div class="line">  nextElement.innerHTML = <span class="string">' &lt;a href="#" aria-label="Next"&gt;&lt;span ariahidden="true"&gt;&amp;raquo;&lt;/span&gt;&lt;/a&gt;'</span>;</div><div class="line">  <span class="keyword">if</span> (currentPage &gt;= (end-region)) &#123;</div><div class="line">    nextElement.classList.add(<span class="string">'disabled'</span>);</div><div class="line">  &#125;</div><div class="line">  container.appendChild(nextElement);</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          记得引入bootstrap的css样式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;ul class="pagination"&gt;&lt;/ul
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/13/基于bootstrap（复杂）分页样式的js原生实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1273,28 +1265,18 @@ tom.say;//获取
       
         
           
-            <p>关于为什么要使用seajs，我已经在上次的文章里体现的很具体了</p>
-<p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：</p>
-<p>1.安装seajs，引入，并编写入口模块，一般加载都在head部分</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;\script src=<span class="string">"node_modules/seajs/dist/sea.js"</span>&gt;&lt;\/script&gt;</div><div class="line"> &lt;\script&gt;</div><div class="line">   seajs.use(<span class="string">'./calculate.js'</span>, <span class="keyword">function</span>(calculator) &#123;</div><div class="line">     console.log(<span class="string">'模块加载完成'</span>);</div><div class="line">     // console.log(e);</div><div class="line">   &#125;);</div><div class="line">&lt;\/script&gt;</div></pre></td></tr></table></figure>
-<p>需要注意的是，文件路径必须是规范的相对路径’./‘或者’../‘开头等，或者相对于服务器的绝对路径<br>入口模块，个人理解相当于window.onload，在全文中只有一次使用seajs.use(‘’,function(){})</p>
-<p>2.定义单独的js模块文件，并且定义模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> // 定义一个计算模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var add = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var result = 0;</div><div class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arguments.length; i++) &#123;</div><div class="line">      result += parseFloat(arguments[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> result;</div><div class="line">  &#125;</div><div class="line">	</div><div class="line">  //exports.add = add;</div><div class="line">  module.exports = &#123;</div><div class="line">    add: add</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>首先，函数的参数不推荐自己定义，以防止和nodejs的命名冲突，所以不要改变为其他变量，另外exports是module.exports的一个快捷方式，module.exports指向一个新的地址，module.exports === exports，exports相当于一个引用</p>
-<p>3.模块间的调用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 定义一个模块</div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  // require(<span class="string">'./modules/02-calculator.js'</span>);用一个变量接受返回值，从而调用引入模块的方法，同步</div><div class="line">  require.async(<span class="string">'./modules/02-calculator.js'</span>,<span class="keyword">function</span> (c) &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;);//异步方法加载模块，没有返回值，有回调函数</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>4.使用第三方依赖，用jQuery做例子：</p>
-<p>对jQuery做相应的修改，非压缩文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//适配CMD</div><div class="line"> <span class="keyword">if</span> (typeof define === <span class="string">"function"</span> &amp;&amp; !define.amd) &#123;</div><div class="line">    define(<span class="string">"jquery"</span>, [], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      <span class="built_in">return</span> jQuery.noConflict(<span class="literal">true</span>);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>如果使用模块化AMD或者CMD的时候，我们需要通过noConflict(true)的方法不往全局挂载jQuery对象</p>
-<p>5.seajs配置</p>
-<p>//别名配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    <span class="built_in">alias</span>: &#123; <span class="string">'jquery'</span>: <span class="string">'./jquery/jquery/1.10.1/jquery.js'</span> &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">    //引用jQuery模块</div><div class="line">    var $ = require(<span class="string">'jquery'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p> // 变量配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">seajs.config(&#123;</div><div class="line">    vars: &#123;</div><div class="line">        <span class="string">'locale'</span>: <span class="string">'zh-cn'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</div><div class="line">  var lang = require(<span class="string">'./i18n/&#123;locale&#125;.js'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
+SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
+1.安装seajs，引入，并编写入口模块，一般加载都在head部分
+1234567&lt;\script src="node_modules/seaj
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/12/模块化seajs使用实现CMD规范/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1435,18 +1417,16 @@ tom.say;//获取
       
         
           
-            <h3 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h3><p>早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">function</span> add(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) + parseFloat(b);</div><div class="line">&#125;</div><div class="line">   <span class="keyword">function</span> subtract(a, b) &#123;</div><div class="line">     <span class="built_in">return</span> parseFloat(a) - parseFloat(b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h3><p>形成传统编程语言中的命名空间的概念，从代码层面就已经有了模块的感觉，但是没有私有空间，注意私有空间和对象边界是不同的概念</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var math = &#123;&#125;;</div><div class="line">math.calculator = &#123;&#125;;</div><div class="line">math.calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">  <span class="built_in">return</span> a + b;</div><div class="line">&#125;;</div><div class="line">math.convertor = &#123;&#125;;</div></pre></td></tr></table></figure>
-<h3 id="阶段三"><a href="#阶段三" class="headerlink" title="阶段三"></a>阶段三</h3><p>这里形成一个单独的私有的空间，私有成员的作用，将一个成员私有化，抽象公共方法（其他成员中都会用到的）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> var calculator = (<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var name = <span class="string">''</span>;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> convert(input)&#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">function</span> add(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">return</span> &#123;</div><div class="line">    add: add</div><div class="line">  &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
-<h3 id="阶段四"><a href="#阶段四" class="headerlink" title="阶段四"></a>阶段四</h3><p>开闭原则，对新增开放，对修改关闭；容易拓展,这个阶段已经相对成熟了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// calc_v2015.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  calculator.add = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) + convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line"></div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div><div class="line"></div><div class="line">// 新增需求</div><div class="line">// calc_v2016.js</div><div class="line">(<span class="keyword">function</span>(calculator,$) &#123;</div><div class="line">  <span class="keyword">function</span> convert(input) &#123;</div><div class="line">    <span class="built_in">return</span> parseInt(input);</div><div class="line">  &#125;</div><div class="line">  // calculator 如果存在的话，我就是扩展，不存在我就新建</div><div class="line">  calculator.remain = <span class="keyword">function</span>(a, b) &#123;</div><div class="line">    <span class="built_in">return</span> convert(a) % convert(b);</div><div class="line">  &#125;</div><div class="line">  window.calculator = calculator;</div><div class="line">&#125;)(window.calculator || &#123;&#125;,jquery);</div></pre></td></tr></table></figure>
-<h3 id="阶段五"><a href="#阶段五" class="headerlink" title="阶段五"></a>阶段五</h3><p>SeaJS是一个遵循CMD规范的JavaScript模块加载框架<br>requirejs是一个遵循AMD规范的JavaScript模块加载框架<br>commonjs规范已经不再维护</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          阶段一早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块
+1234567function add(a, b) &#123;     return parseFloat(a) + parseFloat(b);&#125;   function subtract
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/12/模块化编程的发展过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1587,12 +1567,16 @@ tom.say;//获取
       
         
           
-            <h2 id="angular抽象配置"><a href="#angular抽象配置" class="headerlink" title="angular抽象配置"></a>angular抽象配置</h2><p>1.创建父模块模块，编写配置<br>var myApp = angular.module(‘myApp’,[]);<br>myApp.constant(‘appConfig’,{<br>    pageSize:10,<br>    listApi:’www.baidu.com/api’<br>})</p>
-<p>2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以被子模块获取，</p>
-<p>3.利用对象的方式调用并替换相应的字符串。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{    pageSize:10,    listApi:’www.baidu.com/api’})
+2.在子模块的控
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/12/Angular之抽象配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1733,22 +1717,16 @@ tom.say;//获取
       
         
           
-            <h2 id="angular异步加载包"><a href="#angular异步加载包" class="headerlink" title="angular异步加载包"></a>angular异步加载包</h2><p>主要是针对angular-seed项目框架的修改！</p>
-<p>首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的依赖顺序进行管理。</p>
-<p>1.打开app文件夹下的index-async.html文件中进行修改。<br>2.下载并在head部分引入angular-loader和script.js<br>3.head内容如下：</p>
-<pre><code class="bash">
-<span class="variable">$script</span>([ 
-    <span class="string">'./bower_components/angular/angular.js'</span>, 
-    <span class="string">'./bower_components/angular-route/angular-route.js'</span>, 
-    <span class="string">'./app.js'</span>
-    ], <span class="function"><span class="title">function</span></span>() { 
-    angular.bootstrap(document, [<span class="string">'moviecat'</span>]);
- });
-</code></pre>
-<p>index-async.html查看加载状态,<br>通过angular.bootstrap(document, [‘moviecat’])加载包，就不需要再指明ng-app<br>完成操作。</p>
-<p>如果有用，请留言点赞，或者提出你们的问题，共同学习！</p>
-
-          
+          angular异步加载包主要是针对angular-seed项目框架的修改！
+首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/12/Angular之异步加载包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
