@@ -366,7 +366,10 @@
           在下面这个例子里除了自定义filter匹配规则外，应该更加深刻的体会双向数据绑定
 &lt;div ng-app="app"&gt;
     &lt;input type="text" ng-model='height'&gt;
-    &lt;p&gt;{{height | height}}&lt;
+    &lt;p&gt;{{height | height}}&lt;/p&gt;
+&lt;/div&gt;
+&lt;script src="node_modules/angular/angular.min.js"&gt;&lt;/script&gt;
+&lt;scri
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -520,7 +523,9 @@
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;Document&lt;/title&gt;
-    &lt;link rel="s
+    &lt;link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"&gt;
+&lt;/head&gt;
+&lt;body
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -669,7 +674,7 @@
       
         
           
-           ~ng-xxx的属性本身并不是标准中定义的属性，语法校验无法通过，所以也有data-ng-xxx的写法，让网页对h5有效，二者相同~按照功能人为划分指令可以分为，普通指令和事件指令ng-app：{    ~创建多个ng-app的时候，默认执行第一个，其他的需要手动去执行    ~ng-app一个页
+           ~ng-xxx的属性本身并不是标准中定义的属性，语法校验无法通过，所以也有data-ng-xxx的写法，让网页对h5有效，二者相同~按照功能人为划分指令可以分为，普通指令和事件指令ng-app：{    ~创建多个ng-app的时候，默认执行第一个，其他的需要手动去执行    ~ng-app一个页面上有多个，但是不推荐，另外标记的范围要尽可能小， 性能更高    ~每个ng-app都是一个模块，他们可以组成新的模块从而避免多个ng-app}ng-bind： {    在绑定的值包含HTML时会
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -820,7 +825,8 @@
           
           是什么：Angular就是一个高级的JavaScript框架
 做什么：Angular能够构建SPA[单一页面应用程序]，只有一个页面，内容由AJAX请求得到，Angular整个是利用锚点进行异步请求的，实现局部刷新
-为什么用：更少的代码实现更强劲的功能，现在的需求不仅仅是做出一些相应的功能，如果不能
+为什么用：更少的代码实现更强劲的功能，现在的需求不仅仅是做出一些相应的功能，如果不能在代码里体现出一些思想的话，那么维护和推进都很难，而angular的出现带领着人更加注重前端思维，走向模式化和架构化.
+Angular的特性:1.MVC 2.模块化 3.自动化双向数据绑定 4.指令系
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -970,7 +976,8 @@
         
           
           关于location对象属性的一些说明、例如：”http://wwww.baidu.com:8080/abc/index.html/?a=1&amp;b=2#user“
-location : {    protocol : http:    hostname : wwww.baidu.com    
+location : {    protocol : http:    hostname : wwww.baidu.com    port : 8080    pathname : abc/index.html    search : ?a=1&amp;b=2    hash : #user}
+如果有用，请留言点赞，或者提出你们
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1119,7 +1126,7 @@ location : {    protocol : http:    hostname : wwww.baidu.com
       
         
           
-          最近看《JavaScript高级程序设计 第三版》和 《编写高质量代码 改善JavaScript程序的188个建议》真的是看到吐先说第一本吧，可取的知识点确实多，但是在读完一半的时候，越往后就会发现，这本书就像一个详尽的功能说明书一样，真的是全到让人无可奈何，更偏向理论，它在技术的展示上都很基本，但
+          最近看《JavaScript高级程序设计 第三版》和 《编写高质量代码 改善JavaScript程序的188个建议》真的是看到吐先说第一本吧，可取的知识点确实多，但是在读完一半的时候，越往后就会发现，这本书就像一个详尽的功能说明书一样，真的是全到让人无可奈何，更偏向理论，它在技术的展示上都很基本，但是在问题的处理上倒是给了不少建议。大家有兴趣可以看看.《编写高质量代码 改善JavaScript程序的188个建议》虽然是188条建议，大概就几个部分吧，正则，数组，对象，继承，循环，作用域块等等，唉
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1268,7 +1275,7 @@ location : {    protocol : http:    hostname : wwww.baidu.com
       
         
           
-          1.虽然ECMAScript标准化之后允许用中文命名变量或者函数，但是为了防止Unicode乱码，不推荐使用2.尽可能在函数体的顶部定义素有函数需要的变量，而不是推迟定义，因为JavaScript并没有块级作用域3.避免勿用parseInt();它会从0位置检索，0位置不是数字则返回NaN，如果是小
+          1.虽然ECMAScript标准化之后允许用中文命名变量或者函数，但是为了防止Unicode乱码，不推荐使用2.尽可能在函数体的顶部定义素有函数需要的变量，而不是推迟定义，因为JavaScript并没有块级作用域3.避免勿用parseInt();它会从0位置检索，0位置不是数字则返回NaN，如果是小数则到.的位置返回之前的整数4.防止JavaScript自动插入分号，如果要return一个值的时候，这个值的表达式必须和return在同一行，为了避免这种错误，在完整的语句后面都要添加分号5.大多数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1417,7 +1424,7 @@ location : {    protocol : http:    hostname : wwww.baidu.com
       
         
           
-          DOM：{    ~BOM相当于api，用于访问操作html和xml    ~每一个节点都有nodeType属性    ~documentElement,firstChild,childNodes[0]都指向元素    ~document类型    ~Element类型：{        ~node
+          DOM：{    ~BOM相当于api，用于访问操作html和xml    ~每一个节点都有nodeType属性    ~documentElement,firstChild,childNodes[0]都指向元素    ~document类型    ~Element类型：{        ~nodeType的值为1；        ~nodeValue的值为null；        ~父节点可能是document或者element        ~element.tarName输出标签名：‘DI
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1566,7 +1573,7 @@ location : {    protocol : http:    hostname : wwww.baidu.com
       
         
           
-          1.window对象：{    ~window对象是BOM的核心对象    ~全局作用域:{        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行        ~window对象有location和navigator属性，他们分别指向自己所代表的对象   
+          1.window对象：{    ~window对象是BOM的核心对象    ~全局作用域:{        ~通过window定义的全局变量可以被delete掉，而var定义的全局变量不行        ~window对象有location和navigator属性，他们分别指向自己所代表的对象        ~如果页面中有框架frame，那么每个框架都有自己的window对象，通过window.frame[i]获取        ~window对象位置属性：{            ~IE,Sa
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1715,7 +1722,7 @@ location : {    protocol : http:    hostname : wwww.baidu.com
       
         
           
-          ~早起的事件写法称之为：DOM0时代，也就是click写法。分离事件的写法称之为：DOM2时代，也就是addEventListener~Dom2的核心就是事件流，事件流包括冒泡和捕获。~Dom2—addEventListener:优点：1，给一个对象绑定多个事件2，动态的移除和添加 ~事件委托：通过
+          ~早起的事件写法称之为：DOM0时代，也就是click写法。分离事件的写法称之为：DOM2时代，也就是addEventListener~Dom2的核心就是事件流，事件流包括冒泡和捕获。~Dom2—addEventListener:优点：1，给一个对象绑定多个事件2，动态的移除和添加 ~事件委托：通过绑定父元素来绑定子元素(原理：事件冒泡)~Event对象：当你定义一个事件的时候，系统自动生成一个event对象保存当前对象的一些信息，比如type，target。短路表达式（经常在框架中使用）：~ 
           ...
           <!--noindex-->
           <div class="post-button text-center">

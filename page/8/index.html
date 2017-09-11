@@ -363,7 +363,7 @@
       
         
           
-          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798
+          1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011021031041051061071081091101111121131141151161171181191
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -512,7 +512,7 @@
       
         
           
-          come from wang_hes’s blog123456789101112//DOM没有提供insertAfter()方法function insertAfter(newElement, targetElement)&#123;	var parent = targetElement.paren
+          come from wang_hes’s blog123456789101112//DOM没有提供insertAfter()方法function insertAfter(newElement, targetElement)&#123;	var parent = targetElement.parentNode;	if (parent.lastChild == targetElement) &#123;	// 如果最后的节点是目标元素，则直接添加。因为默认是最后	parent.appendChil
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -661,7 +661,7 @@
       
         
           
-          123456789101112131415161718192021var li = document.getElementById('list').getElementsByTagName('p');     for (var i = 0; i &lt; li.length; i++) &#123;
+          123456789101112131415161718192021var li = document.getElementById('list').getElementsByTagName('p');     for (var i = 0; i &lt; li.length; i++) &#123;        (function(arg)&#123;         var param = &#123;               data:'uid='+i,               u
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -810,8 +810,10 @@
       
         
           
-          Swiper的基础演示中，关于自定义滚动浏览框中，如果想要以卡片的形式插入展示信息，同时实现卡片高度自适应，最好的方法就是不要设置height属性，应为swiper-slide这个类是产生滚动条的关键，如果单纯去设置这个属性，那么就无法实现卡片高度随内容改变，无法良好的兼容移动端，尽管可以通过限定高
-          ...
+          Swiper的基础演示中，关于自定义滚动浏览框中，如果想要以卡片的形式插入展示信息，同时实现卡片高度自适应，最好的方法就是不要设置height属性，应为swiper-slide这个类是产生滚动条的关键，如果单纯去设置这个属性，那么就无法实现卡片高度随内容改变，无法良好的兼容移动端，尽管可以通过限定高度在一定的数值内取舍，但是不推荐
+如果有用，请留言点赞，或者提出你们的问题，共同学习！
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/06/10/swiper关于height适应问题/#more" rel="contents">
@@ -959,7 +961,7 @@
       
         
           
-          已经熟悉的内容没有再次记录，这几张内容偏向知识广度，没有具体记录1.正则表达式：var pattern = /s$/;默认创建RegExp对象并赋值2.JavaScript正则表达式的语法也支持非字母匹配吗，但是要通过\转义3.客户端JavaScript：window对象表示web浏览器的一个窗口或
+          已经熟悉的内容没有再次记录，这几张内容偏向知识广度，没有具体记录1.正则表达式：var pattern = /s$/;默认创建RegExp对象并赋值2.JavaScript正则表达式的语法也支持非字母匹配吗，但是要通过\转义3.客户端JavaScript：window对象表示web浏览器的一个窗口或者窗体4.每个Element对象都有style和className属性5.当脚本所在的html文件被载入浏览器的时候，这个脚本里的JavaScript代码只会执行一次，因此要先注册函数，并作为事件的响
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1108,7 +1110,7 @@
       
         
           
-          1.每一个函数都包括一个prototype属性，这个属性指向一个对象的引用。这个对象叫做原型对象，当将函数用作构造函数的时候会从原型对象上继承属性2.想要以对象o的方法调用函数f()，f.call(o)/f.apply(o)3.function()构造函数可以传入任意数量的字符串实参，最后一个实参文
+          1.每一个函数都包括一个prototype属性，这个属性指向一个对象的引用。这个对象叫做原型对象，当将函数用作构造函数的时候会从原型对象上继承属性2.想要以对象o的方法调用函数f()，f.call(o)/f.apply(o)3.function()构造函数可以传入任意数量的字符串实参，最后一个实参文本是函数体4.高阶函数：操作函数的函数5.在JavaScript中，类的实现是基于其原型继承机制、6.如果两个对象继承自同一个原型，往往意味着（不绝对），他们由同一个构造函数创建并初始化7，JavaS
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1257,7 +1259,7 @@
       
         
           
-          闭包：关于闭包《JavaScript权威指南第六版》：这个术语非常古老，是指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量’包裹’了起来，闭包的实现：首先我们需要知道词法作用域的基本规则：JavaScript函数的执行用到了作用域链，这个作用域链是函数定义的时候创建的，函数定义时的作用域链
+          闭包：关于闭包《JavaScript权威指南第六版》：这个术语非常古老，是指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量’包裹’了起来，闭包的实现：首先我们需要知道词法作用域的基本规则：JavaScript函数的执行用到了作用域链，这个作用域链是函数定义的时候创建的，函数定义时的作用域链到函数执行时依然有效。嵌套函数会定义在这个作用域链里面，其中外层函数内的变量也一定是局部变量，不管在何时执行嵌套函数，这种绑定在执行嵌套函数时依旧有效。换句话说，闭包可以捕捉局部变量和参数，看起来像这
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1406,7 +1408,7 @@
       
         
           
-          1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解
+          1.和其他全局对象不同的是，var声明的变量无法通过delete删除，作为for/in循环的一部分也会声明提升2.多次声明一个变量是无所谓的3，函数声明方式，必须先声明后使用并且声明语句创建的变量无法被删除，函数定义则无所谓，4.跳转：break和continue，return，其中return让解释器跳出函数体的执行，并提供本次调用的返回值。throw抛出一个异常。5.标签语句:语句是可以添加标签的，标签由语句前的标识符和冒号组成6.通过给循环定义一个标签名，可以在循环体内部使用break和c
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1555,7 +1557,7 @@
       
         
           
-          &amp; JavaScript用Unicode字符集编写，Unicode是ASCII和Latin-1的超集，几乎支持地球上的所有语言&amp; JavaScript区分大小写，HTML不区分。XHTML区分,但有时文档中存在大写，主要原因是浏览器纠错&amp; JavaScript的数据类型分为两
+          &amp; JavaScript用Unicode字符集编写，Unicode是ASCII和Latin-1的超集，几乎支持地球上的所有语言&amp; JavaScript区分大小写，HTML不区分。XHTML区分,但有时文档中存在大写，主要原因是浏览器纠错&amp; JavaScript的数据类型分为两种：原始类型（数字，字符串，布尔值，以及特殊的null和undefined）和对象类型（其他的都是对象，包括函数）&amp; JavaScript解释器有自己的内存管理机制，可以自动对内存进行垃圾回收
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1706,7 +1708,7 @@
           
           1、对于第一章一些个人理解和看法第一章主要讲的是JavaScript概述，我摘抄了一些书中的概念谈谈我的一些看法，以及一些零碎的知识点；
 ###1.JavaScript早已超出了其“脚本语言”本身的范畴，成为一种健壮，高校，通用的编程语言。
-首先，我们学JavaScript这门语言，那么就不能将之狭
+首先，我们学JavaScript这门语言，那么就不能将之狭义的理解为单纯的“脚本语言”，而应该以编程语言来看待，它具有和其他语言同样的地位，因为语言的局限性体现在语言所运行的平台，而不是程序员，当然了，人也是一种影响因素。这里只是想说，在心里要重视它，因为它
           ...
           <!--noindex-->
           <div class="post-button text-center">

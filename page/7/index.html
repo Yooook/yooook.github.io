@@ -363,7 +363,7 @@
       
         
           
-          想法：先说一下个人的JavaScript使用的一个经历，这门语言使用了三年，基本平均下来每天使用两个小时还是有的，看过仅JavaScript相关的视频也有近千部，目测自己属于过渡高手的过程，当然了，每个人的标准也不一样。在读《JavaScript权威指南（第六版）》的时候，我觉得可以给自己较多惊喜的
+          想法：先说一下个人的JavaScript使用的一个经历，这门语言使用了三年，基本平均下来每天使用两个小时还是有的，看过仅JavaScript相关的视频也有近千部，目测自己属于过渡高手的过程，当然了，每个人的标准也不一样。在读《JavaScript权威指南（第六版）》的时候，我觉得可以给自己较多惊喜的地方，也和自己之前想的不一样，我觉得这本书，是针对有一些JavaScript基础的人写的，如果没有之前的一些学习经验，我觉得自己不会在读的时候有像现在这样深的体会。这本书涉及的概念很多，我觉得前20章
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -512,7 +512,7 @@
       
         
           
-          ~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名
+          ~渐进增强：用一些额外的数据去包裹原始数据，按照“渐进增强”原则创建出来的网页大部分都符合“平稳退化”原则~位于head中的script导致了浏览器无法并行加载其他文件（图像或者其他脚本），一般来说，浏览器从同一个域名中最多只能同时下载两个文件，在这期间，浏览器不会下载任何其他文件，即使来自不同域名的文件，都必须要等脚本加载完毕后下载。之所以要把JavaScript放在body结束的地方，就是基于，渐进增强和分离JavaScript的观点。~如果有两个函数绑定在onload事件上，那么只有最后一
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -661,7 +661,7 @@
       
         
           
-          Try….force to use installed plugin as dependency.?这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：123456cordova plugin remove --force cordova-plugin-co
+          Try….force to use installed plugin as dependency.?这个是在安装摄像头cordova-plugin-camera 插件时弹出的，具体解决办法如下：123456cordova plugin remove --force cordova-plugin-compat  cordova plugin add cordova-plugin-compat  cordova plugins  cordova platform remove android  co
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -961,7 +961,7 @@
       
         
           
-          ~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&l
+          ~什么是DOM？简单的说，就是一套对文档的内容进行抽象和概念化的方法、~是DOM将html，css，JavaScript结合在了一起，例如JavaScript本身没有document.getElementById;~加载js最好的做法是将&lt;\script&gt;标签放到html文档的最后，&lt;\/body&gt;之前，这样能够使浏览器更快的加载页面~虽然关联数组的可读性更高，但是不推荐使用，因为它改变了array对象的属性；~DOM的前提是有文档，一份文档就是一棵节点树。~节点分为不同
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1110,7 +1110,7 @@
       
         
           
-          ~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。~jQuery对象是类数组，具有length属性~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组
+          ~jQuery()是工厂函数而不是构造函数，它返回一个新创建的对象。~jQuery对象是类数组，具有length属性~$()和querySelectorAll()都是用css选择器做为参数，返回类数组，但是querySelectorAll()只在新版本的浏览器中支持，$()则都可以，并且返回的类数组比之更有用~jQuery.borwser用于客户端嗅探。如果是IE会有msie属性值为true，如果是Firefox,会有值为true的mozilla属性，如果是Safari和Chrome，huiou
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1259,7 +1259,7 @@
       
         
           
-          ~非标准css属性：Firefox使用-moz-，chrome使用-webkit-,IE使用-ms-~box-boxsize：border-box包括内边距和边框，content-box不包括~visibility和display的区别在在于是否脱离标准文档流~脚本化的css中的style属性对应的
+          ~非标准css属性：Firefox使用-moz-，chrome使用-webkit-,IE使用-ms-~box-boxsize：border-box包括内边距和边框，content-box不包括~visibility和display的区别在在于是否脱离标准文档流~脚本化的css中的style属性对应的值都是字符串。并且要包含相关单位。’399px’。~设置、获取css样式e.setAttribute(“style”,s) ==&gt; e.style.cssText = s;var s = e.s
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1408,7 +1408,7 @@
       
         
           
-          ~关于DOM：html的节点树，document节点=&gt;树的根部代表整个文档，text节点=&gt;文本节点，elemet是html元素的节点。他们都是Node的子类。~在低版本浏览器中getElementById匹配的Id不区分大小写，而且也可以返回匹配name~html的name属性最初打
+          ~关于DOM：html的节点树，document节点=&gt;树的根部代表整个文档，text节点=&gt;文本节点，elemet是html元素的节点。他们都是Node的子类。~在低版本浏览器中getElementById匹配的Id不区分大小写，而且也可以返回匹配name~html的name属性最初打算为了表单元素分配名字，和id不同的是name属性只有在极少的html元素中有效，包括表单，表单元素，&lt;\iframe&gt;,&lt;\img&gt;~基于名字选择html元素，getElem
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1557,7 +1557,7 @@
       
         
           
-          ~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location
+          ~以0毫秒的事件来调用setTimeout()，指定函数并不会立即执行，相反把它放到队列中吗，等到前面处于等待状态的事件处理程序全部执行完后，在“立即”调用~它； window对象的location属性引用的是location对象，document对象的location属性也是引用到location对象，即wi~ndow.location === document.location//true~window.location和location输出相同，location.href和location
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1706,7 +1706,7 @@
       
         
           
-          ~web浏览器中的JavaScript称为客户端JavaScript~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它~alert，settimeout，location等都是window的方法或者属性~在客户端J
+          ~web浏览器中的JavaScript称为客户端JavaScript~window对象时客户端JavaScript特性和API的主要接入点，他表示web浏览器的一个窗口或窗体，用标识符window来引用它~alert，settimeout，location等都是window的方法或者属性~在客户端JavaScript中，window对象也是全局对象，处于作用域的顶部，它的属性和方法都是全局变量和全局函数~Window对象有一个引用自身的属性，叫做window，如果需要引用窗口对象本身，可以使用这
           ...
           <!--noindex-->
           <div class="post-button text-center">

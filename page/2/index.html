@@ -363,7 +363,10 @@
       
         
           
-          react-native之标签栏：react-native-tab-navigator组件“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用
+          react-native之标签栏：react-native-tab-navigator组件“接下来讲解的是Android中如何实现TabBar，都知道RN中针对iOS有TabBarIOS组件而针对安卓并没有类似的组件，因为是从安卓原生转过来的，所以能力有限，只能借助高手来实现自己的功能模块”——使用目的
+android经历:
+第一步：在根目录1npm install react-native-tab-navigator --save
+注意：如果安装报错，那么一定要看一下node_modules里
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -513,7 +516,7 @@
         
           
           react-native之触摸高亮：TouchableHighlight组件使用方法：
-1234567//导入组件import &#123; TouchableHighlight &#125; from 'react-native';//标签化使用 &lt;TouchableHighlight un
+1234567//导入组件import &#123; TouchableHighlight &#125; from 'react-native';//标签化使用 &lt;TouchableHighlight underlayColor="rgba(34,26,38,0.2)" onPress=&#123;()=&gt;&#123;&#125;&#125;&gt; 	//列表的每一项 &lt;/Touchabl
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -664,7 +667,8 @@
           
           react-native的进度组件：android:ActivityIndicator组件ProgressBarAndroid已经被ActivityIndicator组件取代。
 使用方法：
-12345678//导入组件import &#123; ActivityIndicator &#125; fr
+12345678//导入组件import &#123; ActivityIndicator &#125; from 'react-native';//标签化使用&lt;ActivityIndicator  styleAttr='Large' color="#6425c9"/&gt;
+属性： animating
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -813,8 +817,10 @@
       
         
           
-          关于app组件管理：我们需要在项目根目录下创建app文件，用来管理我们的组件，在app文件夹下，我们可以 创建components和style文件夹，分别存放相应的文件。关于style的文件，如果是一个js文件，那就需要在index.android.js文件和模块文件中同时引入，style文件导出模
-          ...
+          关于app组件管理：我们需要在项目根目录下创建app文件，用来管理我们的组件，在app文件夹下，我们可以 创建components和style文件夹，分别存放相应的文件。关于style的文件，如果是一个js文件，那就需要在index.android.js文件和模块文件中同时引入，style文件导出模块为styles变量，不需要创建类。500的错误一般都是模块导入出错。
+如果有用，请留言点赞，或者提出你们的问题，共同学习！
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/22/初遇React系列之五/#more" rel="contents">
@@ -962,7 +968,8 @@
       
         
           
-          关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前
+          关于fetch：“在 AJAX 时代，进行 API 等网络请求都是通过 XMLHttpRequest 或者封装后的框架进行网络请求。现在产生的 fetch 框架简直就是为了提供更加强大、高效的网络请求而生，虽然在目前会有一点浏览器兼容的问题，但是当我们进行 Hybrid App 开发的时候，如我之前介绍的 Ionic 和 React Native，都可以使用 fetch 进行完美的网络请求。”
+12345678910111213141516171819202122232425262728//定义
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1113,8 +1120,9 @@
           
           React-Native安装需要注意的两点：1.需要在项目的android目录下创建local.properties文件，设置android SDK的目录指向，比如：1sdk.dir=D\:\\android；
 2.需要删除项目下.babelrc文件
-如果有用，请留言点赞，或者提出你们的问题，共同学
-          ...
+如果有用，请留言点赞，或者提出你们的问题，共同学习！
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/22/初遇React系列之三/#more" rel="contents">
@@ -1265,7 +1273,11 @@
           React组件的生命周期：1.创建阶段：执行getDefaultProps(),处理props的默认值，在React.createClass的时候调用
 2.实例化阶段：（React.render()方法之后调用的函数）执行顺序如下：
 1.getInitialState() //初始化state状态
-
+2.componentWillMount() //组件即将加载
+3.render()创建虚拟的dom树
+4.componentDidMount() //组件加载结束
+3.更新阶段：执行顺序如下：
+1.
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1417,7 +1429,8 @@
           环境搭建及使用1.全局安装 npm install webpack -g
 2.创建文件夹，初始化npm init
 3.npm install webpack –save-dev 
-4.创建entry.js输出内容，document.getElementById(‘app’).textContent 
+4.创建entry.js输出内容，document.getElementById(‘app’).textContent = ‘hello ~’;
+5.创建index.html文件，结构如下：1234&lt;body&gt;	&lt;div id="app"&gt;&lt;/div&gt;	&lt;script src=
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1566,7 +1579,8 @@
       
         
           
-          环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器
+          环境搭建及使用 JavaScript 模块的写法有几种，比如 AMD，CommonJS .. 还有标准化的 ES6 的写法 .. jspm 支持加载所有的用这些方法写的 JavaScript 模块，在正式发布应用的时候，可以优化创建的模块，把模块依赖的东西打成一个包。所以说jspm就是一个模块加载器兼打包工具。
+ jspm是一个浏览器包管理工具也可以理解成是JavaScript的软件包管理工具，它是工作在SystemJs(模块加载器)通用模块之上，jspm不是一个全新的包管理器，而是基于已存在的
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1719,7 +1733,8 @@
 1.npm init //创建项目文件夹react，初始化npm
 2.npm install babel-cli –save-dev //安装开发依赖
 3.新版本的babel将自己的功能分成各种插件，所以要先安装对应的插件
-4.因为是局部安
+4.因为是局部安装，没有配置环境变量，所以利用cmd，进入到node_modules/.bin目录下，可以babel –help查看安装是否成功
+5.在react目录下创建js文件(script.js),并用js在编
           ...
           <!--noindex-->
           <div class="post-button text-center">

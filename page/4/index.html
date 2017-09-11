@@ -364,7 +364,7 @@
         
           
           实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Function、Number、String、Object、Array、Boolean）进行值复制。
-123456789101112131415161718192021222324252627282930313233343
+12345678910111213141516171819202122232425262728293031323334353637383940function clone(obj) &#123;    var o;    switch (typeof obj) &#123;        case "undefined
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -513,7 +513,7 @@
       
         
           
-          有两种方法，第一种，通过控制器12345&lt;\ul class="nav nav-sidebar" ng-controller="NavController"&gt;  &lt;\li ng-class="&#123;active:type=='in_theaters'&#125;"&gt;&l
+          有两种方法，第一种，通过控制器12345&lt;\ul class="nav nav-sidebar" ng-controller="NavController"&gt;  &lt;\li ng-class="&#123;active:type=='in_theaters'&#125;"&gt;&lt;\a href="#/in_theaters/1"&gt;正在热映&lt;\/a&gt;&lt;\/li&gt;  &lt;\li ng-class="&#123;active:type=='co
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -662,7 +662,8 @@
       
         
           
-          首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:p
+          首先要明确一下路由的配置：{    1.npm install angular-route –save    2.在模块中注入ngRoute模块    3.配置路由的时候注入的是$routeProvider，用来调用when()方法，例如：$routeProvider.when(‘/topic/:page’,{});    4.控制器注入的是$routeParams,用来获取路由后得参数,例如：page = parseInt($routeParams.page)}
+根据传入的start和coun
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -811,7 +812,8 @@
       
         
           
-          有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况
+          有时候，加载过慢导致我们要等很长时间去服务器请求数据，那么在这段时间，我们就可以使用css loading动画过渡，这里推荐一个网站，’https://www.qianduan.net/free-html5-css3-loaders-preloaders/&#39;;在angular中的使用具体情况如下：
+1.复制相应动画的html和css到项目对应页面2.$scope暴露变量，值为bool，例如$scope.flag = true;3.加载完成后改变变量的值,$scope.flag = fal
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -961,7 +963,9 @@
         
           
           8、什么叫优雅降级和渐进增强？
-渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低
+渐进增强 progressive enhancement： 针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。优雅降级 graceful degradation： 一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+9、浏览器的内核分别是什么?
+IE: trident内核 Firefox：gecko内核 Safari：webkit内核 Opera：以前是presto内核，Opera现已改用G
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1113,7 +1117,7 @@
           4、简述一下src与href的区别
 href 是指向网络资源所在位置，仅仅是建立链接，用于超链接。src是指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求src资源时会将其指向的资源下载并应用到文档内。
 5、什么是CSS Hack?
-针对不同的浏览器写不同的CSS,就是 CSS
+针对不同的浏览器写不同的CSS,就是 CSS Hack，IE浏览器Hack一般又分为三种，条件Hack、属性级Hack、选择符Hack{    // 1、条件Hack  \&lt;!–[if IE]&gt;;     &lt;\style&gt
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1264,7 +1268,8 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
           
           1、什么是盒子模型？
 在网页中，一个元素占有空间的大小由元素的内容（content），元素的内边距（padding），元素的边框（border），元素的外边距（margin）四个部分构成，他们一同构成css中元素的盒模型。不区分行内元素和块级元素。
-2、行内元素有哪些？块级元素有哪些？ 空(void
+2、行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
+行内元素：a、span、img、input、strong、select、label、em、button、textarea 块级元素：div、列表元素（ul、li、dl、dt、dd）标题
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1413,7 +1418,8 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          angular自定义跨域请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于
+          angular自定义跨域请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们需要的数据。
+123456
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1562,7 +1568,7 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就
+          使用angular本身提供的$http服务进行异步请求以下是angular提供的两种书写方法，这里主要是展示了get的书写方法，post方法与之类似，重点是说一下在实际环境中运用索要注意的地方：1，都需要现在控制器里进行$http服务的注入，而不是模块的注入2，具体的请求地址应该是以’/‘开始的,就是从域名后面开始写，相对于服务器绝对路径的书写方式去写，而不是相对路径，这样可以避免路由产生的一些地址相关问题。3.返回的response本身是对原始数据的二次包装，response.data才是我们
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1711,7 +1717,7 @@ href 是指向网络资源所在位置，仅仅是建立链接，用于超链接
       
         
           
-          ng-class=”{complate:todo.complate}”//只有一个括号$scope是双向数据绑定的核心可以用form + ng-submit 实现回车提交ng中路由是单独提供功能的模块ngRoute注意页面逻辑和界面逻辑的划分&lt;\input class=”toggle” typ
+          ng-class=”{complate:todo.complate}”//只有一个括号$scope是双向数据绑定的核心可以用form + ng-submit 实现回车提交ng中路由是单独提供功能的模块ngRoute注意页面逻辑和界面逻辑的划分&lt;\input class=”toggle” type=”checkbox” ng-model=”item.completed”&gt;//绑定的value值页面统计时候直接用数组的length属性//angular实现回车提交的方法&lt;\form
           ...
           <!--noindex-->
           <div class="post-button text-center">

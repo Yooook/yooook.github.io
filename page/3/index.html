@@ -366,7 +366,10 @@
           不适用gulp搭建自动化工作流利，而是单纯的用Browsersync进行实时同步显示的时候，会发现页面无法同步刷新，需要手动F5去更新数据。保证基本的环境（node）之下，具体步骤如下
 1.npm install -g browser-sync
 
-browser-sync start –server
+browser-sync start –server –files “.html , css/.css , js/*.js”
+
+我之所以出现无法自动刷新同步，是因为我用的是这句话：
+browser-sync start –server –files ‘
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -516,7 +519,7 @@ browser-sync start –server
         
           
           笔记：1.react 是一个创建显示组件的东西(组件化开发)
-2.jspm包的管理工具，它里面的SystemJS可以加载不同规范的js模块，里面的babel可以编译JavaScript代码，并且可以将JSX代码编译成JavaScript代码3.props:    123456789101112131
+2.jspm包的管理工具，它里面的SystemJS可以加载不同规范的js模块，里面的babel可以编译JavaScript代码，并且可以将JSX代码编译成JavaScript代码3.props:    1234567891011121314151617181920211.这个属性是用来接受父模块给子模块传递的数据的，也可以从主模块多层传递，每层用this.props.date传递2.在主模块中写法：&lt;Comment author
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -666,7 +669,7 @@ browser-sync start –server
         
           
           笔记：1.把一个对象的属性赋值给另一个对象Object.assign(){    let foo = {};    Object.assign(        foo,//第一个参数是需要复制的对象        {one:1}//被复制的对象    );}
-2.设置对象的prototype{   
+2.设置对象的prototype{    let foo = {        get() {}    }    let fmm = {}    fun = Object.create(foo)//创建对象    Object.getPro
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -817,7 +820,9 @@ browser-sync start –server
           
           笔记：1,ES6拥有块级作用域，用let定义的变量，仅仅在大括号所在的范围里有效，也就是说在块级作用域里有效
 2.用const定义恒量，不可以被改变，但是可以添加值，比如说push往数组里添加数据
-3.解构数组，let [one,two,three] = [1,2,3],console.log(on
+3.解构数组，let [one,two,three] = [1,2,3],console.log(one,two,three)//1 2 3
+4.解构对象 let {one1:one,two1:two,three1:three} = {one:1,two:2,three:3}
+5.模板字符串： let
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -967,7 +972,7 @@ browser-sync start –server
         
           
           记得引入bootstrap的css样式,我们使用seajs去封装pagination.js如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253defi
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253define(function(require,exports,module) &#123;  &lt;!-- 创建 --&gt;  function Pagination() &#123;      thi
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1116,7 +1121,7 @@ browser-sync start –server
       
         
           
-          记得引入bootstrap的css样式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;ul class="pagination"&gt;&lt;/ul
+          记得引入bootstrap的css样式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;ul class="pagination"&gt;&lt;/ul&gt;&lt;script&gt;  //核心计算部分  var currentPage = 18;  //总共显示的条目  var total = 20;  // 显示的个数为奇数  var sh
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1268,7 +1273,7 @@ browser-sync start –server
           关于为什么要使用seajs，我已经在上次的文章里体现的很具体了
 SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使用方法：
 1.安装seajs，引入，并编写入口模块，一般加载都在head部分
-1234567&lt;\script src="node_modules/seaj
+1234567&lt;\script src="node_modules/seajs/dist/sea.js"&gt;&lt;\/script&gt; &lt;\script&gt;   seajs.use('./calculate.js', function(calculator
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1418,7 +1423,8 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
         
           
           阶段一早期的开发过程中就是将重复使用的代码封装到函数中，再将一系列的函数放到一个文件中，称之为模块
-1234567function add(a, b) &#123;     return parseFloat(a) + parseFloat(b);&#125;   function subtract
+1234567function add(a, b) &#123;     return parseFloat(a) + parseFloat(b);&#125;   function subtract(a, b) &#123;     return parseFloat(a) - parseFloat(b);&#125;
+阶段二形成传统编程语言中的命名空间的概念，从代码层面就已经有了模块的感觉，但
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1568,7 +1574,9 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
         
           
           angular抽象配置1.创建父模块模块，编写配置var myApp = angular.module(‘myApp’,[]);myApp.constant(‘appConfig’,{    pageSize:10,    listApi:’www.baidu.com/api’})
-2.在子模块的控
+2.在子模块的控制器中注入依赖。要注意的是父模块的controller是不能被子模块获取的，但是constant可以被子模块获取，
+3.利用对象的方式调用并替换相应的字符串。
+如果有用，请留言点赞，或者提出你们的问题
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1718,7 +1726,10 @@ SeaJS是一个遵循CMD规范的JavaScript模块加载框架，现在说说使�
         
           
           angular异步加载包主要是针对angular-seed项目框架的修改！
-首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的
+首先说一下，在angular项目中，异步加载包的方式有很多，比如说load.js、script.js等，这些可以让我们的项目实现异步加载包，但是不能解决包的依赖问题太，所以要在他们之前引入angular-loader来对包的依赖顺序进行管理。
+1.打开app文件夹下的index-async.html文件中进行修改。2.下载并在head部分引入angular-loader和script.js3.head内容如下：
+
+$sc
           ...
           <!--noindex-->
           <div class="post-button text-center">

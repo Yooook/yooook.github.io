@@ -363,7 +363,7 @@
       
         
           
-          html部分截取简要代码说明一下，在id为home-content的标签的内填充内容1234567&lt;ion-view id="home" view-title="主页" cache-view="false" &gt;&lt;!-- 实现scroll的标签 --&gt;  &lt;ion-con
+          html部分截取简要代码说明一下，在id为home-content的标签的内填充内容1234567&lt;ion-view id="home" view-title="主页" cache-view="false" &gt;&lt;!-- 实现scroll的标签 --&gt;  &lt;ion-content id="home-content" scroll="false"&gt;    &lt;!--返回顶部的按钮 --&gt;  &lt;div class="back_top"&gt;&lt;
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -512,7 +512,7 @@
       
         
           
-          ###ajax的原生实现之前已经有很详细的说明，这里主要说说区别1234567891011121314151617181920&lt;script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;
+          ###ajax的原生实现之前已经有很详细的说明，这里主要说说区别1234567891011121314151617181920&lt;script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;&lt;script&gt;  $(document).ready(function() &#123;    $('#btn').click(function() &#123;     $.ajax(
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -661,7 +661,7 @@
       
         
           
-          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,docu
+          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869(function(window,document)&#123;  // 原生封装Ajax  function Ajax(data) &#123;    // var data = &#123;data:"",dataType:"xml/js
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -811,7 +811,7 @@
         
           
           ###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = './data.json';// 通过open方法进行初始化配置xhr.open('post',url,true);// 执行发送请求的动作xhr.send(null);
-true可以省略，
+true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。123456789101112131415161718// 数据请
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -961,7 +961,7 @@ true可以省略，
         
           
           ###ajax的原生实现之前已经有很详细的说明，这里主要说说区别123456// 请求地址var url = './data.xml';// 通过open方法进行初始化配置xhr.open('post',url,true);// 执行发送请求的动作xhr.send(null);
-true可以省略，不
+true可以省略，不论是post方法或者get方法请求【整个xml文件节点内容】，要使send()方法里面的参数为null，表单提交请求xml文件待定。123456789101112131415161718192021/
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1110,7 +1110,7 @@ true可以省略，不
       
         
           
-          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head
+          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;  &lt;meta charset="UTF-8"&gt;  &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &l
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1259,7 +1259,7 @@ true可以省略，不
       
         
           
-          12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;  &lt;
+          12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;  &lt;meta charset="UTF-8"&gt;  &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &lt;form act
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1408,7 +1408,7 @@ true可以省略，不
       
         
           
-          12345678910111213141516&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;	&lt;meta charset="UTF-8"&gt;	&lt;title&gt;Document&lt;/title&gt;&lt;/he
+          12345678910111213141516&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;	&lt;meta charset="UTF-8"&gt;	&lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;	&lt;div id="show"&gt;&lt;/div&gt;	&lt;form action="./data.php" method="post" targ
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1558,7 +1558,7 @@ true可以省略，不
         
           
           
-123456789101112131415161718192021222324252627282930313233343536373839404142  &lt;script type="text/javascript"&gt;    (function()&#123;      var canv
+123456789101112131415161718192021222324252627282930313233343536373839404142  &lt;script type="text/javascript"&gt;    (function()&#123;      var canvas = document.querySelector('#cavsElem');      var togger = 0;  // 判断是否取消微信默认的下拉事件  document.querySe
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1708,7 +1708,8 @@ true可以省略，不
         
           
           
-12345&lt;script type='text/javascript'&gt;document.querySelector('body').addEventListener('touchstart', function (ev) &#123;    event.preventDefault(
+12345&lt;script type='text/javascript'&gt;document.querySelector('body').addEventListener('touchstart', function (ev) &#123;    event.preventDefault();&#125;);&lt;/script&gt;
+这个是官方给出的解决方案，我就以自己的案例为主，提出一点思考，就代码而言有用，但是禁用掉了所有包含在body下的一些touch，scroll事件，可
           ...
           <!--noindex-->
           <div class="post-button text-center">
